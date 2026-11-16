@@ -1,0 +1,16 @@
+court_id,country,city,court_name_en,court_name_ar,court_type,currency
+CT-01,UAE,Dubai,Dubai Court of First Instance – Commercial,محكمة دبي الابتدائية – الدائرة التجارية,Civil / commercial court,AED
+CT-02,UAE,Abu Dhabi,Abu Dhabi Commercial Court,محكمة أبوظبي التجارية,Civil / commercial court,AED
+CT-03,UAE,Abu Dhabi,Ministry of Economy – Trademark Office,وزارة الاقتصاد – إدارة العلامات التجارية,Administrative (trademark office),AED
+CT-04,UAE,Dubai,Dubai Customs – IPR Department,جمارك دبي – إدارة حقوق الملكية الفكرية,Customs,AED
+CT-05,UAE,Sharjah,Sharjah Federal Court of First Instance,محكمة الشارقة الاتحادية الابتدائية,Civil / commercial court,AED
+CT-06,KSA,Riyadh,Riyadh Commercial Court,المحكمة التجارية بالرياض,Civil / commercial court,SAR
+CT-07,KSA,Riyadh,Saudi Authority for Intellectual Property – Enforcement,الهيئة السعودية للملكية الفكرية – الإنفاذ,Administrative (IP authority),SAR
+CT-08,KSA,Jeddah,Jeddah Commercial Court,المحكمة التجارية بجدة,Civil / commercial court,SAR
+CT-09,Egypt,Cairo,Cairo Economic Court,المحكمة الاقتصادية بالقاهرة,Civil / commercial court,EGP
+CT-10,Jordan,Amman,Amman Court of First Instance,محكمة بداية عمان,Civil / commercial court,JOD
+CT-11,Kuwait,Kuwait City,Kuwait Commercial Court,المحكمة التجارية بالكويت,Civil / commercial court,KWD
+CT-12,Qatar,Doha,Qatar Investment and Trade Court,محكمة الاستثمار والتجارة بقطر,Civil / commercial court,QAR
+CT-13,Oman,Muscat,Muscat Commercial Court,المحكمة التجارية بمسقط,Civil / commercial court,OMR
+CT-14,Turkey,Istanbul,Istanbul 1st Civil Court for Intellectual Property Rights,محكمة إسطنبول المدنية الأولى لحقوق الملكية الفكرية,Specialised IP court,TRY
+CT-15,India,New Delhi,Delhi High Court – IP Division,المحكمة العليا بدلهي – قسم الملكية الفكرية,Specialised IP court,INR

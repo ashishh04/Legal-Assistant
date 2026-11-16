@@ -1,0 +1,78 @@
+app_id,store,app_name,developer,mark_id,country,detected_date,status,takedown_requested_date,removed_date,est_downloads,linked_case_id
+APP-048,Apple App Store,CRISPINO Kids Game,Unknown developer,MK-02,UAE,2024-01-12,Detected,,,50000,
+APP-071,Huawei AppGallery,VELORA Shop,ChocoApp Technologies,MK-01,Qatar,2024-01-28,Removed,2024-01-29,2024-02-22,50000,
+APP-020,Google Play,PICCOLINI Kids Game,ChocoApp Technologies,MK-05,UAE,2024-02-03,Removed,2024-02-09,2024-02-13,5000,
+APP-063,Huawei AppGallery,PICCOLINI Wallpapers,Unknown developer,MK-05,Jordan,2024-02-07,Removed,2024-02-08,2024-02-25,10000,
+APP-001,Apple App Store,CRISPINO Stickers,AppWorks Studio FZ-LLC,MK-02,Kuwait,2024-02-29,Removed,2024-03-08,2024-03-17,1000,TM-2024-409
+APP-023,Google Play,VELORA Fan Club,FunKids Apps SARL,MK-01,UAE,2024-03-03,Re-listed,2024-03-11,2024-03-23,5000,
+APP-026,Google Play,PICCOLINI Rewards,Unknown developer,MK-05,KSA,2024-03-04,Removed,2024-03-11,2024-03-27,5000,
+APP-046,Apple App Store,CRISPINO Stickers,Indie Apps 2024,MK-02,UAE,2024-03-10,Reported to store,2024-03-12,,5000,
+APP-036,Huawei AppGallery,AURELIA Kids Game,FunKids Apps SARL,MK-06,UAE,2024-04-03,Removed,2024-04-11,2024-04-13,500,
+APP-052,Google Play,CRISPINO Rewards,FunKids Apps SARL,MK-02,Egypt,2024-04-18,Removed,2024-04-19,2024-05-04,100000,
+APP-060,Huawei AppGallery,DOLCETTA Wallpapers,Unknown developer,MK-03,Turkey,2024-04-26,Takedown requested,2024-04-30,,500,
+APP-041,Huawei AppGallery,DOLCETTA Shop,FunKids Apps SARL,MK-03,UAE,2024-04-30,Re-listed,2024-05-06,2024-05-27,1000,
+APP-069,Huawei AppGallery,PICCOLINI Wallpapers,Indie Apps 2024,MK-05,UAE,2024-04-30,Reported to store,2024-05-02,,5000,
+APP-024,Apple App Store,MINTIQ Kids Game,AppWorks Studio FZ-LLC,MK-04,UAE,2024-05-06,Takedown requested,2024-05-11,,50000,
+APP-002,Google Play,VELORA Rewards,Candy Games Studio,MK-01,UAE,2024-05-12,Removed,2024-05-22,2024-06-02,100000,TM-2024-419
+APP-072,Google Play,PICCOLINI Wallpapers,AppWorks Studio FZ-LLC,MK-05,UAE,2024-05-14,Removed,2024-05-24,2024-06-11,1000,
+APP-065,Apple App Store,CRISPINO Puzzle,Unknown developer,MK-02,UAE,2024-05-16,Removed,2024-05-18,2024-06-01,5000,
+APP-076,Google Play,DOLCETTA Coupons,AppWorks Studio FZ-LLC,MK-03,KSA,2024-06-28,Removed,2024-07-08,2024-07-22,50000,
+APP-059,Google Play,AURELIA Stickers,ChocoApp Technologies,MK-06,KSA,2024-07-16,Removed,2024-07-24,2024-08-06,10000,
+APP-075,Google Play,CRISPINO Fan Club,FunKids Apps SARL,MK-02,Turkey,2024-08-11,Removed,2024-08-18,2024-09-06,500,
+APP-032,Huawei AppGallery,AURELIA Shop,Indie Apps 2024,MK-06,KSA,2024-08-14,Removed,2024-08-23,2024-09-21,50000,
+APP-044,Google Play,VELORA Stickers,Pixel Fun Games Ltd,MK-01,UAE,2024-08-28,Rejected by store,2024-09-04,,50000,
+APP-003,Google Play,VELORA Quiz,Unknown developer,MK-01,KSA,2024-09-10,Takedown requested,2024-09-20,,100000,TM-2024-426
+APP-049,Apple App Store,VELORA Fan Club,Unknown developer,MK-01,UAE,2024-10-20,Re-listed,2024-10-25,2024-10-29,500,
+APP-004,Huawei AppGallery,AURELIA Stickers,Pixel Fun Games Ltd,MK-06,Egypt,2024-10-22,Removed,2024-10-29,2024-11-23,50000,TM-2024-430
+APP-005,Google Play,AURELIA Quiz,FunKids Apps SARL,MK-06,Qatar,2024-11-16,Removed,2024-11-20,2024-12-11,100000,TM-2024-434
+APP-006,Apple App Store,VELORA Coupons,ChocoApp Technologies,MK-01,KSA,2024-11-27,Takedown requested,2024-11-29,,1000,TM-2024-435
+APP-007,Apple App Store,VELORA Coupons,Indie Apps 2024,MK-01,KSA,2024-12-20,Removed,2024-12-27,2024-12-30,1000,TM-2024-436
+APP-037,Apple App Store,PICCOLINI Recipes,Indie Apps 2024,MK-05,UAE,2025-01-02,Takedown requested,2025-01-03,,1000,
+APP-008,Google Play,VELORA Recipes,Pixel Fun Games Ltd,MK-01,Kuwait,2025-01-05,Removed,2025-01-12,2025-02-11,10000,TM-2025-402
+APP-009,Google Play,MINTIQ Wallpapers,AppWorks Studio FZ-LLC,MK-04,Kuwait,2025-01-20,Removed,2025-01-25,2025-02-02,5000,TM-2025-404
+APP-053,Apple App Store,MINTIQ Coupons,ChocoApp Technologies,MK-04,Jordan,2025-01-22,Reported to store,2025-01-30,,100000,
+APP-064,Google Play,DOLCETTA Puzzle,Pixel Fun Games Ltd,MK-03,Kuwait,2025-02-14,Rejected by store,2025-02-17,,1000,
+APP-021,Google Play,PICCOLINI Recipes,FunKids Apps SARL,MK-05,Egypt,2025-03-07,Re-listed,2025-03-16,2025-04-11,5000,
+APP-073,Samsung Galaxy Store,DOLCETTA Stickers,Indie Apps 2024,MK-03,UAE,2025-04-18,Removed,2025-04-25,2025-05-24,10000,
+APP-010,Huawei AppGallery,VELORA Rewards,Indie Apps 2024,MK-01,UAE,2025-04-23,Removed,2025-04-26,2025-05-23,5000,TM-2025-412
+APP-051,Huawei AppGallery,VELORA Wallpapers,ChocoApp Technologies,MK-01,UAE,2025-05-20,Reported to store,2025-05-27,,500,
+APP-061,Google Play,AURELIA Shop,FunKids Apps SARL,MK-06,UAE,2025-05-20,Removed,2025-05-26,2025-06-16,100000,
+APP-058,Samsung Galaxy Store,VELORA Shop,ChocoApp Technologies,MK-01,UAE,2025-05-24,Reported to store,2025-05-27,,10000,
+APP-029,Google Play,DOLCETTA Recipes,ChocoApp Technologies,MK-03,KSA,2025-05-25,Removed,2025-05-26,2025-06-20,50000,
+APP-027,Huawei AppGallery,CRISPINO Wallpapers,ChocoApp Technologies,MK-02,Jordan,2025-06-07,Reported to store,2025-06-17,,5000,
+APP-031,Apple App Store,VELORA Puzzle,FunKids Apps SARL,MK-01,KSA,2025-06-08,Takedown requested,2025-06-12,,50000,
+APP-011,Google Play,AURELIA Kids Game,Unknown developer,MK-06,UAE,2025-06-09,Removed,2025-06-14,2025-06-19,100000,TM-2025-418
+APP-047,Google Play,AURELIA Puzzle,Indie Apps 2024,MK-06,UAE,2025-06-18,Removed,2025-06-26,2025-07-21,1000,
+APP-034,Google Play,CRISPINO Wallpapers,Unknown developer,MK-02,Qatar,2025-06-26,Removed,2025-06-28,2025-07-28,10000,
+APP-012,Apple App Store,PICCOLINI Puzzle,Unknown developer,MK-05,UAE,2025-06-30,Takedown requested,2025-07-05,,50000,TM-2025-423
+APP-066,Huawei AppGallery,DOLCETTA Fan Club,Unknown developer,MK-03,Jordan,2025-07-06,Removed,2025-07-13,2025-07-31,50000,
+APP-028,Google Play,CRISPINO Kids Game,ChocoApp Technologies,MK-02,KSA,2025-07-08,Re-listed,2025-07-17,2025-07-22,5000,
+APP-013,Apple App Store,VELORA Puzzle,ChocoApp Technologies,MK-01,UAE,2025-07-13,Removed,2025-07-22,2025-08-03,50000,TM-2025-426
+APP-062,Huawei AppGallery,AURELIA Recipes,Candy Games Studio,MK-06,UAE,2025-08-08,Rejected by store,2025-08-09,,500,
+APP-074,Google Play,VELORA Wallpapers,Pixel Fun Games Ltd,MK-01,Kuwait,2025-09-07,Removed,2025-09-14,2025-09-27,500,
+APP-014,Apple App Store,VELORA Coupons,FunKids Apps SARL,MK-01,Egypt,2025-09-14,Removed,2025-09-22,2025-10-02,50000,TM-2025-434
+APP-068,Apple App Store,DOLCETTA Shop,AppWorks Studio FZ-LLC,MK-03,Turkey,2025-09-15,Removed,2025-09-21,2025-10-10,100000,
+APP-056,Apple App Store,VELORA Quiz,Candy Games Studio,MK-01,KSA,2025-10-17,Removed,2025-10-25,2025-11-04,500,
+APP-015,Apple App Store,CRISPINO Recipes,Unknown developer,MK-02,Oman,2025-10-26,Rejected by store,2025-11-04,,50000,TM-2025-440
+APP-043,Apple App Store,AURELIA Wallpapers,Unknown developer,MK-06,KSA,2025-11-15,Removed,2025-11-20,2025-12-06,5000,
+APP-040,Apple App Store,CRISPINO Fan Club,Unknown developer,MK-02,UAE,2025-11-21,Detected,,,5000,
+APP-050,Google Play,CRISPINO Stickers,FunKids Apps SARL,MK-02,Jordan,2025-11-25,Detected,,,50000,
+APP-022,Google Play,MINTIQ Puzzle,AppWorks Studio FZ-LLC,MK-04,KSA,2025-12-21,Takedown requested,2025-12-29,,1000,
+APP-016,Google Play,VELORA Wallpapers,ChocoApp Technologies,MK-01,India,2026-01-25,Takedown requested,2026-01-29,,500,TM-2026-402
+APP-054,Apple App Store,AURELIA Rewards,Indie Apps 2024,MK-06,UAE,2026-01-30,Takedown requested,2026-02-07,,5000,
+APP-045,Huawei AppGallery,CRISPINO Stickers,Pixel Fun Games Ltd,MK-02,UAE,2026-02-14,Reported to store,2026-02-21,,10000,
+APP-025,Google Play,VELORA Coupons,Unknown developer,MK-01,UAE,2026-02-20,Removed,2026-02-22,2026-03-13,100000,
+APP-017,Google Play,AURELIA Kids Game,Indie Apps 2024,MK-06,UAE,2026-03-10,Takedown requested,2026-03-18,,10000,TM-2026-408
+APP-042,Apple App Store,VELORA Puzzle,Unknown developer,MK-01,KSA,2026-03-26,Removed,2026-03-27,2026-04-02,500,
+APP-067,Google Play,MINTIQ Rewards,Candy Games Studio,MK-04,UAE,2026-04-04,Detected,,,100000,
+APP-035,Apple App Store,MINTIQ Puzzle,FunKids Apps SARL,MK-04,UAE,2026-04-23,Reported to store,2026-04-27,,5000,
+APP-030,Apple App Store,MINTIQ Rewards,Unknown developer,MK-04,KSA,2026-06-10,Reported to store,2026-06-16,,100000,
+APP-038,Google Play,DOLCETTA Wallpapers,AppWorks Studio FZ-LLC,MK-03,Oman,2026-07-10,Removed,2026-07-12,2026-08-04,100000,
+APP-057,Google Play,PICCOLINI Puzzle,AppWorks Studio FZ-LLC,MK-05,UAE,2026-07-21,Removed,2026-07-29,2026-08-20,1000,
+APP-077,Samsung Galaxy Store,AURELIA Puzzle,Candy Games Studio,MK-06,UAE,2026-08-01,Takedown requested,2026-08-10,,100000,
+APP-033,Huawei AppGallery,VELORA Stickers,Indie Apps 2024,MK-01,UAE,2026-08-04,Removed,2026-08-11,2026-08-29,100000,
+APP-039,Apple App Store,DOLCETTA Kids Game,FunKids Apps SARL,MK-03,UAE,2026-08-26,Reported to store,2026-09-04,,1000,
+APP-018,Google Play,DOLCETTA Stickers,FunKids Apps SARL,MK-03,UAE,2026-08-28,Takedown requested,2026-09-03,,10000,TM-2026-429
+APP-019,Huawei AppGallery,PICCOLINI Rewards,Candy Games Studio,MK-05,UAE,2026-09-27,Reported to store,2026-10-03,,10000,TM-2026-431
+APP-070,Apple App Store,CRISPINO Wallpapers,Indie Apps 2024,MK-02,UAE,2026-10-01,Re-listed,2026-10-04,2026-10-24,1000,
+APP-055,Apple App Store,VELORA Quiz,Unknown developer,MK-01,Kuwait,2026-10-03,Takedown requested,2026-10-10,,10000,

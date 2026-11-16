@@ -1,0 +1,29 @@
+# Python and tooling
+.venv/
+.venv-ocr/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.idea/
+frontend/node_modules/
+
+# Credentials: never commit .env (copy it to a server separately)
+.env
+
+# Large or regenerable
+# - Unlimited-OCR-2 weights (6.7 GB): python -m ferrero.ocr download
+models/
+# - work files of the corpus builds (scripts/pdf_corpus/*.py write them again)
+docs/Ferrero_Demo_Pack/scripts/out/
+# - deployment packages
+*.tgz
+
+# data/: keep what the app and the Docker image read (the document index and the cached text recognition);
+# leave out logs, locks and evaluation reports.
+data/*
+!data/index.sqlite
+!data/sync_status.csv
+!data/ocr/
+data/ocr/.running
+data/ocr/.stop
+data/ocr/batch.log

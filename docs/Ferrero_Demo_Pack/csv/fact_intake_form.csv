@@ -1,0 +1,79 @@
+form_id,submitted_at,submitter_team,mark_id,country,infringement_type,evidence_files,estimated_units,status,converted_case_id
+IF-0031,2024-01-06,Customer care,MK-06,UAE,Unauthorised online listing,2,1200,Merged into existing case,
+IF-0058,2024-01-08,Distributor,MK-05,Jordan,Lookalike packaging,5,50,Merged into existing case,
+IF-0053,2024-01-10,Customer care,MK-04,KSA,Counterfeit product,4,200,Rejected – insufficient evidence,
+IF-0073,2024-01-18,Supply chain,MK-02,UAE,Infringing app,4,50,Rejected – insufficient evidence,
+IF-0046,2024-01-22,Sales,MK-05,KSA,Infringing domain,0,200,Merged into existing case,
+IF-0037,2024-01-24,Distributor,MK-04,UAE,Lookalike packaging,4,5000,Under review,
+IF-0019,2024-01-31,Customer care,MK-06,UAE,Unauthorised online listing,6,200,Rejected – insufficient evidence,
+IF-0056,2024-02-17,Sales,MK-04,KSA,Lookalike packaging,0,200,Under review,
+IF-0072,2024-03-08,Supply chain,MK-03,Kuwait,Infringing app,1,1200,Rejected – insufficient evidence,
+IF-0078,2024-03-12,Brand protection vendor,MK-04,Oman,Infringing app,4,5000,Under review,
+IF-0071,2024-03-21,Supply chain,MK-03,KSA,Lookalike packaging,2,200,Monitoring,
+IF-0027,2024-04-01,Marketing,MK-01,Jordan,Unauthorised online listing,0,50,Monitoring,
+IF-0062,2024-04-25,Supply chain,MK-02,UAE,Infringing app,4,0,Under review,
+IF-0039,2024-04-30,Sales,MK-04,Egypt,Grey-market import,4,5000,Under review,
+IF-0017,2024-05-04,Sales,MK-02,KSA,Unauthorised online listing,0,5000,Under review,
+IF-0042,2024-05-17,Distributor,MK-03,UAE,Infringing app,6,50,Under review,
+IF-0030,2024-05-23,Brand protection vendor,MK-03,Turkey,Counterfeit product,3,12000,Monitoring,
+IF-0066,2024-05-25,Supply chain,MK-06,Jordan,Infringing app,5,0,Monitoring,
+IF-0001,2024-06-21,Sales,MK-01,UAE,Lookalike packaging,5,50,Converted to case,TM-2024-421
+IF-0018,2024-06-27,Customer care,MK-05,UAE,Infringing app,1,5000,Monitoring,
+IF-0002,2024-08-04,Sales,MK-05,UAE,Infringing domain,6,12000,Converted to case,TM-2024-425
+IF-0074,2024-08-17,Customer care,MK-03,KSA,Grey-market import,1,500,Merged into existing case,
+IF-0038,2024-09-10,Sales,MK-05,Turkey,Infringing domain,1,200,Rejected – insufficient evidence,
+IF-0023,2024-09-11,Sales,MK-03,KSA,Unauthorised online listing,4,0,Rejected – insufficient evidence,
+IF-0047,2024-10-07,Supply chain,MK-05,UAE,Infringing app,3,1200,Monitoring,
+IF-0021,2024-10-25,Brand protection vendor,MK-06,UAE,Lookalike packaging,5,500,Rejected – insufficient evidence,
+IF-0068,2024-11-12,Brand protection vendor,MK-01,UAE,Grey-market import,3,50,Under review,
+IF-0061,2024-11-23,Marketing,MK-04,KSA,Grey-market import,3,12000,Under review,
+IF-0063,2024-12-13,Distributor,MK-06,UAE,Infringing domain,5,200,Under review,
+IF-0003,2024-12-20,Sales,MK-01,UAE,Lookalike packaging,6,50,Converted to case,TM-2024-437
+IF-0024,2024-12-30,Distributor,MK-02,KSA,Lookalike packaging,6,5000,Monitoring,
+IF-0041,2025-01-24,Brand protection vendor,MK-01,KSA,Unauthorised online listing,4,12000,Rejected – insufficient evidence,
+IF-0036,2025-01-30,Supply chain,MK-02,KSA,Grey-market import,6,5000,Merged into existing case,
+IF-0052,2025-03-01,Customer care,MK-02,UAE,Unauthorised online listing,2,0,Rejected – insufficient evidence,
+IF-0004,2025-03-03,Distributor,MK-01,Qatar,Unauthorised online listing,4,50,Converted to case,TM-2025-408
+IF-0005,2025-03-10,Distributor,MK-05,KSA,Infringing app,5,1200,Converted to case,TM-2025-410
+IF-0051,2025-04-04,Customer care,MK-03,India,Lookalike packaging,3,50,Merged into existing case,
+IF-0006,2025-04-21,Supply chain,MK-01,UAE,Infringing app,6,0,Converted to case,TM-2025-411
+IF-0007,2025-05-06,Customer care,MK-06,UAE,Lookalike packaging,2,500,Converted to case,TM-2025-414
+IF-0054,2025-05-16,Marketing,MK-04,KSA,Grey-market import,3,0,Rejected – insufficient evidence,
+IF-0055,2025-06-03,Sales,MK-05,Turkey,Infringing domain,2,12000,Monitoring,
+IF-0040,2025-06-14,Customer care,MK-02,UAE,Infringing domain,3,12000,Under review,
+IF-0048,2025-07-04,Distributor,MK-01,KSA,Lookalike packaging,1,12000,Monitoring,
+IF-0008,2025-07-18,Marketing,MK-02,India,Counterfeit product,0,50,Converted to case,TM-2025-429
+IF-0010,2025-08-11,Sales,MK-01,UAE,Grey-market import,6,500,Converted to case,TM-2025-432
+IF-0009,2025-08-14,Brand protection vendor,MK-01,Jordan,Grey-market import,4,0,Converted to case,TM-2025-431
+IF-0070,2025-08-28,Customer care,MK-05,Egypt,Lookalike packaging,3,0,Monitoring,
+IF-0011,2025-09-14,Brand protection vendor,MK-01,KSA,Grey-market import,5,200,Converted to case,TM-2025-435
+IF-0057,2025-11-01,Customer care,MK-04,UAE,Lookalike packaging,6,50,Rejected – insufficient evidence,
+IF-0033,2025-11-14,Distributor,MK-01,UAE,Lookalike packaging,6,12000,Monitoring,
+IF-0012,2025-11-15,Sales,MK-01,UAE,Counterfeit product,6,1200,Converted to case,TM-2025-445
+IF-0065,2025-12-20,Marketing,MK-01,UAE,Unauthorised online listing,1,0,Under review,
+IF-0064,2025-12-27,Customer care,MK-06,KSA,Infringing app,0,12000,Rejected – insufficient evidence,
+IF-0077,2025-12-29,Brand protection vendor,MK-04,UAE,Lookalike packaging,3,12000,Rejected – insufficient evidence,
+IF-0069,2026-01-14,Distributor,MK-04,UAE,Unauthorised online listing,4,12000,Rejected – insufficient evidence,
+IF-0013,2026-01-26,Distributor,MK-06,UAE,Unauthorised online listing,2,200,Converted to case,TM-2026-403
+IF-0014,2026-01-28,Brand protection vendor,MK-06,KSA,Lookalike packaging,5,500,Converted to case,TM-2026-404
+IF-0029,2026-03-14,Marketing,MK-03,India,Counterfeit product,6,5000,Under review,
+IF-0015,2026-04-13,Brand protection vendor,MK-06,Jordan,Grey-market import,5,50,Converted to case,TM-2026-413
+IF-0044,2026-04-18,Sales,MK-05,India,Infringing domain,0,1200,Merged into existing case,
+IF-0050,2026-04-19,Distributor,MK-05,UAE,Counterfeit product,0,1200,Rejected – insufficient evidence,
+IF-0032,2026-05-01,Supply chain,MK-02,Egypt,Lookalike packaging,4,200,Merged into existing case,
+IF-0075,2026-05-23,Sales,MK-04,Oman,Infringing domain,0,0,Monitoring,
+IF-0043,2026-06-05,Supply chain,MK-05,KSA,Grey-market import,2,1200,Under review,
+IF-0067,2026-06-06,Brand protection vendor,MK-06,UAE,Counterfeit product,1,5000,Merged into existing case,
+IF-0049,2026-06-09,Customer care,MK-02,UAE,Counterfeit product,4,200,Merged into existing case,
+IF-0045,2026-06-10,Sales,MK-01,UAE,Unauthorised online listing,3,12000,Rejected – insufficient evidence,
+IF-0059,2026-06-27,Sales,MK-01,KSA,Unauthorised online listing,1,5000,Under review,
+IF-0028,2026-07-28,Sales,MK-03,India,Lookalike packaging,4,50,Under review,
+IF-0034,2026-08-06,Customer care,MK-03,UAE,Unauthorised online listing,4,0,Under review,
+IF-0020,2026-08-11,Distributor,MK-06,UAE,Counterfeit product,2,200,Rejected – insufficient evidence,
+IF-0035,2026-08-16,Customer care,MK-05,KSA,Counterfeit product,3,12000,Merged into existing case,
+IF-0016,2026-08-21,Brand protection vendor,MK-02,UAE,Unauthorised online listing,4,500,Converted to case,TM-2026-427
+IF-0076,2026-08-27,Brand protection vendor,MK-03,UAE,Infringing domain,0,1200,Merged into existing case,
+IF-0025,2026-08-28,Brand protection vendor,MK-01,UAE,Lookalike packaging,5,500,Merged into existing case,
+IF-0022,2026-09-11,Distributor,MK-01,UAE,Grey-market import,3,200,Merged into existing case,
+IF-0026,2026-10-06,Brand protection vendor,MK-01,KSA,Unauthorised online listing,2,5000,Monitoring,
+IF-0060,2026-10-28,Distributor,MK-01,UAE,Infringing domain,4,500,Merged into existing case,

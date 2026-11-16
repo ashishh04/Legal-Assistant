@@ -1,0 +1,20 @@
+# Keep credentials and bulky local folders out of the image build context.
+.env
+.env.*
+*.tgz
+.venv
+.venv-ocr
+models
+frontend/node_modules
+.idea
+.pytest_cache
+**/__pycache__
+src/*.egg-info
+copilot_studio
+docs/deliverables
+docs/Ferrero_Demo_Pack/scripts
+data/eval
+data/sync.log
+data/ocr/.running
+data/ocr/.stop
+data/ocr/batch.log

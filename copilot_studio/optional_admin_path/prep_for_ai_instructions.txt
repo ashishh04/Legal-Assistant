@@ -1,0 +1,15 @@
+Case tracker for Dolce Group International S.A.'s legal and brand-protection team. One row in fact_case is one case (case_id like TM-2024-428). Trademarks: VELORA, CRISPINO, DOLCETTA, MINTIQ, PICCOLINI, AURELIA. Countries: UAE, KSA (Saudi Arabia), Egypt, Jordan, Kuwait, Oman, Qatar, Turkey, India.
+
+Dates
+- This demo is frozen on 5 November 2026. For "today", "this year", "last 30 days", "next 30 days" use 5 November 2026 (the [Demo Today] measure), never the real current date.
+
+Definitions
+- Open case: fact_case[status] = "Open"; closed case: status = "Closed". Use [Open Cases] and [Closed Cases].
+- Hearings in the next 30 days: [Hearings Next 30d] (open cases whose next_hearing_date is from today to today + 30 days).
+- Damages or compensation awarded: [Awarded] (AED). "Awarded in <year>" means cases whose closed_date falls in that year.
+- Amounts: columns ending _aed are in AED; columns ending _local are in the case's currency (fact_case[currency]). Report AED unless the user asks for local currency.
+- Settled = [Settled]; recovered = [Recovered]; recovery rate = [Recovery Rate]; win rate = [Win Rate]; legal spend = [Legal Spend].
+- Infringer with the most cases: count fact_case rows per dim_infringer[infringer_name]. If several infringers tie, list all of them with their count.
+- Next action of a case: fact_case[next_action] and fact_case[next_action_due]. Next hearing: fact_case[next_hearing_date].
+- Lead counsel: dim_user[full_name] through fact_case[lead_counsel_id].
+- Reports and intake: fact_mailbox (emailed reports), fact_intake_form (web intake), fact_appstore (app-store takedowns).

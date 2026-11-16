@@ -1,0 +1,451 @@
+<meta name="dash-one-writer">
+<style>
+#dash-root { --dash-gutter: 1rem; }
+.ci { font-family: var(--font-anthropic-sans); color: var(--color-fg); max-width: 1180px; margin-inline: auto; }
+.ci h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-sm); text-wrap: balance; }
+.ci-take { margin: 0 0 var(--cds-gap-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 70ch; }
+.ci-take b { color: var(--color-fg); font-weight: 600; }
+.ci-tabs { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); margin: 0 0 var(--cds-gap-md); border-bottom: 1px solid var(--color-border-line); padding-bottom: var(--cds-pad-sm); }
+.ci-tabs button { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg-muted); background: none; border: 1px solid transparent; border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
+.ci-tabs button:hover { color: var(--color-fg); }
+.ci-tabs button[aria-selected="true"] { color: var(--color-fg); background: var(--color-panel); border-color: var(--color-border-line); font-weight: 600; }
+.ci-tabs button:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.ci-page > h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+.ci-page > .ci-q { margin: 0 0 var(--cds-gap-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-body); max-width: 80ch; }
+.ci-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--cds-gap-md); margin-bottom: var(--cds-gap-md); }
+.ci-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ci-tile-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ci-tile-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.ci-tile-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ci-tile.is-bad .ci-tile-value { color: var(--color-bad); }
+.ci-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); margin-bottom: var(--cds-gap-md); }
+.ci-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+.ci-card.wide { grid-column: 1 / -1; }
+.ci-card h3 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.ci-card .ci-note { margin: 2px 0 var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.ci-chart { position: relative; min-height: 260px; }
+.ci-chart.tall { min-height: 320px; }
+.ci-chart svg { display: block; width: 100%; height: auto; }
+.ci-chart text { font-family: var(--font-anthropic-sans); fill: var(--color-fg-muted); font-size: 11px; }
+.ci-chart .lbl { fill: var(--color-fg); }
+.ci-chart .grid line { stroke: var(--cds-chart-grid); }
+.ci-chart .axis path { stroke: var(--cds-chart-axis); }
+.ci-chart .axis line { stroke: var(--cds-chart-axis); }
+.ci-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: var(--cds-gap-xs); }
+.ci-legend span::before { content: ""; display: inline-block; width: .6rem; height: .6rem; border-radius: 2px; margin-right: .35rem; background: var(--sw); vertical-align: -1px; }
+.ci-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg); white-space: nowrap; z-index: 2; }
+.ci-tip .k { color: var(--cds-text-secondary); display: block; }
+.ci-tip .sw { display: inline-block; width: .55rem; height: .55rem; border-radius: 2px; margin-right: .3rem; background: var(--sw); }
+.ci-table-box { max-height: 420px; overflow: auto; }
+.ci table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.ci th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: 600; color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.ci td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.ci td.num, .ci th.num { text-align: right; }
+.ci td.flag { color: var(--color-bad); font-weight: 600; }
+.ci td.ok { color: var(--color-ok); }
+.ci .pill { display: inline-block; padding: 0 .45rem; border-radius: 999px; border: 1px solid var(--color-border-line); font-size: var(--cds-font-size-caption); }
+.ci-foot { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-md) 0 0; max-width: 90ch; }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+@media (max-width: 520px) { .ci-tile-value { font-size: 1.6rem; } }
+</style>
+
+<div class="ci">
+  <h1>Ferrero Case Intelligence Demo</h1>
+  <p class="ci-take">Synthetic case data as of <b data-draw="asof">—</b>: <b data-draw="take-open" data-source="kpi_d1" data-field="open" data-row="0">—</b> open cases, <b data-draw="take-hear" data-source="kpi_d1" data-field="hearings30" data-row="0">—</b> hearings in the next 30 days and <b data-draw="take-over" data-source="kpi_d1" data-field="overdue" data-row="0">—</b> overdue actions. Four dashboards, one case model: these are the Power BI pages the demo builds.</p>
+  <nav class="ci-tabs" role="tablist" aria-label="Dashboards">
+    <button type="button" role="tab" data-tab="d1" aria-selected="true">D1 Legal Case Overview</button>
+    <button type="button" role="tab" data-tab="d2" aria-selected="false">D2 Leadership Command View</button>
+    <button type="button" role="tab" data-tab="d3" aria-selected="false">D3 Intake and Triage</button>
+    <button type="button" role="tab" data-tab="d4" aria-selected="false">D4 Infringers and Outcomes</button>
+  </nav>
+
+  <!-- ===================== D1 ===================== -->
+  <section id="d1" class="ci-page" role="tabpanel">
+    <h2>Legal Case Overview</h2>
+    <p class="ci-q">For the legal team: where every case stands, what is due, and who owns it. Replaces the per-country Excel trackers.</p>
+    <div class="ci-tiles">
+      <div class="ci-tile"><span class="ci-tile-label">Open cases</span><b class="ci-tile-value" data-draw="d1-open" data-source="kpi_d1" data-field="open" data-row="0">—</b><span class="ci-tile-note">All countries</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">New cases</span><b class="ci-tile-value" data-draw="d1-new" data-source="kpi_d1" data-field="new30" data-row="0">—</b><span class="ci-tile-note">Last 30 days</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Hearings</span><b class="ci-tile-value" data-draw="d1-hear" data-source="kpi_d1" data-field="hearings30" data-row="0">—</b><span class="ci-tile-note">Next 30 days</span></div>
+      <div class="ci-tile is-bad"><span class="ci-tile-label">Overdue actions</span><b class="ci-tile-value" data-draw="d1-over" data-source="kpi_d1" data-field="overdue" data-row="0">—</b><span class="ci-tile-note">Due date passed</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Average days open</span><b class="ci-tile-value" data-draw="d1-age" data-source="kpi_d1" data-field="avgDaysOpen" data-row="0">—</b><span class="ci-tile-note">Open cases</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Closed this year</span><b class="ci-tile-value" data-draw="d1-closed" data-source="kpi_d1" data-field="closedYtd" data-row="0">—</b><span class="ci-tile-note">2026 year to date</span></div>
+    </div>
+    <div class="ci-cards">
+      <div class="ci-card" id="d1-stage-card"><h3>Open cases by stage</h3><p class="ci-note">From intake to appeal; the funnel the legal team works every week</p><div class="ci-chart" data-draw="c-d1-stage" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d1-country-card"><h3>Open cases by country</h3><p class="ci-note">Each row-level-security role sees its own countries</p><div class="ci-chart" data-draw="c-d1-country" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d1-age-card"><h3>Case ageing by priority</h3><p class="ci-note">Open cases in age buckets; high priority stacked first</p><div class="ci-chart" data-draw="c-d1-age" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d1-mark-card"><h3>Open cases by mark</h3><p class="ci-note">Which brands are under pressure now</p><div class="ci-chart" data-draw="c-d1-mark" data-source="fact_case"></div></div>
+      <div class="ci-card wide" id="d1-new-card"><h3>New cases by month and source</h3><p class="ci-note">How cases arrive: mailbox, intake forms, customs, app-store monitoring, vendors and distributors</p><div class="ci-chart" data-draw="c-d1-new" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d1-counsel-card"><h3>Caseload by lead counsel</h3><p class="ci-note">Open cases per internal lawyer</p><div class="ci-chart" data-draw="c-d1-counsel" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d1-actions-card"><h3>Upcoming hearings and due actions</h3><p class="ci-note">Open cases, soonest first; overdue in red. Click a row in Power BI to drill through to the case.</p>
+        <div class="ci-table-box"><table data-source="d1_actions" data-row-key="case_id"><thead><tr><th data-field="case_id">Case</th><th data-field="title">Title</th><th data-field="country">Country</th><th data-field="when">Due</th><th data-field="what">What</th><th data-field="lead_counsel">Counsel</th></tr></thead><tbody data-draw="t-d1-actions"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== D2 ===================== -->
+  <section id="d2" class="ci-page" role="tabpanel" hidden>
+    <h2>Leadership Command View</h2>
+    <p class="ci-q">For the Head of Legal, the Regional GC and Procurement: what we claim, what we win, what we recover, what it costs, and where the exceptions are.</p>
+    <div class="ci-tiles">
+      <div class="ci-tile"><span class="ci-tile-label">Claimed (AED)</span><b class="ci-tile-value" data-draw="d2-claimed" data-source="kpi_d2" data-field="claimed" data-row="0">—</b><span class="ci-tile-note">All cases, 2024 to date</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Awarded or settled (AED)</span><b class="ci-tile-value" data-draw="d2-aws" data-source="kpi_d2" data-field="awardedSettled" data-row="0">—</b><span class="ci-tile-note">Judgments and settlements</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Recovered (AED)</span><b class="ci-tile-value" data-draw="d2-rec" data-source="kpi_d2" data-field="recovered" data-row="0">—</b><span class="ci-tile-note">Cash actually collected</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Recovery rate</span><b class="ci-tile-value" data-draw="d2-rate" data-source="kpi_d2" data-field="recoveryRate" data-row="0">—</b><span class="ci-tile-note">Recovered ÷ awarded or settled</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Win rate</span><b class="ci-tile-value" data-draw="d2-win" data-source="kpi_d2" data-field="winRate" data-row="0">—</b><span class="ci-tile-note">Favourable ÷ decided cases</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Legal spend (AED)</span><b class="ci-tile-value" data-draw="d2-spend" data-source="kpi_d2" data-field="spend" data-row="0">—</b><span class="ci-tile-note">External counsel invoices</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Spend per AED recovered</span><b class="ci-tile-value" data-draw="d2-ratio" data-source="kpi_d2" data-field="spendToRecovery" data-row="0">—</b><span class="ci-tile-note">Lower is better</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Average days to close</span><b class="ci-tile-value" data-draw="d2-days" data-source="kpi_d2" data-field="avgDaysToClose" data-row="0">—</b><span class="ci-tile-note">Closed cases</span></div>
+    </div>
+    <div class="ci-cards">
+      <div class="ci-card" id="d2-money-card"><h3>Claimed, awarded or settled, and recovered by year</h3><p class="ci-note">AED, by year the case was opened</p><div class="ci-chart" data-draw="c-d2-money" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d2-outcome-card"><h3>Outcome mix of closed cases by country</h3><p class="ci-note">Share of closed cases; won, settled and takedowns count as favourable</p><div class="ci-chart tall" data-draw="c-d2-outcome" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d2-spend-card"><h3>Legal spend by category and firm</h3><p class="ci-note">External invoices in AED</p><div class="ci-chart" data-draw="c-d2-spend" data-source="fact_invoice"></div></div>
+      <div class="ci-card" id="d2-winrate-card"><h3>Win rate by country</h3><p class="ci-note">Decided cases only; label shows how many were decided</p><div class="ci-chart" data-draw="c-d2-winrate" data-source="fact_case"></div></div>
+      <div class="ci-card wide" id="d2-trend-card"><h3>Open cases over time</h3><p class="ci-note">Cases open at each month end</p><div class="ci-chart" data-draw="c-d2-trend" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d2-repeat-card"><h3>Top repeat infringers</h3><p class="ci-note">Parties with the most cases, with cash recovered from them</p><div class="ci-chart" data-draw="c-d2-repeat" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d2-exc-card"><h3>Exceptions</h3><p class="ci-note">Open cases over a year old, overdue actions, high risk, or large claims with no hearing listed</p>
+        <div class="ci-table-box"><table data-source="d2_exceptions" data-row-key="case_id"><thead><tr><th data-field="case_id">Case</th><th data-field="title">Title</th><th data-field="country">Country</th><th data-field="stage">Stage</th><th class="num" data-field="days_open">Days open</th><th class="num" data-field="claim_amount_aed">Claim (AED)</th><th data-field="flag">Flag</th></tr></thead><tbody data-draw="t-d2-exc"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== D3 ===================== -->
+  <section id="d3" class="ci-page" role="tabpanel" hidden>
+    <h2>Infringement Intake and Triage</h2>
+    <p class="ci-q">For legal operations and brand protection: what arrives through the infringement mailbox, intake forms and app-store monitoring, how fast it is triaged, and what becomes a case.</p>
+    <div class="ci-tiles">
+      <div class="ci-tile"><span class="ci-tile-label">Reports received</span><b class="ci-tile-value" data-draw="d3-rep30" data-source="kpi_d3" data-field="reports30" data-row="0">—</b><span class="ci-tile-note">Mailbox, last 30 days</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Triage SLA met</span><b class="ci-tile-value" data-draw="d3-sla" data-source="kpi_d3" data-field="slaMet" data-row="0">—</b><span class="ci-tile-note">Triaged within 48 hours</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Median hours to triage</span><b class="ci-tile-value" data-draw="d3-med" data-source="kpi_d3" data-field="medianHours" data-row="0">—</b><span class="ci-tile-note">All triaged reports</span></div>
+      <div class="ci-tile is-bad"><span class="ci-tile-label">Backlog</span><b class="ci-tile-value" data-draw="d3-backlog" data-source="kpi_d3" data-field="backlog" data-row="0">—</b><span class="ci-tile-note">Not yet triaged</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Became a case</span><b class="ci-tile-value" data-draw="d3-conv" data-source="kpi_d3" data-field="conversion" data-row="0">—</b><span class="ci-tile-note">Share of all reports</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">App takedowns</span><b class="ci-tile-value" data-draw="d3-take" data-source="kpi_d3" data-field="takedowns" data-row="0">—</b><span class="ci-tile-note">Apps removed from stores</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Days to takedown</span><b class="ci-tile-value" data-draw="d3-tdays" data-source="kpi_d3" data-field="avgDaysTakedown" data-row="0">—</b><span class="ci-tile-note">Average, request to removal</span></div>
+    </div>
+    <div class="ci-cards">
+      <div class="ci-card wide" id="d3-week-card"><h3>Reports per month by channel</h3><p class="ci-note">Where infringements are seen: marketplaces, social media, stores, apps, domains, customs</p><div class="ci-chart" data-draw="c-d3-month" data-source="fact_mailbox"></div></div>
+      <div class="ci-card" id="d3-reporter-card"><h3>Reports by reporter type</h3><p class="ci-note">Who tells us</p><div class="ci-chart" data-draw="c-d3-reporter" data-source="fact_mailbox"></div></div>
+      <div class="ci-card" id="d3-triage-card"><h3>Triage outcomes</h3><p class="ci-note">What happened to each report</p><div class="ci-chart" data-draw="c-d3-triage" data-source="fact_mailbox"></div></div>
+      <div class="ci-card" id="d3-intake-card"><h3>Intake forms by status</h3><p class="ci-note">Forms submitted by sales, marketing, distributors and customer care</p><div class="ci-chart" data-draw="c-d3-intake" data-source="fact_intake_form"></div></div>
+      <div class="ci-card" id="d3-apps-card"><h3>App-store detections by store and status</h3><p class="ci-note">Monitoring of Google Play, the App Store, AppGallery and Galaxy Store</p><div class="ci-chart" data-draw="c-d3-apps" data-source="fact_appstore"></div></div>
+      <div class="ci-card wide" id="d3-heat-card"><h3>Reports by country and mark</h3><p class="ci-note">Darker cells carry more reports</p><div class="ci-chart" data-draw="c-d3-heat" data-source="fact_mailbox dim_mark"></div></div>
+      <div class="ci-card wide" id="d3-recent-card"><h3>Latest reports</h3><p class="ci-note">Most recent mailbox items and their triage status</p>
+        <div class="ci-table-box"><table data-source="d3_recent" data-row-key="email_id"><thead><tr><th data-field="email_id">Email</th><th data-field="received">Received</th><th data-field="reporter_type">Reporter</th><th data-field="subject">Subject</th><th data-field="country">Country</th><th data-field="triage_status">Status</th><th data-field="linked_case_id">Case</th></tr></thead><tbody data-draw="t-d3-recent"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== D4 ===================== -->
+  <section id="d4" class="ci-page" role="tabpanel" hidden>
+    <h2>Infringers and Enforcement Outcomes</h2>
+    <p class="ci-q">For IP counsel and brand protection: who infringes, how often, through which route, and which enforcement route works best by jurisdiction.</p>
+    <div class="ci-tiles">
+      <div class="ci-tile"><span class="ci-tile-label">Active infringers</span><b class="ci-tile-value" data-draw="d4-active" data-source="kpi_d4" data-field="activeInfringers" data-row="0">—</b><span class="ci-tile-note">Parties with an open case</span></div>
+      <div class="ci-tile is-bad"><span class="ci-tile-label">Repeat offenders</span><b class="ci-tile-value" data-draw="d4-repeat" data-source="kpi_d4" data-field="repeatOffenders" data-row="0">—</b><span class="ci-tile-note">Two or more cases</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Cases per infringer</span><b class="ci-tile-value" data-draw="d4-per" data-source="kpi_d4" data-field="casesPerInfringer" data-row="0">—</b><span class="ci-tile-note">Average</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Takedown success</span><b class="ci-tile-value" data-draw="d4-take" data-source="kpi_d4" data-field="takedownSuccess" data-row="0">—</b><span class="ci-tile-note">Apps removed ÷ apps reported</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Days to resolution</span><b class="ci-tile-value" data-draw="d4-days" data-source="kpi_d4" data-field="avgDaysToResolution" data-row="0">—</b><span class="ci-tile-note">Average, closed cases</span></div>
+      <div class="ci-tile"><span class="ci-tile-label">Recovered per case (AED)</span><b class="ci-tile-value" data-draw="d4-recper" data-source="kpi_d4" data-field="recoveredPerCase" data-row="0">—</b><span class="ci-tile-note">Closed cases</span></div>
+    </div>
+    <div class="ci-cards">
+      <div class="ci-card" id="d4-type-card"><h3>Infringer type and outcome</h3><p class="ci-note">Closed cases by the kind of party</p><div class="ci-chart" data-draw="c-d4-type" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d4-route-card"><h3>Outcome by enforcement route</h3><p class="ci-note">Share of closed cases per case type</p><div class="ci-chart tall" data-draw="c-d4-route" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d4-time-card"><h3>Time to resolution by country</h3><p class="ci-note">Average days from opening to closing</p><div class="ci-chart" data-draw="c-d4-time" data-source="fact_case"></div></div>
+      <div class="ci-card" id="d4-marks-card"><h3>Marks under most pressure</h3><p class="ci-note">Cases and total claimed per mark</p><div class="ci-chart" data-draw="c-d4-marks" data-source="fact_case"></div></div>
+      <div class="ci-card wide" id="d4-league-card"><h3>Infringer league table</h3><p class="ci-note">Most cases first; drill through to the infringer profile in Power BI</p>
+        <div class="ci-table-box"><table data-source="d4_infringers" data-row-key="infringer"><thead><tr><th data-field="infringer">Infringer</th><th data-field="infringer_type">Type</th><th data-field="country">Country</th><th class="num" data-field="cases">Cases</th><th class="num" data-field="open">Open</th><th class="num" data-field="won">Won</th><th class="num" data-field="settled">Settled</th><th class="num" data-field="lost">Lost</th><th class="num" data-field="recovered">Recovered (AED)</th></tr></thead><tbody data-draw="t-d4-league"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <p class="ci-foot">All figures come from the synthetic demo data pack (marks, parties, people and amounts are fictional). In the delivered solution the same pages run on the Fabric case model with row-level security by Entra ID group, refreshed by pipelines, and are embedded in Ferrero’s Analytics page.</p>
+</div>
+
+<script>
+// ---------- constants and helpers (fixed references the demo uses) ----------
+window.CI = window.CI || {};
+CI.TODAY = '2026-11-05';            // the frozen demo date
+CI.SLA_HOURS = 48;                 // triage SLA
+CI.fmtN = d3.format(',');
+CI.fmtP = d3.format('.1%');
+CI.fmtC = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 });
+CI.fmtD = (s) => s ? d3.utcFormat('%-d %b %Y')(new Date(s)) : '';
+CI.ok = (g) => g && g.status === 'ok';
+CI.STAGES = ['Intake', 'Investigation', 'Notice sent', 'Filed', 'Hearing', 'Judgment', 'Appeal'];
+CI.OUTCOMES = ['Won', 'Partially won', 'Settled', 'Takedown achieved', 'Lost', 'Withdrawn'];
+CI.FAV = ['Won', 'Partially won', 'Settled', 'Takedown achieved'];
+CI.AGE = ['0–90 days', '91–180 days', '181–365 days', '> 365 days'];
+CI.ageOf = (d) => d <= 90 ? CI.AGE[0] : d <= 180 ? CI.AGE[1] : d <= 365 ? CI.AGE[2] : CI.AGE[3];
+
+// tooltip in a chart box
+CI.tip = (el) => {
+  let t = el.querySelector('.ci-tip');
+  if (!t) { t = document.createElement('div'); t.className = 'ci-tip'; t.hidden = true; el.appendChild(t); }
+  return {
+    show(event, html) { t.innerHTML = html; t.hidden = false; const r = el.getBoundingClientRect(); let x = event.clientX - r.left + 12, y = event.clientY - r.top + 12;
+      if (x + t.offsetWidth > r.width) x = Math.max(0, event.clientX - r.left - t.offsetWidth - 12); if (y + t.offsetHeight > r.height) y = Math.max(0, y - t.offsetHeight - 24); t.style.left = x + 'px'; t.style.top = y + 'px'; },
+    hide() { t.hidden = true; }
+  };
+};
+CI.esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+CI.svg = (el, h) => { const w = Math.max(240, el.clientWidth); const s = d3.select(el).selectAll('svg').data([0]).join('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('width', '100%').attr('preserveAspectRatio', 'xMinYMin meet'); s.selectAll('*').remove(); return { s, w }; };
+CI.legend = (el, keys, colors) => { let lg = el.querySelector('.ci-legend'); if (!lg) { lg = document.createElement('div'); lg.className = 'ci-legend'; el.appendChild(lg); }
+  lg.replaceChildren(...keys.map((k, i) => { const sp = document.createElement('span'); sp.style.setProperty('--sw', colors[i % colors.length]); sp.textContent = k; return sp; })); };
+CI.measure = (s, labels, size = 11) => { const g = s.append('g').attr('visibility', 'hidden'); let m = 0; labels.forEach((l) => { const t = g.append('text').attr('font-size', size).text(l); m = Math.max(m, t.node().getComputedTextLength()); }); g.remove(); return m; };
+
+// horizontal bars: rows [{label, value, extra?}]
+CI.hbar = (el, rows, o = {}) => {
+  const fmt = o.fmt || CI.fmtN; const color = o.color || dash.colors[0]; const rowH = o.rowH || 26;
+  const h = Math.max(60, rows.length * rowH + 20); const { s, w } = CI.svg(el, h);
+  const ml = Math.min(w * 0.45, CI.measure(s, rows.map((r) => r.label)) + 12); const mr = CI.measure(s, rows.map((r) => fmt(r.value))) + 14;
+  const x = d3.scaleLinear([0, d3.max(rows, (r) => r.value) || 1], [ml, w - mr]); const y = d3.scaleBand(rows.map((r) => r.label), [10, h - 10]).padding(0.28);
+  const tip = CI.tip(el);
+  const g = s.append('g');
+  g.selectAll('rect').data(rows).join('rect').attr('x', ml).attr('y', (r) => y(r.label)).attr('height', y.bandwidth()).attr('width', (r) => Math.max(0, x(r.value) - ml)).attr('rx', 3)
+    .attr('fill', (r) => r.color || color)
+    .on('mousemove', (ev, r) => tip.show(ev, `<span class="k">${CI.esc(r.label)}</span>${CI.esc(fmt(r.value))}${r.extra ? ' · ' + CI.esc(r.extra) : ''}`)).on('mouseleave', () => tip.hide());
+  g.selectAll('text.lbl').data(rows).join('text').attr('class', 'lbl').attr('x', ml - 8).attr('y', (r) => y(r.label) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => r.label);
+  g.selectAll('text.val').data(rows).join('text').attr('class', 'val').attr('x', (r) => x(r.value) + 6).attr('y', (r) => y(r.label) + y.bandwidth() / 2).attr('dy', '0.35em').text((r) => fmt(r.value));
+};
+
+// stacked or grouped columns: rows [{x, k1, k2...}], keys
+CI.columns = (el, rows, keys, o = {}) => {
+  const colors = o.colors || dash.colors; const fmt = o.fmt || CI.fmtN; const h = o.h || 250; const { s, w } = CI.svg(el, h);
+  const ml = CI.measure(s, [fmt(d3.max(rows, (r) => o.grouped ? d3.max(keys, (k) => r[k] || 0) : d3.sum(keys, (k) => r[k] || 0)) || 1)]) + 12, mr = 8, mt = 10, mb = 30;
+  const xs = rows.map((r) => r.x); const x = d3.scaleBand(xs, [ml, w - mr]).padding(0.25);
+  const top = o.grouped ? d3.max(rows, (r) => d3.max(keys, (k) => r[k] || 0)) : d3.max(rows, (r) => d3.sum(keys, (k) => r[k] || 0));
+  const y = d3.scaleLinear([0, top || 1], [h - mb, mt]).nice();
+  s.append('g').attr('class', 'grid').selectAll('line').data(y.ticks(4)).join('line').attr('x1', ml).attr('x2', w - mr).attr('y1', y).attr('y2', y);
+  s.append('g').attr('class', 'axis').selectAll('text').data(y.ticks(4)).join('text').attr('x', ml - 6).attr('y', y).attr('dy', '0.35em').attr('text-anchor', 'end').text(fmt);
+  const every = Math.max(1, Math.ceil(xs.length / Math.floor((w - ml - mr) / 56)));
+  s.append('g').attr('class', 'axis').selectAll('text').data(xs.filter((d, i) => i % every === 0)).join('text').attr('x', (d) => x(d) + x.bandwidth() / 2).attr('y', h - mb + 14).attr('text-anchor', 'middle').text((d) => o.xLabel ? o.xLabel(d) : d);
+  const tip = CI.tip(el);
+  if (o.grouped) {
+    const xi = d3.scaleBand(keys, [0, x.bandwidth()]).padding(0.1);
+    s.append('g').selectAll('g').data(rows).join('g').attr('transform', (r) => `translate(${x(r.x)},0)`).selectAll('rect').data((r) => keys.map((k) => ({ k, v: r[k] || 0, r }))).join('rect')
+      .attr('x', (d) => xi(d.k)).attr('width', xi.bandwidth()).attr('y', (d) => y(d.v)).attr('height', (d) => y(0) - y(d.v)).attr('rx', 2).attr('fill', (d) => colors[keys.indexOf(d.k) % colors.length])
+      .on('mousemove', (ev, d) => tip.show(ev, `<span class="k">${CI.esc(o.xLabel ? o.xLabel(d.r.x) : d.r.x)}</span>` + keys.map((k, i) => `<div><span class="sw" style="--sw:${colors[i % colors.length]}"></span>${CI.esc(k)}: ${CI.esc(fmt(d.r[k] || 0))}</div>`).join(''))).on('mouseleave', () => tip.hide());
+  } else {
+    const series = d3.stack().keys(keys).value((r, k) => r[k] || 0)(rows);
+    s.append('g').selectAll('g').data(series).join('g').attr('fill', (d, i) => colors[i % colors.length]).selectAll('rect').data((d) => d.map((p) => ({ p, key: d.key }))).join('rect')
+      .attr('x', (d) => x(d.p.data.x)).attr('width', x.bandwidth()).attr('y', (d) => y(d.p[1])).attr('height', (d) => Math.max(0, y(d.p[0]) - y(d.p[1])))
+      .on('mousemove', (ev, d) => tip.show(ev, `<span class="k">${CI.esc(o.xLabel ? o.xLabel(d.p.data.x) : d.p.data.x)}</span>` + keys.filter((k) => d.p.data[k]).map((k) => `<div><span class="sw" style="--sw:${colors[keys.indexOf(k) % colors.length]}"></span>${CI.esc(k)}: ${CI.esc(fmt(d.p.data[k]))}</div>`).join('') + `<div>Total: ${CI.esc(fmt(d3.sum(keys, (k) => d.p.data[k] || 0)))}</div>`)).on('mouseleave', () => tip.hide());
+  }
+  CI.legend(el, keys, colors);
+};
+
+// 100% stacked horizontal: rows [{y, k1, k2...}]
+CI.hstack = (el, rows, keys, o = {}) => {
+  const colors = o.colors || dash.colors; const rowH = o.rowH || 28; const h = rows.length * rowH + 16; const { s, w } = CI.svg(el, h);
+  const ml = Math.min(w * 0.4, CI.measure(s, rows.map((r) => r.y)) + 12), mr = 40;
+  const y = d3.scaleBand(rows.map((r) => r.y), [8, h - 8]).padding(0.25); const x = d3.scaleLinear([0, 1], [ml, w - mr]);
+  const tip = CI.tip(el);
+  const g = s.append('g');
+  rows.forEach((r) => { const tot = d3.sum(keys, (k) => r[k] || 0) || 1; let acc = 0;
+    keys.forEach((k, i) => { const v = (r[k] || 0) / tot; if (!v) return;
+      g.append('rect').attr('x', x(acc)).attr('y', y(r.y)).attr('width', Math.max(0, x(acc + v) - x(acc))).attr('height', y.bandwidth()).attr('fill', colors[i % colors.length])
+        .on('mousemove', (ev) => tip.show(ev, `<span class="k">${CI.esc(r.y)}</span><span class="sw" style="--sw:${colors[i % colors.length]}"></span>${CI.esc(k)}: ${CI.esc(CI.fmtN(r[k]))} (${CI.esc(CI.fmtP(v))})`)).on('mouseleave', () => tip.hide());
+      acc += v; });
+    g.append('text').attr('class', 'lbl').attr('x', ml - 8).attr('y', y(r.y) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text(r.y);
+    g.append('text').attr('x', w - mr + 6).attr('y', y(r.y) + y.bandwidth() / 2).attr('dy', '0.35em').text(CI.fmtN(tot)); });
+  CI.legend(el, keys, colors);
+};
+
+// line over dates: rows [{d: Date, v}]
+CI.line = (el, rows, o = {}) => {
+  const h = o.h || 240; const { s, w } = CI.svg(el, h); const fmt = o.fmt || CI.fmtN;
+  const ml = CI.measure(s, [fmt(d3.max(rows, (r) => r.v) || 1)]) + 12, mr = 60, mt = 12, mb = 28;
+  const x = d3.scaleUtc(d3.extent(rows, (r) => r.d), [ml, w - mr]); const y = d3.scaleLinear([0, d3.max(rows, (r) => r.v) || 1], [h - mb, mt]).nice();
+  s.append('g').attr('class', 'grid').selectAll('line').data(y.ticks(4)).join('line').attr('x1', ml).attr('x2', w - mr).attr('y1', y).attr('y2', y);
+  s.append('g').attr('class', 'axis').selectAll('text').data(y.ticks(4)).join('text').attr('x', ml - 6).attr('y', y).attr('dy', '0.35em').attr('text-anchor', 'end').text(fmt);
+  const ticks = x.ticks(Math.max(3, Math.floor((w - ml - mr) / 90)));
+  s.append('g').attr('class', 'axis').selectAll('text').data(ticks).join('text').attr('x', x).attr('y', h - mb + 14).attr('text-anchor', 'middle').text(d3.utcFormat('%b %Y'));
+  const id = 'g' + Math.random().toString(36).slice(2, 8);
+  const grad = s.append('defs').append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+  [[0, .26], [.25, .16], [.5, .08], [.75, .03], [1, 0]].forEach(([off, op]) => grad.append('stop').attr('offset', off).attr('style', `stop-color:${dash.colors[0]}`).attr('stop-opacity', op));
+  s.append('path').datum(rows).attr('fill', `url(#${id})`).attr('d', d3.area().x((r) => x(r.d)).y0(y(0)).y1((r) => y(r.v)));
+  s.append('path').datum(rows).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.v)));
+  const last = rows[rows.length - 1];
+  s.append('circle').attr('cx', x(last.d)).attr('cy', y(last.v)).attr('r', 3.5).attr('fill', dash.colors[0]);
+  s.append('text').attr('class', 'lbl').attr('x', x(last.d) + 8).attr('y', y(last.v)).attr('dy', '0.35em').text(fmt(last.v) + (o.lastLabel ? ' ' + o.lastLabel : ''));
+  const tip = CI.tip(el); const bis = d3.bisector((r) => r.d).center; const dot = s.append('circle').attr('r', 4).attr('fill', dash.colors[0]).attr('visibility', 'hidden');
+  s.append('rect').attr('x', ml).attr('y', mt).attr('width', w - ml - mr).attr('height', h - mt - mb).attr('fill', 'transparent')
+    .on('mousemove', (ev) => { const [px] = d3.pointer(ev); const r = rows[bis(rows, x.invert(px))]; dot.attr('cx', x(r.d)).attr('cy', y(r.v)).attr('visibility', null); tip.show(ev, `<span class="k">${d3.utcFormat('%b %Y')(r.d)}</span>${CI.esc(fmt(r.v))}`); })
+    .on('mouseleave', () => { dot.attr('visibility', 'hidden'); tip.hide(); });
+};
+
+// donut: rows [{label, value}]
+CI.donut = (el, rows) => {
+  const h = 240; const { s, w } = CI.svg(el, h); const R = Math.min(w, h) / 2 - 8; const cx = Math.min(w / 2, R + 8 + 10);
+  const pie = d3.pie().value((r) => r.value).sort(null)(rows); const arc = d3.arc().innerRadius(R * 0.58).outerRadius(R); const tot = d3.sum(rows, (r) => r.value);
+  const tip = CI.tip(el); const g = s.append('g').attr('transform', `translate(${cx},${h / 2})`);
+  g.selectAll('path').data(pie).join('path').attr('d', arc).attr('fill', (d, i) => dash.colors[i % dash.colors.length]).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
+    .on('mousemove', (ev, d) => tip.show(ev, `<span class="k">${CI.esc(d.data.label)}</span>${CI.esc(CI.fmtN(d.data.value))} (${CI.esc(CI.fmtP(d.data.value / tot))})`)).on('mouseleave', () => tip.hide());
+  g.append('text').attr('class', 'lbl').attr('text-anchor', 'middle').attr('dy', '-0.1em').attr('font-size', 22).text(CI.fmtN(tot));
+  g.append('text').attr('text-anchor', 'middle').attr('dy', '1.3em').text('open cases');
+  const lg = s.append('g').attr('transform', `translate(${cx + R + 24},${h / 2 - rows.length * 9})`);
+  lg.selectAll('rect').data(rows).join('rect').attr('y', (d, i) => i * 18).attr('width', 10).attr('height', 10).attr('rx', 2).attr('fill', (d, i) => dash.colors[i % dash.colors.length]);
+  lg.selectAll('text').data(rows).join('text').attr('class', 'lbl').attr('x', 16).attr('y', (d, i) => i * 18 + 5).attr('dy', '0.35em').text((d) => `${d.label}  ${CI.fmtN(d.value)}`);
+};
+
+// heat-map matrix: cells [{x, y, v}]
+CI.heat = (el, xs, ys, cells) => {
+  const cw = 26; const h = ys.length * cw + 40; const { s, w } = CI.svg(el, h);
+  const ml = Math.min(w * 0.35, CI.measure(s, ys) + 12); const x = d3.scaleBand(xs, [ml, w - 8]).padding(0.08); const y = d3.scaleBand(ys, [30, h - 10]).padding(0.08);
+  const max = d3.max(cells, (c) => c.v) || 1; const base = getComputedStyle(el).getPropertyValue('--color-panel').trim() || '#fff'; const ramp = d3.interpolateRgb(base, dash.colors[0]);
+  const tip = CI.tip(el); const g = s.append('g');
+  g.selectAll('rect').data(cells).join('rect').attr('x', (c) => x(c.x)).attr('y', (c) => y(c.y)).attr('width', x.bandwidth()).attr('height', y.bandwidth()).attr('rx', 3)
+    .attr('fill', (c) => c.v ? ramp(0.15 + 0.85 * c.v / max) : 'var(--cds-chart-grid)')
+    .on('mousemove', (ev, c) => tip.show(ev, `<span class="k">${CI.esc(c.y)} · ${CI.esc(c.x)}</span>${CI.esc(CI.fmtN(c.v))} reports`)).on('mouseleave', () => tip.hide());
+  g.selectAll('text.v').data(cells.filter((c) => c.v)).join('text').attr('class', 'v').attr('x', (c) => x(c.x) + x.bandwidth() / 2).attr('y', (c) => y(c.y) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('fill', (c) => c.v / max > 0.55 ? '#fff' : 'var(--color-fg)').text((c) => c.v);
+  s.append('g').selectAll('text').data(xs).join('text').attr('x', (d) => x(d) + x.bandwidth() / 2).attr('y', 18).attr('text-anchor', 'middle').attr('class', 'lbl').text((d) => d);
+  s.append('g').selectAll('text').data(ys).join('text').attr('x', ml - 8).attr('y', (d) => y(d) + y.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('class', 'lbl').text((d) => d);
+};
+
+// ---------- calculations (readers can inspect these in Sources) ----------
+dash.calc('kpi_d1', { inputs: ['fact_case'], title: 'Case overview figures', description: 'Open, new, hearing, overdue, ageing and closed counts from the case tracker as of 5 Nov 2026.',
+  fn: (fact_case) => {
+    const T = '2026-11-05', back30 = '2026-10-06', fwd30 = '2026-12-05';
+    const open = fact_case.filter((r) => r.status === 'Open');
+    const sum = open.reduce((a, r) => a + r.days_open, 0);
+    return [{ open: open.length,
+      new30: fact_case.filter((r) => r.opened_date >= back30).length,
+      hearings30: open.filter((r) => r.next_hearing_date && r.next_hearing_date >= T && r.next_hearing_date <= fwd30).length,
+      overdue: open.filter((r) => r.next_action_due && r.next_action_due < T).length,
+      avgDaysOpen: open.length ? Math.round(sum / open.length) : 0,
+      closedYtd: fact_case.filter((r) => r.closed_date && r.closed_date.slice(0, 4) === '2026').length }];
+  } });
+dash.calc('d1_actions', { inputs: ['fact_case'], title: 'Upcoming hearings and actions', description: 'Open cases with a hearing date or an action due date, soonest first.',
+  fn: (fact_case) => fact_case.filter((r) => r.status === 'Open' && (r.next_hearing_date || r.next_action_due))
+    .map((r) => ({ case_id: r.case_id, title: r.title, country: r.country, when: r.next_hearing_date && (!r.next_action_due || r.next_hearing_date <= r.next_action_due) ? r.next_hearing_date : r.next_action_due,
+                   what: r.next_hearing_date && (!r.next_action_due || r.next_hearing_date <= r.next_action_due) ? 'Hearing – ' + r.court_name : r.next_action, lead_counsel: r.lead_counsel }))
+    .sort((a, b) => a.when < b.when ? -1 : a.when > b.when ? 1 : 0) });
+dash.calc('kpi_d2', { inputs: ['fact_case', 'fact_invoice'], title: 'Portfolio figures', description: 'Claimed, awarded or settled, recovered, rates, external spend and duration across all cases.',
+  fn: (fact_case, fact_invoice) => {
+    const s = (k) => fact_case.reduce((a, r) => a + (r[k] || 0), 0);
+    const claimed = s('claim_amount_aed'), aws = s('awarded_amount_aed') + s('settlement_amount_aed'), rec = s('recovered_amount_aed');
+    const fav = ['Won', 'Partially won', 'Settled', 'Takedown achieved']; const decided = fact_case.filter((r) => fav.includes(r.outcome) || r.outcome === 'Lost');
+    const closed = fact_case.filter((r) => r.status === 'Closed'); const spend = fact_invoice.reduce((a, r) => a + r.amount_aed, 0);
+    return [{ claimed, awardedSettled: aws, recovered: rec, recoveryRate: aws ? rec / aws : 0,
+      winRate: decided.length ? decided.filter((r) => fav.includes(r.outcome)).length / decided.length : 0, spend, spendToRecovery: rec ? spend / rec : 0,
+      avgDaysToClose: closed.length ? Math.round(closed.reduce((a, r) => a + r.days_open, 0) / closed.length) : 0 }];
+  } });
+dash.calc('d2_exceptions', { inputs: ['fact_case'], title: 'Exception cases', description: 'Open cases over 365 days old, with an overdue action, rated high risk, or claiming over AED 1M with no hearing listed.',
+  fn: (fact_case) => fact_case.filter((r) => r.status === 'Open').map((r) => { const f = [];
+      if (r.days_open > 365) f.push('Over 1 year'); if (r.next_action_due && r.next_action_due < '2026-11-05') f.push('Overdue action');
+      if (r.risk_rating === 'High') f.push('High risk'); if (r.claim_amount_aed > 1000000 && !r.next_hearing_date) f.push('Large claim, no hearing');
+      return { case_id: r.case_id, title: r.title, country: r.country, stage: r.stage, days_open: r.days_open, claim_amount_aed: r.claim_amount_aed, flag: f.join('; ') }; })
+    .filter((r) => r.flag).sort((a, b) => b.days_open - a.days_open) });
+dash.calc('kpi_d3', { inputs: ['fact_mailbox', 'fact_appstore'], title: 'Intake and triage figures', description: 'Mailbox volume, SLA, triage time, backlog, conversion, and app takedowns.',
+  fn: (fact_mailbox, fact_appstore) => {
+    const back30 = '2026-10-06'; const triaged = fact_mailbox.filter((r) => r.triaged_at);
+    const hours = triaged.map((r) => (new Date(r.triaged_at) - new Date(r.received_at)) / 3600000).sort((a, b) => a - b);
+    const med = hours.length ? hours[Math.floor(hours.length / 2)] : 0;
+    const removed = fact_appstore.filter((r) => r.status === 'Removed' && r.removed_date && r.takedown_requested_date);
+    const days = removed.map((r) => (new Date(r.removed_date) - new Date(r.takedown_requested_date)) / 86400000);
+    return [{ reports30: fact_mailbox.filter((r) => r.received_at.slice(0, 10) >= back30).length,
+      slaMet: triaged.length ? 1 - triaged.filter((r) => r.sla_breached).length / triaged.length : 0, medianHours: Math.round(med),
+      backlog: fact_mailbox.filter((r) => r.triage_status === 'New').length,
+      conversion: fact_mailbox.length ? fact_mailbox.filter((r) => r.triage_status === 'Linked to case').length / fact_mailbox.length : 0,
+      takedowns: fact_appstore.filter((r) => r.status === 'Removed').length, avgDaysTakedown: days.length ? Math.round(days.reduce((a, b) => a + b, 0) / days.length) : 0 }];
+  } });
+dash.calc('d3_recent', { inputs: ['fact_mailbox'], title: 'Latest mailbox reports', description: 'The 15 most recent infringement reports.',
+  fn: (fact_mailbox) => fact_mailbox.slice().sort((a, b) => a.received_at < b.received_at ? 1 : -1).slice(0, 15)
+    .map((r) => ({ email_id: r.email_id, received: r.received_at.slice(0, 16).replace('T', ' '), reporter_type: r.reporter_type, subject: r.subject, country: r.country, triage_status: r.triage_status, linked_case_id: r.linked_case_id || '' })) });
+dash.calc('kpi_d4', { inputs: ['fact_case', 'fact_appstore'], title: 'Infringer and outcome figures', description: 'Active and repeat infringers, cases per infringer, takedown success, time to resolution and recovery per closed case.',
+  fn: (fact_case, fact_appstore) => {
+    const by = {}; fact_case.forEach((r) => { by[r.infringer_name] = (by[r.infringer_name] || 0) + 1; });
+    const names = Object.keys(by); const closed = fact_case.filter((r) => r.status === 'Closed');
+    const reported = fact_appstore.filter((r) => ['Removed', 'Rejected by store', 'Re-listed', 'Takedown requested'].includes(r.status));
+    return [{ activeInfringers: new Set(fact_case.filter((r) => r.status === 'Open').map((r) => r.infringer_name)).size,
+      repeatOffenders: names.filter((n) => by[n] >= 2).length, casesPerInfringer: names.length ? Math.round(fact_case.length / names.length * 10) / 10 : 0,
+      takedownSuccess: reported.length ? reported.filter((r) => r.status === 'Removed').length / reported.length : 0,
+      avgDaysToResolution: closed.length ? Math.round(closed.reduce((a, r) => a + r.days_open, 0) / closed.length) : 0,
+      recoveredPerCase: closed.length ? Math.round(closed.reduce((a, r) => a + r.recovered_amount_aed, 0) / closed.length) : 0 }];
+  } });
+dash.calc('d4_infringers', { inputs: ['fact_case'], title: 'Infringer league table', description: 'Cases, open cases, outcomes and cash recovered per infringer, most cases first.',
+  fn: (fact_case) => { const m = {};
+    fact_case.forEach((r) => { const k = r.infringer_name; m[k] = m[k] || { infringer: k, infringer_type: r.infringer_type, country: r.country, cases: 0, open: 0, won: 0, settled: 0, lost: 0, recovered: 0 };
+      const o = m[k]; o.cases++; if (r.status === 'Open') o.open++; if (r.outcome === 'Won' || r.outcome === 'Partially won' || r.outcome === 'Takedown achieved') o.won++;
+      if (r.outcome === 'Settled') o.settled++; if (r.outcome === 'Lost') o.lost++; o.recovered += r.recovered_amount_aed || 0; });
+    return Object.values(m).sort((a, b) => b.cases - a.cases || b.recovered - a.recovered); } });
+</script>
+
+<script>
+// ---------- tabs and links ----------
+const CI_show = (id) => {
+  document.querySelectorAll('.ci-page').forEach((sec) => { sec.hidden = sec.id !== id; });
+  document.querySelectorAll('.ci-tabs [data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === id)));
+  dash.setLink(id);
+};
+document.querySelectorAll('.ci-tabs [data-tab]').forEach((b) => b.addEventListener('click', () => CI_show(b.dataset.tab)));
+const CI_named = location.hash.slice(1);
+if (document.getElementById(CI_named) && document.getElementById(CI_named).classList.contains('ci-page')) CI_show(CI_named);
+
+// ---------- tiles ----------
+const CI_tile = (name, src, field, fmt) => dash.draw(name, (el) => { const g = dash.data(src); el.textContent = CI.ok(g) && g.data[0] ? fmt(g.data[0][field]) : '—'; });
+dash.draw('asof', (el) => { el.textContent = CI.fmtD(CI.TODAY); });
+[['take-open', 'open', CI.fmtN], ['take-hear', 'hearings30', CI.fmtN], ['take-over', 'overdue', CI.fmtN], ['d1-open', 'open', CI.fmtN], ['d1-new', 'new30', CI.fmtN], ['d1-hear', 'hearings30', CI.fmtN],
+ ['d1-over', 'overdue', CI.fmtN], ['d1-age', 'avgDaysOpen', CI.fmtN], ['d1-closed', 'closedYtd', CI.fmtN]].forEach(([n, f, fm]) => CI_tile(n, 'kpi_d1', f, fm));
+[['d2-claimed', 'claimed', CI.fmtC.format.bind(CI.fmtC)], ['d2-aws', 'awardedSettled', CI.fmtC.format.bind(CI.fmtC)], ['d2-rec', 'recovered', CI.fmtC.format.bind(CI.fmtC)], ['d2-rate', 'recoveryRate', CI.fmtP],
+ ['d2-win', 'winRate', CI.fmtP], ['d2-spend', 'spend', CI.fmtC.format.bind(CI.fmtC)], ['d2-ratio', 'spendToRecovery', d3.format('.2f')], ['d2-days', 'avgDaysToClose', CI.fmtN]].forEach(([n, f, fm]) => CI_tile(n, 'kpi_d2', f, fm));
+[['d3-rep30', 'reports30', CI.fmtN], ['d3-sla', 'slaMet', CI.fmtP], ['d3-med', 'medianHours', CI.fmtN], ['d3-backlog', 'backlog', CI.fmtN], ['d3-conv', 'conversion', CI.fmtP], ['d3-take', 'takedowns', CI.fmtN],
+ ['d3-tdays', 'avgDaysTakedown', CI.fmtN]].forEach(([n, f, fm]) => CI_tile(n, 'kpi_d3', f, fm));
+[['d4-active', 'activeInfringers', CI.fmtN], ['d4-repeat', 'repeatOffenders', CI.fmtN], ['d4-per', 'casesPerInfringer', d3.format('.1f')], ['d4-take', 'takedownSuccess', CI.fmtP], ['d4-days', 'avgDaysToResolution', CI.fmtN],
+ ['d4-recper', 'recoveredPerCase', CI.fmtN]].forEach(([n, f, fm]) => CI_tile(n, 'kpi_d4', f, fm));
+
+// ---------- chart drawings ----------
+const CI_chart = (name, src, draw) => dash.draw(name, (el) => {
+  const g = dash.data(src); el.classList.toggle('dash-skeleton', g.status === 'loading');
+  if (!CI.ok(g) || el.clientWidth === 0) { if (g.status !== 'loading') el.replaceChildren(document.createTextNode(g.status === 'error' ? 'Failed to load' : '—')); return; }
+  el.querySelectorAll('.ci-legend, .ci-tip').forEach((n) => n.remove()); Array.from(el.childNodes).forEach((n) => { if (n.nodeType === 3) n.remove(); });
+  draw(el, g.data);
+});
+const CI_count = (rows, key, order) => { const m = d3.rollup(rows, (v) => v.length, (r) => r[key]); return (order || Array.from(m.keys())).filter((k) => m.has(k)).map((k) => ({ label: k, value: m.get(k) })); };
+const CI_pivot = (rows, xKey, kKey, xs, ks) => xs.map((x) => { const o = { x }; ks.forEach((k) => { o[k] = rows.filter((r) => r[xKey] === x && r[kKey] === k).length; }); return o; });
+
+CI_chart('c-d1-stage', 'fact_case', (el, rows) => CI.hbar(el, CI_count(rows.filter((r) => r.status === 'Open'), 'stage', CI.STAGES)));
+CI_chart('c-d1-country', 'fact_case', (el, rows) => CI.hbar(el, CI_count(rows.filter((r) => r.status === 'Open'), 'country').sort((a, b) => b.value - a.value), { color: dash.colors[1] }));
+CI_chart('c-d1-age', 'fact_case', (el, rows) => { const open = rows.filter((r) => r.status === 'Open').map((r) => ({ ...r, age: CI.ageOf(r.days_open) })); CI.columns(el, CI_pivot(open, 'age', 'priority', CI.AGE, ['High', 'Medium', 'Low']), ['High', 'Medium', 'Low'], { colors: [dash.colors[2], dash.colors[0], dash.colors[4]] }); });
+CI_chart('c-d1-mark', 'fact_case', (el, rows) => CI.donut(el, CI_count(rows.filter((r) => r.status === 'Open'), 'mark_name').sort((a, b) => b.value - a.value)));
+CI_chart('c-d1-new', 'fact_case', (el, rows) => { const months = d3.utcMonth.range(new Date('2024-01-01'), new Date('2026-11-01')).map(d3.utcFormat('%Y-%m')); const srcs = ['Infringement mailbox', 'Intake form', 'Brand protection vendor', 'Distributor report', 'Customs notification', 'App store monitoring'];
+  const data = CI_pivot(rows.map((r) => ({ ...r, m: r.opened_date.slice(0, 7) })), 'm', 'source_channel', months, srcs); CI.columns(el, data, srcs, { xLabel: (m) => d3.utcFormat('%b %y')(new Date(m + '-01')) }); });
+CI_chart('c-d1-counsel', 'fact_case', (el, rows) => CI.hbar(el, CI_count(rows.filter((r) => r.status === 'Open'), 'lead_counsel').sort((a, b) => b.value - a.value), { color: dash.colors[3] }));
+CI_chart('c-d2-money', 'fact_case', (el, rows) => { const ys = ['2024', '2025', '2026']; const data = ys.map((y) => { const s = rows.filter((r) => r.opened_date.slice(0, 4) === y); return { x: y, Claimed: d3.sum(s, (r) => r.claim_amount_aed), 'Awarded or settled': d3.sum(s, (r) => r.awarded_amount_aed + r.settlement_amount_aed), Recovered: d3.sum(s, (r) => r.recovered_amount_aed) }; });
+  CI.columns(el, data, ['Claimed', 'Awarded or settled', 'Recovered'], { grouped: true, fmt: (v) => CI.fmtC.format(v) }); });
+CI_chart('c-d2-outcome', 'fact_case', (el, rows) => { const closed = rows.filter((r) => r.status === 'Closed'); const cs = Array.from(d3.rollup(closed, (v) => v.length, (r) => r.country)).sort((a, b) => b[1] - a[1]).map((d) => d[0]);
+  CI.hstack(el, cs.map((c) => { const o = { y: c }; CI.OUTCOMES.forEach((k) => { o[k] = closed.filter((r) => r.country === c && r.outcome === k).length; }); return o; }), CI.OUTCOMES, { colors: [dash.colors[1], dash.colors[5], dash.colors[0], dash.colors[3], dash.colors[2], dash.colors[6]] }); });
+CI_chart('c-d2-spend', 'fact_invoice', (el, rows) => { const cats = Array.from(d3.rollup(rows, (v) => d3.sum(v, (r) => r.amount_aed), (r) => r.category)).sort((a, b) => b[1] - a[1]).map((d) => d[0]); const firms = Array.from(new Set(rows.map((r) => r.firm)));
+  CI.columns(el, cats.map((c) => { const o = { x: c }; firms.forEach((f) => { o[f] = d3.sum(rows.filter((r) => r.category === c && r.firm === f), (r) => r.amount_aed); }); return o; }), firms, { fmt: (v) => CI.fmtC.format(v), xLabel: (c) => c.replace(' fees', '').replace(' handling', '') }); });
+CI_chart('c-d2-winrate', 'fact_case', (el, rows) => { const dec = rows.filter((r) => CI.FAV.includes(r.outcome) || r.outcome === 'Lost');
+  CI.hbar(el, Array.from(d3.rollup(dec, (v) => ({ n: v.length, w: v.filter((r) => CI.FAV.includes(r.outcome)).length }), (r) => r.country)).map(([c, o]) => ({ label: c, value: o.w / o.n, extra: `${o.n} decided` })).sort((a, b) => b.value - a.value), { fmt: CI.fmtP, color: dash.colors[5] }); });
+CI_chart('c-d2-trend', 'fact_case', (el, rows) => { const ends = d3.utcMonth.range(new Date('2024-01-01'), new Date('2026-11-01')).map((d) => d3.utcMonth.offset(d, 1)).map((d) => d3.utcDay.offset(d, -1));
+  CI.line(el, ends.map((d) => { const s = d3.utcFormat('%Y-%m-%d')(d); return { d, v: rows.filter((r) => r.opened_date <= s && (!r.closed_date || r.closed_date > s)).length }; }), { lastLabel: 'open' }); });
+CI_chart('c-d2-repeat', 'fact_case', (el, rows) => CI.hbar(el, Array.from(d3.rollup(rows, (v) => ({ n: v.length, rec: d3.sum(v, (r) => r.recovered_amount_aed) }), (r) => r.infringer_name)).map(([k, o]) => ({ label: k, value: o.n, extra: 'AED ' + CI.fmtN(o.rec) + ' recovered' })).sort((a, b) => b.value - a.value).slice(0, 10), { color: dash.colors[2] }));
+CI_chart('c-d3-month', 'fact_mailbox', (el, rows) => { const months = d3.utcMonth.range(new Date('2024-01-01'), new Date('2026-12-01')).map(d3.utcFormat('%Y-%m')); const ch = ['Online marketplace', 'Physical store', 'Social media', 'Mobile app', 'Website / domain', 'Customs', 'Wholesale market'];
+  CI.columns(el, CI_pivot(rows.map((r) => ({ ...r, m: r.received_at.slice(0, 7) })), 'm', 'channel', months, ch), ch, { xLabel: (m) => d3.utcFormat('%b %y')(new Date(m + '-01')) }); });
+CI_chart('c-d3-reporter', 'fact_mailbox', (el, rows) => CI.hbar(el, CI_count(rows, 'reporter_type').sort((a, b) => b.value - a.value)));
+CI_chart('c-d3-triage', 'fact_mailbox', (el, rows) => CI.hbar(el, CI_count(rows, 'triage_status', ['New', 'Triaged – monitoring', 'Triaged – no action', 'Linked to case', 'Duplicate', 'Dismissed – not infringing']), { color: dash.colors[1] }));
+CI_chart('c-d3-intake', 'fact_intake_form', (el, rows) => CI.hbar(el, CI_count(rows, 'status').sort((a, b) => b.value - a.value), { color: dash.colors[3] }));
+CI_chart('c-d3-apps', 'fact_appstore', (el, rows) => { const st = ['Detected', 'Reported to store', 'Takedown requested', 'Removed', 'Rejected by store', 'Re-listed']; const stores = ['Google Play', 'Apple App Store', 'Huawei AppGallery', 'Samsung Galaxy Store'];
+  CI.columns(el, CI_pivot(rows, 'store', 'status', stores, st), st, { colors: [dash.colors[6], dash.colors[0], dash.colors[3], dash.colors[1], dash.colors[2], dash.colors[4]], xLabel: (s) => s.replace('Samsung ', '').replace('Huawei ', '').replace('Apple ', '') }); });
+dash.draw('c-d3-heat', (el) => { const m = dash.data('fact_mailbox'), k = dash.data('dim_mark'); el.classList.toggle('dash-skeleton', m.status === 'loading' || k.status === 'loading');
+  if (!CI.ok(m) || !CI.ok(k) || el.clientWidth === 0) { if (m.status !== 'loading' && k.status !== 'loading') el.replaceChildren(document.createTextNode('—')); return; }
+  el.querySelectorAll('.ci-tip').forEach((n) => n.remove()); Array.from(el.childNodes).forEach((n) => { if (n.nodeType === 3) n.remove(); });
+  const name = new Map(k.data.map((r) => [r.mark_id, r.mark_name])); const xs = k.data.map((r) => r.mark_name); const ys = ['UAE', 'KSA', 'Egypt', 'Kuwait', 'Jordan', 'Turkey', 'Oman', 'India', 'Qatar'];
+  const cells = []; ys.forEach((y) => xs.forEach((x) => cells.push({ x, y, v: m.data.filter((r) => r.country === y && name.get(r.mark_id) === x).length }))); CI.heat(el, xs, ys, cells); });
+CI_chart('c-d4-type', 'fact_case', (el, rows) => { const closed = rows.filter((r) => r.status === 'Closed'); const types = Array.from(d3.rollup(closed, (v) => v.length, (r) => r.infringer_type)).sort((a, b) => b[1] - a[1]).map((d) => d[0]);
+  CI.columns(el, CI_pivot(closed, 'infringer_type', 'outcome', types, CI.OUTCOMES), CI.OUTCOMES, { colors: [dash.colors[1], dash.colors[5], dash.colors[0], dash.colors[3], dash.colors[2], dash.colors[6]], xLabel: (t) => t.replace(' registrant', '').replace(' developer', ' dev.') }); });
+CI_chart('c-d4-route', 'fact_case', (el, rows) => { const closed = rows.filter((r) => r.status === 'Closed'); const types = Array.from(d3.rollup(closed, (v) => v.length, (r) => r.case_type)).sort((a, b) => b[1] - a[1]).map((d) => d[0]);
+  CI.hstack(el, types.map((t) => { const o = { y: t.replace('Trademark infringement – ', '').replace(' / cybersquatting', '').replace(' / passing off', '').replace(' / grey market', '').replace(' / cancellation', '') }; CI.OUTCOMES.forEach((k) => { o[k] = closed.filter((r) => r.case_type === t && r.outcome === k).length; }); return o; }), CI.OUTCOMES, { colors: [dash.colors[1], dash.colors[5], dash.colors[0], dash.colors[3], dash.colors[2], dash.colors[6]] }); });
+CI_chart('c-d4-time', 'fact_case', (el, rows) => CI.hbar(el, Array.from(d3.rollup(rows.filter((r) => r.status === 'Closed'), (v) => Math.round(d3.mean(v, (r) => r.days_open)), (r) => r.country)).map(([c, v]) => ({ label: c, value: v, extra: 'days' })).sort((a, b) => b.value - a.value), { color: dash.colors[4] }));
+CI_chart('c-d4-marks', 'fact_case', (el, rows) => CI.hbar(el, Array.from(d3.rollup(rows, (v) => ({ n: v.length, c: d3.sum(v, (r) => r.claim_amount_aed) }), (r) => r.mark_name)).map(([k, o]) => ({ label: k, value: o.n, extra: 'AED ' + CI.fmtC.format(o.c) + ' claimed' })).sort((a, b) => b.value - a.value), { color: dash.colors[0] }));
+
+// ---------- tables ----------
+const CI_table = (name, src, cols) => dash.draw(name, (tb) => { const g = dash.data(src); tb.replaceChildren();
+  if (!CI.ok(g)) return;
+  g.data.forEach((r) => { const tr = document.createElement('tr'); cols.forEach(([f, fmt, cls]) => { const td = document.createElement('td'); const v = fmt ? fmt(r[f], r) : (r[f] ?? ''); td.textContent = v; if (cls) td.className = typeof cls === 'function' ? cls(r) : cls; tr.appendChild(td); }); tb.appendChild(tr); }); });
+CI_table('t-d1-actions', 'd1_actions', [['case_id'], ['title'], ['country'], ['when', (v) => CI.fmtD(v), (r) => r.when < CI.TODAY ? 'flag' : ''], ['what'], ['lead_counsel']]);
+CI_table('t-d2-exc', 'd2_exceptions', [['case_id'], ['title'], ['country'], ['stage'], ['days_open', (v) => CI.fmtN(v), 'num'], ['claim_amount_aed', (v) => CI.fmtN(v), 'num'], ['flag', null, 'flag']]);
+CI_table('t-d3-recent', 'd3_recent', [['email_id'], ['received'], ['reporter_type'], ['subject'], ['country'], ['triage_status', null, (r) => r.triage_status === 'Linked to case' ? 'ok' : ''], ['linked_case_id']]);
+CI_table('t-d4-league', 'd4_infringers', [['infringer'], ['infringer_type'], ['country'], ['cases', (v) => CI.fmtN(v), 'num'], ['open', (v) => CI.fmtN(v), 'num'], ['won', (v) => CI.fmtN(v), 'num'], ['settled', (v) => CI.fmtN(v), 'num'], ['lost', (v) => CI.fmtN(v), 'num'], ['recovered', (v) => CI.fmtN(v), 'num']]);
+</script>

@@ -1,0 +1,46 @@
+infringer_id,infringer_name_en,infringer_name_ar,infringer_type,country,city,case_count,repeat_offender,first_seen
+INF-001,Al Noor General Trading LLC,النور للتجارة العامة ذ.م.م,Distributor,UAE,Dubai,5,True,2024-12-24
+INF-002,Sweet Deals Foodstuff Trading,سويت ديلز لتجارة المواد الغذائية,Importer,UAE,Dubai,3,True,2024-04-02
+INF-003,Golden Taste Distribution FZE,جولدن تيست للتوزيع م.م.ح,Importer,UAE,Dubai,2,True,2025-07-15
+INF-004,Hazel Bite Foods LLC,هيزل بايت للأغذية ذ.م.م,Manufacturer,UAE,Sharjah,4,True,2024-04-23
+INF-005,Choco Palace Sweets,قصر الشوكولاتة للحلويات,Retailer,UAE,Abu Dhabi,0,False,
+INF-006,QuickCart Online Store,كويك كارت للتسوق الإلكتروني,Online seller,UAE,Dubai,6,True,2024-04-07
+INF-007,AppWorks Studio FZ-LLC,آب ووركس ستوديو,App developer,UAE,Dubai,3,True,2025-01-09
+INF-008,Dessert Kingdom Trading,مملكة الحلويات للتجارة,Retailer,UAE,Dubai,0,False,
+INF-009,Emirates Candy House,بيت الحلوى الإماراتي,Retailer,UAE,Ajman,2,True,2025-08-20
+INF-010,Bright Star Foodstuff LLC,النجم الساطع للمواد الغذائية,Distributor,UAE,Dubai,5,True,2024-03-05
+INF-011,Marina Gifts and Chocolates,مارينا للهدايا والشوكولاتة,Retailer,UAE,Dubai,1,False,2026-06-21
+INF-012,Zahrat Al Sahra Trading,زهرة الصحراء للتجارة,Importer,UAE,Sharjah,4,True,2024-07-10
+INF-013,Nutty Delight General Trading,ناتي ديلايت للتجارة العامة,Distributor,UAE,Dubai,2,True,2024-03-27
+INF-014,DealHub Marketplace Seller 4471,بائع ديل هب 4471,Online seller,UAE,Dubai,7,True,2024-02-06
+INF-015,Al Falah Sweets Factory,مصنع الفلاح للحلويات,Manufacturer,UAE,Ras Al Khaimah,4,True,2024-08-08
+INF-016,Pixel Fun Games Ltd,بيكسل فن للألعاب,App developer,UAE,Dubai,4,True,2024-05-17
+INF-017,Riyadh Sweets Trading Est.,مؤسسة حلويات الرياض التجارية,Distributor,KSA,Riyadh,2,True,2025-11-12
+INF-018,Al Majd Foodstuff Co.,شركة المجد للمواد الغذائية,Importer,KSA,Jeddah,3,True,2024-09-16
+INF-019,Najd Chocolate Factory,مصنع نجد للشوكولاتة,Manufacturer,KSA,Riyadh,2,True,2024-06-22
+INF-020,Souq Al Hala Online,سوق الحلا أونلاين,Online seller,KSA,Riyadh,7,True,2024-07-26
+INF-021,Dammam Sweet Corner,ركن الحلويات بالدمام,Retailer,KSA,Dammam,2,True,2024-02-04
+INF-022,Al Rawabi Trading Co.,شركة الروابي التجارية,Distributor,KSA,Jeddah,0,False,
+INF-023,Jeddah Candy Imports,جدة لاستيراد الحلوى,Importer,KSA,Jeddah,1,False,2025-11-11
+INF-024,Taif Nuts and Sweets,الطائف للمكسرات والحلويات,Retailer,KSA,Taif,4,True,2024-07-05
+INF-025,Nile Sweets Company,شركة حلويات النيل,Manufacturer,Egypt,Cairo,2,True,2025-11-21
+INF-026,Cairo Candy Distribution,القاهرة لتوزيع الحلوى,Distributor,Egypt,Cairo,1,False,2026-04-25
+INF-027,Alexandria Foods Import,الإسكندرية لاستيراد الأغذية,Importer,Egypt,Alexandria,1,False,2026-08-06
+INF-028,Giza Online Mart,الجيزة مارت أونلاين,Online seller,Egypt,Giza,1,False,2026-05-16
+INF-029,Amman Confectionery Co.,شركة عمان للحلويات,Manufacturer,Jordan,Amman,5,True,2024-01-15
+INF-030,Petra Sweets Trading,البتراء لتجارة الحلويات,Distributor,Jordan,Amman,2,True,2026-04-16
+INF-031,Kuwait Sweet Mart,الكويت سويت مارت,Retailer,Kuwait,Kuwait City,1,False,2026-10-06
+INF-032,Al Salmiya Foodstuff,السالمية للمواد الغذائية,Importer,Kuwait,Salmiya,3,True,2024-05-11
+INF-033,Doha Delights Trading,الدوحة ديلايتس للتجارة,Distributor,Qatar,Doha,3,True,2024-05-13
+INF-034,Pearl Sweets WLL,بيرل سويتس ذ.م.م,Retailer,Qatar,Doha,0,False,
+INF-035,Muscat Candy Traders,تجار الحلوى بمسقط,Distributor,Oman,Muscat,2,True,2024-02-17
+INF-036,Sohar Foods LLC,صحار للأغذية ش.م.م,Importer,Oman,Sohar,1,False,2025-07-20
+INF-037,Istanbul Şeker Gıda A.Ş.,اسطنبول شكر غيدا,Manufacturer,Turkey,Istanbul,1,False,2026-04-04
+INF-038,Bosphorus Sweets Ltd,بوسفور سويتس,Distributor,Turkey,Istanbul,4,True,2024-05-05
+INF-039,Anadolu Online Market,أناضول ماركت أونلاين,Online seller,Turkey,Ankara,2,True,2026-03-15
+INF-040,Delhi Confectioners Pvt Ltd,دلهي للحلويات المحدودة,Manufacturer,India,New Delhi,3,True,2024-04-15
+INF-041,Mumbai Sweet Traders,تجار الحلويات بمومباي,Distributor,India,Mumbai,2,True,2025-11-20
+INF-042,ChocoApp Technologies,تشوكو آب تكنولوجيز,App developer,India,Bangalore,3,True,2024-03-06
+INF-043,velora-outlet.shop (registrant),مسجل نطاق velora-outlet.shop,Domain registrant,UAE,Unknown,5,True,2024-05-11
+INF-044,aurelia-gifts.store (registrant),مسجل نطاق aurelia-gifts.store,Domain registrant,KSA,Unknown,1,False,2024-01-13
+INF-045,FunKids Apps SARL,فن كيدز آبس,App developer,Egypt,Cairo,4,True,2024-10-25

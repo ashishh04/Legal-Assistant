@@ -1,0 +1,19 @@
+{
+ "sha256": "f72115be169841b03d50c88f08bde885ebfff49fa9126b52b83b2437a6af1443",
+ "engine": "Unlimited-OCR-2",
+ "model": "baidu/Unlimited-OCR-2@0480966",
+ "pages": [
+  {
+   "number": 1,
+   "text": "<PAGE><BLOCK>title<LEVEL1>[295, 72, 705, 93]<FORK>SPECIAL POWER OF ATTORNEY\n<BLOCK>text[356, 100, 644, 116]<FORK>No. POA-2025-415-2025 · 05 July 2025\n<BLOCK>text[102, 153, 893, 219]<FORK>Dolce Group International S.A., a société anonyme incorporated under the laws of the Grand Duchy of Luxembourg, with registered office at 5, Rue des Noisetiers, L-1855 Luxembourg, Grand Duchy of Luxembourg (RCS Luxembourg B 41 207) (the \"Principal\"), represented by Daniel Weber, Regional General Counsel, duly authorised by resolution of the board of directors,\n<MERGE>\n<BLOCK>text[101, 223, 893, 306]<FORK>hereby appoints Tariq Haddadin and Dana Khoury of Levant Legal Group, Building 14, Al Abdali Boulevard, Amman 11190, Jordan, jointly or severally (the \"Attorneys\") to act in its name and on its behalf in Hashemite Kingdom of Jordan in all matters concerning the protection and enforcement of its trademarks, including the DOLCETTA mark (registration No. 102062), and in particular in matter TM-2025-415 against Amman Confectionery Co., with the following powers:\n<BLOCK>other[99, 309, 891, 472]<FORK>\n<BLOCK>text[101, 310, 888, 342]<FORK>a) to represent the Principal before all courts of every degree, the public prosecution, police, customs, economic and municipal authorities and the trademark office;\n<BLOCK>text[101, 345, 888, 377]<FORK>b) to file, sign and withdraw complaints, statements of claim, appeals, oppositions and applications for precautionary seizure;\n<BLOCK>text[101, 382, 888, 412]<FORK>c) to appoint and challenge experts, attend inspections and the destruction of goods, and receive notices;\n<BLOCK>text[100, 418, 888, 450]<FORK>d) to negotiate and sign settlements and undertakings, and to receive amounts awarded or agreed and give receipts;\n<BLOCK>text[100, 455, 580, 472]<FORK>e) to delegate all or part of these powers to another lawyer.\n<BLOCK>text[99, 475, 888, 508]<FORK>This power of attorney is valid until 05 July 2028 unless revoked earlier in writing. It is governed by the laws of Hashemite Kingdom of Jordan.\n<BLOCK>title<LEVEL2>[107, 516, 245, 532]<FORK>For the Principal\n<BLOCK>image[108, 584, 236, 610]<FORK>\n<BLOCK>image[288, 536, 391, 613]<FORK>\n<BLOCK>title<LEVEL2>[106, 630, 212, 643]<FORK>Daniel Weber\n<BLOCK>text[106, 645, 297, 659]<FORK>Regional General Counsel\n<BLOCK>text[106, 660, 325, 673]<FORK>Dolce Group International S.A.\n<BLOCK>title<LEVEL2>[97, 699, 280, 714]<FORK>Notarial certification\n<BLOCK>text[96, 719, 885, 748]<FORK>Signed before me, Maître Anne Schmit, Notary in Luxembourg, on 05 July 2025, register No. 5871/2025. Apostille / legalisation No. 20327 for use in Hashemite Kingdom of Jordan.\n<BLOCK>title<LEVEL2>[104, 756, 163, 771]<FORK>Notary\n<BLOCK>image[104, 830, 231, 852]<FORK>\n<BLOCK>image[280, 776, 391, 854]<FORK>\n<BLOCK>title<LEVEL2>[102, 870, 231, 883]<FORK>Me Anne Schmit\n<BLOCK>text[102, 885, 251, 899]<FORK>Notary, Luxembourg\n<BLOCK>footer[170, 955, 802, 970]<FORK>Power of attorney · TM-2025-415 · Restricted · Demo document – all parties and facts are fictional Page 1 of 1",
+   "confidence": 0.9591,
+   "tokens": 890,
+   "finish": "stop",
+   "seconds": 977.5,
+   "prefill_seconds": 104.3
+  }
+ ],
+ "mode": "gundam",
+ "file_name": "power-of-attorney - Amman (final).pdf",
+ "created_at": "2026-11-11T17:19:11+00:00"
+}

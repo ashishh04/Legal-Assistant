@@ -1,0 +1,225 @@
+email_id,received_at,reporter_type,sender_domain,subject,country,mark_id,channel,triage_status,triaged_at,sla_hours,sla_breached,linked_case_id,assigned_to
+EM-0034,2024-01-20 14:10:00,Distributor,gmail.com,Complaint about DOLCETTA product quality (suspected fake),Oman,MK-03,Physical store,Triaged – monitoring,2024-01-20 22:10:00,48,False,,U-07
+EM-0035,2024-01-29 12:20:00,Marketplace platform,gmail.com,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Mobile app,Duplicate,2024-01-29 16:20:00,48,False,,U-07
+EM-0036,2024-02-02 17:47:00,Distributor,distributor-demo.ae,Report: fake PICCOLINI listing,UAE,MK-05,Social media,Linked to case,2024-02-03 23:47:00,48,False,,U-07
+EM-0037,2024-02-02 18:32:00,Distributor,company-demo.local,Complaint about VELORA product quality (suspected fake),Oman,MK-01,Mobile app,Triaged – no action,2024-02-03 14:32:00,48,False,,U-09
+EM-0001,2024-02-03 11:00:00,Consumer,gmail.com,Complaint about VELORA product quality (suspected fake),KSA,MK-01,Customs,Linked to case,2024-02-06 19:00:00,48,True,TM-2024-403,U-07
+EM-0002,2024-02-05 16:49:00,Distributor,customs.gov.demo,Unauthorised DOLCETTA app,UAE,MK-03,Website / domain,Linked to case,2024-02-06 22:49:00,48,False,TM-2024-404,U-09
+EM-0003,2024-02-15 10:33:00,Distributor,outlook.com,Suspected counterfeit VELORA products – Oman,Oman,MK-01,Physical store,Linked to case,2024-02-15 14:33:00,48,False,TM-2024-405,U-09
+EM-0038,2024-02-16 09:44:00,Customs,outlook.com,Seizure notice – goods bearing AURELIA,UAE,MK-06,Social media,Dismissed – not infringing,2024-02-17 05:44:00,48,False,,U-09
+EM-0039,2024-02-20 14:16:00,Anonymous,outlook.com,Unauthorised PICCOLINI app,KSA,MK-05,Wholesale market,Dismissed – not infringing,2024-02-21 10:16:00,48,False,,U-09
+EM-0004,2024-02-24 07:42:00,Brand protection vendor,company-demo.local,CRISPINO imitation packaging seen in UAE,UAE,MK-02,Online marketplace,Linked to case,2024-02-29 07:42:00,48,True,TM-2024-408,U-07
+EM-0040,2024-03-27 11:31:00,Distributor,outlook.com,Complaint about AURELIA product quality (suspected fake),UAE,MK-06,Mobile app,Duplicate,2024-03-27 19:31:00,48,False,,U-08
+EM-0005,2024-04-11 14:32:00,Distributor,marketplace-demo.com,Report: fake AURELIA listing,India,MK-06,Physical store,Linked to case,2024-04-16 14:32:00,48,True,TM-2024-413,U-09
+EM-0041,2024-04-30 09:03:00,Brand protection vendor,gmail.com,Unauthorised VELORA app,Qatar,MK-01,Online marketplace,Triaged – monitoring,2024-05-01 15:03:00,48,False,,U-04
+EM-0006,2024-05-04 07:01:00,Distributor,distributor-demo.ae,Seizure notice – goods bearing MINTIQ,Turkey,MK-04,Online marketplace,Linked to case,2024-05-04 11:01:00,48,False,TM-2024-415,U-09
+EM-0042,2024-05-08 13:36:00,Consumer,outlook.com,PICCOLINI imitation packaging seen in Jordan,Jordan,MK-05,Physical store,Duplicate,2024-05-09 19:36:00,48,False,,U-07
+EM-0043,2024-05-14 14:59:00,Brand protection vendor,outlook.com,VELORA imitation packaging seen in KSA,KSA,MK-01,Social media,Triaged – monitoring,2024-05-14 18:59:00,48,False,,U-09
+EM-0044,2024-05-26 18:05:00,Consumer,distributor-demo.ae,MINTIQ imitation packaging seen in UAE,UAE,MK-04,Social media,Triaged – monitoring,2024-05-31 18:05:00,48,True,,U-09
+EM-0045,2024-06-03 20:19:00,Consumer,distributor-demo.ae,Unauthorised CRISPINO app,UAE,MK-02,Physical store,Dismissed – not infringing,2024-06-05 22:19:00,48,True,,U-09
+EM-0046,2024-06-14 11:30:00,Consumer,company-demo.local,CRISPINO imitation packaging seen in UAE,UAE,MK-02,Physical store,Dismissed – not infringing,2024-06-14 19:30:00,48,False,,U-04
+EM-0047,2024-06-18 08:31:00,Distributor,outlook.com,VELORA imitation packaging seen in UAE,UAE,MK-01,Wholesale market,Triaged – no action,2024-06-19 04:31:00,48,False,,U-09
+EM-0007,2024-06-19 19:58:00,Consumer,distributor-demo.ae,Seizure notice – goods bearing PICCOLINI,KSA,MK-05,Customs,Linked to case,2024-06-20 03:58:00,48,False,TM-2024-420,U-07
+EM-0049,2024-06-25 17:30:00,Consumer,brandguard-demo.com,Suspected counterfeit AURELIA products – UAE,UAE,MK-06,Mobile app,Linked to case,2024-06-27 19:30:00,48,True,,U-09
+EM-0008,2024-06-28 13:20:00,Consumer,outlook.com,Suspected counterfeit CRISPINO products – KSA,KSA,MK-02,Wholesale market,Linked to case,2024-06-29 09:20:00,48,False,TM-2024-422,U-09
+EM-0048,2024-06-30 13:20:00,Brand protection vendor,marketplace-demo.com,Suspected counterfeit DOLCETTA products – Jordan,Jordan,MK-03,Social media,Triaged – monitoring,2024-06-30 17:20:00,48,False,,U-04
+EM-0051,2024-07-10 18:03:00,Consumer,brandguard-demo.com,Suspected counterfeit AURELIA products – KSA,KSA,MK-06,Wholesale market,Linked to case,2024-07-15 18:03:00,48,True,,U-07
+EM-0052,2024-07-11 17:44:00,Brand protection vendor,company-demo.local,Report: fake VELORA listing,UAE,MK-01,Customs,Dismissed – not infringing,2024-07-12 01:44:00,48,False,,U-04
+EM-0050,2024-07-12 12:25:00,Marketplace platform,gmail.com,Suspected counterfeit CRISPINO products – UAE,UAE,MK-02,Physical store,Triaged – monitoring,2024-07-14 14:25:00,48,True,,U-07
+EM-0053,2024-07-21 11:04:00,Internal sales,company-demo.local,Suspected counterfeit PICCOLINI products – Turkey,Turkey,MK-05,Online marketplace,Dismissed – not infringing,2024-07-21 19:04:00,48,False,,U-07
+EM-0009,2024-07-23 14:53:00,Consumer,company-demo.local,Seizure notice – goods bearing VELORA,KSA,MK-01,Online marketplace,Linked to case,2024-07-25 16:53:00,48,True,TM-2024-424,U-09
+EM-0054,2024-08-01 17:04:00,Consumer,company-demo.local,DOLCETTA imitation packaging seen in UAE,UAE,MK-03,Online marketplace,Triaged – no action,2024-08-02 13:04:00,48,False,,U-09
+EM-0056,2024-08-06 16:21:00,Brand protection vendor,outlook.com,Suspected counterfeit AURELIA products – UAE,UAE,MK-06,Online marketplace,Triaged – no action,2024-08-11 16:21:00,48,True,,U-09
+EM-0055,2024-08-12 20:40:00,Consumer,outlook.com,PICCOLINI imitation packaging seen in Turkey,Turkey,MK-05,Online marketplace,Triaged – no action,2024-08-17 20:40:00,48,True,,U-08
+EM-0058,2024-08-13 16:40:00,Distributor,company-demo.local,Complaint about DOLCETTA product quality (suspected fake),Egypt,MK-03,Online marketplace,Dismissed – not infringing,2024-08-18 16:40:00,48,True,,U-07
+EM-0057,2024-08-16 12:28:00,Customs,gmail.com,Unauthorised VELORA app,UAE,MK-01,Online marketplace,Dismissed – not infringing,2024-08-17 08:28:00,48,False,,U-07
+EM-0059,2024-08-20 16:30:00,Consumer,gmail.com,Seizure notice – goods bearing AURELIA,Jordan,MK-06,Online marketplace,Triaged – monitoring,2024-08-20 20:30:00,48,False,,U-07
+EM-0060,2024-08-24 18:53:00,Brand protection vendor,brandguard-demo.com,Unauthorised MINTIQ app,Egypt,MK-04,Physical store,Triaged – no action,2024-08-25 14:53:00,48,False,,U-08
+EM-0061,2024-08-29 18:20:00,Consumer,gmail.com,Complaint about PICCOLINI product quality (suspected fake),Qatar,MK-05,Online marketplace,Triaged – no action,2024-08-31 20:20:00,48,True,,U-04
+EM-0062,2024-09-02 11:26:00,Consumer,gmail.com,DOLCETTA imitation packaging seen in Egypt,Egypt,MK-03,Customs,Triaged – no action,2024-09-07 11:26:00,48,True,,U-04
+EM-0063,2024-09-04 20:02:00,Brand protection vendor,customs.gov.demo,Report: fake AURELIA listing,UAE,MK-06,Website / domain,Dismissed – not infringing,2024-09-09 20:02:00,48,True,,U-04
+EM-0010,2024-09-12 11:37:00,Consumer,marketplace-demo.com,Report: fake DOLCETTA listing,Kuwait,MK-03,Website / domain,Linked to case,2024-09-12 15:37:00,48,False,TM-2024-427,U-09
+EM-0064,2024-09-14 17:32:00,Consumer,distributor-demo.ae,Report: fake PICCOLINI listing,UAE,MK-05,Social media,Triaged – monitoring,2024-09-18 01:32:00,48,True,,U-08
+EM-0065,2024-09-17 12:39:00,Marketplace platform,brandguard-demo.com,Suspected counterfeit MINTIQ products – KSA,KSA,MK-04,Wholesale market,Triaged – monitoring,2024-09-19 14:39:00,48,True,,U-09
+EM-0066,2024-09-27 16:53:00,Brand protection vendor,marketplace-demo.com,CRISPINO imitation packaging seen in KSA,KSA,MK-02,Social media,Triaged – no action,2024-09-29 18:53:00,48,True,,U-07
+EM-0067,2024-10-07 16:50:00,Internal sales,outlook.com,Report: fake VELORA listing,Egypt,MK-01,Social media,Triaged – no action,2024-10-08 22:50:00,48,False,,U-07
+EM-0068,2024-10-10 08:24:00,Internal sales,customs.gov.demo,Suspected counterfeit DOLCETTA products – KSA,KSA,MK-03,Customs,Dismissed – not infringing,2024-10-13 16:24:00,48,True,,U-07
+EM-0069,2024-10-11 15:43:00,Consumer,marketplace-demo.com,Suspected counterfeit MINTIQ products – KSA,KSA,MK-04,Mobile app,Triaged – monitoring,2024-10-14 23:43:00,48,True,,U-04
+EM-0011,2024-10-17 19:25:00,Brand protection vendor,brandguard-demo.com,Report: fake PICCOLINI listing,UAE,MK-05,Customs,Linked to case,2024-10-21 03:25:00,48,True,TM-2024-429,U-07
+EM-0012,2024-10-21 11:43:00,Marketplace platform,marketplace-demo.com,Report: fake DOLCETTA listing,KSA,MK-03,Mobile app,Linked to case,2024-10-23 13:43:00,48,True,TM-2024-431,U-04
+EM-0070,2024-11-02 17:22:00,Consumer,brandguard-demo.com,AURELIA imitation packaging seen in UAE,UAE,MK-06,Online marketplace,Triaged – monitoring,2024-11-06 01:22:00,48,True,,U-04
+EM-0071,2024-11-06 17:27:00,Marketplace platform,company-demo.local,Report: fake CRISPINO listing,KSA,MK-02,Online marketplace,Linked to case,2024-11-08 19:27:00,48,True,,U-07
+EM-0013,2024-11-08 11:31:00,Brand protection vendor,company-demo.local,Seizure notice – goods bearing VELORA,Turkey,MK-01,Wholesale market,Linked to case,2024-11-11 19:31:00,48,True,TM-2024-433,U-09
+EM-0072,2024-11-24 10:39:00,Consumer,customs.gov.demo,Report: fake PICCOLINI listing,UAE,MK-05,Social media,Triaged – monitoring,2024-11-26 12:39:00,48,True,,U-08
+EM-0073,2024-12-07 10:04:00,Consumer,brandguard-demo.com,Unauthorised VELORA app,Egypt,MK-01,Social media,Triaged – no action,2024-12-08 16:04:00,48,False,,U-07
+EM-0074,2024-12-09 13:29:00,Marketplace platform,brandguard-demo.com,Seizure notice – goods bearing DOLCETTA,UAE,MK-03,Customs,Dismissed – not infringing,2024-12-11 15:29:00,48,True,,U-09
+EM-0076,2024-12-12 07:27:00,Consumer,customs.gov.demo,Complaint about CRISPINO product quality (suspected fake),Turkey,MK-02,Online marketplace,Triaged – no action,2024-12-12 11:27:00,48,False,,U-07
+EM-0077,2024-12-15 17:11:00,Internal sales,gmail.com,Unauthorised CRISPINO app,UAE,MK-02,Online marketplace,Linked to case,2024-12-20 17:11:00,48,True,,U-08
+EM-0075,2024-12-16 10:59:00,Internal sales,marketplace-demo.com,PICCOLINI imitation packaging seen in KSA,KSA,MK-05,Website / domain,Triaged – no action,2024-12-16 14:59:00,48,False,,U-09
+EM-0078,2024-12-17 12:16:00,Internal sales,company-demo.local,Report: fake AURELIA listing,KSA,MK-06,Online marketplace,Triaged – monitoring,2024-12-18 18:16:00,48,False,,U-09
+EM-0079,2024-12-26 18:16:00,Brand protection vendor,outlook.com,Suspected counterfeit VELORA products – UAE,UAE,MK-01,Physical store,Dismissed – not infringing,2024-12-30 02:16:00,48,True,,U-08
+EM-0081,2024-12-31 14:37:00,Internal sales,distributor-demo.ae,Complaint about VELORA product quality (suspected fake),Qatar,MK-01,Social media,Triaged – monitoring,2024-12-31 18:37:00,48,False,,U-07
+EM-0014,2025-01-06 15:11:00,Customs,customs.gov.demo,Unauthorised PICCOLINI app,KSA,MK-05,Physical store,Linked to case,2025-01-11 15:11:00,48,True,TM-2025-401,U-07
+EM-0080,2025-01-06 19:03:00,Consumer,company-demo.local,Report: fake DOLCETTA listing,KSA,MK-03,Physical store,Duplicate,2025-01-06 23:03:00,48,False,,U-07
+EM-0082,2025-01-07 15:53:00,Consumer,company-demo.local,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Customs,Dismissed – not infringing,2025-01-10 23:53:00,48,True,,U-07
+EM-0083,2025-01-11 16:22:00,Distributor,gmail.com,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Social media,Linked to case,2025-01-12 12:22:00,48,False,,U-07
+EM-0084,2025-01-25 13:19:00,Consumer,brandguard-demo.com,Complaint about CRISPINO product quality (suspected fake),KSA,MK-02,Wholesale market,Triaged – no action,2025-01-30 13:19:00,48,True,,U-08
+EM-0085,2025-01-29 09:39:00,Consumer,company-demo.local,CRISPINO imitation packaging seen in Egypt,Egypt,MK-02,Online marketplace,Triaged – monitoring,2025-01-29 13:39:00,48,False,,U-08
+EM-0086,2025-02-15 11:38:00,Anonymous,brandguard-demo.com,Suspected counterfeit VELORA products – KSA,KSA,MK-01,Mobile app,Triaged – no action,2025-02-18 19:38:00,48,True,,U-07
+EM-0087,2025-02-20 07:43:00,Internal sales,brandguard-demo.com,Seizure notice – goods bearing MINTIQ,KSA,MK-04,Physical store,Dismissed – not infringing,2025-02-20 11:43:00,48,False,,U-04
+EM-0088,2025-03-05 13:16:00,Consumer,outlook.com,Suspected counterfeit MINTIQ products – India,India,MK-04,Customs,Triaged – no action,2025-03-06 09:16:00,48,False,,U-07
+EM-0089,2025-03-07 09:38:00,Consumer,outlook.com,AURELIA imitation packaging seen in UAE,UAE,MK-06,Wholesale market,Triaged – no action,2025-03-08 15:38:00,48,False,,U-07
+EM-0090,2025-03-12 07:38:00,Marketplace platform,gmail.com,Seizure notice – goods bearing PICCOLINI,UAE,MK-05,Online marketplace,Triaged – monitoring,2025-03-17 07:38:00,48,True,,U-04
+EM-0091,2025-03-26 20:57:00,Brand protection vendor,company-demo.local,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Online marketplace,Triaged – no action,2025-03-30 04:57:00,48,True,,U-09
+EM-0092,2025-04-07 20:39:00,Consumer,marketplace-demo.com,Complaint about CRISPINO product quality (suspected fake),UAE,MK-02,Physical store,Triaged – no action,2025-04-12 20:39:00,48,True,,U-07
+EM-0093,2025-04-14 19:10:00,Distributor,marketplace-demo.com,Seizure notice – goods bearing MINTIQ,Egypt,MK-04,Online marketplace,Triaged – no action,2025-04-15 15:10:00,48,False,,U-04
+EM-0094,2025-04-17 14:44:00,Distributor,gmail.com,Suspected counterfeit CRISPINO products – UAE,UAE,MK-02,Online marketplace,Triaged – no action,2025-04-22 14:44:00,48,True,,U-09
+EM-0095,2025-04-23 12:42:00,Brand protection vendor,brandguard-demo.com,Unauthorised PICCOLINI app,UAE,MK-05,Online marketplace,Triaged – monitoring,2025-04-26 20:42:00,48,True,,U-07
+EM-0015,2025-05-03 08:55:00,Distributor,customs.gov.demo,VELORA imitation packaging seen in UAE,UAE,MK-01,Physical store,Linked to case,2025-05-06 16:55:00,48,True,TM-2025-413,U-09
+EM-0096,2025-05-03 18:51:00,Distributor,brandguard-demo.com,Suspected counterfeit AURELIA products – KSA,KSA,MK-06,Social media,Duplicate,2025-05-05 00:51:00,48,False,,U-07
+EM-0097,2025-05-06 12:41:00,Brand protection vendor,brandguard-demo.com,Unauthorised VELORA app,Jordan,MK-01,Mobile app,Dismissed – not infringing,2025-05-07 18:41:00,48,False,,U-07
+EM-0098,2025-05-14 08:11:00,Consumer,brandguard-demo.com,Suspected counterfeit AURELIA products – UAE,UAE,MK-06,Online marketplace,Triaged – monitoring,2025-05-15 04:11:00,48,False,,U-04
+EM-0016,2025-05-22 13:15:00,Distributor,distributor-demo.ae,Suspected counterfeit MINTIQ products – UAE,UAE,MK-04,Wholesale market,Linked to case,2025-05-22 17:15:00,48,False,TM-2025-416,U-07
+EM-0100,2025-06-04 16:47:00,Distributor,brandguard-demo.com,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Online marketplace,Dismissed – not infringing,2025-06-05 22:47:00,48,False,,U-04
+EM-0099,2025-06-06 10:34:00,Brand protection vendor,distributor-demo.ae,Complaint about AURELIA product quality (suspected fake),KSA,MK-06,Online marketplace,Triaged – no action,2025-06-06 14:34:00,48,False,,U-07
+EM-0017,2025-06-11 10:03:00,Consumer,customs.gov.demo,Unauthorised DOLCETTA app,Jordan,MK-03,Mobile app,Linked to case,2025-06-12 16:03:00,48,False,TM-2025-420,U-04
+EM-0102,2025-06-14 17:28:00,Distributor,customs.gov.demo,Report: fake VELORA listing,Qatar,MK-01,Physical store,Triaged – no action,2025-06-15 01:28:00,48,False,,U-07
+EM-0101,2025-06-16 18:23:00,Consumer,outlook.com,Report: fake PICCOLINI listing,UAE,MK-05,Website / domain,Dismissed – not infringing,2025-06-18 00:23:00,48,False,,U-07
+EM-0104,2025-06-18 15:18:00,Customs,marketplace-demo.com,Unauthorised CRISPINO app,UAE,MK-02,Wholesale market,Duplicate,2025-06-18 19:18:00,48,False,,U-04
+EM-0103,2025-06-23 11:44:00,Customs,outlook.com,Complaint about DOLCETTA product quality (suspected fake),UAE,MK-03,Wholesale market,Duplicate,2025-06-24 17:44:00,48,False,,U-04
+EM-0106,2025-06-25 18:06:00,Distributor,brandguard-demo.com,Unauthorised CRISPINO app,India,MK-02,Website / domain,Dismissed – not infringing,2025-06-27 20:06:00,48,True,,U-07
+EM-0105,2025-06-29 13:23:00,Anonymous,customs.gov.demo,Complaint about CRISPINO product quality (suspected fake),KSA,MK-02,Social media,Duplicate,2025-07-04 13:23:00,48,True,,U-07
+EM-0107,2025-07-01 18:05:00,Consumer,outlook.com,Report: fake PICCOLINI listing,Jordan,MK-05,Online marketplace,Triaged – no action,2025-07-02 14:05:00,48,False,,U-09
+EM-0108,2025-07-04 07:01:00,Brand protection vendor,brandguard-demo.com,Unauthorised PICCOLINI app,UAE,MK-05,Online marketplace,Triaged – no action,2025-07-04 11:01:00,48,False,,U-07
+EM-0109,2025-07-04 13:19:00,Brand protection vendor,distributor-demo.ae,Unauthorised AURELIA app,UAE,MK-06,Social media,Linked to case,2025-07-07 21:19:00,48,True,,U-07
+EM-0018,2025-07-07 13:20:00,Consumer,outlook.com,Seizure notice – goods bearing DOLCETTA,UAE,MK-03,Online marketplace,Linked to case,2025-07-08 09:20:00,48,False,TM-2025-427,U-08
+EM-0111,2025-07-13 08:55:00,Distributor,marketplace-demo.com,Suspected counterfeit AURELIA products – KSA,KSA,MK-06,Online marketplace,Triaged – monitoring,2025-07-14 14:55:00,48,False,,U-07
+EM-0110,2025-07-13 20:25:00,Brand protection vendor,brandguard-demo.com,AURELIA imitation packaging seen in Jordan,Jordan,MK-06,Website / domain,Triaged – no action,2025-07-18 20:25:00,48,True,,U-09
+EM-0113,2025-07-17 10:23:00,Distributor,distributor-demo.ae,AURELIA imitation packaging seen in KSA,KSA,MK-06,Physical store,Triaged – no action,2025-07-19 12:23:00,48,True,,U-07
+EM-0112,2025-07-19 20:09:00,Consumer,brandguard-demo.com,Suspected counterfeit CRISPINO products – UAE,UAE,MK-02,Online marketplace,Triaged – monitoring,2025-07-21 22:09:00,48,True,,U-09
+EM-0114,2025-07-26 08:26:00,Internal sales,brandguard-demo.com,Seizure notice – goods bearing DOLCETTA,UAE,MK-03,Physical store,Linked to case,2025-07-27 14:26:00,48,False,,U-08
+EM-0115,2025-07-30 07:30:00,Consumer,customs.gov.demo,Report: fake VELORA listing,UAE,MK-01,Social media,Dismissed – not infringing,2025-07-31 13:30:00,48,False,,U-04
+EM-0116,2025-07-30 16:19:00,Consumer,outlook.com,Suspected counterfeit PICCOLINI products – Egypt,Egypt,MK-05,Social media,Triaged – no action,2025-07-31 00:19:00,48,False,,U-04
+EM-0118,2025-08-10 09:15:00,Distributor,company-demo.local,DOLCETTA imitation packaging seen in UAE,UAE,MK-03,Social media,Triaged – monitoring,2025-08-10 17:15:00,48,False,,U-09
+EM-0117,2025-08-11 08:40:00,Brand protection vendor,brandguard-demo.com,VELORA imitation packaging seen in UAE,UAE,MK-01,Social media,Duplicate,2025-08-14 16:40:00,48,True,,U-07
+EM-0119,2025-08-18 12:08:00,Distributor,outlook.com,Report: fake AURELIA listing,UAE,MK-06,Website / domain,Triaged – monitoring,2025-08-23 12:08:00,48,True,,U-09
+EM-0121,2025-08-20 16:51:00,Brand protection vendor,marketplace-demo.com,Complaint about AURELIA product quality (suspected fake),Qatar,MK-06,Social media,Dismissed – not infringing,2025-08-22 18:51:00,48,True,,U-07
+EM-0120,2025-08-20 18:23:00,Consumer,company-demo.local,Suspected counterfeit AURELIA products – UAE,UAE,MK-06,Social media,Dismissed – not infringing,2025-08-25 18:23:00,48,True,,U-09
+EM-0123,2025-08-26 14:42:00,Consumer,outlook.com,PICCOLINI imitation packaging seen in UAE,UAE,MK-05,Online marketplace,Triaged – monitoring,2025-08-27 20:42:00,48,False,,U-09
+EM-0122,2025-08-29 11:21:00,Marketplace platform,brandguard-demo.com,Complaint about PICCOLINI product quality (suspected fake),Kuwait,MK-05,Customs,Triaged – monitoring,2025-08-31 13:21:00,48,True,,U-07
+EM-0124,2025-09-06 20:58:00,Consumer,gmail.com,Suspected counterfeit CRISPINO products – UAE,UAE,MK-02,Website / domain,Triaged – monitoring,2025-09-11 20:58:00,48,True,,U-09
+EM-0019,2025-09-17 17:14:00,Brand protection vendor,customs.gov.demo,Complaint about AURELIA product quality (suspected fake),UAE,MK-06,Physical store,Linked to case,2025-09-19 19:14:00,48,True,TM-2025-433,U-08
+EM-0126,2025-09-18 16:37:00,Distributor,customs.gov.demo,Report: fake DOLCETTA listing,KSA,MK-03,Wholesale market,Duplicate,2025-09-23 16:37:00,48,True,,U-07
+EM-0125,2025-09-20 13:34:00,Internal sales,outlook.com,Seizure notice – goods bearing PICCOLINI,Jordan,MK-05,Online marketplace,Duplicate,2025-09-20 17:34:00,48,False,,U-04
+EM-0020,2025-09-23 09:17:00,Consumer,brandguard-demo.com,AURELIA imitation packaging seen in Turkey,Turkey,MK-06,Physical store,Linked to case,2025-09-23 13:17:00,48,False,TM-2025-436,U-04
+EM-0127,2025-09-23 12:42:00,Customs,distributor-demo.ae,Seizure notice – goods bearing DOLCETTA,KSA,MK-03,Website / domain,Triaged – monitoring,2025-09-24 18:42:00,48,False,,U-07
+EM-0128,2025-09-29 11:23:00,Distributor,brandguard-demo.com,Seizure notice – goods bearing PICCOLINI,Qatar,MK-05,Social media,Triaged – no action,2025-09-29 15:23:00,48,False,,U-09
+EM-0129,2025-10-02 20:21:00,Brand protection vendor,customs.gov.demo,Unauthorised AURELIA app,Kuwait,MK-06,Physical store,Triaged – no action,2025-10-03 16:21:00,48,False,,U-07
+EM-0131,2025-10-08 08:46:00,Brand protection vendor,brandguard-demo.com,Suspected counterfeit DOLCETTA products – Turkey,Turkey,MK-03,Physical store,Triaged – monitoring,2025-10-09 04:46:00,48,False,,U-04
+EM-0130,2025-10-13 12:15:00,Consumer,marketplace-demo.com,Suspected counterfeit VELORA products – UAE,UAE,MK-01,Physical store,Triaged – no action,2025-10-16 20:15:00,48,True,,U-07
+EM-0134,2025-10-15 11:29:00,Internal sales,marketplace-demo.com,Suspected counterfeit PICCOLINI products – Jordan,Jordan,MK-05,Online marketplace,Triaged – no action,2025-10-16 17:29:00,48,False,,U-07
+EM-0132,2025-10-16 19:21:00,Distributor,gmail.com,PICCOLINI imitation packaging seen in India,India,MK-05,Physical store,Triaged – no action,2025-10-18 21:21:00,48,True,,U-07
+EM-0133,2025-10-19 08:25:00,Marketplace platform,brandguard-demo.com,Complaint about AURELIA product quality (suspected fake),UAE,MK-06,Wholesale market,Triaged – no action,2025-10-24 08:25:00,48,True,,U-07
+EM-0135,2025-10-24 12:37:00,Brand protection vendor,distributor-demo.ae,Unauthorised PICCOLINI app,UAE,MK-05,Website / domain,Triaged – no action,2025-10-25 18:37:00,48,False,,U-09
+EM-0136,2025-10-25 18:20:00,Consumer,distributor-demo.ae,Unauthorised VELORA app,UAE,MK-01,Social media,Triaged – monitoring,2025-10-26 14:20:00,48,False,,U-07
+EM-0137,2025-11-09 08:34:00,Internal sales,distributor-demo.ae,Report: fake VELORA listing,KSA,MK-01,Online marketplace,Dismissed – not infringing,2025-11-09 16:34:00,48,False,,U-09
+EM-0138,2025-11-11 13:50:00,Internal sales,customs.gov.demo,Complaint about DOLCETTA product quality (suspected fake),UAE,MK-03,Online marketplace,Triaged – no action,2025-11-16 13:50:00,48,True,,U-07
+EM-0021,2025-11-14 15:51:00,Brand protection vendor,brandguard-demo.com,Seizure notice – goods bearing PICCOLINI,Egypt,MK-05,Physical store,Linked to case,2025-11-17 23:51:00,48,True,TM-2025-447,U-09
+EM-0139,2025-11-18 10:20:00,Distributor,customs.gov.demo,Seizure notice – goods bearing CRISPINO,Egypt,MK-02,Social media,Triaged – monitoring,2025-11-23 10:20:00,48,True,,U-07
+EM-0022,2025-11-26 11:35:00,Distributor,customs.gov.demo,Seizure notice – goods bearing DOLCETTA,UAE,MK-03,Customs,Linked to case,2025-11-27 07:35:00,48,False,TM-2025-448,U-04
+EM-0142,2025-11-26 18:26:00,Brand protection vendor,gmail.com,Suspected counterfeit DOLCETTA products – India,India,MK-03,Wholesale market,Triaged – monitoring,2025-12-01 18:26:00,48,True,,U-07
+EM-0141,2025-11-27 14:10:00,Internal sales,marketplace-demo.com,Unauthorised DOLCETTA app,UAE,MK-03,Wholesale market,Triaged – no action,2025-11-27 22:10:00,48,False,,U-07
+EM-0140,2025-12-01 17:15:00,Consumer,company-demo.local,Seizure notice – goods bearing AURELIA,Jordan,MK-06,Physical store,Triaged – monitoring,2025-12-02 13:15:00,48,False,,U-07
+EM-0143,2025-12-04 19:22:00,Consumer,company-demo.local,Report: fake PICCOLINI listing,UAE,MK-05,Physical store,Dismissed – not infringing,2025-12-09 19:22:00,48,True,,U-07
+EM-0144,2025-12-15 07:36:00,Distributor,customs.gov.demo,Suspected counterfeit CRISPINO products – KSA,KSA,MK-02,Online marketplace,Dismissed – not infringing,2025-12-18 15:36:00,48,True,,U-09
+EM-0145,2025-12-17 20:00:00,Distributor,outlook.com,AURELIA imitation packaging seen in Oman,Oman,MK-06,Physical store,Triaged – no action,2025-12-21 04:00:00,48,True,,U-07
+EM-0146,2025-12-24 10:29:00,Internal sales,marketplace-demo.com,Suspected counterfeit VELORA products – India,India,MK-01,Online marketplace,Dismissed – not infringing,2025-12-26 12:29:00,48,True,,U-04
+EM-0147,2025-12-29 14:54:00,Distributor,gmail.com,Seizure notice – goods bearing VELORA,UAE,MK-01,Online marketplace,Triaged – monitoring,2025-12-30 20:54:00,48,False,,U-04
+EM-0149,2026-01-01 14:57:00,Consumer,distributor-demo.ae,Report: fake DOLCETTA listing,UAE,MK-03,Website / domain,Dismissed – not infringing,2026-01-03 16:57:00,48,True,,U-04
+EM-0148,2026-01-03 12:01:00,Consumer,customs.gov.demo,Unauthorised VELORA app,Qatar,MK-01,Mobile app,Triaged – no action,2026-01-06 20:01:00,48,True,,U-09
+EM-0150,2026-01-09 09:30:00,Distributor,customs.gov.demo,Complaint about AURELIA product quality (suspected fake),KSA,MK-06,Customs,Dismissed – not infringing,2026-01-12 17:30:00,48,True,,U-07
+EM-0151,2026-01-09 14:41:00,Distributor,marketplace-demo.com,Unauthorised AURELIA app,UAE,MK-06,Online marketplace,Triaged – monitoring,2026-01-12 22:41:00,48,True,,U-09
+EM-0153,2026-01-24 16:12:00,Consumer,outlook.com,Unauthorised PICCOLINI app,UAE,MK-05,Online marketplace,Triaged – no action,2026-01-25 00:12:00,48,False,,U-04
+EM-0152,2026-01-26 18:40:00,Distributor,outlook.com,Complaint about PICCOLINI product quality (suspected fake),UAE,MK-05,Online marketplace,Linked to case,2026-01-27 02:40:00,48,False,,U-09
+EM-0155,2026-01-30 20:14:00,Distributor,marketplace-demo.com,DOLCETTA imitation packaging seen in UAE,UAE,MK-03,Website / domain,Triaged – no action,2026-01-31 00:14:00,48,False,,U-09
+EM-0154,2026-02-02 08:51:00,Distributor,brandguard-demo.com,Complaint about DOLCETTA product quality (suspected fake),Kuwait,MK-03,Online marketplace,Triaged – no action,2026-02-07 08:51:00,48,True,,U-09
+EM-0156,2026-02-03 19:08:00,Distributor,gmail.com,MINTIQ imitation packaging seen in India,India,MK-04,Mobile app,Dismissed – not infringing,2026-02-04 15:08:00,48,False,,U-04
+EM-0158,2026-02-10 09:14:00,Internal sales,company-demo.local,Suspected counterfeit DOLCETTA products – UAE,UAE,MK-03,Online marketplace,Dismissed – not infringing,2026-02-13 17:14:00,48,True,,U-07
+EM-0157,2026-02-14 14:07:00,Anonymous,marketplace-demo.com,Seizure notice – goods bearing PICCOLINI,Egypt,MK-05,Mobile app,Triaged – monitoring,2026-02-16 16:07:00,48,True,,U-09
+EM-0159,2026-02-19 17:51:00,Internal sales,distributor-demo.ae,Seizure notice – goods bearing VELORA,UAE,MK-01,Wholesale market,Triaged – monitoring,2026-02-20 23:51:00,48,False,,U-09
+EM-0160,2026-02-22 08:48:00,Brand protection vendor,distributor-demo.ae,Complaint about VELORA product quality (suspected fake),India,MK-01,Online marketplace,Triaged – monitoring,2026-02-23 04:48:00,48,False,,U-07
+EM-0161,2026-02-26 13:10:00,Consumer,marketplace-demo.com,Report: fake VELORA listing,UAE,MK-01,Website / domain,Linked to case,2026-03-01 21:10:00,48,True,,U-04
+EM-0162,2026-02-28 14:21:00,Anonymous,company-demo.local,Unauthorised VELORA app,KSA,MK-01,Mobile app,Triaged – monitoring,2026-02-28 18:21:00,48,False,,U-08
+EM-0163,2026-03-08 11:17:00,Distributor,outlook.com,Unauthorised AURELIA app,UAE,MK-06,Social media,Triaged – monitoring,2026-03-08 15:17:00,48,False,,U-08
+EM-0164,2026-03-16 10:23:00,Distributor,customs.gov.demo,DOLCETTA imitation packaging seen in UAE,UAE,MK-03,Online marketplace,Triaged – no action,2026-03-17 16:23:00,48,False,,U-07
+EM-0166,2026-03-19 17:12:00,Consumer,distributor-demo.ae,Seizure notice – goods bearing CRISPINO,KSA,MK-02,Online marketplace,Triaged – monitoring,2026-03-21 19:12:00,48,True,,U-08
+EM-0165,2026-03-20 13:05:00,Brand protection vendor,outlook.com,Report: fake VELORA listing,UAE,MK-01,Website / domain,Triaged – no action,2026-03-21 09:05:00,48,False,,U-09
+EM-0168,2026-03-24 14:31:00,Consumer,marketplace-demo.com,Seizure notice – goods bearing CRISPINO,KSA,MK-02,Mobile app,Triaged – monitoring,2026-03-25 20:31:00,48,False,,U-09
+EM-0167,2026-03-25 11:46:00,Distributor,brandguard-demo.com,AURELIA imitation packaging seen in UAE,UAE,MK-06,Physical store,Triaged – monitoring,2026-03-27 13:46:00,48,True,,U-08
+EM-0023,2026-03-30 10:32:00,Internal sales,outlook.com,Suspected counterfeit AURELIA products – Jordan,Jordan,MK-06,Mobile app,Linked to case,2026-03-30 18:32:00,48,False,TM-2026-411,U-04
+EM-0170,2026-04-04 09:39:00,Consumer,company-demo.local,Suspected counterfeit AURELIA products – UAE,UAE,MK-06,Physical store,Dismissed – not infringing,2026-04-06 11:39:00,48,True,,U-07
+EM-0169,2026-04-04 15:57:00,Brand protection vendor,distributor-demo.ae,Unauthorised DOLCETTA app,Oman,MK-03,Website / domain,Triaged – monitoring,2026-04-05 21:57:00,48,False,,U-04
+EM-0171,2026-04-10 14:44:00,Internal sales,company-demo.local,PICCOLINI imitation packaging seen in UAE,UAE,MK-05,Customs,Triaged – no action,2026-04-10 22:44:00,48,False,,U-08
+EM-0024,2026-04-12 09:31:00,Distributor,brandguard-demo.com,Complaint about DOLCETTA product quality (suspected fake),Egypt,MK-03,Physical store,Linked to case,2026-04-15 17:31:00,48,True,TM-2026-414,U-07
+EM-0172,2026-04-15 15:22:00,Consumer,outlook.com,Seizure notice – goods bearing AURELIA,UAE,MK-06,Online marketplace,Triaged – monitoring,2026-04-16 11:22:00,48,False,,U-09
+EM-0173,2026-04-18 16:56:00,Consumer,outlook.com,Suspected counterfeit DOLCETTA products – UAE,UAE,MK-03,Website / domain,Triaged – monitoring,2026-04-19 12:56:00,48,False,,U-07
+EM-0174,2026-04-20 07:18:00,Consumer,gmail.com,Unauthorised PICCOLINI app,UAE,MK-05,Online marketplace,Triaged – monitoring,2026-04-22 09:18:00,48,True,,U-09
+EM-0175,2026-04-24 10:02:00,Brand protection vendor,marketplace-demo.com,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Customs,Triaged – no action,2026-04-27 18:02:00,48,True,,U-04
+EM-0025,2026-04-27 19:29:00,Distributor,company-demo.local,Suspected counterfeit VELORA products – UAE,UAE,MK-01,Online marketplace,Linked to case,2026-05-01 03:29:00,48,True,TM-2026-416,U-07
+EM-0176,2026-05-03 12:20:00,Consumer,company-demo.local,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Social media,Triaged – no action,2026-05-03 16:20:00,48,False,,U-08
+EM-0177,2026-05-06 07:24:00,Consumer,customs.gov.demo,Complaint about VELORA product quality (suspected fake),Jordan,MK-01,Customs,Duplicate,2026-05-08 09:24:00,48,True,,U-07
+EM-0178,2026-05-06 13:37:00,Customs,customs.gov.demo,Unauthorised DOLCETTA app,UAE,MK-03,Wholesale market,Dismissed – not infringing,2026-05-06 21:37:00,48,False,,U-09
+EM-0026,2026-05-11 10:45:00,Distributor,brandguard-demo.com,Complaint about DOLCETTA product quality (suspected fake),Egypt,MK-03,Wholesale market,Linked to case,2026-05-11 18:45:00,48,False,TM-2026-418,U-08
+EM-0179,2026-05-13 10:48:00,Consumer,customs.gov.demo,CRISPINO imitation packaging seen in UAE,UAE,MK-02,Mobile app,Dismissed – not infringing,2026-05-15 12:48:00,48,True,,U-07
+EM-0180,2026-05-24 17:06:00,Brand protection vendor,brandguard-demo.com,PICCOLINI imitation packaging seen in UAE,UAE,MK-05,Social media,Triaged – no action,2026-05-26 19:06:00,48,True,,U-08
+EM-0182,2026-05-24 20:03:00,Distributor,company-demo.local,Suspected counterfeit PICCOLINI products – KSA,KSA,MK-05,Website / domain,Duplicate,2026-05-25 04:03:00,48,False,,U-09
+EM-0181,2026-05-25 09:19:00,Consumer,company-demo.local,Report: fake AURELIA listing,KSA,MK-06,Wholesale market,Duplicate,2026-05-26 05:19:00,48,False,,U-09
+EM-0183,2026-05-26 15:08:00,Internal sales,gmail.com,Complaint about DOLCETTA product quality (suspected fake),UAE,MK-03,Customs,Triaged – monitoring,2026-05-27 11:08:00,48,False,,U-07
+EM-0184,2026-05-30 12:00:00,Brand protection vendor,brandguard-demo.com,DOLCETTA imitation packaging seen in Qatar,Qatar,MK-03,Mobile app,Triaged – no action,2026-05-31 08:00:00,48,False,,U-07
+EM-0186,2026-06-02 15:57:00,Brand protection vendor,brandguard-demo.com,PICCOLINI imitation packaging seen in KSA,KSA,MK-05,Online marketplace,Triaged – no action,2026-06-03 21:57:00,48,False,,U-07
+EM-0185,2026-06-02 20:49:00,Marketplace platform,distributor-demo.ae,Complaint about PICCOLINI product quality (suspected fake),UAE,MK-05,Mobile app,Duplicate,2026-06-03 04:49:00,48,False,,U-09
+EM-0027,2026-06-13 10:11:00,Brand protection vendor,company-demo.local,Unauthorised CRISPINO app,UAE,MK-02,Physical store,Linked to case,2026-06-14 06:11:00,48,False,TM-2026-419,U-09
+EM-0028,2026-06-19 19:37:00,Anonymous,outlook.com,Seizure notice – goods bearing CRISPINO,UAE,MK-02,Social media,Linked to case,2026-06-20 03:37:00,48,False,TM-2026-421,U-07
+EM-0187,2026-06-22 15:04:00,Consumer,customs.gov.demo,Complaint about VELORA product quality (suspected fake),Egypt,MK-01,Online marketplace,Dismissed – not infringing,2026-06-23 11:04:00,48,False,,U-07
+EM-0189,2026-06-26 12:32:00,Brand protection vendor,distributor-demo.ae,Seizure notice – goods bearing MINTIQ,UAE,MK-04,Mobile app,Triaged – monitoring,2026-07-01 12:32:00,48,True,,U-08
+EM-0188,2026-06-28 19:53:00,Marketplace platform,customs.gov.demo,Complaint about CRISPINO product quality (suspected fake),KSA,MK-02,Mobile app,Triaged – no action,2026-06-29 03:53:00,48,False,,U-07
+EM-0191,2026-07-01 16:49:00,Brand protection vendor,company-demo.local,Suspected counterfeit MINTIQ products – UAE,UAE,MK-04,Social media,Triaged – monitoring,2026-07-06 16:49:00,48,True,,U-09
+EM-0190,2026-07-05 08:00:00,Consumer,customs.gov.demo,Seizure notice – goods bearing DOLCETTA,UAE,MK-03,Customs,Dismissed – not infringing,2026-07-08 16:00:00,48,True,,U-09
+EM-0192,2026-07-13 17:35:00,Consumer,gmail.com,Unauthorised CRISPINO app,UAE,MK-02,Social media,Dismissed – not infringing,2026-07-14 23:35:00,48,False,,U-07
+EM-0193,2026-07-15 13:49:00,Internal sales,brandguard-demo.com,Suspected counterfeit CRISPINO products – UAE,UAE,MK-02,Website / domain,Triaged – no action,2026-07-15 17:49:00,48,False,,U-07
+EM-0194,2026-07-17 07:49:00,Distributor,distributor-demo.ae,Suspected counterfeit MINTIQ products – UAE,UAE,MK-04,Online marketplace,Dismissed – not infringing,2026-07-19 09:49:00,48,True,,U-09
+EM-0029,2026-07-23 12:06:00,Brand protection vendor,marketplace-demo.com,Seizure notice – goods bearing MINTIQ,UAE,MK-04,Website / domain,Linked to case,2026-07-26 20:06:00,48,True,TM-2026-424,U-07
+EM-0195,2026-07-27 08:22:00,Marketplace platform,company-demo.local,Suspected counterfeit VELORA products – KSA,KSA,MK-01,Online marketplace,Dismissed – not infringing,2026-08-01 08:22:00,48,True,,U-09
+EM-0196,2026-07-27 14:39:00,Consumer,customs.gov.demo,Unauthorised CRISPINO app,UAE,MK-02,Physical store,Dismissed – not infringing,2026-07-28 20:39:00,48,False,,U-04
+EM-0030,2026-07-30 11:53:00,Distributor,brandguard-demo.com,Unauthorised DOLCETTA app,Egypt,MK-03,Physical store,Linked to case,2026-07-31 17:53:00,48,False,TM-2026-426,U-09
+EM-0197,2026-07-30 17:04:00,Customs,gmail.com,Suspected counterfeit PICCOLINI products – Jordan,Jordan,MK-05,Social media,Dismissed – not infringing,2026-07-31 23:04:00,48,False,,U-07
+EM-0198,2026-08-03 13:20:00,Brand protection vendor,company-demo.local,DOLCETTA imitation packaging seen in UAE,UAE,MK-03,Online marketplace,Triaged – no action,2026-08-04 19:20:00,48,False,,U-07
+EM-0200,2026-08-05 14:53:00,Consumer,customs.gov.demo,Seizure notice – goods bearing VELORA,KSA,MK-01,Social media,Triaged – monitoring,2026-08-06 10:53:00,48,False,,U-04
+EM-0199,2026-08-07 13:57:00,Customs,gmail.com,Unauthorised AURELIA app,India,MK-06,Online marketplace,Duplicate,2026-08-07 17:57:00,48,False,,U-07
+EM-0201,2026-08-11 18:12:00,Brand protection vendor,gmail.com,Seizure notice – goods bearing DOLCETTA,UAE,MK-03,Physical store,Linked to case,2026-08-11 22:12:00,48,False,,U-09
+EM-0202,2026-08-22 08:01:00,Consumer,company-demo.local,Complaint about VELORA product quality (suspected fake),UAE,MK-01,Social media,Triaged – no action,2026-08-22 12:01:00,48,False,,U-08
+EM-0031,2026-08-23 09:52:00,Marketplace platform,marketplace-demo.com,Suspected counterfeit PICCOLINI products – UAE,UAE,MK-05,Website / domain,Linked to case,2026-08-25 11:52:00,48,True,TM-2026-428,U-07
+EM-0203,2026-08-24 17:36:00,Brand protection vendor,marketplace-demo.com,Seizure notice – goods bearing AURELIA,Egypt,MK-06,Physical store,Dismissed – not infringing,2026-08-28 01:36:00,48,True,,U-07
+EM-0206,2026-08-25 10:58:00,Distributor,outlook.com,Unauthorised DOLCETTA app,Turkey,MK-03,Online marketplace,Duplicate,2026-08-26 16:58:00,48,False,,U-08
+EM-0205,2026-08-26 10:59:00,Distributor,customs.gov.demo,Seizure notice – goods bearing AURELIA,Turkey,MK-06,Physical store,Dismissed – not infringing,2026-08-28 12:59:00,48,True,,U-09
+EM-0204,2026-08-28 15:03:00,Brand protection vendor,marketplace-demo.com,Complaint about MINTIQ product quality (suspected fake),Jordan,MK-04,Social media,Linked to case,2026-08-31 23:03:00,48,True,,U-09
+EM-0207,2026-09-05 09:16:00,Consumer,customs.gov.demo,Report: fake AURELIA listing,UAE,MK-06,Social media,Triaged – no action,2026-09-05 17:16:00,48,False,,U-09
+EM-0208,2026-09-11 17:30:00,Anonymous,company-demo.local,Report: fake DOLCETTA listing,Oman,MK-03,Online marketplace,Duplicate,2026-09-16 17:30:00,48,True,,U-09
+EM-0209,2026-09-14 20:47:00,Distributor,distributor-demo.ae,MINTIQ imitation packaging seen in UAE,UAE,MK-04,Customs,Triaged – no action,2026-09-16 02:47:00,48,False,,U-09
+EM-0212,2026-09-15 19:02:00,Brand protection vendor,marketplace-demo.com,VELORA imitation packaging seen in KSA,KSA,MK-01,Customs,Triaged – no action,2026-09-20 19:02:00,48,True,,U-09
+EM-0210,2026-09-18 15:33:00,Customs,company-demo.local,Seizure notice – goods bearing PICCOLINI,UAE,MK-05,Physical store,Duplicate,2026-09-18 23:33:00,48,False,,U-04
+EM-0211,2026-09-19 13:57:00,Internal sales,brandguard-demo.com,Seizure notice – goods bearing CRISPINO,India,MK-02,Online marketplace,Duplicate,2026-09-20 19:57:00,48,False,,U-07
+EM-0213,2026-09-22 10:39:00,Consumer,gmail.com,Complaint about CRISPINO product quality (suspected fake),Egypt,MK-02,Online marketplace,Triaged – monitoring,2026-09-23 16:39:00,48,False,,U-04
+EM-0032,2026-09-24 09:25:00,Consumer,gmail.com,Complaint about MINTIQ product quality (suspected fake),KSA,MK-04,Wholesale market,Linked to case,2026-09-25 05:25:00,48,False,TM-2026-432,U-04
+EM-0214,2026-09-25 20:56:00,Consumer,company-demo.local,Complaint about PICCOLINI product quality (suspected fake),Turkey,MK-05,Online marketplace,Dismissed – not infringing,2026-09-27 02:56:00,48,False,,U-07
+EM-0215,2026-09-27 11:16:00,Consumer,customs.gov.demo,Report: fake CRISPINO listing,UAE,MK-02,Wholesale market,Triaged – no action,2026-09-27 19:16:00,48,False,,U-09
+EM-0216,2026-10-04 14:16:00,Consumer,gmail.com,VELORA imitation packaging seen in KSA,KSA,MK-01,Website / domain,Triaged – monitoring,2026-10-05 20:16:00,48,False,,U-09
+EM-0217,2026-10-06 19:47:00,Consumer,customs.gov.demo,Seizure notice – goods bearing PICCOLINI,KSA,MK-05,Physical store,Linked to case,2026-10-10 03:47:00,48,True,,U-08
+EM-0218,2026-10-12 20:25:00,Brand protection vendor,distributor-demo.ae,Complaint about DOLCETTA product quality (suspected fake),KSA,MK-03,Online marketplace,Duplicate,2026-10-13 16:25:00,48,False,,U-07
+EM-0219,2026-10-13 14:04:00,Consumer,marketplace-demo.com,Complaint about CRISPINO product quality (suspected fake),UAE,MK-02,Online marketplace,Triaged – no action,2026-10-18 14:04:00,48,True,,U-07
+EM-0220,2026-10-15 09:31:00,Distributor,distributor-demo.ae,Report: fake CRISPINO listing,KSA,MK-02,Social media,Dismissed – not infringing,2026-10-16 05:31:00,48,False,,U-07
+EM-0033,2026-10-16 18:55:00,Internal sales,outlook.com,Unauthorised PICCOLINI app,India,MK-05,Wholesale market,Linked to case,2026-10-17 14:55:00,48,False,TM-2026-434,U-04
+EM-0221,2026-10-17 16:48:00,Marketplace platform,marketplace-demo.com,VELORA imitation packaging seen in Jordan,Jordan,MK-01,Wholesale market,Triaged – monitoring,2026-10-17 20:48:00,48,False,,U-09
+EM-0223,2026-10-20 14:36:00,Anonymous,distributor-demo.ae,CRISPINO imitation packaging seen in UAE,UAE,MK-02,Online marketplace,Triaged – monitoring,2026-10-20 22:36:00,48,False,,U-09
+EM-0224,2026-10-21 20:38:00,Distributor,distributor-demo.ae,Report: fake MINTIQ listing,Kuwait,MK-04,Website / domain,Triaged – no action,2026-10-22 04:38:00,48,False,,U-04
+EM-0222,2026-10-25 09:26:00,Brand protection vendor,distributor-demo.ae,Suspected counterfeit DOLCETTA products – UAE,UAE,MK-03,Online marketplace,Triaged – no action,2026-10-26 05:26:00,48,False,,U-07

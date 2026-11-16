@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ferrero Case Intelligence</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">F</span>
+      <div><strong>Ferrero</strong><span>Case intelligence assistant</span></div>
+    </div>
+    <div class="meta" id="meta">Loading…</div>
+  </header>
+
+  <main class="layout">
+    <aside class="side">
+      <section class="card">
+        <label for="user">Signed in as</label>
+        <select id="user"></select>
+        <p id="access" class="muted"></p>
+      </section>
+
+      <section class="card" id="case-card" hidden>
+        <h2>Case in focus</h2>
+        <div id="case-body"></div>
+      </section>
+
+      <button type="button" id="new" class="secondary">New conversation</button>
+
+      <section class="card">
+        <h2>Try asking</h2>
+        <ul id="examples" class="examples"></ul>
+      </section>
+
+    </aside>
+
+    <section class="chat" aria-label="Conversation">
+      <div id="thread" class="thread" aria-live="polite"></div>
+      <form id="composer" class="composer">
+        <textarea id="input" dir="auto" rows="2" maxlength="4000"
+                  placeholder="Ask about a case, a document or the portfolio – in English or Arabic"></textarea>
+        <button type="submit" id="send">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

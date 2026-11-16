@@ -1,0 +1,10 @@
+{
+  "GS-017": {
+    "expected_answer": "Next action: Prepare hearing bundle, due 27 December 2026; the next hearing is on 1 January 2027 (case tracker).",
+    "note": "The pack's expected answer is only a routing note; these values are from fact_case."
+  },
+  "GS-028": {
+    "expected_answer": "A tie: DealHub Marketplace Seller 4471 (UAE) and Souq Al Hala Online (KSA) have 7 cases each (case tracker).",
+    "note": "The pack names only DealHub Marketplace Seller 4471, but Souq Al Hala Online also has 7 cases."
+  }
+}

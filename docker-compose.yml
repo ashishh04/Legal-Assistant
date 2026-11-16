@@ -1,0 +1,23 @@
+# Ferrero on a Linux server (README, "Deploying to a server"):
+#
+#     docker compose up -d --build        # then open http://<server>/
+#
+# Credentials (Bedrock/AWS keys, the Superset account) come from .env next to this file, at run time only.
+# Superset embeds its dashboards only in pages whose address is in its frame-ancestors list. http://3.75.206.231
+# (port 80) is on that list, so keep the published port at 80 there. FERRERO_HTTP_PORT (shell or .env) changes it.
+#
+# There is no sign-in yet: anyone who can reach the port can pick any persona and use the assistant, which is billed
+# to your AWS account. Limit the port to known addresses (EC2 security group) until Entra ID sign-in is in place.
+services:
+  ferrero:
+    build: .
+    image: ferrero:latest
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${FERRERO_HTTP_PORT:-80}:8000"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

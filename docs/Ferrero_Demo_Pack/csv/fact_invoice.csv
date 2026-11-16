@@ -1,0 +1,188 @@
+invoice_id,case_id,firm,invoice_date,category,amount_aed,status
+INV-0001,TM-2024-402,Levant Legal Group,2024-03-18,Translation,5000,Paid
+INV-0002,TM-2024-402,Levant Legal Group,2024-03-25,Court fees,10000,Paid
+INV-0003,TM-2024-402,Levant Legal Group,2024-01-28,Court fees,25000,Paid
+INV-0004,TM-2024-403,Riyadh Law Chambers,2024-08-14,Court fees,32000,Paid
+INV-0005,TM-2024-404,Najm & Co. Advocates,2024-11-15,Counsel fees,80000,Under review
+INV-0006,TM-2024-405,Najm & Co. Advocates,2024-09-22,Expert fees,18000,Paid
+INV-0007,TM-2024-405,Najm & Co. Advocates,2024-09-29,Translation,8000,Paid
+INV-0008,TM-2024-405,Najm & Co. Advocates,2024-03-30,Counsel fees,77000,Paid
+INV-0009,TM-2024-405,Najm & Co. Advocates,2024-09-23,Expert fees,19000,Approved
+INV-0010,TM-2024-406,Gulf IP Partners,2024-03-23,Counsel fees,22000,Paid
+INV-0011,TM-2024-406,Gulf IP Partners,2024-03-09,Court fees,23000,Paid
+INV-0012,TM-2024-406,Gulf IP Partners,2024-03-24,Court fees,35000,Paid
+INV-0013,TM-2024-407,Najm & Co. Advocates,2024-12-22,Counsel fees,68000,Paid
+INV-0014,TM-2024-407,Najm & Co. Advocates,2024-05-05,Investigation,9000,Approved
+INV-0015,TM-2024-407,Najm & Co. Advocates,2025-02-14,Translation,9000,Paid
+INV-0016,TM-2024-407,Najm & Co. Advocates,2024-10-04,Counsel fees,45000,Paid
+INV-0017,TM-2024-412,Najm & Co. Advocates,2024-04-07,Translation,2000,Paid
+INV-0018,TM-2024-412,Najm & Co. Advocates,2024-07-02,Expert fees,29000,Paid
+INV-0019,TM-2024-412,Najm & Co. Advocates,2024-08-28,Counsel fees,45000,Paid
+INV-0020,TM-2024-413,Indus Legal Associates,2024-05-07,Court fees,37000,Approved
+INV-0021,TM-2024-413,Indus Legal Associates,2024-09-03,Translation,7000,Paid
+INV-0022,TM-2024-414,Najm & Co. Advocates,2024-05-19,Court fees,34000,Paid
+INV-0023,TM-2024-414,Najm & Co. Advocates,2024-06-11,Expert fees,15000,Paid
+INV-0024,TM-2024-414,Najm & Co. Advocates,2024-10-01,Counsel fees,78000,Paid
+INV-0025,TM-2024-415,Bosphorus IP Law,2025-04-18,Investigation,7000,Paid
+INV-0026,TM-2024-415,Bosphorus IP Law,2024-10-29,Investigation,9000,Paid
+INV-0027,TM-2024-416,Gulf IP Partners,2024-07-30,Court fees,28000,Approved
+INV-0028,TM-2024-416,Gulf IP Partners,2024-05-29,Court fees,15000,Paid
+INV-0029,TM-2024-416,Gulf IP Partners,2024-05-26,Court fees,14000,Paid
+INV-0030,TM-2024-416,Gulf IP Partners,2024-09-18,Translation,4000,Paid
+INV-0031,TM-2024-418,Gulf IP Partners,2024-10-16,Investigation,13000,Approved
+INV-0032,TM-2024-418,Gulf IP Partners,2024-11-03,Court fees,8000,Paid
+INV-0033,TM-2024-418,Gulf IP Partners,2024-12-19,Expert fees,29000,Paid
+INV-0034,TM-2024-420,Riyadh Law Chambers,2025-02-19,Expert fees,23000,Paid
+INV-0035,TM-2024-420,Riyadh Law Chambers,2025-04-08,Investigation,11000,Paid
+INV-0036,TM-2024-421,Najm & Co. Advocates,2024-08-22,Counsel fees,47000,Approved
+INV-0037,TM-2024-422,Riyadh Law Chambers,2024-09-23,Counsel fees,56000,Approved
+INV-0038,TM-2024-422,Riyadh Law Chambers,2024-10-03,Counsel fees,21000,Paid
+INV-0039,TM-2024-423,Gulf IP Partners,2024-07-21,Counsel fees,75000,Paid
+INV-0040,TM-2024-423,Gulf IP Partners,2024-10-07,Counsel fees,59000,Paid
+INV-0041,TM-2024-425,Gulf IP Partners,2024-11-14,Counsel fees,20000,Approved
+INV-0042,TM-2024-425,Gulf IP Partners,2024-10-27,Investigation,7000,Under review
+INV-0043,TM-2024-426,Riyadh Law Chambers,2026-05-12,Counsel fees,26000,Paid
+INV-0044,TM-2024-426,Riyadh Law Chambers,2026-08-30,Court fees,35000,Paid
+INV-0045,TM-2024-427,Gulf IP Partners,2025-11-05,Expert fees,34000,Paid
+INV-0046,TM-2024-427,Gulf IP Partners,2025-02-18,Counsel fees,75000,Paid
+INV-0047,TM-2024-427,Gulf IP Partners,2024-10-09,Counsel fees,30000,Paid
+INV-0048,TM-2024-427,Gulf IP Partners,2024-11-09,Court fees,5000,Paid
+INV-0049,TM-2024-428,Gulf IP Partners,2025-03-21,Counsel fees,79000,Approved
+INV-0050,TM-2024-428,Gulf IP Partners,2025-01-04,Court fees,11000,Approved
+INV-0051,TM-2024-428,Gulf IP Partners,2024-12-31,Investigation,9000,Under review
+INV-0052,TM-2024-428,Gulf IP Partners,2025-04-11,Court fees,8000,Under review
+INV-0053,TM-2024-430,Nile Counsel LLP,2024-12-21,Translation,5000,Paid
+INV-0054,TM-2024-431,Riyadh Law Chambers,2025-07-06,Court fees,8000,Approved
+INV-0055,TM-2024-431,Riyadh Law Chambers,2025-08-13,Translation,4000,Paid
+INV-0056,TM-2024-431,Riyadh Law Chambers,2025-07-02,Counsel fees,57000,Paid
+INV-0057,TM-2024-431,Riyadh Law Chambers,2025-07-18,Counsel fees,60000,Approved
+INV-0058,TM-2024-432,Najm & Co. Advocates,2025-11-11,Counsel fees,50000,Paid
+INV-0059,TM-2024-433,Bosphorus IP Law,2025-12-11,Counsel fees,73000,Paid
+INV-0060,TM-2024-433,Bosphorus IP Law,2024-12-07,Counsel fees,39000,Paid
+INV-0061,TM-2024-436,Riyadh Law Chambers,2025-03-12,Translation,5000,Paid
+INV-0062,TM-2024-437,Najm & Co. Advocates,2025-05-24,Translation,4000,Under review
+INV-0063,TM-2024-437,Najm & Co. Advocates,2025-07-30,Counsel fees,29000,Paid
+INV-0064,TM-2024-437,Najm & Co. Advocates,2025-01-16,Customs handling,12000,Paid
+INV-0065,TM-2024-437,Najm & Co. Advocates,2025-03-18,Translation,4000,Paid
+INV-0066,TM-2024-438,Riyadh Law Chambers,2025-03-03,Expert fees,26000,Paid
+INV-0067,TM-2024-438,Riyadh Law Chambers,2025-03-08,Customs handling,12000,Approved
+INV-0068,TM-2025-401,Riyadh Law Chambers,2025-04-21,Counsel fees,77000,Paid
+INV-0069,TM-2025-401,Riyadh Law Chambers,2025-04-17,Translation,5000,Paid
+INV-0070,TM-2025-401,Riyadh Law Chambers,2025-03-02,Investigation,6000,Paid
+INV-0071,TM-2025-403,Gulf IP Partners,2025-06-09,Counsel fees,14000,Paid
+INV-0072,TM-2025-405,Najm & Co. Advocates,2025-07-09,Expert fees,21000,Paid
+INV-0073,TM-2025-407,Riyadh Law Chambers,2025-05-01,Translation,8000,Approved
+INV-0074,TM-2025-407,Riyadh Law Chambers,2025-08-07,Investigation,17000,Paid
+INV-0075,TM-2025-407,Riyadh Law Chambers,2025-04-02,Court fees,9000,Paid
+INV-0076,TM-2025-407,Riyadh Law Chambers,2025-08-06,Investigation,4000,Paid
+INV-0077,TM-2025-408,Gulf IP Partners,2025-06-16,Counsel fees,60000,Paid
+INV-0078,TM-2025-408,Gulf IP Partners,2026-03-03,Court fees,14000,Paid
+INV-0079,TM-2025-408,Gulf IP Partners,2025-10-20,Customs handling,4000,Paid
+INV-0080,TM-2025-409,Gulf IP Partners,2026-01-30,Counsel fees,37000,Paid
+INV-0081,TM-2025-409,Gulf IP Partners,2026-03-20,Counsel fees,59000,Paid
+INV-0082,TM-2025-409,Gulf IP Partners,2025-03-28,Investigation,5000,Paid
+INV-0083,TM-2025-411,Najm & Co. Advocates,2025-05-10,Counsel fees,27000,Paid
+INV-0084,TM-2025-414,Najm & Co. Advocates,2025-10-06,Expert fees,22000,Paid
+INV-0085,TM-2025-414,Najm & Co. Advocates,2025-07-23,Expert fees,14000,Paid
+INV-0086,TM-2025-414,Najm & Co. Advocates,2025-07-18,Counsel fees,64000,Under review
+INV-0087,TM-2025-414,Najm & Co. Advocates,2025-09-05,Investigation,17000,Paid
+INV-0088,TM-2025-415,Levant Legal Group,2025-08-08,Counsel fees,63000,Paid
+INV-0089,TM-2025-415,Levant Legal Group,2025-10-19,Court fees,26000,Paid
+INV-0090,TM-2025-416,Najm & Co. Advocates,2025-06-09,Court fees,22000,Paid
+INV-0091,TM-2025-416,Najm & Co. Advocates,2025-06-02,Court fees,31000,Paid
+INV-0092,TM-2025-416,Najm & Co. Advocates,2025-06-02,Court fees,29000,Paid
+INV-0093,TM-2025-417,Bosphorus IP Law,2025-12-31,Counsel fees,83000,Paid
+INV-0094,TM-2025-418,Najm & Co. Advocates,2026-03-27,Translation,6000,Paid
+INV-0095,TM-2025-420,Levant Legal Group,2025-11-10,Counsel fees,44000,Paid
+INV-0096,TM-2025-420,Levant Legal Group,2025-10-07,Court fees,32000,Paid
+INV-0097,TM-2025-420,Levant Legal Group,2025-06-27,Counsel fees,63000,Paid
+INV-0098,TM-2025-422,Riyadh Law Chambers,2025-07-15,Expert fees,26000,Paid
+INV-0099,TM-2025-422,Riyadh Law Chambers,2026-01-30,Court fees,23000,Paid
+INV-0100,TM-2025-422,Riyadh Law Chambers,2026-05-10,Expert fees,33000,Paid
+INV-0101,TM-2025-423,Najm & Co. Advocates,2026-01-09,Investigation,14000,Paid
+INV-0102,TM-2025-423,Najm & Co. Advocates,2026-09-22,Counsel fees,60000,Paid
+INV-0103,TM-2025-424,Gulf IP Partners,2025-10-24,Counsel fees,90000,Paid
+INV-0104,TM-2025-424,Gulf IP Partners,2025-12-10,Counsel fees,67000,Paid
+INV-0105,TM-2025-424,Gulf IP Partners,2026-03-29,Customs handling,6000,Paid
+INV-0106,TM-2025-424,Gulf IP Partners,2025-10-19,Counsel fees,73000,Paid
+INV-0107,TM-2025-425,Najm & Co. Advocates,2025-11-10,Counsel fees,51000,Approved
+INV-0108,TM-2025-425,Najm & Co. Advocates,2026-03-19,Court fees,25000,Approved
+INV-0109,TM-2025-427,Najm & Co. Advocates,2025-10-25,Court fees,36000,Under review
+INV-0110,TM-2025-427,Najm & Co. Advocates,2025-10-10,Court fees,18000,Paid
+INV-0111,TM-2025-427,Najm & Co. Advocates,2025-11-20,Court fees,18000,Paid
+INV-0112,TM-2025-427,Najm & Co. Advocates,2025-09-26,Expert fees,25000,Paid
+INV-0113,TM-2025-428,Najm & Co. Advocates,2026-01-08,Translation,7000,Paid
+INV-0114,TM-2025-428,Najm & Co. Advocates,2025-11-29,Investigation,10000,Under review
+INV-0115,TM-2025-429,Indus Legal Associates,2025-09-12,Counsel fees,64000,Paid
+INV-0116,TM-2025-429,Indus Legal Associates,2026-05-20,Counsel fees,56000,Under review
+INV-0117,TM-2025-430,Najm & Co. Advocates,2025-08-19,Court fees,33000,Paid
+INV-0118,TM-2025-430,Najm & Co. Advocates,2025-10-30,Investigation,15000,Paid
+INV-0119,TM-2025-430,Najm & Co. Advocates,2025-08-15,Customs handling,4000,Paid
+INV-0120,TM-2025-431,Levant Legal Group,2026-09-05,Counsel fees,84000,Paid
+INV-0121,TM-2025-431,Levant Legal Group,2026-05-16,Court fees,17000,Paid
+INV-0122,TM-2025-432,Najm & Co. Advocates,2025-09-12,Court fees,39000,Under review
+INV-0123,TM-2025-432,Najm & Co. Advocates,2025-10-04,Customs handling,3000,Paid
+INV-0124,TM-2025-432,Najm & Co. Advocates,2025-08-28,Investigation,13000,Under review
+INV-0125,TM-2025-432,Najm & Co. Advocates,2025-09-28,Counsel fees,39000,Approved
+INV-0126,TM-2025-435,Riyadh Law Chambers,2026-01-10,Counsel fees,58000,Paid
+INV-0127,TM-2025-436,Bosphorus IP Law,2026-02-23,Expert fees,16000,Paid
+INV-0128,TM-2025-437,Riyadh Law Chambers,2025-10-21,Counsel fees,69000,Paid
+INV-0129,TM-2025-439,Riyadh Law Chambers,2026-05-03,Counsel fees,78000,Paid
+INV-0130,TM-2025-439,Riyadh Law Chambers,2026-01-02,Counsel fees,28000,Paid
+INV-0131,TM-2025-441,Gulf IP Partners,2025-12-23,Translation,2000,Approved
+INV-0132,TM-2025-441,Gulf IP Partners,2026-02-22,Counsel fees,42000,Paid
+INV-0133,TM-2025-441,Gulf IP Partners,2026-01-28,Customs handling,9000,Paid
+INV-0134,TM-2025-441,Gulf IP Partners,2026-04-03,Translation,9000,Paid
+INV-0135,TM-2025-442,Riyadh Law Chambers,2026-07-06,Counsel fees,51000,Paid
+INV-0136,TM-2025-442,Riyadh Law Chambers,2025-12-11,Court fees,28000,Paid
+INV-0137,TM-2025-443,Riyadh Law Chambers,2026-03-31,Counsel fees,20000,Paid
+INV-0138,TM-2025-445,Gulf IP Partners,2026-03-15,Counsel fees,46000,Paid
+INV-0139,TM-2025-445,Gulf IP Partners,2026-01-03,Counsel fees,61000,Approved
+INV-0140,TM-2025-446,Indus Legal Associates,2026-06-02,Court fees,35000,Approved
+INV-0141,TM-2025-446,Indus Legal Associates,2026-10-11,Expert fees,21000,Paid
+INV-0142,TM-2025-448,Gulf IP Partners,2026-05-13,Counsel fees,38000,Paid
+INV-0143,TM-2026-401,Riyadh Law Chambers,2026-04-08,Counsel fees,83000,Approved
+INV-0144,TM-2026-401,Riyadh Law Chambers,2026-10-16,Counsel fees,57000,Paid
+INV-0145,TM-2026-402,Indus Legal Associates,2026-04-08,Counsel fees,57000,Paid
+INV-0146,TM-2026-403,Gulf IP Partners,2026-03-24,Investigation,12000,Under review
+INV-0147,TM-2026-403,Gulf IP Partners,2026-04-24,Customs handling,11000,Paid
+INV-0148,TM-2026-404,Riyadh Law Chambers,2026-07-05,Court fees,28000,Paid
+INV-0149,TM-2026-404,Riyadh Law Chambers,2026-10-24,Investigation,9000,Paid
+INV-0150,TM-2026-405,Gulf IP Partners,2026-06-05,Investigation,17000,Paid
+INV-0151,TM-2026-406,Najm & Co. Advocates,2026-03-21,Counsel fees,36000,Paid
+INV-0152,TM-2026-407,Bosphorus IP Law,2026-06-05,Court fees,33000,Paid
+INV-0153,TM-2026-409,Bosphorus IP Law,2026-06-18,Counsel fees,75000,Paid
+INV-0154,TM-2026-409,Bosphorus IP Law,2026-05-05,Counsel fees,47000,Paid
+INV-0155,TM-2026-410,Bosphorus IP Law,2026-08-31,Translation,2000,Approved
+INV-0156,TM-2026-411,Levant Legal Group,2026-05-02,Counsel fees,29000,Paid
+INV-0157,TM-2026-411,Levant Legal Group,2026-08-20,Counsel fees,74000,Paid
+INV-0158,TM-2026-412,Najm & Co. Advocates,2026-07-14,Counsel fees,35000,Paid
+INV-0159,TM-2026-412,Najm & Co. Advocates,2026-06-26,Counsel fees,60000,Paid
+INV-0160,TM-2026-414,Nile Counsel LLP,2026-10-16,Counsel fees,23000,Paid
+INV-0161,TM-2026-414,Nile Counsel LLP,2026-09-09,Court fees,34000,Under review
+INV-0162,TM-2026-415,Nile Counsel LLP,2026-10-10,Investigation,15000,Paid
+INV-0163,TM-2026-416,Najm & Co. Advocates,2026-10-15,Counsel fees,89000,Paid
+INV-0164,TM-2026-419,Najm & Co. Advocates,2026-07-16,Counsel fees,36000,Approved
+INV-0165,TM-2026-419,Najm & Co. Advocates,2026-08-05,Court fees,10000,Paid
+INV-0166,TM-2026-419,Najm & Co. Advocates,2026-07-16,Counsel fees,71000,Paid
+INV-0167,TM-2026-420,Riyadh Law Chambers,2026-08-05,Court fees,20000,Paid
+INV-0168,TM-2026-420,Riyadh Law Chambers,2026-06-24,Court fees,9000,Paid
+INV-0169,TM-2026-421,Najm & Co. Advocates,2026-10-15,Counsel fees,81000,Paid
+INV-0170,TM-2026-421,Najm & Co. Advocates,2026-09-18,Court fees,37000,Paid
+INV-0171,TM-2026-422,Indus Legal Associates,2026-09-12,Court fees,31000,Approved
+INV-0172,TM-2026-422,Indus Legal Associates,2026-07-30,Counsel fees,12000,Paid
+INV-0173,TM-2026-423,Gulf IP Partners,2026-09-11,Counsel fees,37000,Under review
+INV-0174,TM-2026-423,Gulf IP Partners,2026-08-21,Counsel fees,21000,Paid
+INV-0175,TM-2026-424,Gulf IP Partners,2026-09-09,Translation,4000,Paid
+INV-0176,TM-2026-425,Riyadh Law Chambers,2026-09-11,Investigation,8000,Paid
+INV-0177,TM-2026-426,Nile Counsel LLP,2026-09-12,Investigation,6000,Paid
+INV-0178,TM-2026-426,Nile Counsel LLP,2026-08-09,Translation,5000,Paid
+INV-0179,TM-2026-426,Nile Counsel LLP,2026-09-08,Court fees,26000,Paid
+INV-0180,TM-2026-426,Nile Counsel LLP,2026-10-17,Customs handling,11000,Paid
+INV-0181,TM-2026-430,Levant Legal Group,2026-09-26,Court fees,31000,Approved
+INV-0182,TM-2026-431,Gulf IP Partners,2026-11-05,Court fees,22000,Paid
+INV-0183,TM-2026-431,Gulf IP Partners,2026-11-03,Counsel fees,35000,Paid
+INV-0184,TM-2026-432,Riyadh Law Chambers,2026-10-08,Court fees,30000,Under review
+INV-0185,TM-2026-432,Riyadh Law Chambers,2026-10-08,Counsel fees,90000,Approved
+INV-0186,TM-2026-434,Indus Legal Associates,2026-10-21,Expert fees,20000,Under review
+INV-0187,TM-2026-434,Indus Legal Associates,2026-11-02,Counsel fees,26000,Paid

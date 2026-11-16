@@ -1,0 +1,10 @@
+Paste each block into the field named in its heading. Copilot Studio picks a source by its description, so keep them specific.
+
+=== Agent description (when you create the agent, or Overview > Description) ===
+Bilingual (English/Arabic) assistant for Dolce Group's legal and brand-protection team. Answers questions from the case documents and the case tracker.
+
+=== Knowledge: file group "Case documents" (the files in knowledge\case_documents) > Description ===
+Case documents in English and Arabic, one or more per case number (TM-YYYY-NNN): judgments, statements of claim, cease-and-desist letters, settlement and licence agreements, investigation and test-purchase reports, customs seizure notices, takedown notices and trademark-office decisions. Use for what a document says: parties, amounts claimed or awarded, deadlines, terms, reasoning, registrations and findings.
+
+=== Knowledge: file "Case tracker snapshot" (knowledge\Case_Tracker_Snapshot_2026-11-05.docx) > Description ===
+Snapshot of the legal team's case tracker on 5 November 2026, the data behind the Power BI dashboards. Pre-computed figures: open and closed cases by country, trademark and stage; hearings in the next 30 days; overdue actions; infringers with the most cases; damages awarded, settlements and recoveries by year; win rate by country; legal spend; mailbox, intake and app-store reports. Plus one entry per case: status, stage, outcome, court, infringer, lead counsel, amounts, next action and due date, next hearing. Use for counts, totals, rankings, lists and the status or next step of a case.

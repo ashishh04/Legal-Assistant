@@ -1,0 +1,738 @@
+event_id,case_id,event_date,event_type,description,owner_user_id,external_fees_aed
+EV-00001,TM-2024-401,2024-01-13,Case opened,Case opened – AURELIA v. aurelia-gifts.store (registrant),U-04,0
+EV-00002,TM-2024-401,2024-01-29,Evidence collected,Evidence collected – AURELIA v. aurelia-gifts.store (registrant),U-04,7000
+EV-00003,TM-2024-401,2024-02-29,Test purchase completed,Test purchase completed – AURELIA v. aurelia-gifts.store (registrant),U-04,3000
+EV-00004,TM-2024-401,2024-03-14,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. aurelia-gifts.store (registrant),U-04,8000
+EV-00005,TM-2024-401,2024-04-11,Response received,Response received – AURELIA v. aurelia-gifts.store (registrant),U-04,0
+EV-00006,TM-2024-401,2024-04-17,Statement of claim filed,Statement of claim filed – AURELIA v. aurelia-gifts.store (registrant),U-04,55000
+EV-00007,TM-2024-401,2024-05-04,Hearing held,Hearing held – AURELIA v. aurelia-gifts.store (registrant),U-04,33000
+EV-00008,TM-2024-401,2024-05-10,Expert report filed,Expert report filed – AURELIA v. aurelia-gifts.store (registrant),U-04,11000
+EV-00009,TM-2024-401,2024-06-16,Case closed,Case closed – AURELIA v. aurelia-gifts.store (registrant),U-04,0
+EV-00010,TM-2024-402,2024-01-15,Case opened,Case opened – VELORA v. Amman Confectionery Co.,U-06,0
+EV-00011,TM-2024-402,2024-02-02,Evidence collected,Evidence collected – VELORA v. Amman Confectionery Co.,U-06,9000
+EV-00012,TM-2024-402,2024-02-11,Test purchase completed,Test purchase completed – VELORA v. Amman Confectionery Co.,U-06,3000
+EV-00013,TM-2024-402,2024-02-13,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Amman Confectionery Co.,U-06,7000
+EV-00014,TM-2024-402,2024-03-21,Response received,Response received – VELORA v. Amman Confectionery Co.,U-06,0
+EV-00015,TM-2024-402,2024-07-01,Statement of claim filed,Statement of claim filed – VELORA v. Amman Confectionery Co.,U-06,17000
+EV-00016,TM-2024-402,2024-08-17,Case closed,Case closed – VELORA v. Amman Confectionery Co.,U-06,0
+EV-00017,TM-2024-403,2024-02-04,Case opened,Case opened – VELORA v. Dammam Sweet Corner,U-05,0
+EV-00018,TM-2024-403,2024-02-27,Evidence collected,Evidence collected – VELORA v. Dammam Sweet Corner,U-05,11000
+EV-00019,TM-2024-403,2024-03-06,Test purchase completed,Test purchase completed – VELORA v. Dammam Sweet Corner,U-05,6000
+EV-00020,TM-2024-403,2024-03-07,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Dammam Sweet Corner,U-05,4000
+EV-00021,TM-2024-403,2024-04-05,Response received,Response received – VELORA v. Dammam Sweet Corner,U-05,0
+EV-00022,TM-2024-403,2024-05-26,Statement of claim filed,Statement of claim filed – VELORA v. Dammam Sweet Corner,U-05,59000
+EV-00023,TM-2024-403,2024-09-10,Hearing held,Hearing held – VELORA v. Dammam Sweet Corner,U-05,21000
+EV-00024,TM-2024-403,2024-10-08,Case closed,Case closed – VELORA v. Dammam Sweet Corner,U-05,0
+EV-00025,TM-2024-404,2024-02-06,Case opened,Case opened – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00026,TM-2024-404,2024-02-29,Evidence collected,Evidence collected – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,2000
+EV-00027,TM-2024-404,2024-06-19,Test purchase completed,Test purchase completed – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,5000
+EV-00028,TM-2024-404,2024-08-03,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,7000
+EV-00029,TM-2024-404,2024-09-15,Response received,Response received – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00030,TM-2024-404,2024-10-03,Statement of claim filed,Statement of claim filed – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,36000
+EV-00031,TM-2024-404,2024-12-16,Hearing held,Hearing held – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,42000
+EV-00032,TM-2024-404,2024-12-20,Expert report filed,Expert report filed – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,11000
+EV-00033,TM-2024-404,2025-03-24,Case closed,Case closed – DOLCETTA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00034,TM-2024-405,2024-02-17,Case opened,Case opened – VELORA v. Muscat Candy Traders,U-06,0
+EV-00035,TM-2024-405,2024-02-23,Evidence collected,Evidence collected – VELORA v. Muscat Candy Traders,U-06,4000
+EV-00036,TM-2024-405,2024-03-26,Test purchase completed,Test purchase completed – VELORA v. Muscat Candy Traders,U-06,4000
+EV-00037,TM-2024-405,2024-04-29,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Muscat Candy Traders,U-06,7000
+EV-00038,TM-2024-405,2024-07-17,Response received,Response received – VELORA v. Muscat Candy Traders,U-06,0
+EV-00039,TM-2024-405,2024-07-24,Statement of claim filed,Statement of claim filed – VELORA v. Muscat Candy Traders,U-06,25000
+EV-00040,TM-2024-405,2024-11-17,Case closed,Case closed – VELORA v. Muscat Candy Traders,U-06,0
+EV-00041,TM-2024-406,2024-03-04,Case opened,Case opened – VELORA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00042,TM-2024-406,2024-03-05,Evidence collected,Evidence collected – VELORA v. DealHub Marketplace Seller 4471,U-04,8000
+EV-00043,TM-2024-406,2024-03-06,Test purchase completed,Test purchase completed – VELORA v. DealHub Marketplace Seller 4471,U-04,9000
+EV-00044,TM-2024-406,2024-03-13,Cease-and-desist sent,Cease-and-desist sent – VELORA v. DealHub Marketplace Seller 4471,U-04,4000
+EV-00045,TM-2024-406,2024-03-24,Case closed,Case closed – VELORA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00046,TM-2024-407,2024-03-05,Case opened,Case opened – VELORA v. Bright Star Foodstuff LLC,U-04,0
+EV-00047,TM-2024-407,2024-03-26,Evidence collected,Evidence collected – VELORA v. Bright Star Foodstuff LLC,U-04,12000
+EV-00048,TM-2024-407,2024-04-21,Test purchase completed,Test purchase completed – VELORA v. Bright Star Foodstuff LLC,U-04,6000
+EV-00049,TM-2024-407,2024-05-25,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Bright Star Foodstuff LLC,U-04,3000
+EV-00050,TM-2024-407,2024-05-26,Response received,Response received – VELORA v. Bright Star Foodstuff LLC,U-04,0
+EV-00051,TM-2024-407,2024-08-06,Statement of claim filed,Statement of claim filed – VELORA v. Bright Star Foodstuff LLC,U-04,44000
+EV-00052,TM-2024-407,2024-09-22,Hearing held,Hearing held – VELORA v. Bright Star Foodstuff LLC,U-04,13000
+EV-00053,TM-2024-407,2025-03-26,Case closed,Case closed – VELORA v. Bright Star Foodstuff LLC,U-04,0
+EV-00054,TM-2024-408,2024-03-05,Case opened,Case opened – CRISPINO v. Bright Star Foodstuff LLC,U-07,0
+EV-00055,TM-2024-408,2024-03-07,Evidence collected,Evidence collected – CRISPINO v. Bright Star Foodstuff LLC,U-07,5000
+EV-00056,TM-2024-408,2024-03-14,Test purchase completed,Test purchase completed – CRISPINO v. Bright Star Foodstuff LLC,U-07,4000
+EV-00057,TM-2024-408,2024-03-15,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Bright Star Foodstuff LLC,U-07,5000
+EV-00058,TM-2024-408,2024-03-18,Response received,Response received – CRISPINO v. Bright Star Foodstuff LLC,U-07,0
+EV-00059,TM-2024-408,2024-03-20,Statement of claim filed,Statement of claim filed – CRISPINO v. Bright Star Foodstuff LLC,U-07,29000
+EV-00060,TM-2024-408,2024-03-20,Hearing held,Hearing held – CRISPINO v. Bright Star Foodstuff LLC,U-07,55000
+EV-00061,TM-2024-408,2024-03-23,Expert report filed,Expert report filed – CRISPINO v. Bright Star Foodstuff LLC,U-07,17000
+EV-00062,TM-2024-408,2024-03-25,Case closed,Case closed – CRISPINO v. Bright Star Foodstuff LLC,U-07,0
+EV-00063,TM-2024-409,2024-03-06,Case opened,Case opened – CRISPINO v. ChocoApp Technologies,U-05,0
+EV-00064,TM-2024-409,2024-03-15,Evidence collected,Evidence collected – CRISPINO v. ChocoApp Technologies,U-05,5000
+EV-00065,TM-2024-409,2024-05-03,Test purchase completed,Test purchase completed – CRISPINO v. ChocoApp Technologies,U-05,2000
+EV-00066,TM-2024-409,2024-05-15,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. ChocoApp Technologies,U-05,9000
+EV-00067,TM-2024-409,2024-06-19,Response received,Response received – CRISPINO v. ChocoApp Technologies,U-05,0
+EV-00068,TM-2024-409,2024-06-23,Statement of claim filed,Statement of claim filed – CRISPINO v. ChocoApp Technologies,U-05,45000
+EV-00069,TM-2024-409,2024-07-31,Hearing held,Hearing held – CRISPINO v. ChocoApp Technologies,U-05,27000
+EV-00070,TM-2024-409,2024-08-20,Expert report filed,Expert report filed – CRISPINO v. ChocoApp Technologies,U-05,27000
+EV-00071,TM-2024-409,2024-11-21,Case closed,Case closed – CRISPINO v. ChocoApp Technologies,U-05,0
+EV-00072,TM-2024-410,2024-03-27,Case opened,Case opened – DOLCETTA v. Nutty Delight General Trading,U-03,0
+EV-00073,TM-2024-410,2024-03-27,Evidence collected,Evidence collected – DOLCETTA v. Nutty Delight General Trading,U-03,2000
+EV-00074,TM-2024-410,2024-03-28,Test purchase completed,Test purchase completed – DOLCETTA v. Nutty Delight General Trading,U-03,5000
+EV-00075,TM-2024-410,2024-04-16,Case closed,Case closed – DOLCETTA v. Nutty Delight General Trading,U-03,0
+EV-00076,TM-2024-411,2024-04-02,Case opened,Case opened – CRISPINO v. Sweet Deals Foodstuff Trading,U-03,0
+EV-00077,TM-2024-411,2024-04-02,Evidence collected,Evidence collected – CRISPINO v. Sweet Deals Foodstuff Trading,U-03,8000
+EV-00078,TM-2024-411,2024-04-05,Test purchase completed,Test purchase completed – CRISPINO v. Sweet Deals Foodstuff Trading,U-03,4000
+EV-00079,TM-2024-411,2024-04-06,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Sweet Deals Foodstuff Trading,U-03,5000
+EV-00080,TM-2024-411,2024-04-08,Response received,Response received – CRISPINO v. Sweet Deals Foodstuff Trading,U-03,0
+EV-00081,TM-2024-411,2024-04-16,Settlement signed,Settlement signed – CRISPINO v. Sweet Deals Foodstuff Trading,U-03,0
+EV-00082,TM-2024-411,2024-05-04,Case closed,Case closed – CRISPINO v. Sweet Deals Foodstuff Trading,U-03,0
+EV-00083,TM-2024-412,2024-04-07,Case opened,Case opened – VELORA v. QuickCart Online Store,U-07,0
+EV-00084,TM-2024-412,2024-04-13,Evidence collected,Evidence collected – VELORA v. QuickCart Online Store,U-07,12000
+EV-00085,TM-2024-412,2024-06-19,Test purchase completed,Test purchase completed – VELORA v. QuickCart Online Store,U-07,6000
+EV-00086,TM-2024-412,2024-08-07,Cease-and-desist sent,Cease-and-desist sent – VELORA v. QuickCart Online Store,U-07,7000
+EV-00087,TM-2024-412,2024-09-21,Case closed,Case closed – VELORA v. QuickCart Online Store,U-07,0
+EV-00088,TM-2024-413,2024-04-15,Case opened,Case opened – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,0
+EV-00089,TM-2024-413,2024-04-18,Evidence collected,Evidence collected – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,2000
+EV-00090,TM-2024-413,2024-04-20,Test purchase completed,Test purchase completed – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,5000
+EV-00091,TM-2024-413,2024-04-24,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,8000
+EV-00092,TM-2024-413,2024-04-29,Response received,Response received – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,0
+EV-00093,TM-2024-413,2024-05-22,Statement of claim filed,Statement of claim filed – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,17000
+EV-00094,TM-2024-413,2024-08-21,Hearing held,Hearing held – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,55000
+EV-00095,TM-2024-413,2024-08-23,Expert report filed,Expert report filed – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,58000
+EV-00096,TM-2024-413,2024-12-23,Case closed,Case closed – AURELIA v. Delhi Confectioners Pvt Ltd,U-03,0
+EV-00097,TM-2024-414,2024-04-23,Case opened,Case opened – VELORA v. Hazel Bite Foods LLC,U-03,0
+EV-00098,TM-2024-414,2024-06-08,Evidence collected,Evidence collected – VELORA v. Hazel Bite Foods LLC,U-03,9000
+EV-00099,TM-2024-414,2024-07-06,Test purchase completed,Test purchase completed – VELORA v. Hazel Bite Foods LLC,U-03,4000
+EV-00100,TM-2024-414,2024-07-18,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Hazel Bite Foods LLC,U-03,7000
+EV-00101,TM-2024-414,2024-10-12,Case closed,Case closed – VELORA v. Hazel Bite Foods LLC,U-03,0
+EV-00102,TM-2024-415,2024-05-05,Case opened,Case opened – MINTIQ v. Bosphorus Sweets Ltd,U-06,0
+EV-00103,TM-2024-415,2024-06-24,Evidence collected,Evidence collected – MINTIQ v. Bosphorus Sweets Ltd,U-06,8000
+EV-00104,TM-2024-415,2024-09-25,Test purchase completed,Test purchase completed – MINTIQ v. Bosphorus Sweets Ltd,U-06,6000
+EV-00105,TM-2024-415,2025-05-26,Case closed,Case closed – MINTIQ v. Bosphorus Sweets Ltd,U-06,0
+EV-00106,TM-2024-416,2024-05-11,Case opened,Case opened – VELORA v. Al Salmiya Foodstuff,U-06,0
+EV-00107,TM-2024-416,2024-06-07,Evidence collected,Evidence collected – VELORA v. Al Salmiya Foodstuff,U-06,8000
+EV-00108,TM-2024-416,2024-06-07,Test purchase completed,Test purchase completed – VELORA v. Al Salmiya Foodstuff,U-06,10000
+EV-00109,TM-2024-416,2024-06-14,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Al Salmiya Foodstuff,U-06,4000
+EV-00110,TM-2024-416,2024-06-30,Response received,Response received – VELORA v. Al Salmiya Foodstuff,U-06,0
+EV-00111,TM-2024-416,2024-07-01,Statement of claim filed,Statement of claim filed – VELORA v. Al Salmiya Foodstuff,U-06,12000
+EV-00112,TM-2024-416,2024-07-21,Hearing held,Hearing held – VELORA v. Al Salmiya Foodstuff,U-06,31000
+EV-00113,TM-2024-416,2024-07-27,Expert report filed,Expert report filed – VELORA v. Al Salmiya Foodstuff,U-06,8000
+EV-00114,TM-2024-416,2024-10-25,Case closed,Case closed – VELORA v. Al Salmiya Foodstuff,U-06,0
+EV-00115,TM-2024-417,2024-05-11,Case opened,Case opened – VELORA v. velora-outlet.shop (registrant),U-04,0
+EV-00116,TM-2024-417,2024-05-31,Evidence collected,Evidence collected – VELORA v. velora-outlet.shop (registrant),U-04,11000
+EV-00117,TM-2024-417,2024-06-22,Test purchase completed,Test purchase completed – VELORA v. velora-outlet.shop (registrant),U-04,6000
+EV-00118,TM-2024-417,2024-07-08,Cease-and-desist sent,Cease-and-desist sent – VELORA v. velora-outlet.shop (registrant),U-04,8000
+EV-00119,TM-2024-417,2024-08-18,Response received,Response received – VELORA v. velora-outlet.shop (registrant),U-04,0
+EV-00120,TM-2024-417,2024-08-22,Statement of claim filed,Statement of claim filed – VELORA v. velora-outlet.shop (registrant),U-04,42000
+EV-00121,TM-2024-417,2024-10-26,Hearing held,Hearing held – VELORA v. velora-outlet.shop (registrant),U-04,59000
+EV-00122,TM-2024-417,2024-11-22,Case closed,Case closed – VELORA v. velora-outlet.shop (registrant),U-04,0
+EV-00123,TM-2024-418,2024-05-13,Case opened,Case opened – AURELIA v. Doha Delights Trading,U-03,0
+EV-00124,TM-2024-418,2024-05-20,Evidence collected,Evidence collected – AURELIA v. Doha Delights Trading,U-03,12000
+EV-00125,TM-2024-418,2024-05-29,Test purchase completed,Test purchase completed – AURELIA v. Doha Delights Trading,U-03,7000
+EV-00126,TM-2024-418,2024-06-17,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Doha Delights Trading,U-03,9000
+EV-00127,TM-2024-418,2024-07-13,Response received,Response received – AURELIA v. Doha Delights Trading,U-03,0
+EV-00128,TM-2024-418,2024-07-25,Statement of claim filed,Statement of claim filed – AURELIA v. Doha Delights Trading,U-03,54000
+EV-00129,TM-2024-418,2024-09-03,Hearing held,Hearing held – AURELIA v. Doha Delights Trading,U-03,33000
+EV-00130,TM-2024-418,2024-11-21,Expert report filed,Expert report filed – AURELIA v. Doha Delights Trading,U-03,21000
+EV-00131,TM-2024-418,2024-11-22,Judgment issued,Judgment issued – AURELIA v. Doha Delights Trading,U-03,0
+EV-00132,TM-2024-418,2025-01-29,Case closed,Case closed – AURELIA v. Doha Delights Trading,U-03,0
+EV-00133,TM-2024-419,2024-05-17,Case opened,Case opened – VELORA v. Pixel Fun Games Ltd,U-04,0
+EV-00134,TM-2024-419,2024-05-25,Evidence collected,Evidence collected – VELORA v. Pixel Fun Games Ltd,U-04,10000
+EV-00135,TM-2024-419,2024-06-01,Test purchase completed,Test purchase completed – VELORA v. Pixel Fun Games Ltd,U-04,3000
+EV-00136,TM-2024-419,2024-06-06,Case closed,Case closed – VELORA v. Pixel Fun Games Ltd,U-04,0
+EV-00137,TM-2024-420,2024-06-22,Case opened,Case opened – PICCOLINI v. Najd Chocolate Factory,U-05,0
+EV-00138,TM-2024-420,2024-06-22,Evidence collected,Evidence collected – PICCOLINI v. Najd Chocolate Factory,U-05,8000
+EV-00139,TM-2024-420,2025-02-20,Test purchase completed,Test purchase completed – PICCOLINI v. Najd Chocolate Factory,U-05,7000
+EV-00140,TM-2024-420,2025-04-13,Case closed,Case closed – PICCOLINI v. Najd Chocolate Factory,U-05,0
+EV-00141,TM-2024-421,2024-06-29,Case opened,Case opened – VELORA v. Hazel Bite Foods LLC,U-03,0
+EV-00142,TM-2024-421,2024-06-29,Evidence collected,Evidence collected – VELORA v. Hazel Bite Foods LLC,U-03,7000
+EV-00143,TM-2024-421,2024-07-03,Test purchase completed,Test purchase completed – VELORA v. Hazel Bite Foods LLC,U-03,6000
+EV-00144,TM-2024-421,2024-07-12,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Hazel Bite Foods LLC,U-03,7000
+EV-00145,TM-2024-421,2024-08-30,Response received,Response received – VELORA v. Hazel Bite Foods LLC,U-03,0
+EV-00146,TM-2024-421,2024-10-06,Statement of claim filed,Statement of claim filed – VELORA v. Hazel Bite Foods LLC,U-03,44000
+EV-00147,TM-2024-421,2024-10-10,Hearing held,Hearing held – VELORA v. Hazel Bite Foods LLC,U-03,44000
+EV-00148,TM-2024-421,2024-10-10,Expert report filed,Expert report filed – VELORA v. Hazel Bite Foods LLC,U-03,9000
+EV-00149,TM-2024-421,2024-11-02,Case closed,Case closed – VELORA v. Hazel Bite Foods LLC,U-03,0
+EV-00150,TM-2024-422,2024-07-05,Case opened,Case opened – CRISPINO v. Taif Nuts and Sweets,U-05,0
+EV-00151,TM-2024-422,2024-07-05,Evidence collected,Evidence collected – CRISPINO v. Taif Nuts and Sweets,U-05,12000
+EV-00152,TM-2024-422,2024-07-31,Test purchase completed,Test purchase completed – CRISPINO v. Taif Nuts and Sweets,U-05,6000
+EV-00153,TM-2024-422,2024-09-02,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Taif Nuts and Sweets,U-05,6000
+EV-00154,TM-2024-422,2024-10-27,Response received,Response received – CRISPINO v. Taif Nuts and Sweets,U-05,0
+EV-00155,TM-2024-422,2025-01-12,Statement of claim filed,Statement of claim filed – CRISPINO v. Taif Nuts and Sweets,U-05,8000
+EV-00156,TM-2024-422,2025-02-05,Hearing held,Hearing held – CRISPINO v. Taif Nuts and Sweets,U-05,36000
+EV-00157,TM-2024-422,2025-04-14,Case closed,Case closed – CRISPINO v. Taif Nuts and Sweets,U-05,0
+EV-00158,TM-2024-423,2024-07-10,Case opened,Case opened – CRISPINO v. Zahrat Al Sahra Trading,U-04,0
+EV-00159,TM-2024-423,2024-07-11,Evidence collected,Evidence collected – CRISPINO v. Zahrat Al Sahra Trading,U-04,6000
+EV-00160,TM-2024-423,2024-07-21,Test purchase completed,Test purchase completed – CRISPINO v. Zahrat Al Sahra Trading,U-04,2000
+EV-00161,TM-2024-423,2024-07-24,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Zahrat Al Sahra Trading,U-04,7000
+EV-00162,TM-2024-423,2024-07-30,Response received,Response received – CRISPINO v. Zahrat Al Sahra Trading,U-04,0
+EV-00163,TM-2024-423,2024-08-09,Statement of claim filed,Statement of claim filed – CRISPINO v. Zahrat Al Sahra Trading,U-04,41000
+EV-00164,TM-2024-423,2024-08-23,Hearing held,Hearing held – CRISPINO v. Zahrat Al Sahra Trading,U-04,26000
+EV-00165,TM-2024-423,2024-08-25,Expert report filed,Expert report filed – CRISPINO v. Zahrat Al Sahra Trading,U-04,57000
+EV-00166,TM-2024-423,2024-10-08,Case closed,Case closed – CRISPINO v. Zahrat Al Sahra Trading,U-04,0
+EV-00167,TM-2024-424,2024-07-26,Case opened,Case opened – VELORA v. Souq Al Hala Online,U-05,0
+EV-00168,TM-2024-424,2024-08-10,Evidence collected,Evidence collected – VELORA v. Souq Al Hala Online,U-05,6000
+EV-00169,TM-2024-424,2024-08-12,Test purchase completed,Test purchase completed – VELORA v. Souq Al Hala Online,U-05,10000
+EV-00170,TM-2024-424,2024-08-12,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Souq Al Hala Online,U-05,4000
+EV-00171,TM-2024-424,2024-08-15,Response received,Response received – VELORA v. Souq Al Hala Online,U-05,0
+EV-00172,TM-2024-424,2024-09-01,Statement of claim filed,Statement of claim filed – VELORA v. Souq Al Hala Online,U-05,24000
+EV-00173,TM-2024-424,2024-09-11,Hearing held,Hearing held – VELORA v. Souq Al Hala Online,U-05,56000
+EV-00174,TM-2024-424,2024-10-12,Case closed,Case closed – VELORA v. Souq Al Hala Online,U-05,0
+EV-00175,TM-2024-425,2024-08-08,Case opened,Case opened – PICCOLINI v. Al Falah Sweets Factory,U-07,0
+EV-00176,TM-2024-425,2024-08-10,Evidence collected,Evidence collected – PICCOLINI v. Al Falah Sweets Factory,U-07,4000
+EV-00177,TM-2024-425,2024-09-17,Test purchase completed,Test purchase completed – PICCOLINI v. Al Falah Sweets Factory,U-07,5000
+EV-00178,TM-2024-425,2024-11-17,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Al Falah Sweets Factory,U-07,8000
+EV-00179,TM-2024-425,2024-11-30,Response received,Response received – PICCOLINI v. Al Falah Sweets Factory,U-07,0
+EV-00180,TM-2024-425,2024-12-24,Statement of claim filed,Statement of claim filed – PICCOLINI v. Al Falah Sweets Factory,U-07,25000
+EV-00181,TM-2024-425,2025-01-02,Case closed,Case closed – PICCOLINI v. Al Falah Sweets Factory,U-07,0
+EV-00182,TM-2024-426,2024-09-16,Case opened,Case opened – VELORA v. Al Majd Foodstuff Co.,U-05,0
+EV-00183,TM-2024-426,2024-12-01,Evidence collected,Evidence collected – VELORA v. Al Majd Foodstuff Co.,U-05,4000
+EV-00184,TM-2024-426,2025-03-01,Test purchase completed,Test purchase completed – VELORA v. Al Majd Foodstuff Co.,U-05,2000
+EV-00185,TM-2024-426,2025-09-18,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Al Majd Foodstuff Co.,U-05,7000
+EV-00186,TM-2024-426,2026-09-05,Response received,Response received – VELORA v. Al Majd Foodstuff Co.,U-05,0
+EV-00187,TM-2024-427,2024-09-22,Case opened,Case opened – DOLCETTA v. Al Salmiya Foodstuff,U-05,0
+EV-00188,TM-2024-427,2024-10-10,Evidence collected,Evidence collected – DOLCETTA v. Al Salmiya Foodstuff,U-05,9000
+EV-00189,TM-2024-427,2024-12-15,Test purchase completed,Test purchase completed – DOLCETTA v. Al Salmiya Foodstuff,U-05,3000
+EV-00190,TM-2024-427,2025-03-21,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Al Salmiya Foodstuff,U-05,8000
+EV-00191,TM-2024-427,2025-08-04,Response received,Response received – DOLCETTA v. Al Salmiya Foodstuff,U-05,0
+EV-00192,TM-2024-427,2025-08-18,Statement of claim filed,Statement of claim filed – DOLCETTA v. Al Salmiya Foodstuff,U-05,49000
+EV-00193,TM-2024-427,2025-12-12,Case closed,Case closed – DOLCETTA v. Al Salmiya Foodstuff,U-05,0
+EV-00194,TM-2024-428,2024-10-19,Case opened,Case opened – VELORA v. Zahrat Al Sahra Trading,U-07,0
+EV-00195,TM-2024-428,2024-11-21,Evidence collected,Evidence collected – VELORA v. Zahrat Al Sahra Trading,U-07,8000
+EV-00196,TM-2024-428,2025-03-29,Test purchase completed,Test purchase completed – VELORA v. Zahrat Al Sahra Trading,U-07,4000
+EV-00197,TM-2024-428,2025-05-26,Case closed,Case closed – VELORA v. Zahrat Al Sahra Trading,U-07,0
+EV-00198,TM-2024-429,2024-10-25,Case opened,Case opened – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,0
+EV-00199,TM-2024-429,2024-10-26,Evidence collected,Evidence collected – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,12000
+EV-00200,TM-2024-429,2024-11-03,Test purchase completed,Test purchase completed – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,10000
+EV-00201,TM-2024-429,2024-11-08,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,3000
+EV-00202,TM-2024-429,2024-11-14,Case closed,Case closed – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,0
+EV-00203,TM-2024-430,2024-10-25,Case opened,Case opened – AURELIA v. FunKids Apps SARL,U-06,0
+EV-00204,TM-2024-430,2024-11-01,Evidence collected,Evidence collected – AURELIA v. FunKids Apps SARL,U-06,8000
+EV-00205,TM-2024-430,2024-12-07,Test purchase completed,Test purchase completed – AURELIA v. FunKids Apps SARL,U-06,7000
+EV-00206,TM-2024-430,2024-12-12,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. FunKids Apps SARL,U-06,7000
+EV-00207,TM-2024-430,2024-12-31,Response received,Response received – AURELIA v. FunKids Apps SARL,U-06,0
+EV-00208,TM-2024-430,2025-01-03,Statement of claim filed,Statement of claim filed – AURELIA v. FunKids Apps SARL,U-06,18000
+EV-00209,TM-2024-430,2025-01-08,Hearing held,Hearing held – AURELIA v. FunKids Apps SARL,U-06,27000
+EV-00210,TM-2024-430,2025-01-30,Expert report filed,Expert report filed – AURELIA v. FunKids Apps SARL,U-06,43000
+EV-00211,TM-2024-430,2025-02-15,Takedown confirmed,Takedown confirmed – AURELIA v. FunKids Apps SARL,U-06,0
+EV-00212,TM-2024-430,2025-03-14,Case closed,Case closed – AURELIA v. FunKids Apps SARL,U-06,0
+EV-00213,TM-2024-431,2024-10-26,Case opened,Case opened – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00214,TM-2024-431,2025-01-19,Evidence collected,Evidence collected – DOLCETTA v. Souq Al Hala Online,U-05,7000
+EV-00215,TM-2024-431,2025-01-27,Test purchase completed,Test purchase completed – DOLCETTA v. Souq Al Hala Online,U-05,12000
+EV-00216,TM-2024-431,2025-02-17,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Souq Al Hala Online,U-05,7000
+EV-00217,TM-2024-431,2025-04-04,Response received,Response received – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00218,TM-2024-431,2025-04-09,Statement of claim filed,Statement of claim filed – DOLCETTA v. Souq Al Hala Online,U-05,57000
+EV-00219,TM-2024-431,2025-06-14,Hearing held,Hearing held – DOLCETTA v. Souq Al Hala Online,U-05,55000
+EV-00220,TM-2024-431,2025-07-14,Expert report filed,Expert report filed – DOLCETTA v. Souq Al Hala Online,U-05,38000
+EV-00221,TM-2024-431,2025-09-12,Case closed,Case closed – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00222,TM-2024-432,2024-11-01,Case opened,Case opened – VELORA v. Bright Star Foodstuff LLC,U-07,0
+EV-00223,TM-2024-432,2025-04-01,Evidence collected,Evidence collected – VELORA v. Bright Star Foodstuff LLC,U-07,6000
+EV-00224,TM-2024-432,2025-05-29,Test purchase completed,Test purchase completed – VELORA v. Bright Star Foodstuff LLC,U-07,4000
+EV-00225,TM-2024-432,2025-09-09,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Bright Star Foodstuff LLC,U-07,6000
+EV-00226,TM-2024-432,2026-07-14,Response received,Response received – VELORA v. Bright Star Foodstuff LLC,U-07,0
+EV-00227,TM-2024-433,2024-11-18,Case opened,Case opened – VELORA v. Bosphorus Sweets Ltd,U-06,0
+EV-00228,TM-2024-433,2024-12-26,Evidence collected,Evidence collected – VELORA v. Bosphorus Sweets Ltd,U-06,10000
+EV-00229,TM-2024-433,2025-01-28,Test purchase completed,Test purchase completed – VELORA v. Bosphorus Sweets Ltd,U-06,9000
+EV-00230,TM-2024-433,2025-05-21,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Bosphorus Sweets Ltd,U-06,3000
+EV-00231,TM-2024-433,2025-06-30,Response received,Response received – VELORA v. Bosphorus Sweets Ltd,U-06,0
+EV-00232,TM-2024-433,2025-08-30,Statement of claim filed,Statement of claim filed – VELORA v. Bosphorus Sweets Ltd,U-06,56000
+EV-00233,TM-2024-433,2025-10-19,Hearing held,Hearing held – VELORA v. Bosphorus Sweets Ltd,U-06,37000
+EV-00234,TM-2024-433,2025-10-25,Expert report filed,Expert report filed – VELORA v. Bosphorus Sweets Ltd,U-06,54000
+EV-00235,TM-2024-433,2025-12-28,Case closed,Case closed – VELORA v. Bosphorus Sweets Ltd,U-06,0
+EV-00236,TM-2024-434,2024-11-21,Case opened,Case opened – AURELIA v. FunKids Apps SARL,U-06,0
+EV-00237,TM-2024-434,2024-11-21,Evidence collected,Evidence collected – AURELIA v. FunKids Apps SARL,U-06,9000
+EV-00238,TM-2024-434,2024-12-02,Test purchase completed,Test purchase completed – AURELIA v. FunKids Apps SARL,U-06,3000
+EV-00239,TM-2024-434,2024-12-15,Case closed,Case closed – AURELIA v. FunKids Apps SARL,U-06,0
+EV-00240,TM-2024-435,2024-11-29,Case opened,Case opened – VELORA v. ChocoApp Technologies,U-05,0
+EV-00241,TM-2024-435,2026-10-06,Evidence collected,Evidence collected – VELORA v. ChocoApp Technologies,U-05,12000
+EV-00242,TM-2024-436,2024-12-23,Case opened,Case opened – VELORA v. FunKids Apps SARL,U-05,0
+EV-00243,TM-2024-436,2025-01-22,Evidence collected,Evidence collected – VELORA v. FunKids Apps SARL,U-05,2000
+EV-00244,TM-2024-436,2025-01-24,Test purchase completed,Test purchase completed – VELORA v. FunKids Apps SARL,U-05,9000
+EV-00245,TM-2024-436,2025-05-05,Cease-and-desist sent,Cease-and-desist sent – VELORA v. FunKids Apps SARL,U-05,3000
+EV-00246,TM-2024-436,2025-06-21,Response received,Response received – VELORA v. FunKids Apps SARL,U-05,0
+EV-00247,TM-2024-436,2025-07-12,Statement of claim filed,Statement of claim filed – VELORA v. FunKids Apps SARL,U-05,33000
+EV-00248,TM-2024-436,2025-07-24,Case closed,Case closed – VELORA v. FunKids Apps SARL,U-05,0
+EV-00249,TM-2024-437,2024-12-24,Case opened,Case opened – VELORA v. Al Noor General Trading LLC,U-07,0
+EV-00250,TM-2024-437,2025-02-27,Evidence collected,Evidence collected – VELORA v. Al Noor General Trading LLC,U-07,12000
+EV-00251,TM-2024-437,2025-02-27,Test purchase completed,Test purchase completed – VELORA v. Al Noor General Trading LLC,U-07,5000
+EV-00252,TM-2024-437,2025-03-04,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Al Noor General Trading LLC,U-07,7000
+EV-00253,TM-2024-437,2025-03-27,Response received,Response received – VELORA v. Al Noor General Trading LLC,U-07,0
+EV-00254,TM-2024-437,2025-06-20,Statement of claim filed,Statement of claim filed – VELORA v. Al Noor General Trading LLC,U-07,27000
+EV-00255,TM-2024-437,2025-10-30,Case closed,Case closed – VELORA v. Al Noor General Trading LLC,U-07,0
+EV-00256,TM-2024-438,2024-12-31,Case opened,Case opened – AURELIA v. Taif Nuts and Sweets,U-05,0
+EV-00257,TM-2024-438,2025-01-01,Evidence collected,Evidence collected – AURELIA v. Taif Nuts and Sweets,U-05,12000
+EV-00258,TM-2024-438,2025-01-11,Test purchase completed,Test purchase completed – AURELIA v. Taif Nuts and Sweets,U-05,12000
+EV-00259,TM-2024-438,2025-02-02,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Taif Nuts and Sweets,U-05,3000
+EV-00260,TM-2024-438,2025-02-04,Response received,Response received – AURELIA v. Taif Nuts and Sweets,U-05,0
+EV-00261,TM-2024-438,2025-03-18,Case closed,Case closed – AURELIA v. Taif Nuts and Sweets,U-05,0
+EV-00262,TM-2025-401,2025-01-09,Case opened,Case opened – PICCOLINI v. Souq Al Hala Online,U-05,0
+EV-00263,TM-2025-401,2025-01-12,Evidence collected,Evidence collected – PICCOLINI v. Souq Al Hala Online,U-05,3000
+EV-00264,TM-2025-401,2025-01-18,Test purchase completed,Test purchase completed – PICCOLINI v. Souq Al Hala Online,U-05,6000
+EV-00265,TM-2025-401,2025-02-01,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Souq Al Hala Online,U-05,6000
+EV-00266,TM-2025-401,2025-02-09,Response received,Response received – PICCOLINI v. Souq Al Hala Online,U-05,0
+EV-00267,TM-2025-401,2025-02-15,Statement of claim filed,Statement of claim filed – PICCOLINI v. Souq Al Hala Online,U-05,39000
+EV-00268,TM-2025-401,2025-02-28,Hearing held,Hearing held – PICCOLINI v. Souq Al Hala Online,U-05,11000
+EV-00269,TM-2025-401,2025-03-17,Expert report filed,Expert report filed – PICCOLINI v. Souq Al Hala Online,U-05,23000
+EV-00270,TM-2025-401,2025-03-27,Judgment issued,Judgment issued – PICCOLINI v. Souq Al Hala Online,U-05,0
+EV-00271,TM-2025-401,2025-04-28,Case closed,Case closed – PICCOLINI v. Souq Al Hala Online,U-05,0
+EV-00272,TM-2025-402,2025-01-09,Case opened,Case opened – VELORA v. AppWorks Studio FZ-LLC,U-05,0
+EV-00273,TM-2025-402,2025-01-13,Evidence collected,Evidence collected – VELORA v. AppWorks Studio FZ-LLC,U-05,2000
+EV-00274,TM-2025-402,2025-03-15,Test purchase completed,Test purchase completed – VELORA v. AppWorks Studio FZ-LLC,U-05,5000
+EV-00275,TM-2025-402,2025-03-21,Cease-and-desist sent,Cease-and-desist sent – VELORA v. AppWorks Studio FZ-LLC,U-05,4000
+EV-00276,TM-2025-402,2025-03-23,Response received,Response received – VELORA v. AppWorks Studio FZ-LLC,U-05,0
+EV-00277,TM-2025-402,2025-06-04,Case closed,Case closed – VELORA v. AppWorks Studio FZ-LLC,U-05,0
+EV-00278,TM-2025-403,2025-01-12,Case opened,Case opened – AURELIA v. Bright Star Foodstuff LLC,U-04,0
+EV-00279,TM-2025-403,2025-01-19,Evidence collected,Evidence collected – AURELIA v. Bright Star Foodstuff LLC,U-04,6000
+EV-00280,TM-2025-403,2025-07-31,Test purchase completed,Test purchase completed – AURELIA v. Bright Star Foodstuff LLC,U-04,3000
+EV-00281,TM-2025-403,2025-08-19,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Bright Star Foodstuff LLC,U-04,7000
+EV-00282,TM-2025-403,2025-09-19,Response received,Response received – AURELIA v. Bright Star Foodstuff LLC,U-04,0
+EV-00283,TM-2025-403,2026-03-25,Case closed,Case closed – AURELIA v. Bright Star Foodstuff LLC,U-04,0
+EV-00284,TM-2025-404,2025-01-22,Case opened,Case opened – MINTIQ v. AppWorks Studio FZ-LLC,U-05,0
+EV-00285,TM-2025-404,2025-02-24,Evidence collected,Evidence collected – MINTIQ v. AppWorks Studio FZ-LLC,U-05,2000
+EV-00286,TM-2025-404,2025-03-20,Test purchase completed,Test purchase completed – MINTIQ v. AppWorks Studio FZ-LLC,U-05,12000
+EV-00287,TM-2025-404,2025-04-01,Cease-and-desist sent,Cease-and-desist sent – MINTIQ v. AppWorks Studio FZ-LLC,U-05,5000
+EV-00288,TM-2025-404,2025-05-04,Response received,Response received – MINTIQ v. AppWorks Studio FZ-LLC,U-05,0
+EV-00289,TM-2025-404,2025-05-07,Statement of claim filed,Statement of claim filed – MINTIQ v. AppWorks Studio FZ-LLC,U-05,50000
+EV-00290,TM-2025-404,2025-06-24,Hearing held,Hearing held – MINTIQ v. AppWorks Studio FZ-LLC,U-05,45000
+EV-00291,TM-2025-404,2025-07-08,Expert report filed,Expert report filed – MINTIQ v. AppWorks Studio FZ-LLC,U-05,18000
+EV-00292,TM-2025-404,2025-08-05,Case closed,Case closed – MINTIQ v. AppWorks Studio FZ-LLC,U-05,0
+EV-00293,TM-2025-405,2025-02-27,Case opened,Case opened – VELORA v. velora-outlet.shop (registrant),U-06,0
+EV-00294,TM-2025-405,2025-03-20,Evidence collected,Evidence collected – VELORA v. velora-outlet.shop (registrant),U-06,12000
+EV-00295,TM-2025-405,2025-04-04,Test purchase completed,Test purchase completed – VELORA v. velora-outlet.shop (registrant),U-06,11000
+EV-00296,TM-2025-405,2025-04-09,Cease-and-desist sent,Cease-and-desist sent – VELORA v. velora-outlet.shop (registrant),U-06,7000
+EV-00297,TM-2025-405,2025-04-18,Response received,Response received – VELORA v. velora-outlet.shop (registrant),U-06,0
+EV-00298,TM-2025-405,2025-07-13,Statement of claim filed,Statement of claim filed – VELORA v. velora-outlet.shop (registrant),U-06,12000
+EV-00299,TM-2025-405,2025-08-30,Case closed,Case closed – VELORA v. velora-outlet.shop (registrant),U-06,0
+EV-00300,TM-2025-406,2025-02-28,Case opened,Case opened – DOLCETTA v. Al Noor General Trading LLC,U-04,0
+EV-00301,TM-2025-406,2025-04-05,Evidence collected,Evidence collected – DOLCETTA v. Al Noor General Trading LLC,U-04,9000
+EV-00302,TM-2025-406,2025-05-21,Test purchase completed,Test purchase completed – DOLCETTA v. Al Noor General Trading LLC,U-04,3000
+EV-00303,TM-2025-406,2025-05-23,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Al Noor General Trading LLC,U-04,6000
+EV-00304,TM-2025-406,2025-06-07,Response received,Response received – DOLCETTA v. Al Noor General Trading LLC,U-04,0
+EV-00305,TM-2025-406,2025-06-10,Settlement signed,Settlement signed – DOLCETTA v. Al Noor General Trading LLC,U-04,0
+EV-00306,TM-2025-406,2025-08-04,Payment received,Payment received – DOLCETTA v. Al Noor General Trading LLC,U-04,0
+EV-00307,TM-2025-406,2025-09-19,Case closed,Case closed – DOLCETTA v. Al Noor General Trading LLC,U-04,0
+EV-00308,TM-2025-407,2025-03-10,Case opened,Case opened – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00309,TM-2025-407,2025-03-17,Evidence collected,Evidence collected – DOLCETTA v. Souq Al Hala Online,U-05,4000
+EV-00310,TM-2025-407,2025-04-27,Test purchase completed,Test purchase completed – DOLCETTA v. Souq Al Hala Online,U-05,8000
+EV-00311,TM-2025-407,2025-05-02,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Souq Al Hala Online,U-05,3000
+EV-00312,TM-2025-407,2025-05-05,Response received,Response received – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00313,TM-2025-407,2025-05-26,Statement of claim filed,Statement of claim filed – DOLCETTA v. Souq Al Hala Online,U-05,60000
+EV-00314,TM-2025-407,2025-06-01,Hearing held,Hearing held – DOLCETTA v. Souq Al Hala Online,U-05,14000
+EV-00315,TM-2025-407,2025-06-13,Expert report filed,Expert report filed – DOLCETTA v. Souq Al Hala Online,U-05,18000
+EV-00316,TM-2025-407,2025-09-17,Case closed,Case closed – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00317,TM-2025-408,2025-03-11,Case opened,Case opened – VELORA v. Doha Delights Trading,U-03,0
+EV-00318,TM-2025-408,2025-03-31,Evidence collected,Evidence collected – VELORA v. Doha Delights Trading,U-03,9000
+EV-00319,TM-2025-408,2025-06-26,Test purchase completed,Test purchase completed – VELORA v. Doha Delights Trading,U-03,11000
+EV-00320,TM-2025-408,2025-07-06,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Doha Delights Trading,U-03,3000
+EV-00321,TM-2025-408,2025-08-02,Response received,Response received – VELORA v. Doha Delights Trading,U-03,0
+EV-00322,TM-2025-408,2025-08-16,Statement of claim filed,Statement of claim filed – VELORA v. Doha Delights Trading,U-03,21000
+EV-00323,TM-2025-408,2025-12-07,Hearing held,Hearing held – VELORA v. Doha Delights Trading,U-03,39000
+EV-00324,TM-2025-408,2026-01-06,Expert report filed,Expert report filed – VELORA v. Doha Delights Trading,U-03,32000
+EV-00325,TM-2025-408,2026-02-16,Judgment issued,Judgment issued – VELORA v. Doha Delights Trading,U-03,0
+EV-00326,TM-2025-408,2026-03-31,Case closed,Case closed – VELORA v. Doha Delights Trading,U-03,0
+EV-00327,TM-2025-409,2025-03-12,Case opened,Case opened – AURELIA v. QuickCart Online Store,U-03,0
+EV-00328,TM-2025-409,2025-05-15,Evidence collected,Evidence collected – AURELIA v. QuickCart Online Store,U-03,12000
+EV-00329,TM-2025-409,2025-05-26,Test purchase completed,Test purchase completed – AURELIA v. QuickCart Online Store,U-03,11000
+EV-00330,TM-2025-409,2025-12-14,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. QuickCart Online Store,U-03,8000
+EV-00331,TM-2025-409,2026-01-01,Response received,Response received – AURELIA v. QuickCart Online Store,U-03,0
+EV-00332,TM-2025-409,2026-01-09,Statement of claim filed,Statement of claim filed – AURELIA v. QuickCart Online Store,U-03,8000
+EV-00333,TM-2025-409,2026-01-30,Hearing held,Hearing held – AURELIA v. QuickCart Online Store,U-03,14000
+EV-00334,TM-2025-409,2026-02-18,Expert report filed,Expert report filed – AURELIA v. QuickCart Online Store,U-03,35000
+EV-00335,TM-2025-409,2026-03-22,Case closed,Case closed – AURELIA v. QuickCart Online Store,U-03,0
+EV-00336,TM-2025-410,2025-03-16,Case opened,Case opened – PICCOLINI v. Souq Al Hala Online,U-05,0
+EV-00337,TM-2025-410,2025-03-18,Evidence collected,Evidence collected – PICCOLINI v. Souq Al Hala Online,U-05,10000
+EV-00338,TM-2025-410,2025-03-20,Test purchase completed,Test purchase completed – PICCOLINI v. Souq Al Hala Online,U-05,12000
+EV-00339,TM-2025-410,2025-03-25,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Souq Al Hala Online,U-05,8000
+EV-00340,TM-2025-410,2025-04-05,Case closed,Case closed – PICCOLINI v. Souq Al Hala Online,U-05,0
+EV-00341,TM-2025-411,2025-04-22,Case opened,Case opened – VELORA v. QuickCart Online Store,U-07,0
+EV-00342,TM-2025-411,2025-06-26,Evidence collected,Evidence collected – VELORA v. QuickCart Online Store,U-07,10000
+EV-00343,TM-2025-411,2025-07-10,Test purchase completed,Test purchase completed – VELORA v. QuickCart Online Store,U-07,8000
+EV-00344,TM-2025-411,2025-08-26,Cease-and-desist sent,Cease-and-desist sent – VELORA v. QuickCart Online Store,U-07,4000
+EV-00345,TM-2025-411,2025-12-02,Response received,Response received – VELORA v. QuickCart Online Store,U-07,0
+EV-00346,TM-2025-411,2026-03-12,Case closed,Case closed – VELORA v. QuickCart Online Store,U-07,0
+EV-00347,TM-2025-412,2025-04-29,Case opened,Case opened – VELORA v. velora-outlet.shop (registrant),U-04,0
+EV-00348,TM-2025-412,2025-05-05,Evidence collected,Evidence collected – VELORA v. velora-outlet.shop (registrant),U-04,4000
+EV-00349,TM-2025-412,2025-05-08,Test purchase completed,Test purchase completed – VELORA v. velora-outlet.shop (registrant),U-04,6000
+EV-00350,TM-2025-412,2025-05-30,Cease-and-desist sent,Cease-and-desist sent – VELORA v. velora-outlet.shop (registrant),U-04,9000
+EV-00351,TM-2025-412,2025-06-14,Response received,Response received – VELORA v. velora-outlet.shop (registrant),U-04,0
+EV-00352,TM-2025-412,2025-07-07,Statement of claim filed,Statement of claim filed – VELORA v. velora-outlet.shop (registrant),U-04,58000
+EV-00353,TM-2025-412,2025-08-06,Hearing held,Hearing held – VELORA v. velora-outlet.shop (registrant),U-04,10000
+EV-00354,TM-2025-412,2025-08-07,Expert report filed,Expert report filed – VELORA v. velora-outlet.shop (registrant),U-04,15000
+EV-00355,TM-2025-412,2025-08-08,Settlement signed,Settlement signed – VELORA v. velora-outlet.shop (registrant),U-04,0
+EV-00356,TM-2025-412,2025-08-19,Case closed,Case closed – VELORA v. velora-outlet.shop (registrant),U-04,0
+EV-00357,TM-2025-413,2025-05-04,Case opened,Case opened – VELORA v. velora-outlet.shop (registrant),U-07,0
+EV-00358,TM-2025-413,2025-05-29,Evidence collected,Evidence collected – VELORA v. velora-outlet.shop (registrant),U-07,9000
+EV-00359,TM-2025-413,2025-06-22,Test purchase completed,Test purchase completed – VELORA v. velora-outlet.shop (registrant),U-07,12000
+EV-00360,TM-2025-413,2025-11-11,Case closed,Case closed – VELORA v. velora-outlet.shop (registrant),U-07,0
+EV-00361,TM-2025-414,2025-05-07,Case opened,Case opened – AURELIA v. Al Noor General Trading LLC,U-07,0
+EV-00362,TM-2025-414,2025-06-09,Evidence collected,Evidence collected – AURELIA v. Al Noor General Trading LLC,U-07,10000
+EV-00363,TM-2025-414,2025-07-04,Test purchase completed,Test purchase completed – AURELIA v. Al Noor General Trading LLC,U-07,2000
+EV-00364,TM-2025-414,2025-07-05,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Al Noor General Trading LLC,U-07,3000
+EV-00365,TM-2025-414,2025-07-13,Response received,Response received – AURELIA v. Al Noor General Trading LLC,U-07,0
+EV-00366,TM-2025-414,2025-08-13,Statement of claim filed,Statement of claim filed – AURELIA v. Al Noor General Trading LLC,U-07,28000
+EV-00367,TM-2025-414,2025-10-24,Hearing held,Hearing held – AURELIA v. Al Noor General Trading LLC,U-07,53000
+EV-00368,TM-2025-414,2025-11-01,Expert report filed,Expert report filed – AURELIA v. Al Noor General Trading LLC,U-07,12000
+EV-00369,TM-2025-414,2025-11-25,Case closed,Case closed – AURELIA v. Al Noor General Trading LLC,U-07,0
+EV-00370,TM-2025-415,2025-05-14,Case opened,Case opened – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00371,TM-2025-415,2025-05-28,Evidence collected,Evidence collected – DOLCETTA v. Amman Confectionery Co.,U-06,3000
+EV-00372,TM-2025-415,2025-06-18,Test purchase completed,Test purchase completed – DOLCETTA v. Amman Confectionery Co.,U-06,6000
+EV-00373,TM-2025-415,2025-07-11,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Amman Confectionery Co.,U-06,6000
+EV-00374,TM-2025-415,2025-10-11,Response received,Response received – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00375,TM-2025-415,2025-10-26,Statement of claim filed,Statement of claim filed – DOLCETTA v. Amman Confectionery Co.,U-06,39000
+EV-00376,TM-2025-415,2025-11-07,Hearing held,Hearing held – DOLCETTA v. Amman Confectionery Co.,U-06,20000
+EV-00377,TM-2025-415,2025-12-26,Expert report filed,Expert report filed – DOLCETTA v. Amman Confectionery Co.,U-06,24000
+EV-00378,TM-2025-415,2026-01-31,Judgment issued,Judgment issued – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00379,TM-2025-415,2026-04-16,Case closed,Case closed – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00380,TM-2025-416,2025-05-24,Case opened,Case opened – MINTIQ v. DealHub Marketplace Seller 4471,U-04,0
+EV-00381,TM-2025-416,2025-05-30,Evidence collected,Evidence collected – MINTIQ v. DealHub Marketplace Seller 4471,U-04,10000
+EV-00382,TM-2025-416,2025-06-02,Test purchase completed,Test purchase completed – MINTIQ v. DealHub Marketplace Seller 4471,U-04,3000
+EV-00383,TM-2025-416,2025-06-06,Cease-and-desist sent,Cease-and-desist sent – MINTIQ v. DealHub Marketplace Seller 4471,U-04,8000
+EV-00384,TM-2025-416,2025-06-08,Response received,Response received – MINTIQ v. DealHub Marketplace Seller 4471,U-04,0
+EV-00385,TM-2025-416,2025-06-09,Statement of claim filed,Statement of claim filed – MINTIQ v. DealHub Marketplace Seller 4471,U-04,22000
+EV-00386,TM-2025-416,2025-06-09,Hearing held,Hearing held – MINTIQ v. DealHub Marketplace Seller 4471,U-04,28000
+EV-00387,TM-2025-416,2025-06-12,Expert report filed,Expert report filed – MINTIQ v. DealHub Marketplace Seller 4471,U-04,27000
+EV-00388,TM-2025-416,2025-06-13,Case closed,Case closed – MINTIQ v. DealHub Marketplace Seller 4471,U-04,0
+EV-00389,TM-2025-417,2025-05-31,Case opened,Case opened – PICCOLINI v. Bosphorus Sweets Ltd,U-06,0
+EV-00390,TM-2025-417,2025-07-21,Evidence collected,Evidence collected – PICCOLINI v. Bosphorus Sweets Ltd,U-06,4000
+EV-00391,TM-2025-417,2025-09-04,Test purchase completed,Test purchase completed – PICCOLINI v. Bosphorus Sweets Ltd,U-06,10000
+EV-00392,TM-2025-417,2025-10-30,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Bosphorus Sweets Ltd,U-06,9000
+EV-00393,TM-2025-417,2025-12-11,Response received,Response received – PICCOLINI v. Bosphorus Sweets Ltd,U-06,0
+EV-00394,TM-2025-417,2025-12-29,Statement of claim filed,Statement of claim filed – PICCOLINI v. Bosphorus Sweets Ltd,U-06,41000
+EV-00395,TM-2025-417,2026-01-02,Hearing held,Hearing held – PICCOLINI v. Bosphorus Sweets Ltd,U-06,46000
+EV-00396,TM-2025-417,2026-01-07,Expert report filed,Expert report filed – PICCOLINI v. Bosphorus Sweets Ltd,U-06,56000
+EV-00397,TM-2025-417,2026-02-20,Case closed,Case closed – PICCOLINI v. Bosphorus Sweets Ltd,U-06,0
+EV-00398,TM-2025-418,2025-06-16,Case opened,Case opened – AURELIA v. Pixel Fun Games Ltd,U-07,0
+EV-00399,TM-2025-418,2025-06-23,Evidence collected,Evidence collected – AURELIA v. Pixel Fun Games Ltd,U-07,4000
+EV-00400,TM-2025-418,2025-08-28,Test purchase completed,Test purchase completed – AURELIA v. Pixel Fun Games Ltd,U-07,4000
+EV-00401,TM-2025-418,2025-11-15,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Pixel Fun Games Ltd,U-07,5000
+EV-00402,TM-2025-418,2025-12-20,Response received,Response received – AURELIA v. Pixel Fun Games Ltd,U-07,0
+EV-00403,TM-2025-418,2026-02-18,Statement of claim filed,Statement of claim filed – AURELIA v. Pixel Fun Games Ltd,U-07,56000
+EV-00404,TM-2025-418,2026-03-23,Hearing held,Hearing held – AURELIA v. Pixel Fun Games Ltd,U-07,24000
+EV-00405,TM-2025-418,2026-04-26,Expert report filed,Expert report filed – AURELIA v. Pixel Fun Games Ltd,U-07,56000
+EV-00406,TM-2025-418,2026-06-06,Case closed,Case closed – AURELIA v. Pixel Fun Games Ltd,U-07,0
+EV-00407,TM-2025-419,2025-06-18,Case opened,Case opened – VELORA v. Bright Star Foodstuff LLC,U-03,0
+EV-00408,TM-2025-419,2025-06-20,Evidence collected,Evidence collected – VELORA v. Bright Star Foodstuff LLC,U-03,2000
+EV-00409,TM-2025-419,2025-07-25,Test purchase completed,Test purchase completed – VELORA v. Bright Star Foodstuff LLC,U-03,7000
+EV-00410,TM-2025-419,2025-08-08,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Bright Star Foodstuff LLC,U-03,6000
+EV-00411,TM-2025-419,2025-08-10,Response received,Response received – VELORA v. Bright Star Foodstuff LLC,U-03,0
+EV-00412,TM-2025-419,2025-09-06,Settlement signed,Settlement signed – VELORA v. Bright Star Foodstuff LLC,U-03,0
+EV-00413,TM-2025-419,2025-09-26,Payment received,Payment received – VELORA v. Bright Star Foodstuff LLC,U-03,0
+EV-00414,TM-2025-419,2025-10-04,Case closed,Case closed – VELORA v. Bright Star Foodstuff LLC,U-03,0
+EV-00415,TM-2025-420,2025-06-19,Case opened,Case opened – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00416,TM-2025-420,2025-08-22,Evidence collected,Evidence collected – DOLCETTA v. Amman Confectionery Co.,U-06,9000
+EV-00417,TM-2025-420,2025-09-05,Test purchase completed,Test purchase completed – DOLCETTA v. Amman Confectionery Co.,U-06,2000
+EV-00418,TM-2025-420,2025-10-04,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Amman Confectionery Co.,U-06,4000
+EV-00419,TM-2025-420,2025-10-17,Response received,Response received – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00420,TM-2025-420,2025-12-05,Statement of claim filed,Statement of claim filed – DOLCETTA v. Amman Confectionery Co.,U-06,15000
+EV-00421,TM-2025-420,2025-12-10,Hearing held,Hearing held – DOLCETTA v. Amman Confectionery Co.,U-06,59000
+EV-00422,TM-2025-420,2025-12-22,Expert report filed,Expert report filed – DOLCETTA v. Amman Confectionery Co.,U-06,45000
+EV-00423,TM-2025-420,2025-12-28,Judgment issued,Judgment issued – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00424,TM-2025-420,2026-03-15,Case closed,Case closed – DOLCETTA v. Amman Confectionery Co.,U-06,0
+EV-00425,TM-2025-421,2025-06-24,Case opened,Case opened – DOLCETTA v. Al Noor General Trading LLC,U-07,0
+EV-00426,TM-2025-421,2025-07-06,Evidence collected,Evidence collected – DOLCETTA v. Al Noor General Trading LLC,U-07,5000
+EV-00427,TM-2025-421,2025-08-07,Test purchase completed,Test purchase completed – DOLCETTA v. Al Noor General Trading LLC,U-07,7000
+EV-00428,TM-2025-421,2025-08-23,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Al Noor General Trading LLC,U-07,6000
+EV-00429,TM-2025-421,2025-09-03,Response received,Response received – DOLCETTA v. Al Noor General Trading LLC,U-07,0
+EV-00430,TM-2025-421,2025-09-07,Takedown confirmed,Takedown confirmed – DOLCETTA v. Al Noor General Trading LLC,U-07,0
+EV-00431,TM-2025-421,2025-11-06,Case closed,Case closed – DOLCETTA v. Al Noor General Trading LLC,U-07,0
+EV-00432,TM-2025-422,2025-06-25,Case opened,Case opened – CRISPINO v. Al Majd Foodstuff Co.,U-05,0
+EV-00433,TM-2025-422,2025-07-22,Evidence collected,Evidence collected – CRISPINO v. Al Majd Foodstuff Co.,U-05,9000
+EV-00434,TM-2025-422,2025-08-16,Test purchase completed,Test purchase completed – CRISPINO v. Al Majd Foodstuff Co.,U-05,2000
+EV-00435,TM-2025-422,2026-05-25,Case closed,Case closed – CRISPINO v. Al Majd Foodstuff Co.,U-05,0
+EV-00436,TM-2025-423,2025-07-02,Case opened,Case opened – PICCOLINI v. QuickCart Online Store,U-07,0
+EV-00437,TM-2025-423,2025-08-11,Evidence collected,Evidence collected – PICCOLINI v. QuickCart Online Store,U-07,8000
+EV-00438,TM-2025-423,2026-02-10,Test purchase completed,Test purchase completed – PICCOLINI v. QuickCart Online Store,U-07,7000
+EV-00439,TM-2025-423,2026-02-24,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. QuickCart Online Store,U-07,8000
+EV-00440,TM-2025-423,2026-04-28,Response received,Response received – PICCOLINI v. QuickCart Online Store,U-07,0
+EV-00441,TM-2025-423,2026-05-29,Statement of claim filed,Statement of claim filed – PICCOLINI v. QuickCart Online Store,U-07,32000
+EV-00442,TM-2025-424,2025-07-06,Case opened,Case opened – CRISPINO v. Al Salmiya Foodstuff,U-06,0
+EV-00443,TM-2025-424,2025-12-10,Evidence collected,Evidence collected – CRISPINO v. Al Salmiya Foodstuff,U-06,8000
+EV-00444,TM-2025-424,2026-01-13,Test purchase completed,Test purchase completed – CRISPINO v. Al Salmiya Foodstuff,U-06,11000
+EV-00445,TM-2025-424,2026-01-28,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Al Salmiya Foodstuff,U-06,8000
+EV-00446,TM-2025-424,2026-04-23,Case closed,Case closed – CRISPINO v. Al Salmiya Foodstuff,U-06,0
+EV-00447,TM-2025-425,2025-07-14,Case opened,Case opened – PICCOLINI v. Al Falah Sweets Factory,U-03,0
+EV-00448,TM-2025-425,2025-08-19,Evidence collected,Evidence collected – PICCOLINI v. Al Falah Sweets Factory,U-03,4000
+EV-00449,TM-2025-425,2025-09-06,Test purchase completed,Test purchase completed – PICCOLINI v. Al Falah Sweets Factory,U-03,9000
+EV-00450,TM-2025-425,2025-10-23,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Al Falah Sweets Factory,U-03,7000
+EV-00451,TM-2025-425,2025-11-25,Response received,Response received – PICCOLINI v. Al Falah Sweets Factory,U-03,0
+EV-00452,TM-2025-425,2025-12-31,Statement of claim filed,Statement of claim filed – PICCOLINI v. Al Falah Sweets Factory,U-03,40000
+EV-00453,TM-2025-425,2026-01-14,Hearing held,Hearing held – PICCOLINI v. Al Falah Sweets Factory,U-03,28000
+EV-00454,TM-2025-425,2026-02-21,Expert report filed,Expert report filed – PICCOLINI v. Al Falah Sweets Factory,U-03,55000
+EV-00455,TM-2025-425,2026-04-09,Judgment issued,Judgment issued – PICCOLINI v. Al Falah Sweets Factory,U-03,0
+EV-00456,TM-2025-425,2026-06-01,Case closed,Case closed – PICCOLINI v. Al Falah Sweets Factory,U-03,0
+EV-00457,TM-2025-426,2025-07-14,Case opened,Case opened – VELORA v. Pixel Fun Games Ltd,U-07,0
+EV-00458,TM-2025-426,2025-08-30,Evidence collected,Evidence collected – VELORA v. Pixel Fun Games Ltd,U-07,7000
+EV-00459,TM-2025-426,2025-09-14,Test purchase completed,Test purchase completed – VELORA v. Pixel Fun Games Ltd,U-07,7000
+EV-00460,TM-2025-426,2025-10-23,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Pixel Fun Games Ltd,U-07,9000
+EV-00461,TM-2025-426,2025-12-07,Response received,Response received – VELORA v. Pixel Fun Games Ltd,U-07,0
+EV-00462,TM-2025-426,2025-12-27,Case closed,Case closed – VELORA v. Pixel Fun Games Ltd,U-07,0
+EV-00463,TM-2025-427,2025-07-15,Case opened,Case opened – DOLCETTA v. Golden Taste Distribution FZE,U-04,0
+EV-00464,TM-2025-427,2025-08-22,Evidence collected,Evidence collected – DOLCETTA v. Golden Taste Distribution FZE,U-04,7000
+EV-00465,TM-2025-427,2025-08-27,Test purchase completed,Test purchase completed – DOLCETTA v. Golden Taste Distribution FZE,U-04,3000
+EV-00466,TM-2025-427,2025-09-05,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Golden Taste Distribution FZE,U-04,5000
+EV-00467,TM-2025-427,2025-09-20,Response received,Response received – DOLCETTA v. Golden Taste Distribution FZE,U-04,0
+EV-00468,TM-2025-427,2025-10-14,Statement of claim filed,Statement of claim filed – DOLCETTA v. Golden Taste Distribution FZE,U-04,52000
+EV-00469,TM-2025-427,2025-10-19,Hearing held,Hearing held – DOLCETTA v. Golden Taste Distribution FZE,U-04,20000
+EV-00470,TM-2025-427,2025-11-03,Expert report filed,Expert report filed – DOLCETTA v. Golden Taste Distribution FZE,U-04,24000
+EV-00471,TM-2025-427,2025-12-12,Judgment issued,Judgment issued – DOLCETTA v. Golden Taste Distribution FZE,U-04,0
+EV-00472,TM-2025-427,2026-01-30,Case closed,Case closed – DOLCETTA v. Golden Taste Distribution FZE,U-04,0
+EV-00473,TM-2025-428,2025-07-20,Case opened,Case opened – AURELIA v. Sohar Foods LLC,U-06,0
+EV-00474,TM-2025-428,2026-04-21,Evidence collected,Evidence collected – AURELIA v. Sohar Foods LLC,U-06,11000
+EV-00475,TM-2025-428,2026-07-20,Test purchase completed,Test purchase completed – AURELIA v. Sohar Foods LLC,U-06,2000
+EV-00476,TM-2025-428,2026-08-05,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Sohar Foods LLC,U-06,3000
+EV-00477,TM-2025-429,2025-07-21,Case opened,Case opened – CRISPINO v. Delhi Confectioners Pvt Ltd,U-06,0
+EV-00478,TM-2025-429,2025-09-10,Evidence collected,Evidence collected – CRISPINO v. Delhi Confectioners Pvt Ltd,U-06,4000
+EV-00479,TM-2025-429,2026-02-10,Test purchase completed,Test purchase completed – CRISPINO v. Delhi Confectioners Pvt Ltd,U-06,8000
+EV-00480,TM-2025-429,2026-03-19,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Delhi Confectioners Pvt Ltd,U-06,6000
+EV-00481,TM-2025-429,2026-06-21,Response received,Response received – CRISPINO v. Delhi Confectioners Pvt Ltd,U-06,0
+EV-00482,TM-2025-429,2026-10-03,Statement of claim filed,Statement of claim filed – CRISPINO v. Delhi Confectioners Pvt Ltd,U-06,50000
+EV-00483,TM-2025-430,2025-08-14,Case opened,Case opened – CRISPINO v. Zahrat Al Sahra Trading,U-04,0
+EV-00484,TM-2025-430,2025-08-29,Evidence collected,Evidence collected – CRISPINO v. Zahrat Al Sahra Trading,U-04,11000
+EV-00485,TM-2025-430,2025-09-10,Test purchase completed,Test purchase completed – CRISPINO v. Zahrat Al Sahra Trading,U-04,4000
+EV-00486,TM-2025-430,2025-10-13,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Zahrat Al Sahra Trading,U-04,3000
+EV-00487,TM-2025-430,2025-11-26,Case closed,Case closed – CRISPINO v. Zahrat Al Sahra Trading,U-04,0
+EV-00488,TM-2025-431,2025-08-17,Case opened,Case opened – VELORA v. Amman Confectionery Co.,U-06,0
+EV-00489,TM-2025-431,2025-08-31,Evidence collected,Evidence collected – VELORA v. Amman Confectionery Co.,U-06,11000
+EV-00490,TM-2025-431,2025-12-11,Test purchase completed,Test purchase completed – VELORA v. Amman Confectionery Co.,U-06,7000
+EV-00491,TM-2025-431,2026-05-10,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Amman Confectionery Co.,U-06,3000
+EV-00492,TM-2025-431,2026-10-21,Case closed,Case closed – VELORA v. Amman Confectionery Co.,U-06,0
+EV-00493,TM-2025-432,2025-08-20,Case opened,Case opened – VELORA v. Emirates Candy House,U-07,0
+EV-00494,TM-2025-432,2025-10-19,Evidence collected,Evidence collected – VELORA v. Emirates Candy House,U-07,7000
+EV-00495,TM-2025-432,2025-10-31,Test purchase completed,Test purchase completed – VELORA v. Emirates Candy House,U-07,2000
+EV-00496,TM-2025-432,2025-12-12,Case closed,Case closed – VELORA v. Emirates Candy House,U-07,0
+EV-00497,TM-2025-433,2025-09-18,Case opened,Case opened – AURELIA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00498,TM-2025-433,2025-09-30,Evidence collected,Evidence collected – AURELIA v. DealHub Marketplace Seller 4471,U-04,8000
+EV-00499,TM-2025-433,2025-10-13,Test purchase completed,Test purchase completed – AURELIA v. DealHub Marketplace Seller 4471,U-04,6000
+EV-00500,TM-2025-433,2025-10-17,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. DealHub Marketplace Seller 4471,U-04,9000
+EV-00501,TM-2025-433,2025-10-25,Response received,Response received – AURELIA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00502,TM-2025-433,2025-11-18,Statement of claim filed,Statement of claim filed – AURELIA v. DealHub Marketplace Seller 4471,U-04,29000
+EV-00503,TM-2025-433,2025-11-18,Hearing held,Hearing held – AURELIA v. DealHub Marketplace Seller 4471,U-04,27000
+EV-00504,TM-2025-433,2025-11-28,Expert report filed,Expert report filed – AURELIA v. DealHub Marketplace Seller 4471,U-04,18000
+EV-00505,TM-2025-433,2025-12-10,Takedown confirmed,Takedown confirmed – AURELIA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00506,TM-2025-433,2025-12-14,Case closed,Case closed – AURELIA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00507,TM-2025-434,2025-09-19,Case opened,Case opened – VELORA v. FunKids Apps SARL,U-06,0
+EV-00508,TM-2025-434,2025-10-13,Evidence collected,Evidence collected – VELORA v. FunKids Apps SARL,U-06,5000
+EV-00509,TM-2025-434,2025-10-15,Test purchase completed,Test purchase completed – VELORA v. FunKids Apps SARL,U-06,11000
+EV-00510,TM-2025-434,2025-11-22,Case closed,Case closed – VELORA v. FunKids Apps SARL,U-06,0
+EV-00511,TM-2025-435,2025-09-24,Case opened,Case opened – VELORA v. Taif Nuts and Sweets,U-05,0
+EV-00512,TM-2025-435,2025-11-07,Evidence collected,Evidence collected – VELORA v. Taif Nuts and Sweets,U-05,2000
+EV-00513,TM-2025-435,2026-06-06,Test purchase completed,Test purchase completed – VELORA v. Taif Nuts and Sweets,U-05,5000
+EV-00514,TM-2025-435,2026-08-08,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Taif Nuts and Sweets,U-05,8000
+EV-00515,TM-2025-436,2025-10-02,Case opened,Case opened – AURELIA v. Bosphorus Sweets Ltd,U-06,0
+EV-00516,TM-2025-436,2025-10-02,Evidence collected,Evidence collected – AURELIA v. Bosphorus Sweets Ltd,U-06,8000
+EV-00517,TM-2025-436,2025-12-13,Test purchase completed,Test purchase completed – AURELIA v. Bosphorus Sweets Ltd,U-06,11000
+EV-00518,TM-2025-436,2025-12-15,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Bosphorus Sweets Ltd,U-06,8000
+EV-00519,TM-2025-436,2026-01-13,Response received,Response received – AURELIA v. Bosphorus Sweets Ltd,U-06,0
+EV-00520,TM-2025-436,2026-02-20,Statement of claim filed,Statement of claim filed – AURELIA v. Bosphorus Sweets Ltd,U-06,13000
+EV-00521,TM-2025-436,2026-03-26,Hearing held,Hearing held – AURELIA v. Bosphorus Sweets Ltd,U-06,19000
+EV-00522,TM-2025-436,2026-05-11,Case closed,Case closed – AURELIA v. Bosphorus Sweets Ltd,U-06,0
+EV-00523,TM-2025-437,2025-10-09,Case opened,Case opened – VELORA v. Souq Al Hala Online,U-05,0
+EV-00524,TM-2025-437,2025-10-20,Evidence collected,Evidence collected – VELORA v. Souq Al Hala Online,U-05,5000
+EV-00525,TM-2025-437,2025-11-06,Test purchase completed,Test purchase completed – VELORA v. Souq Al Hala Online,U-05,5000
+EV-00526,TM-2025-437,2026-01-02,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Souq Al Hala Online,U-05,7000
+EV-00527,TM-2025-437,2026-02-15,Case closed,Case closed – VELORA v. Souq Al Hala Online,U-05,0
+EV-00528,TM-2025-438,2025-10-10,Case opened,Case opened – VELORA v. Nutty Delight General Trading,U-04,0
+EV-00529,TM-2025-438,2025-10-13,Evidence collected,Evidence collected – VELORA v. Nutty Delight General Trading,U-04,6000
+EV-00530,TM-2025-438,2025-10-21,Test purchase completed,Test purchase completed – VELORA v. Nutty Delight General Trading,U-04,6000
+EV-00531,TM-2025-438,2025-10-21,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Nutty Delight General Trading,U-04,4000
+EV-00532,TM-2025-438,2025-10-30,Case closed,Case closed – VELORA v. Nutty Delight General Trading,U-04,0
+EV-00533,TM-2025-439,2025-10-13,Case opened,Case opened – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00534,TM-2025-439,2025-11-15,Evidence collected,Evidence collected – DOLCETTA v. Souq Al Hala Online,U-05,4000
+EV-00535,TM-2025-439,2025-11-21,Test purchase completed,Test purchase completed – DOLCETTA v. Souq Al Hala Online,U-05,4000
+EV-00536,TM-2025-439,2026-01-09,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Souq Al Hala Online,U-05,9000
+EV-00537,TM-2025-439,2026-03-15,Response received,Response received – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00538,TM-2025-439,2026-04-20,Statement of claim filed,Statement of claim filed – DOLCETTA v. Souq Al Hala Online,U-05,8000
+EV-00539,TM-2025-439,2026-06-08,Hearing held,Hearing held – DOLCETTA v. Souq Al Hala Online,U-05,50000
+EV-00540,TM-2025-439,2026-07-10,Case closed,Case closed – DOLCETTA v. Souq Al Hala Online,U-05,0
+EV-00541,TM-2025-440,2025-10-31,Case opened,Case opened – CRISPINO v. Pixel Fun Games Ltd,U-06,0
+EV-00542,TM-2025-440,2025-11-13,Evidence collected,Evidence collected – CRISPINO v. Pixel Fun Games Ltd,U-06,2000
+EV-00543,TM-2025-440,2025-12-05,Test purchase completed,Test purchase completed – CRISPINO v. Pixel Fun Games Ltd,U-06,2000
+EV-00544,TM-2025-440,2026-06-10,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Pixel Fun Games Ltd,U-06,9000
+EV-00545,TM-2025-440,2026-08-01,Response received,Response received – CRISPINO v. Pixel Fun Games Ltd,U-06,0
+EV-00546,TM-2025-441,2025-11-11,Case opened,Case opened – CRISPINO v. Doha Delights Trading,U-06,0
+EV-00547,TM-2025-441,2025-12-15,Evidence collected,Evidence collected – CRISPINO v. Doha Delights Trading,U-06,9000
+EV-00548,TM-2025-441,2026-01-24,Test purchase completed,Test purchase completed – CRISPINO v. Doha Delights Trading,U-06,10000
+EV-00549,TM-2025-441,2026-02-07,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Doha Delights Trading,U-06,7000
+EV-00550,TM-2025-441,2026-02-18,Response received,Response received – CRISPINO v. Doha Delights Trading,U-06,0
+EV-00551,TM-2025-441,2026-08-02,Case closed,Case closed – CRISPINO v. Doha Delights Trading,U-06,0
+EV-00552,TM-2025-442,2025-11-11,Case opened,Case opened – AURELIA v. Jeddah Candy Imports,U-05,0
+EV-00553,TM-2025-442,2026-10-11,Evidence collected,Evidence collected – AURELIA v. Jeddah Candy Imports,U-05,3000
+EV-00554,TM-2025-443,2025-11-12,Case opened,Case opened – DOLCETTA v. Riyadh Sweets Trading Est.,U-05,0
+EV-00555,TM-2025-443,2025-11-23,Evidence collected,Evidence collected – DOLCETTA v. Riyadh Sweets Trading Est.,U-05,12000
+EV-00556,TM-2025-443,2025-11-28,Test purchase completed,Test purchase completed – DOLCETTA v. Riyadh Sweets Trading Est.,U-05,6000
+EV-00557,TM-2025-443,2026-06-27,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Riyadh Sweets Trading Est.,U-05,7000
+EV-00558,TM-2025-443,2026-10-03,Response received,Response received – DOLCETTA v. Riyadh Sweets Trading Est.,U-05,0
+EV-00559,TM-2025-444,2025-11-15,Case opened,Case opened – VELORA v. velora-outlet.shop (registrant),U-07,0
+EV-00560,TM-2025-444,2025-11-16,Evidence collected,Evidence collected – VELORA v. velora-outlet.shop (registrant),U-07,6000
+EV-00561,TM-2025-444,2026-01-06,Test purchase completed,Test purchase completed – VELORA v. velora-outlet.shop (registrant),U-07,6000
+EV-00562,TM-2025-444,2026-01-17,Cease-and-desist sent,Cease-and-desist sent – VELORA v. velora-outlet.shop (registrant),U-07,7000
+EV-00563,TM-2025-444,2026-01-25,Response received,Response received – VELORA v. velora-outlet.shop (registrant),U-07,0
+EV-00564,TM-2025-444,2026-04-23,Case closed,Case closed – VELORA v. velora-outlet.shop (registrant),U-07,0
+EV-00565,TM-2025-445,2025-11-20,Case opened,Case opened – VELORA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00566,TM-2025-445,2025-12-24,Evidence collected,Evidence collected – VELORA v. DealHub Marketplace Seller 4471,U-04,7000
+EV-00567,TM-2025-445,2026-04-18,Test purchase completed,Test purchase completed – VELORA v. DealHub Marketplace Seller 4471,U-04,2000
+EV-00568,TM-2025-445,2026-05-30,Cease-and-desist sent,Cease-and-desist sent – VELORA v. DealHub Marketplace Seller 4471,U-04,6000
+EV-00569,TM-2025-445,2026-09-19,Case closed,Case closed – VELORA v. DealHub Marketplace Seller 4471,U-04,0
+EV-00570,TM-2025-446,2025-11-20,Case opened,Case opened – AURELIA v. Mumbai Sweet Traders,U-03,0
+EV-00571,TM-2025-446,2026-01-12,Evidence collected,Evidence collected – AURELIA v. Mumbai Sweet Traders,U-03,4000
+EV-00572,TM-2025-446,2026-03-04,Test purchase completed,Test purchase completed – AURELIA v. Mumbai Sweet Traders,U-03,5000
+EV-00573,TM-2025-446,2026-05-30,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Mumbai Sweet Traders,U-03,6000
+EV-00574,TM-2025-446,2026-06-29,Response received,Response received – AURELIA v. Mumbai Sweet Traders,U-03,0
+EV-00575,TM-2025-447,2025-11-21,Case opened,Case opened – PICCOLINI v. Nile Sweets Company,U-06,0
+EV-00576,TM-2025-447,2025-11-22,Evidence collected,Evidence collected – PICCOLINI v. Nile Sweets Company,U-06,8000
+EV-00577,TM-2025-447,2025-11-22,Test purchase completed,Test purchase completed – PICCOLINI v. Nile Sweets Company,U-06,10000
+EV-00578,TM-2025-447,2025-11-24,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Nile Sweets Company,U-06,8000
+EV-00579,TM-2025-447,2025-12-03,Response received,Response received – PICCOLINI v. Nile Sweets Company,U-06,0
+EV-00580,TM-2025-447,2025-12-09,Statement of claim filed,Statement of claim filed – PICCOLINI v. Nile Sweets Company,U-06,13000
+EV-00581,TM-2025-447,2025-12-11,Case closed,Case closed – PICCOLINI v. Nile Sweets Company,U-06,0
+EV-00582,TM-2025-448,2025-11-30,Case opened,Case opened – DOLCETTA v. Al Noor General Trading LLC,U-04,0
+EV-00583,TM-2025-448,2026-10-30,Evidence collected,Evidence collected – DOLCETTA v. Al Noor General Trading LLC,U-04,10000
+EV-00584,TM-2026-401,2026-01-13,Case opened,Case opened – VELORA v. Dammam Sweet Corner,U-05,0
+EV-00585,TM-2026-401,2026-02-03,Evidence collected,Evidence collected – VELORA v. Dammam Sweet Corner,U-05,3000
+EV-00586,TM-2026-401,2026-02-10,Test purchase completed,Test purchase completed – VELORA v. Dammam Sweet Corner,U-05,5000
+EV-00587,TM-2026-401,2026-03-26,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Dammam Sweet Corner,U-05,8000
+EV-00588,TM-2026-401,2026-04-02,Response received,Response received – VELORA v. Dammam Sweet Corner,U-05,0
+EV-00589,TM-2026-401,2026-05-27,Statement of claim filed,Statement of claim filed – VELORA v. Dammam Sweet Corner,U-05,26000
+EV-00590,TM-2026-401,2026-10-16,Case closed,Case closed – VELORA v. Dammam Sweet Corner,U-05,0
+EV-00591,TM-2026-402,2026-01-27,Case opened,Case opened – VELORA v. ChocoApp Technologies,U-03,0
+EV-00592,TM-2026-402,2026-04-13,Evidence collected,Evidence collected – VELORA v. ChocoApp Technologies,U-03,10000
+EV-00593,TM-2026-402,2026-09-05,Test purchase completed,Test purchase completed – VELORA v. ChocoApp Technologies,U-03,3000
+EV-00594,TM-2026-402,2026-09-20,Cease-and-desist sent,Cease-and-desist sent – VELORA v. ChocoApp Technologies,U-03,9000
+EV-00595,TM-2026-402,2026-10-08,Response received,Response received – VELORA v. ChocoApp Technologies,U-03,0
+EV-00596,TM-2026-403,2026-02-05,Case opened,Case opened – AURELIA v. Zahrat Al Sahra Trading,U-04,0
+EV-00597,TM-2026-403,2026-02-09,Evidence collected,Evidence collected – AURELIA v. Zahrat Al Sahra Trading,U-04,4000
+EV-00598,TM-2026-403,2026-02-15,Test purchase completed,Test purchase completed – AURELIA v. Zahrat Al Sahra Trading,U-04,4000
+EV-00599,TM-2026-403,2026-03-09,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Zahrat Al Sahra Trading,U-04,6000
+EV-00600,TM-2026-403,2026-08-23,Response received,Response received – AURELIA v. Zahrat Al Sahra Trading,U-04,0
+EV-00601,TM-2026-403,2026-11-04,Case closed,Case closed – AURELIA v. Zahrat Al Sahra Trading,U-04,0
+EV-00602,TM-2026-404,2026-02-11,Case opened,Case opened – AURELIA v. Taif Nuts and Sweets,U-05,0
+EV-00603,TM-2026-404,2026-03-23,Evidence collected,Evidence collected – AURELIA v. Taif Nuts and Sweets,U-05,2000
+EV-00604,TM-2026-404,2026-04-02,Test purchase completed,Test purchase completed – AURELIA v. Taif Nuts and Sweets,U-05,7000
+EV-00605,TM-2026-404,2026-04-28,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Taif Nuts and Sweets,U-05,5000
+EV-00606,TM-2026-404,2026-05-24,Response received,Response received – AURELIA v. Taif Nuts and Sweets,U-05,0
+EV-00607,TM-2026-404,2026-10-12,Statement of claim filed,Statement of claim filed – AURELIA v. Taif Nuts and Sweets,U-05,31000
+EV-00608,TM-2026-405,2026-02-12,Case opened,Case opened – PICCOLINI v. Hazel Bite Foods LLC,U-04,0
+EV-00609,TM-2026-405,2026-02-17,Evidence collected,Evidence collected – PICCOLINI v. Hazel Bite Foods LLC,U-04,3000
+EV-00610,TM-2026-405,2026-03-07,Test purchase completed,Test purchase completed – PICCOLINI v. Hazel Bite Foods LLC,U-04,6000
+EV-00611,TM-2026-405,2026-04-23,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Hazel Bite Foods LLC,U-04,4000
+EV-00612,TM-2026-405,2026-05-03,Response received,Response received – PICCOLINI v. Hazel Bite Foods LLC,U-04,0
+EV-00613,TM-2026-405,2026-05-24,Statement of claim filed,Statement of claim filed – PICCOLINI v. Hazel Bite Foods LLC,U-04,50000
+EV-00614,TM-2026-405,2026-05-30,Hearing held,Hearing held – PICCOLINI v. Hazel Bite Foods LLC,U-04,23000
+EV-00615,TM-2026-405,2026-06-15,Expert report filed,Expert report filed – PICCOLINI v. Hazel Bite Foods LLC,U-04,43000
+EV-00616,TM-2026-405,2026-06-18,Case closed,Case closed – PICCOLINI v. Hazel Bite Foods LLC,U-04,0
+EV-00617,TM-2026-406,2026-03-09,Case opened,Case opened – MINTIQ v. Emirates Candy House,U-03,0
+EV-00618,TM-2026-406,2026-05-18,Evidence collected,Evidence collected – MINTIQ v. Emirates Candy House,U-03,4000
+EV-00619,TM-2026-406,2026-05-18,Test purchase completed,Test purchase completed – MINTIQ v. Emirates Candy House,U-03,12000
+EV-00620,TM-2026-406,2026-06-25,Cease-and-desist sent,Cease-and-desist sent – MINTIQ v. Emirates Candy House,U-03,8000
+EV-00621,TM-2026-406,2026-08-12,Case closed,Case closed – MINTIQ v. Emirates Candy House,U-03,0
+EV-00622,TM-2026-407,2026-03-15,Case opened,Case opened – DOLCETTA v. Anadolu Online Market,U-06,0
+EV-00623,TM-2026-407,2026-07-03,Evidence collected,Evidence collected – DOLCETTA v. Anadolu Online Market,U-06,11000
+EV-00624,TM-2026-407,2026-09-02,Test purchase completed,Test purchase completed – DOLCETTA v. Anadolu Online Market,U-06,10000
+EV-00625,TM-2026-408,2026-03-15,Case opened,Case opened – AURELIA v. Golden Taste Distribution FZE,U-04,0
+EV-00626,TM-2026-408,2026-06-22,Evidence collected,Evidence collected – AURELIA v. Golden Taste Distribution FZE,U-04,2000
+EV-00627,TM-2026-409,2026-03-29,Case opened,Case opened – PICCOLINI v. Anadolu Online Market,U-06,0
+EV-00628,TM-2026-409,2026-08-30,Evidence collected,Evidence collected – PICCOLINI v. Anadolu Online Market,U-06,7000
+EV-00629,TM-2026-409,2026-09-12,Test purchase completed,Test purchase completed – PICCOLINI v. Anadolu Online Market,U-06,10000
+EV-00630,TM-2026-410,2026-04-04,Case opened,Case opened – VELORA v. Istanbul Şeker Gıda A.Ş.,U-06,0
+EV-00631,TM-2026-410,2026-04-21,Evidence collected,Evidence collected – VELORA v. Istanbul Şeker Gıda A.Ş.,U-06,12000
+EV-00632,TM-2026-410,2026-05-17,Test purchase completed,Test purchase completed – VELORA v. Istanbul Şeker Gıda A.Ş.,U-06,7000
+EV-00633,TM-2026-410,2026-07-13,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Istanbul Şeker Gıda A.Ş.,U-06,6000
+EV-00634,TM-2026-410,2026-09-20,Response received,Response received – VELORA v. Istanbul Şeker Gıda A.Ş.,U-06,0
+EV-00635,TM-2026-411,2026-04-08,Case opened,Case opened – AURELIA v. Amman Confectionery Co.,U-06,0
+EV-00636,TM-2026-411,2026-04-09,Evidence collected,Evidence collected – AURELIA v. Amman Confectionery Co.,U-06,12000
+EV-00637,TM-2026-411,2026-04-18,Test purchase completed,Test purchase completed – AURELIA v. Amman Confectionery Co.,U-06,5000
+EV-00638,TM-2026-411,2026-04-25,Cease-and-desist sent,Cease-and-desist sent – AURELIA v. Amman Confectionery Co.,U-06,4000
+EV-00639,TM-2026-411,2026-07-15,Response received,Response received – AURELIA v. Amman Confectionery Co.,U-06,0
+EV-00640,TM-2026-411,2026-07-18,Statement of claim filed,Statement of claim filed – AURELIA v. Amman Confectionery Co.,U-06,21000
+EV-00641,TM-2026-411,2026-11-03,Case closed,Case closed – AURELIA v. Amman Confectionery Co.,U-06,0
+EV-00642,TM-2026-412,2026-04-12,Case opened,Case opened – VELORA v. Muscat Candy Traders,U-06,0
+EV-00643,TM-2026-412,2026-07-09,Evidence collected,Evidence collected – VELORA v. Muscat Candy Traders,U-06,7000
+EV-00644,TM-2026-413,2026-04-16,Case opened,Case opened – AURELIA v. Petra Sweets Trading,U-06,0
+EV-00645,TM-2026-413,2026-04-17,Evidence collected,Evidence collected – AURELIA v. Petra Sweets Trading,U-06,5000
+EV-00646,TM-2026-413,2026-04-26,Test purchase completed,Test purchase completed – AURELIA v. Petra Sweets Trading,U-06,12000
+EV-00647,TM-2026-413,2026-05-06,Case closed,Case closed – AURELIA v. Petra Sweets Trading,U-06,0
+EV-00648,TM-2026-414,2026-04-19,Case opened,Case opened – DOLCETTA v. Nile Sweets Company,U-06,0
+EV-00649,TM-2026-414,2026-09-09,Evidence collected,Evidence collected – DOLCETTA v. Nile Sweets Company,U-06,11000
+EV-00650,TM-2026-414,2026-10-08,Test purchase completed,Test purchase completed – DOLCETTA v. Nile Sweets Company,U-06,3000
+EV-00651,TM-2026-415,2026-04-25,Case opened,Case opened – DOLCETTA v. Cairo Candy Distribution,U-06,0
+EV-00652,TM-2026-415,2026-05-05,Evidence collected,Evidence collected – DOLCETTA v. Cairo Candy Distribution,U-06,3000
+EV-00653,TM-2026-415,2026-05-08,Test purchase completed,Test purchase completed – DOLCETTA v. Cairo Candy Distribution,U-06,3000
+EV-00654,TM-2026-415,2026-05-29,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Cairo Candy Distribution,U-06,4000
+EV-00655,TM-2026-415,2026-06-06,Response received,Response received – DOLCETTA v. Cairo Candy Distribution,U-06,0
+EV-00656,TM-2026-415,2026-07-20,Statement of claim filed,Statement of claim filed – DOLCETTA v. Cairo Candy Distribution,U-06,43000
+EV-00657,TM-2026-415,2026-08-05,Hearing held,Hearing held – DOLCETTA v. Cairo Candy Distribution,U-06,21000
+EV-00658,TM-2026-415,2026-10-23,Expert report filed,Expert report filed – DOLCETTA v. Cairo Candy Distribution,U-06,51000
+EV-00659,TM-2026-415,2026-11-04,Case closed,Case closed – DOLCETTA v. Cairo Candy Distribution,U-06,0
+EV-00660,TM-2026-416,2026-05-01,Case opened,Case opened – VELORA v. Al Falah Sweets Factory,U-07,0
+EV-00661,TM-2026-416,2026-05-06,Evidence collected,Evidence collected – VELORA v. Al Falah Sweets Factory,U-07,12000
+EV-00662,TM-2026-416,2026-08-11,Test purchase completed,Test purchase completed – VELORA v. Al Falah Sweets Factory,U-07,10000
+EV-00663,TM-2026-416,2026-10-14,Cease-and-desist sent,Cease-and-desist sent – VELORA v. Al Falah Sweets Factory,U-07,7000
+EV-00664,TM-2026-417,2026-05-11,Case opened,Case opened – DOLCETTA v. Hazel Bite Foods LLC,U-07,0
+EV-00665,TM-2026-417,2026-08-15,Evidence collected,Evidence collected – DOLCETTA v. Hazel Bite Foods LLC,U-07,2000
+EV-00666,TM-2026-417,2026-08-19,Test purchase completed,Test purchase completed – DOLCETTA v. Hazel Bite Foods LLC,U-07,7000
+EV-00667,TM-2026-417,2026-08-20,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Hazel Bite Foods LLC,U-07,5000
+EV-00668,TM-2026-417,2026-10-08,Response received,Response received – DOLCETTA v. Hazel Bite Foods LLC,U-07,0
+EV-00669,TM-2026-418,2026-05-16,Case opened,Case opened – DOLCETTA v. Giza Online Mart,U-06,0
+EV-00670,TM-2026-418,2026-06-14,Evidence collected,Evidence collected – DOLCETTA v. Giza Online Mart,U-06,6000
+EV-00671,TM-2026-418,2026-08-07,Test purchase completed,Test purchase completed – DOLCETTA v. Giza Online Mart,U-06,4000
+EV-00672,TM-2026-418,2026-09-02,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Giza Online Mart,U-06,3000
+EV-00673,TM-2026-419,2026-06-15,Case opened,Case opened – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,0
+EV-00674,TM-2026-419,2026-06-16,Evidence collected,Evidence collected – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,4000
+EV-00675,TM-2026-419,2026-06-22,Test purchase completed,Test purchase completed – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,4000
+EV-00676,TM-2026-419,2026-06-27,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,6000
+EV-00677,TM-2026-419,2026-06-29,Response received,Response received – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,0
+EV-00678,TM-2026-419,2026-07-03,Statement of claim filed,Statement of claim filed – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,50000
+EV-00679,TM-2026-419,2026-07-11,Hearing held,Hearing held – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,34000
+EV-00680,TM-2026-419,2026-08-01,Expert report filed,Expert report filed – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,40000
+EV-00681,TM-2026-419,2026-11-04,Case closed,Case closed – CRISPINO v. Sweet Deals Foodstuff Trading,U-07,0
+EV-00682,TM-2026-420,2026-06-16,Case opened,Case opened – CRISPINO v. Najd Chocolate Factory,U-05,0
+EV-00683,TM-2026-420,2026-07-13,Evidence collected,Evidence collected – CRISPINO v. Najd Chocolate Factory,U-05,12000
+EV-00684,TM-2026-420,2026-09-04,Test purchase completed,Test purchase completed – CRISPINO v. Najd Chocolate Factory,U-05,8000
+EV-00685,TM-2026-420,2026-09-21,Cease-and-desist sent,Cease-and-desist sent – CRISPINO v. Najd Chocolate Factory,U-05,6000
+EV-00686,TM-2026-420,2026-10-04,Response received,Response received – CRISPINO v. Najd Chocolate Factory,U-05,0
+EV-00687,TM-2026-420,2026-11-05,Statement of claim filed,Statement of claim filed – CRISPINO v. Najd Chocolate Factory,U-05,49000
+EV-00688,TM-2026-421,2026-06-21,Case opened,Case opened – CRISPINO v. Marina Gifts and Chocolates,U-07,0
+EV-00689,TM-2026-421,2026-08-24,Evidence collected,Evidence collected – CRISPINO v. Marina Gifts and Chocolates,U-07,3000
+EV-00690,TM-2026-422,2026-07-20,Case opened,Case opened – PICCOLINI v. Delhi Confectioners Pvt Ltd,U-03,0
+EV-00691,TM-2026-422,2026-08-06,Evidence collected,Evidence collected – PICCOLINI v. Delhi Confectioners Pvt Ltd,U-03,5000
+EV-00692,TM-2026-422,2026-09-06,Test purchase completed,Test purchase completed – PICCOLINI v. Delhi Confectioners Pvt Ltd,U-03,3000
+EV-00693,TM-2026-422,2026-10-02,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Delhi Confectioners Pvt Ltd,U-03,5000
+EV-00694,TM-2026-423,2026-07-20,Case opened,Case opened – DOLCETTA v. Al Falah Sweets Factory,U-03,0
+EV-00695,TM-2026-423,2026-08-09,Evidence collected,Evidence collected – DOLCETTA v. Al Falah Sweets Factory,U-03,11000
+EV-00696,TM-2026-424,2026-07-30,Case opened,Case opened – MINTIQ v. Sweet Deals Foodstuff Trading,U-07,0
+EV-00697,TM-2026-424,2026-08-26,Evidence collected,Evidence collected – MINTIQ v. Sweet Deals Foodstuff Trading,U-07,5000
+EV-00698,TM-2026-424,2026-09-12,Test purchase completed,Test purchase completed – MINTIQ v. Sweet Deals Foodstuff Trading,U-07,7000
+EV-00699,TM-2026-424,2026-09-19,Cease-and-desist sent,Cease-and-desist sent – MINTIQ v. Sweet Deals Foodstuff Trading,U-07,4000
+EV-00700,TM-2026-425,2026-08-04,Case opened,Case opened – PICCOLINI v. Riyadh Sweets Trading Est.,U-05,0
+EV-00701,TM-2026-425,2026-08-15,Evidence collected,Evidence collected – PICCOLINI v. Riyadh Sweets Trading Est.,U-05,11000
+EV-00702,TM-2026-425,2026-09-05,Test purchase completed,Test purchase completed – PICCOLINI v. Riyadh Sweets Trading Est.,U-05,9000
+EV-00703,TM-2026-425,2026-09-11,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Riyadh Sweets Trading Est.,U-05,7000
+EV-00704,TM-2026-425,2026-10-09,Response received,Response received – PICCOLINI v. Riyadh Sweets Trading Est.,U-05,0
+EV-00705,TM-2026-426,2026-08-06,Case opened,Case opened – DOLCETTA v. Alexandria Foods Import,U-06,0
+EV-00706,TM-2026-426,2026-08-06,Evidence collected,Evidence collected – DOLCETTA v. Alexandria Foods Import,U-06,6000
+EV-00707,TM-2026-426,2026-08-09,Test purchase completed,Test purchase completed – DOLCETTA v. Alexandria Foods Import,U-06,9000
+EV-00708,TM-2026-426,2026-09-20,Cease-and-desist sent,Cease-and-desist sent – DOLCETTA v. Alexandria Foods Import,U-06,7000
+EV-00709,TM-2026-426,2026-11-04,Case closed,Case closed – DOLCETTA v. Alexandria Foods Import,U-06,0
+EV-00710,TM-2026-427,2026-09-01,Case opened,Case opened – CRISPINO v. QuickCart Online Store,U-07,0
+EV-00711,TM-2026-427,2026-09-08,Evidence collected,Evidence collected – CRISPINO v. QuickCart Online Store,U-07,5000
+EV-00712,TM-2026-427,2026-09-10,Test purchase completed,Test purchase completed – CRISPINO v. QuickCart Online Store,U-07,10000
+EV-00713,TM-2026-428,2026-09-02,Case opened,Case opened – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,0
+EV-00714,TM-2026-428,2026-09-05,Evidence collected,Evidence collected – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,3000
+EV-00715,TM-2026-428,2026-09-23,Test purchase completed,Test purchase completed – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,12000
+EV-00716,TM-2026-428,2026-10-19,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. DealHub Marketplace Seller 4471,U-04,7000
+EV-00717,TM-2026-429,2026-09-03,Case opened,Case opened – DOLCETTA v. AppWorks Studio FZ-LLC,U-03,0
+EV-00718,TM-2026-429,2026-10-08,Evidence collected,Evidence collected – DOLCETTA v. AppWorks Studio FZ-LLC,U-03,10000
+EV-00719,TM-2026-430,2026-09-25,Case opened,Case opened – VELORA v. Petra Sweets Trading,U-06,0
+EV-00720,TM-2026-430,2026-10-08,Evidence collected,Evidence collected – VELORA v. Petra Sweets Trading,U-06,9000
+EV-00721,TM-2026-430,2026-10-17,Test purchase completed,Test purchase completed – VELORA v. Petra Sweets Trading,U-06,10000
+EV-00722,TM-2026-431,2026-10-03,Case opened,Case opened – PICCOLINI v. QuickCart Online Store,U-04,0
+EV-00723,TM-2026-431,2026-10-08,Evidence collected,Evidence collected – PICCOLINI v. QuickCart Online Store,U-04,8000
+EV-00724,TM-2026-431,2026-10-13,Test purchase completed,Test purchase completed – PICCOLINI v. QuickCart Online Store,U-04,10000
+EV-00725,TM-2026-431,2026-10-24,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. QuickCart Online Store,U-04,6000
+EV-00726,TM-2026-431,2026-10-29,Response received,Response received – PICCOLINI v. QuickCart Online Store,U-04,0
+EV-00727,TM-2026-432,2026-10-04,Case opened,Case opened – MINTIQ v. Al Majd Foodstuff Co.,U-05,0
+EV-00728,TM-2026-432,2026-10-07,Evidence collected,Evidence collected – MINTIQ v. Al Majd Foodstuff Co.,U-05,5000
+EV-00729,TM-2026-432,2026-11-01,Test purchase completed,Test purchase completed – MINTIQ v. Al Majd Foodstuff Co.,U-05,8000
+EV-00730,TM-2026-433,2026-10-06,Case opened,Case opened – CRISPINO v. Kuwait Sweet Mart,U-05,0
+EV-00731,TM-2026-433,2026-10-07,Evidence collected,Evidence collected – CRISPINO v. Kuwait Sweet Mart,U-05,10000
+EV-00732,TM-2026-433,2026-10-09,Test purchase completed,Test purchase completed – CRISPINO v. Kuwait Sweet Mart,U-05,8000
+EV-00733,TM-2026-434,2026-10-20,Case opened,Case opened – PICCOLINI v. Mumbai Sweet Traders,U-06,0
+EV-00734,TM-2026-434,2026-10-24,Evidence collected,Evidence collected – PICCOLINI v. Mumbai Sweet Traders,U-06,5000
+EV-00735,TM-2026-434,2026-10-25,Test purchase completed,Test purchase completed – PICCOLINI v. Mumbai Sweet Traders,U-06,7000
+EV-00736,TM-2026-434,2026-10-27,Cease-and-desist sent,Cease-and-desist sent – PICCOLINI v. Mumbai Sweet Traders,U-06,9000
+EV-00737,TM-2026-434,2026-10-28,Response received,Response received – PICCOLINI v. Mumbai Sweet Traders,U-06,0
