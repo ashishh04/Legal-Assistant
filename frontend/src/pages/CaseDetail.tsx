@@ -1,6 +1,18 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, CalendarClock, ChartPie, ChevronRight, FileText, Gavel, Lock, ScanLine, Sparkles } from "lucide-react";
+import clsx from "clsx";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  ArrowLeft, CalendarClock, ChartPie, ChevronRight, FileText, Gavel, Handshake, Lock, Pencil, ScanLine, Sparkles,
+} from "lucide-react";
 import { ApiError, api } from "../api";
+import { AuditPanel } from "../components/case/AuditPanel";
+import { CaseEditDialog } from "../components/case/CaseEditDialog";
+import { BusinessDialog, CommercialCard } from "../components/case/CommercialPanel";
+import { ComparisonPanel } from "../components/case/ComparisonPanel";
+import { AssignDialog, CloseCaseDialog, WorkflowBar } from "../components/case/Workflow";
+import { EvidencePanel } from "../components/case/EvidencePanel";
+import { FollowUpsPanel } from "../components/case/FollowUpsPanel";
+import { awaitingBusiness } from "../components/case/shared";
 import { BarList } from "../components/charts";
 import { Pagination, usePagination } from "../components/Pagination";
 import { Button, Card, Chip, EmptyState, Outcome, SectionTitle, StatTile, StatusPill } from "../components/ui";
@@ -10,12 +22,24 @@ import { friendlyReason, pct } from "../lib/labels";
 import { useSession } from "../session";
 import type { CaseDetail as Detail, CaseDocument, TimelineEvent } from "../types";
 
+type Tab = "overview" | "evidence" | "follow-ups" | "comparison" | "audit";
+const TAB_IDS: Tab[] = ["overview", "evidence", "follow-ups", "comparison", "audit"];
+
 export default function CaseDetail() {
   const { caseId = "" } = useParams();
   const { user, meta, openAssistant } = useSession();
   const navigate = useNavigate();
-  const { data: c, error } = useApi<Detail | null>(
-    () => (user ? api.case(user.user_id, caseId) : Promise.resolve(null)), [user?.user_id, caseId]);
+  const [params, setParams] = useSearchParams();
+  const tab: Tab = TAB_IDS.includes(params.get("tab") as Tab) ? (params.get("tab") as Tab) : "overview";
+  const setTab = (t: Tab) => setParams(t === "overview" ? {} : { tab: t }, { replace: true });
+  const { data: fetched, error, reload } = useApi<Detail | null>(
+    () => (user ? api.case(caseId) : Promise.resolve(null)), [user?.user_id, caseId]);
+  const [c, setC] = useState<Detail | null>(null);
+  useEffect(() => setC(fetched), [fetched]);
+  const [editing, setEditing] = useState<"case" | "business" | "assign" | "close" | null>(null);
+  const [newFollowUp, setNewFollowUp] = useState(false);
+  const followUpStarted = useCallback(() => setNewFollowUp(false), []);
+  const refresh = useCallback(() => reload(), [reload]);
 
   if (error) {
     const forbidden = error instanceof ApiError && error.status === 404;
@@ -24,13 +48,13 @@ export default function CaseDetail() {
         <EmptyState icon={Lock} title={forbidden ? `${caseId.toUpperCase()} isn't available to ${user?.full_name}` : "Could not load this case"}
           action={<Button icon={ArrowLeft} onClick={() => navigate("/cases")}>Back to cases</Button>}>
           {forbidden
-            ? <>Cases are visible by country group. Check the case number, or switch to a user whose role covers this case.</>
+            ? <>Cases are visible by country group. Check the case number, or ask Legal Operations if you need access.</>
             : "Please try again in a moment."}
         </EmptyState>
       </div>
     );
   }
-  if (!c) return <div className="py-20 text-center text-[14px] text-muted">Loading {caseId}…</div>;
+  if (!c || c.case_id !== caseId.toUpperCase()) return <div className="py-20 text-center text-[14px] text-muted">Loading {caseId}…</div>;
 
   const today = meta?.demo_today ?? "";
   const due = daysFrom(today, c.next_action_due);
@@ -62,13 +86,16 @@ export default function CaseDetail() {
               {c.status === "Closed" && <Chip><Outcome outcome={c.outcome} /></Chip>}
               {c.priority && <Chip>{c.priority} priority</Chip>}
               {c.risk_rating && <Chip>{c.risk_rating} risk</Chip>}
+              {c.business_priority && <Chip>Business priority {c.business_priority}</Chip>}
+              {awaitingBusiness(c) && c.status === "Open" && <Chip className="border-warning/60 bg-warning/10 text-ink"><Handshake size={12} /> Consult business first</Chip>}
               <Chip><Lock size={11} /> {c.sensitivity}</Chip>
             </div>
             <h1 className="mt-3 text-[28px] font-semibold leading-tight tracking-[-0.025em] text-ink">{c.title}</h1>
-            <p className="mt-1.5 text-[14px] text-ink-2">{c.case_type} · {c.court_name}, {c.country}</p>
+            <p className="mt-1.5 text-[14px] text-ink-2">{c.case_type} · {c.court_name ? `${c.court_name}, ` : ""}{c.country}</p>
           </div>
           <div className="flex flex-wrap gap-2">
-            {meta?.embedded_dashboards && (
+            {c.permissions.edit && <Button icon={Pencil} onClick={() => setEditing("case")}>Update case</Button>}
+            {meta?.embedded_dashboards && !c.registered_in_app && (
               <Button icon={ChartPie} onClick={() => navigate(`/dashboards?d=DS-1&case=${encodeURIComponent(c.case_id)}`)}>
                 Case dashboard
               </Button>
@@ -89,6 +116,49 @@ export default function CaseDetail() {
         </dl>
       </Card>
 
+      {awaitingBusiness(c) && c.status === "Open" && (
+        <div className="mb-4 flex flex-wrap items-center gap-4 rounded-2xl border border-warning/60 bg-warning/10 p-4 animate-fade-up" role="status">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-surface text-[var(--warning)] shadow-sm"><Handshake size={19} /></span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[14px] font-semibold text-ink">
+              {c.consultation_status === "Hold enforcement" ? "The business has asked to hold enforcement" : "Consult the business before any enforcement step"}
+            </div>
+            <p className="mt-0.5 text-[13px] leading-relaxed text-ink-2">
+              {c.commercial_relationship && c.commercial_relationship !== "None known" ? `${c.infringer_name} is a ${c.commercial_relationship.toLowerCase()}. ` : ""}
+              Consultation: {(c.consultation_status ?? "Not started").toLowerCase()}{c.consultation_contact ? ` with ${c.consultation_contact}` : ""}.
+              A notice, filing or court step needs business sign-off first; going ahead without it needs a recorded reason.
+            </p>
+          </div>
+          {c.permissions.edit && <Button icon={Handshake} onClick={() => setEditing("business")}>Record consultation</Button>}
+        </div>
+      )}
+
+      <WorkflowBar c={c} onAssign={() => setEditing("assign")} onClose={() => setEditing("close")}
+        onFollowUp={() => { setTab("follow-ups"); setNewFollowUp(true); }} />
+
+      <div role="tablist" aria-label="Case sections" className="mb-5 flex gap-1 overflow-x-auto border-b border-line [scrollbar-width:none]">
+        {([
+          ["overview", "Overview", null],
+          ["evidence", "Evidence & documents", c.counts.evidence],
+          ["follow-ups", "Follow-ups", c.counts.follow_ups_open],
+          ["comparison", "Trademark comparison", null],
+          ["audit", "Audit trail", c.counts.audit],
+        ] as [Tab, string, number | null][]).map(([id, label, count]) => (
+          <button key={id} type="button" role="tab" aria-selected={tab === id} onClick={() => setTab(id)}
+            className={clsx("relative flex items-center gap-2 whitespace-nowrap px-3.5 py-2.5 text-[13.5px] font-medium transition",
+              tab === id ? "text-ink" : "text-ink-2 hover:text-ink")}>
+            {label}
+            {count != null && count > 0 && <span className="tabular rounded-full bg-surface-3 px-1.5 py-px text-[11px] font-semibold text-ink-2">{count}</span>}
+            {tab === id && <span aria-hidden className="absolute inset-x-2 bottom-0 h-0.5 rounded-full bg-accent" />}
+          </button>
+        ))}
+      </div>
+
+      {tab === "evidence" && <EvidencePanel c={c} onChanged={refresh} />}
+      {tab === "follow-ups" && <FollowUpsPanel c={c} onChanged={refresh} startNew={newFollowUp} onStarted={followUpStarted} />}
+      {tab === "comparison" && <ComparisonPanel c={c} onChanged={refresh} onAddPhoto={() => setTab("evidence")} />}
+      {tab === "audit" && <AuditPanel c={c} />}
+      {tab === "overview" && <>
       <div className="mb-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatTile label="Claimed" {...local(c.claim_amount_local, c.claim_amount_aed)} />
         <StatTile label="Awarded" {...local(c.awarded_amount_local, c.awarded_amount_aed)} />
@@ -131,6 +201,7 @@ export default function CaseDetail() {
         </Card>
 
         <div className="flex flex-col gap-4 lg:col-span-3">
+          <CommercialCard c={c} onEdit={c.permissions.edit ? () => setEditing("business") : undefined} />
           <Card className="p-5">
             <SectionTitle aside={docs && <span className="text-[12px] text-muted">{docs.filter((d) => d.text_searchable).length} of {docs.length} searchable by Ferrero</span>}>
               Documents on file
@@ -150,6 +221,12 @@ export default function CaseDetail() {
           </Card>
         </div>
       </div>
+      </>}
+
+      <CaseEditDialog c={c} open={editing === "case"} onClose={() => setEditing(null)} onSaved={setC} />
+      <BusinessDialog c={c} open={editing === "business"} onClose={() => setEditing(null)} onSaved={setC} />
+      <AssignDialog c={c} open={editing === "assign"} onClose={() => setEditing(null)} onSaved={setC} />
+      <CloseCaseDialog c={c} open={editing === "close"} onClose={() => setEditing(null)} onSaved={setC} />
     </>
   );
 }
@@ -157,6 +234,7 @@ export default function CaseDetail() {
 function Timeline({ events, caseId }: { events: TimelineEvent[]; caseId: string }) {
   const newestFirst = [...events].reverse();
   const pager = usePagination(newestFirst, 6, caseId);
+  if (!events.length) return <p className="text-[13px] text-muted">No events on the tracker yet. Changes made here are in the audit trail.</p>;
   return (
     <>
       <ol className="relative ms-1.5 border-s border-line">

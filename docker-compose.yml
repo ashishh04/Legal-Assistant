@@ -6,8 +6,9 @@
 # Superset embeds its dashboards only in pages whose address is in its frame-ancestors list. http://3.75.206.231
 # (port 80) is on that list, so keep the published port at 80 there. FERRERO_HTTP_PORT (shell or .env) changes it.
 #
-# There is no sign-in yet: anyone who can reach the port can pick any persona and use the assistant, which is billed
-# to your AWS account. Limit the port to known addresses (EC2 security group) until Entra ID sign-in is in place.
+# Everyone signs in: set FERRERO_DEMO_PASSWORD in .env (the starting password), or nobody can. On plain HTTP the
+# passwords and the session cookie cross the network unencrypted: put HTTPS in front before real users sign in, and
+# keep the port limited to known addresses (EC2 security group) until then.
 services:
   ferrero:
     build: .
@@ -16,8 +17,14 @@ services:
     env_file: .env
     ports:
       - "${FERRERO_HTTP_PORT:-80}:8000"
+    volumes:
+      # Users' records: case changes, evidence files, follow-ups, notifications, the audit trail. Back this volume up.
+      - ferrero-records:/app/data/records
     logging:
       driver: json-file
       options:
         max-size: "10m"
         max-file: "3"
+
+volumes:
+  ferrero-records:

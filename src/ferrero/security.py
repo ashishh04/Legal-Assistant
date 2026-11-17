@@ -24,6 +24,7 @@ class Role:
     case_groups: frozenset[str]
     documents: bool
     description: str
+    can_edit: bool = True  # may update the cases it sees: fields, evidence (with documents), follow-ups
 
 
 _ALL = frozenset(CASE_GROUPS)
@@ -36,9 +37,10 @@ ROLES: dict[str, Role] = {
     ),
     "Legal-Ops": Role("Legal-Ops", _ALL, True, "all countries, all case data and all documents"),
     "Leadership": Role("Leadership", _ALL, True, "all countries, all case data and all documents"),
-    "Procurement": Role("Procurement", _ALL, False, "case data for all countries, but no case documents"),
+    "Procurement": Role("Procurement", _ALL, False, "case data for all countries, but no case documents", can_edit=False),
 }
-NO_ACCESS = Role("none", frozenset(), False, "no case data")
+NO_ACCESS = Role("none", frozenset(), False, "no case data", can_edit=False)
+ESCALATION_GROUPS = ("Legal-Ops",)  # also told when a deadline is overdue (they oversee deadlines across the team)
 
 
 def role_for_group(entra_group: str) -> Role:
@@ -62,6 +64,10 @@ class Principal:
     @property
     def sees_documents(self) -> bool:
         return self.role.documents
+
+    @property
+    def can_edit(self) -> bool:
+        return self.role.can_edit
 
     @property
     def scope_key(self) -> tuple[tuple[str, ...], bool]:

@@ -38,7 +38,7 @@ build-backend = "setuptools.build_meta"
 where = ["src"]
 
 [tool.setuptools.package-data]
-ferrero = ["web/static/*", "eval/*.json"]
+ferrero = ["web/static/*", "web/marks/*", "eval/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

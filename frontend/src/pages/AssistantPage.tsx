@@ -9,7 +9,7 @@ const CAPABILITIES = [
   { icon: Database, title: "Knows the case tracker", text: "Status, deadlines, hearings, amounts and portfolio figures, the same data the dashboards show." },
   { icon: Quote, title: "Cites its sources", text: "Every statement from a document links to the exact paragraph it came from." },
   { icon: Languages, title: "English and Arabic", text: "Ask in either language, whatever language the document is in." },
-  { icon: ShieldCheck, title: "Respects access", text: "It only sees the cases and documents the signed-in persona may open." },
+  { icon: ShieldCheck, title: "Respects access", text: "It only sees the cases and documents the signed-in user may open." },
 ];
 
 export default function AssistantPage() {

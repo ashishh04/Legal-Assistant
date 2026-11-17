@@ -60,7 +60,7 @@ export function Chat({ caseId = null, prompt = null, compact = false }: { caseId
     setConv(null);
     setStartError(null);
     try {
-      setConv(await api.startConversation(userId, caseId));
+      setConv(await api.startConversation(caseId));
     } catch (e) {
       setStartError((e as Error).message);
     }

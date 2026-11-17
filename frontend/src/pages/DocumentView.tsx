@@ -23,7 +23,7 @@ export default function DocumentView() {
   const { user, openAssistant } = useSession();
   const navigate = useNavigate();
   const { data: d, error } = useApi<Doc | null>(
-    () => (user ? api.document(user.user_id, docId) : Promise.resolve(null)), [user?.user_id, docId]);
+    () => (user ? api.document(docId) : Promise.resolve(null)), [user?.user_id, docId]);
   const [page, setPage] = useState(1);
   useEffect(() => { setPage(1); }, [docId]);
   const pager = usePagination(d?.sections ?? [], 6, docId);
@@ -34,7 +34,7 @@ export default function DocumentView() {
       <div className="mx-auto max-w-xl pt-6">
         <EmptyState icon={Lock} title={forbidden ? `This document isn't available to ${user?.full_name}` : "Could not load this document"}
           action={<Button icon={ArrowLeft} onClick={() => navigate("/documents")}>Back to documents</Button>}>
-          {forbidden ? "Documents follow their case's access rights. Switch to a user whose role covers this case." : "Please try again in a moment."}
+          {forbidden ? "Documents follow their case's access rights. Ask Legal Operations if you need access." : "Please try again in a moment."}
         </EmptyState>
       </div>
     );
@@ -124,7 +124,7 @@ export default function DocumentView() {
         <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <Card className="min-w-0 p-5">
             <SectionTitle aside={
-              <a href={api.pageImageUrl(user.user_id, d.doc_id, page)} target="_blank" rel="noreferrer"
+              <a href={api.pageImageUrl(d.doc_id, page)} target="_blank" rel="noreferrer"
                 className="inline-flex items-center gap-1 text-[12px] text-muted hover:text-ink">Full size <ExternalLink size={12} /></a>}>
               Scanned page {page} of {d.page_images}
             </SectionTitle>
@@ -144,7 +144,7 @@ export default function DocumentView() {
                 })}
               </div>
             )}
-            <img key={page} src={api.pageImageUrl(user.user_id, d.doc_id, page)} alt={`Scanned page ${page} of ${d.file_name}`}
+            <img key={page} src={api.pageImageUrl(d.doc_id, page)} alt={`Scanned page ${page} of ${d.file_name}`}
               className="w-full rounded-xl border border-line bg-white" loading="lazy" />
             {pageConfidence != null && (
               <p className="mt-2 text-[12px] text-muted">

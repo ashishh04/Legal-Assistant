@@ -71,6 +71,18 @@ class Settings:
     ocr_experts: str = "auto"           # local engine on a CPU: how the routed experts are held (see ocr.local)
     ocr_min_confidence: float = 0.80
     ocr_review_confidence: float = 0.90
+    # Case records (ferrero.records): what users add - case changes, evidence, follow-ups, notifications, audit trail
+    records_path: Path | None = None    # FERRERO_RECORDS_DIR; default data/records
+    evidence_max_mb: int = 25           # largest evidence file accepted
+    reminder_minutes: int = 15          # how often deadlines are checked for reminders (0: only at start and on changes)
+    reminder_lead_days: int = 7         # "due soon" reminder this many days before a deadline (default for follow-ups)
+    escalate_days: int = 3              # a deadline still open this many days after it passed is escalated
+    # Sign-in (ferrero.auth)
+    demo_password: str | None = None    # FERRERO_DEMO_PASSWORD: starting password for accounts without their own
+    session_hours: int = 12             # a session ends after this long without activity
+    session_remember_days: int = 14     # ... or this long with "keep me signed in"
+    login_show_accounts: bool = False   # list the accounts on the sign-in page (a convenience for test environments)
+    cookie_secure: str = "auto"         # Secure flag on the session cookie: auto (when the request is HTTPS), true, false
 
     def __post_init__(self) -> None:
         if self.effort not in EFFORT_LEVELS:
@@ -87,6 +99,15 @@ class Settings:
             raise ValueError(f"FERRERO_OCR_EXPERTS must be auto, ram, mapped or int8, not {self.ocr_experts!r}")
         if not 0 <= self.ocr_min_confidence <= self.ocr_review_confidence <= 1:
             raise ValueError("OCR thresholds need 0 <= FERRERO_OCR_MIN_CONFIDENCE <= FERRERO_OCR_REVIEW_CONFIDENCE <= 1")
+        if not 1 <= self.evidence_max_mb <= 500:
+            raise ValueError("FERRERO_EVIDENCE_MAX_MB must be between 1 and 500")
+        if not 1 <= self.session_hours <= 24 * 30 or not 1 <= self.session_remember_days <= 365:
+            raise ValueError("FERRERO_SESSION_HOURS must be 1-720 and FERRERO_SESSION_REMEMBER_DAYS 1-365")
+        if self.cookie_secure not in ("auto", "true", "false"):
+            raise ValueError("FERRERO_COOKIE_SECURE must be auto, true or false")
+        if self.reminder_minutes < 0 or not 0 <= self.reminder_lead_days <= 90 or not 1 <= self.escalate_days <= 90:
+            raise ValueError("Reminder settings: FERRERO_REMINDER_MINUTES >= 0, FERRERO_REMINDER_LEAD_DAYS 0-90, "
+                             "FERRERO_ESCALATE_DAYS 1-90")
 
     @property
     def mid_conversation_system(self) -> bool:
@@ -127,6 +148,10 @@ class Settings:
     @property
     def ocr_dir(self) -> Path:
         return self.data_dir / "ocr"
+
+    @property
+    def records_dir(self) -> Path:
+        return self.records_path or self.data_dir / "records"
 
     @property
     def ocr_model_dir(self) -> Path:
@@ -182,4 +207,14 @@ def get_settings() -> Settings:
         ocr_experts=env("FERRERO_OCR_EXPERTS", "auto").lower(),
         ocr_min_confidence=float(env("FERRERO_OCR_MIN_CONFIDENCE", "0.80")),
         ocr_review_confidence=float(env("FERRERO_OCR_REVIEW_CONFIDENCE", "0.90")),
+        records_path=_path(env("FERRERO_RECORDS_DIR"), None) if env("FERRERO_RECORDS_DIR") else None,
+        evidence_max_mb=int(env("FERRERO_EVIDENCE_MAX_MB", "25")),
+        reminder_minutes=int(env("FERRERO_REMINDER_MINUTES", "15")),
+        reminder_lead_days=int(env("FERRERO_REMINDER_LEAD_DAYS", "7")),
+        escalate_days=int(env("FERRERO_ESCALATE_DAYS", "3")),
+        demo_password=env("FERRERO_DEMO_PASSWORD") or None,
+        session_hours=int(env("FERRERO_SESSION_HOURS", "12")),
+        session_remember_days=int(env("FERRERO_SESSION_REMEMBER_DAYS", "14")),
+        login_show_accounts=env("FERRERO_LOGIN_SHOW_ACCOUNTS", "false").lower() in ("true", "1", "yes"),
+        cookie_secure=env("FERRERO_COOKIE_SECURE", "auto").lower(),
     )

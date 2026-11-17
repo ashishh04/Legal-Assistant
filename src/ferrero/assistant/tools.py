@@ -32,8 +32,26 @@ Settled, Closed), outcome (Won, Partially won, Settled, Takedown achieved, Lost,
 mark_id, mark_name, infringer_id, infringer_name, infringer_type, lead_counsel_id, lead_counsel, external_firm, currency (local), \
 claim_amount_local, claim_amount_aed, awarded_amount_local, awarded_amount_aed, settlement_amount_local, settlement_amount_aed, \
 recovered_amount_local, recovered_amount_aed, next_hearing_date, next_action, next_action_due, last_action_date, days_open, \
-legal_spend_aed, language, sensitivity, access_group, sharepoint_library
+legal_spend_aed, language, sensitivity, access_group, sharepoint_library; and the commercial-sensitivity assessment \
+(NULL = not assessed yet): business_priority ('High'|'Medium'|'Low'), consultation_required (1 = business consultation \
+required before enforcement, 0 = not required), commercial_relationship (None known, Customer, Distributor or reseller, \
+Commercial partner, Supplier), consultation_status (Not started, In progress, Cleared to proceed, Hold enforcement), \
+consultation_contact, consultation_notes
 - fact_case_event: event_id, case_id, event_date, event_type, description, owner_user_id, external_fees_aed
+- case_follow_up (deadlines users set on a case, e.g. a store given 30 days to remove products): follow_up_id, case_id, kind, \
+title, details, owner_user_id, owner_name, start_date, period_days, due_date, remind_days_before, status ('Open'|'Done'|\
+'Cancelled'), decision, decision_note, resolved_by, resolved_at, created_by, created_at
+- case_evidence (evidence and supporting documents uploaded to a case; metadata only): evidence_id, case_id, category \
+(Product photo, Screenshot, Cease-and-desist letter, Correspondence with authorities, Invoice, External counsel document, \
+Other evidence), title, notes, captured_on, location, file_name, file_type, size_bytes, sha256, uploaded_by, uploaded_at, \
+status ('Active'|'Withdrawn'), withdrawn_reason
+- case_audit (audit trail: one row per change to a case): entry_id, case_id, changed_at (UTC timestamp), changed_by, role, \
+action, summary, reason, ref_type
+- case_mark_comparison (visual trademark comparisons: the registered mark against the sign on the infringing product): \
+comparison_id, case_id, mark_id, evidence_id (the photo compared), infringing_sign, visual, phonetic, conceptual \
+('High'|'Medium'|'Low'|'None'), goods ('Identical'|'Similar'|'Different'), overall (likelihood of confusion: \
+'High'|'Medium'|'Low'), notes, word_similarity (0-1, indicative only), sounds_alike (0/1), assessed_by, assessed_at, \
+status ('Current'|'Superseded'; use the Current row)
 - fact_invoice (external counsel): invoice_id, case_id, firm, invoice_date, category, amount_aed, status
 - fact_document (document catalogue, metadata only): doc_id, case_id, doc_type, title (file name), language, doc_date, pages, \
 scanned, sensitivity, library_path
@@ -96,8 +114,10 @@ TOOLS: list[dict[str, Any]] = [
         "description": (
             "Get one case from the case tracker: status, stage, outcome, court, mark, infringer, lead counsel, external firm, "
             "amounts claimed, awarded, settled and recovered (local currency and AED), next hearing, next action and its due date, "
-            "the event timeline, invoice totals, and the documents on file (with whether their text is searchable). Use it for "
-            "where a case stands and what happens next."
+            "the business priority and whether business consultation is required before enforcement (and its status), the "
+            "follow-ups and their deadlines, the event timeline, invoice totals, the documents on file (with whether their text "
+            "is searchable) and the evidence uploaded (photos, letters, correspondence, invoices). Use it for where a case "
+            "stands and what happens next."
         ),
         "input_schema": {
             "type": "object",
@@ -109,8 +129,9 @@ TOOLS: list[dict[str, Any]] = [
         "name": "query_case_data",
         "description": (
             "Run one read-only SQLite SELECT over the case-tracker data - the same model behind the Power BI dashboards - for "
-            "counts, totals, rankings and lists across cases, intake reports, app-store detections and invoices. Only rows the "
-            "signed-in user may see exist. At most 200 rows are returned, so aggregate in SQL instead of fetching raw rows.\n\n"
+            "counts, totals, rankings and lists across cases, follow-ups, evidence, the audit trail, intake reports, app-store "
+            "detections and invoices. Only rows the signed-in user may see exist. At most 200 rows are returned, so aggregate in "
+            "SQL instead of fetching raw rows.\n\n"
             + CASE_DATA_GUIDE
         ),
         "input_schema": {

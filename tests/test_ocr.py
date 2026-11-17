@@ -267,6 +267,8 @@ def test_document_viewer_serves_scan_pages_only_to_users_of_the_case(tmp_path, m
     from ferrero.assistant.agent import Assistant
     from ferrero.web.app import create_app
 
+    from conftest import sign_in
+
     folder = tmp_path / "docs"
     folder.mkdir()
     data = make_scan_pdf(2)
@@ -279,13 +281,14 @@ def test_document_viewer_serves_scan_pages_only_to_users_of_the_case(tmp_path, m
     doc_id = ix.catalogue()[0]["doc_id"]
     c = TestClient(create_app(s, Assistant(s, model, DocumentIndex(s.index_path, readonly=True), client=fake_claude.client())))
 
-    view = c.get(f"/api/documents/{doc_id}", params={"user_id": "U-05"}).json()  # Legal-KSA: TM-2024-403 is a KSA case
+    sign_in(c, "U-05")  # Legal-KSA: TM-2024-403 is a KSA case
+    view = c.get(f"/api/documents/{doc_id}").json()
     assert (view["extraction"], view["page_images"], view["index_status"]) == ("ocr", 2, "Indexed (flagged)")
     assert view["page_confidence"] == [0.97, 0.86] and "content_sha" not in view
     assert [s["section"] for s in view["sections"]] == ["JUDGMENT", "Operative part"]
-    page = c.get(f"/api/documents/{doc_id}/pages/1", params={"user_id": "U-05"})
+    page = c.get(f"/api/documents/{doc_id}/pages/1")
     assert page.status_code == 200 and page.headers["content-type"] == "image/jpeg" and page.content == JPEG
-    for user in ("U-04",):  # Legal-UAE cannot open a KSA case's documents, scans included
-        assert c.get(f"/api/documents/{doc_id}", params={"user_id": user}).status_code == 404
-        assert c.get(f"/api/documents/{doc_id}/pages/1", params={"user_id": user}).status_code == 404
-    assert c.get(f"/api/documents/{doc_id}/pages/9", params={"user_id": "U-05"}).status_code == 404
+    assert c.get(f"/api/documents/{doc_id}/pages/9").status_code == 404
+    sign_in(c, "U-04")  # Legal-UAE cannot open a KSA case's documents, scans included
+    assert c.get(f"/api/documents/{doc_id}").status_code == 404
+    assert c.get(f"/api/documents/{doc_id}/pages/1").status_code == 404

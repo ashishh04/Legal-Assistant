@@ -2,17 +2,20 @@ import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
-  BriefcaseBusiness, CalendarDays, ChartPie, ChevronsUpDown, ExternalLink, FileText, LayoutDashboard, Menu, Moon,
-  Search, Sparkles, Sun, X,
+  BriefcaseBusiness, CalendarClock, CalendarDays, ChartPie, ExternalLink, FileText, LayoutDashboard, Menu, Moon, Search,
+  Sparkles, Sun, X,
 } from "lucide-react";
-import { fmtDate, initials } from "../lib/format";
+import { fmtDate } from "../lib/format";
 import { useSession } from "../session";
 import { Monogram } from "./Brand";
 import { Chat } from "./Chat";
+import { NotificationBell } from "./NotificationBell";
+import { UserMenu } from "./UserMenu";
 
 const NAV = [
   { to: "/", label: "Overview", icon: LayoutDashboard, end: true },
   { to: "/cases", label: "Cases", icon: BriefcaseBusiness },
+  { to: "/follow-ups", label: "Follow-ups", icon: CalendarClock },
   { to: "/assistant", label: "Assistant", icon: Sparkles },
   { to: "/documents", label: "Documents", icon: FileText },
   { to: "/dashboards", label: "Dashboards", icon: ChartPie },
@@ -95,7 +98,7 @@ function Sidebar() {
         ))}
       </nav>
       <div className="mt-auto flex flex-col gap-3 p-3">
-        <PersonaSwitcher />
+        <UserMenu />
         {meta && (
           <div className="px-2 pb-1 text-[11px] leading-relaxed text-sidebar-muted">
             {meta.org_name}<br />Legal &amp; Brand Protection
@@ -106,64 +109,9 @@ function Sidebar() {
   );
 }
 
-function PersonaSwitcher() {
-  const { user, users, setUserId } = useSession();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!open) return;
-    const onDoc = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    document.addEventListener("mousedown", onDoc);
-    document.addEventListener("keydown", onKey);
-    return () => { document.removeEventListener("mousedown", onDoc); document.removeEventListener("keydown", onKey); };
-  }, [open]);
-  if (!user) return null;
-  return (
-    <div ref={ref} className="relative">
-      {open && (
-        <div className="absolute bottom-full start-0 mb-2 max-h-[60vh] w-full overflow-y-auto rounded-2xl border border-white/10 bg-sidebar-2 p-1.5 shadow-2xl animate-fade-up" role="listbox" aria-label="Users">
-          <div className="px-2.5 pb-1.5 pt-1 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-sidebar-muted">Switch user</div>
-          {users.map((u) => (
-            <button key={u.user_id} type="button" role="option" aria-selected={u.user_id === user.user_id}
-              onClick={() => { setUserId(u.user_id); setOpen(false); }}
-              className={clsx("flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-start transition hover:bg-white/5",
-                u.user_id === user.user_id && "bg-white/5")}>
-              <Avatar name={u.full_name} small />
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-[13px] text-white">{u.full_name}</span>
-                <span className="block truncate text-[11.5px] text-sidebar-muted">{u.job_title}</span>
-              </span>
-              <span className="rounded-full border border-white/10 px-1.5 py-px text-[10px] text-sidebar-muted">{u.entra_group}</span>
-            </button>
-          ))}
-        </div>
-      )}
-      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-haspopup="listbox"
-        className="flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-sidebar-2 p-2.5 text-start transition hover:border-white/20">
-        <Avatar name={user.full_name} />
-        <span className="min-w-0 flex-1">
-          <span className="block truncate text-[13.5px] font-medium text-white">{user.full_name}</span>
-          <span className="block truncate text-[11.5px] text-sidebar-muted">{user.entra_group} · {user.job_title}</span>
-        </span>
-        <ChevronsUpDown size={15} className="text-sidebar-muted" />
-      </button>
-    </div>
-  );
-}
-
-function Avatar({ name, small }: { name: string; small?: boolean }) {
-  return (
-    <span className={clsx("grid shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#e8cf9a] to-[#9c7a3f] font-semibold text-[#141519]",
-      small ? "size-7 text-[11px]" : "size-9 text-[12.5px]")}>
-      {initials(name)}
-    </span>
-  );
-}
-
 const TITLES: [RegExp, string][] = [
   [/^\/$/, "Overview"], [/^\/cases\/[^/]+/, "Case"], [/^\/cases/, "Cases"], [/^\/assistant/, "Assistant"],
-  [/^\/documents/, "Documents"], [/^\/dashboards/, "Dashboards"],
+  [/^\/documents/, "Documents"], [/^\/dashboards/, "Dashboards"], [/^\/follow-ups/, "Follow-ups"],
 ];
 
 function Topbar({ onMenu }: { onMenu: () => void }) {
@@ -197,7 +145,7 @@ function Topbar({ onMenu }: { onMenu: () => void }) {
         <Menu size={19} />
       </button>
       <div className="hidden text-[14px] font-medium text-ink-2 sm:block">{title}</div>
-      <form className="ms-auto flex max-w-md flex-1 sm:ms-6" onSubmit={(e) => { e.preventDefault(); submit(); }}>
+      <form className="ms-auto flex min-w-0 max-w-md flex-1 sm:ms-6" onSubmit={(e) => { e.preventDefault(); submit(); }}>
         <label className="flex w-full items-center gap-2 rounded-xl border border-line bg-surface px-3 py-2 text-[13.5px] focus-within:border-accent">
           <Search size={16} className="text-muted" />
           <input ref={searchRef} value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search cases, parties, marks…"
@@ -211,6 +159,7 @@ function Topbar({ onMenu }: { onMenu: () => void }) {
             <CalendarDays size={14} className="text-accent-ink" /> {fmtDate(meta.demo_today)}
           </span>
         )}
+        <NotificationBell />
         <button type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           className="grid size-9 place-items-center rounded-xl border border-line bg-surface text-ink-2 transition hover:text-ink">
           {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}

@@ -31,7 +31,7 @@ export function Button({ variant = "secondary", icon: IconCmp, className, childr
     <button
       type="button"
       className={clsx(
-        "inline-flex items-center justify-center gap-2 rounded-xl px-3.5 py-2 text-[13.5px] font-medium transition",
+        "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-3.5 py-2 text-[13.5px] font-medium transition",
         "disabled:cursor-not-allowed disabled:opacity-50",
         variant === "primary" && "bg-primary text-primary-ink hover:opacity-90",
         variant === "gold" && "bg-accent text-[#141519] hover:brightness-105",
@@ -154,7 +154,7 @@ export function EmptyState({ icon: IconCmp, title, children, action }: { icon: I
 
 export function SectionTitle({ children, aside }: { children: ReactNode; aside?: ReactNode }) {
   return (
-    <div className="mb-3 flex items-center justify-between gap-3">
+    <div className="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
       <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-ink">{children}</h2>
       {aside}
     </div>

@@ -40,7 +40,7 @@ export default function Documents() {
   const { user } = useSession();
   const [q, setQ] = useState("");
   const [kind, setKind] = useState("");
-  const { data, error } = useApi<SyncStatus | null>(() => (user ? api.sync(user.user_id) : Promise.resolve(null)), [user?.user_id]);
+  const { data, error } = useApi<SyncStatus | null>(() => (user ? api.sync() : Promise.resolve(null)), [user?.user_id]);
 
   const docs = data?.documents ?? [];
   const counts = useMemo(() => {

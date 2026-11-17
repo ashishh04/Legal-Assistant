@@ -8,7 +8,7 @@ const LOAD_TIMEOUT_MS = 25_000;
 /**
  * One embedded dashboard. The browser never signs in to the dashboard server: every load (and every
  * refresh before the token expires) asks Ferrero's backend for a short-lived guest token for this
- * persona, which carries the persona's row rules. Changing persona, dashboard or case re-embeds.
+ * signed-in user, which carries their row rules. A different user, dashboard or case re-embeds.
  */
 export function SupersetFrame({ uuid, domain, userId, caseId, title, theme, blockedHint }: {
   uuid: string;
@@ -46,7 +46,7 @@ export function SupersetFrame({ uuid, domain, userId, caseId, title, theme, bloc
       iframeTitle: title,
       fetchGuestToken: async () => {
         try {
-          return await api.guestToken(userId, uuid, caseId);
+          return await api.guestToken(uuid, caseId);
         } catch (e) {
           window.clearTimeout(timer);
           fail((e as Error).message || "This dashboard can't be opened right now.");

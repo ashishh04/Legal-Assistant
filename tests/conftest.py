@@ -21,6 +21,15 @@ from ferrero.sync.sources import LocalFolderSource
 
 PACK = PROJECT_ROOT / "docs" / "Ferrero_Demo_Pack"
 DEMO_TODAY = date(2026, 11, 5)
+TEST_PASSWORD = "Starting-pass-2026"  # the starting password in tests (FERRERO_DEMO_PASSWORD)
+
+
+def sign_in(client, user_id: str):
+    """Sign a TestClient in as one of the dim_user accounts (its cookie jar keeps the session)."""
+    client.headers["X-Ferrero"] = "1"
+    r = client.post("/api/auth/login", json={"login": user_id, "password": TEST_PASSWORD})
+    assert r.status_code == 200, r.text
+    return client
 
 
 @pytest.fixture(scope="session")
@@ -53,7 +62,7 @@ def index(tmp_path_factory, model, pack_docs) -> DocumentIndex:
 
 @pytest.fixture
 def settings(tmp_path) -> Settings:
-    return Settings(pack_dir=PACK, data_dir=tmp_path, demo_today=DEMO_TODAY)
+    return Settings(pack_dir=PACK, data_dir=tmp_path, demo_today=DEMO_TODAY, demo_password=TEST_PASSWORD)
 
 
 @pytest.fixture(scope="session")

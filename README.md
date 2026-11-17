@@ -5,12 +5,15 @@ The AI part of the Ferrero case-intelligence demo (spec and data in `docs/Ferrer
 - **Document sync** (`python -m ferrero.sync`) takes case documents from a folder or from SharePoint, ties each one to its case, and indexes it for search under that case's access group.
 - **Ferrero assistant** (`python -m ferrero.web`) answers questions in English or Arabic. It draws on the case documents (with citations) and on the case tracker, which holds the same data as the Power BI dashboards. It only ever sees what the signed-in user may see.
 - **Evaluation** (`python -m ferrero.eval`) scores the assistant on the pack's golden set, plus a few access-control probes.
+- **Case records** (in the web app; `python -m ferrero.records` for checks) let the team register, assign, follow up and close cases and keep the case file: visual trademark comparisons, photos of infringing products and other evidence, follow-ups with deadlines and automatic reminders, the business-consultation check before enforcement, and an audit trail of every change. See "Case records" below.
 
 All data is fictional. "Dolce Group International S.A." stands in for the customer's legal entity.
 
 ## Quick start (Windows)
 
 Double-click **`start.cmd`**. On first run it creates the Python environment and indexes the documents; then it starts the app and opens http://127.0.0.1:8000. Close the window to stop it.
+
+Everyone signs in. Before the first start, put a starting password in `.env` (`FERRERO_DEMO_PASSWORD=...`, at least 10 characters): every account in the user directory can then sign in with its e-mail address (for example `priya.menon@demo.local`) and that password, and choose its own from the account menu. See "Signing in" below.
 
 Or step by step in PowerShell:
 
@@ -20,7 +23,7 @@ python -m venv .venv
 copy .env.example .env                 # then put your ANTHROPIC_API_KEY in .env
 .venv\Scripts\python -m ferrero.sync   # index docs\Ferrero_Demo_Pack\documents
 .venv\Scripts\python -m ferrero.web    # open http://127.0.0.1:8000
-.venv\Scripts\python -m pytest         # 67 offline tests; no API key or network needed
+.venv\Scripts\python -m pytest         # 127 offline tests; no API key or network needed
 ```
 
 Scanned PDFs need text recognition first: double-click **`ocr.cmd`** (see "Text recognition").
@@ -56,7 +59,8 @@ To update, repeat these steps. If documents or the frontend changed, first run `
   - Superset embeds dashboards only in pages whose address is on its `frame-ancestors` list. That list includes http://3.75.206.231, but only on port 80.
   - Keep the app on plain HTTP while Superset is on HTTP, because an HTTPS page can't frame an HTTP one.
   - The server must be able to reach `FERRERO_SUPERSET_URL` to get guest tokens.
-- **No sign-in yet:** anyone who can reach the port can pick any persona and use the assistant, which is billed to the AWS account in `.env`. Until Entra ID sign-in replaces the persona picker, limit the port to known addresses in the server's firewall or security group.
+- **Sign-in:** set `FERRERO_DEMO_PASSWORD` in the server's `.env` too, or nobody can sign in. The app runs on plain HTTP there, so the session cookie can't be marked Secure and passwords cross the network unencrypted: put HTTPS in front (a reverse proxy with a certificate) before real users sign in, and keep limiting the port to known addresses in the security group until then. With HTTPS, the cookie becomes Secure by itself (`FERRERO_COOKIE_SECURE=auto`).
+- **Users' records** (case changes, evidence files, follow-ups, the audit trail) live in the `ferrero-records` Docker volume, mounted at `/app/data/records`, so rebuilding the image keeps them. Back the volume up, for example `sudo docker run --rm -v ferrero_ferrero-records:/r -v "$PWD":/b alpine tar czf /b/records-backup.tgz -C /r .` (the volume's full name starts with the compose project's name; `sudo docker volume ls` lists it).
 
 ## How it works
 
@@ -87,7 +91,7 @@ Access is enforced in the data layer and the tools, never by the prompt. A case 
 
 The case tracker also filters the mailbox, intake-form and app-store tables by country. The pack's RLS table leaves those three unfiltered, although D3's spec requires the filter.
 
-**Demo identity:** the web page lets you pick one of the ten `dim_user` personas, and each conversation is bound to the user who started it. This is for the demo only. Before anyone else can reach the app, replace it with Entra ID sign-in: validate the token and map its group claims to `security.ROLES`. The server listens on 127.0.0.1 by default.
+**Identity:** everyone signs in (see "Signing in"), and the server takes the user from the session for every request: nothing the browser sends can choose who is asking. A conversation with Ferrero belongs to the user who started it. The server listens on 127.0.0.1 by default.
 
 ### Document sync
 
@@ -172,19 +176,22 @@ The page opens with that case in focus, so questions that name no case are about
 
 ## Web frontend
 
-`frontend/` is a React 19 + TypeScript + Tailwind 4 app (Vite 7). `npm run build` writes it into `src/ferrero/web/dist`, and `python -m ferrero.web` serves it at http://127.0.0.1:8000. The original single-file chat page is still at `/classic`.
+`frontend/` is a React 19 + TypeScript + Tailwind 4 app (Vite 7). `npm run build` writes it into `src/ferrero/web/dist`, and `python -m ferrero.web` serves it at http://127.0.0.1:8000. The original single-file chat page predates sign-in; `/classic` now opens the Assistant page.
 
 | Page | What it shows |
 |---|---|
-| Overview | KPI row (open cases, hearings in 30 days, overdue actions, recovery and win rates, legal spend); open cases by stage and country; amounts by year; outcomes; upcoming hearings with an "Ask" per case. One filter row scopes the page. |
+| Landing page | What visitors see at `/` before signing in: what Ferrero does, how it protects the data, and the way in |
+| Sign in · Signed out | E-mail address and password, "keep me signed in", help for a forgotten password, and (test environments) a list of the accounts; the page after signing out |
+| Overview | Deliberately simple: four numbers (open cases, hearings in the next 30 days, overdue actions, cases closed this year), "Needs attention" (the user's deadlines that are overdue or due within 7 days, else everyone's they can see), and open cases by stage. The detailed figures are on the Dashboards page. |
 | Cases | Searchable, sortable case tracker with stage, outcome, next step and overdue flags |
-| Case detail (DS-1) | Facts, amounts in local currency and AED, next step, timeline, documents with their sync status, counsel spend, "Ask Ferrero about this case" |
+| Case detail (DS-1) | Tabs: **Overview** (facts, amounts in local currency and AED, next step, timeline, documents with their sync status, counsel spend, commercial sensitivity, "Ask Ferrero about this case"), **Evidence & documents**, **Follow-ups** and **Audit trail**. "Update case" changes status, stage, next step and owner |
+| Follow-ups | Every open deadline the user can see, soonest first: follow-ups set on cases, next actions and hearings from the case tracker, grouped as overdue, due today, coming up and later, plus the recently resolved |
 | Assistant | Full-page chat in English or Arabic, with cited sources and the steps Ferrero took |
 | Documents | The document sync: searchable files, scans read by text recognition (with confidence) or waiting for it, password-protected files, with reasons |
 | Document viewer | A document's indexed text by section; for scans, each page image beside its recognised text and per-page confidence |
 | Dashboards | The Superset dashboards (D1–D4, DS-1) embedded with guest tokens, one tab each; see "Superset dashboards" below. Without a Superset account: plain frames from `FERRERO_SUPERSET_DASHBOARDS`, or the planned D1–D4 set |
 
-The persona switcher at the bottom of the sidebar applies the access rules everywhere: KPIs, charts, cases, documents and Ferrero's answers. A light and a dark theme are available. Deep links of the form `/?case=TM-2024-428` (from Power BI or Superset) open the case with Ferrero beside it.
+The signed-in user's role applies everywhere: KPIs, charts, cases, documents, evidence, reminders and Ferrero's answers. The account menu at the bottom of the sidebar shows what the user can see, and offers "Change password", "Switch account" and "Sign out". The bell in the top bar holds the user's reminders. A light and a dark theme are available. Deep links of the form `/?case=TM-2024-428` (from Power BI or Superset) open the case with Ferrero beside it.
 
 ```powershell
 cd frontend
@@ -201,20 +208,69 @@ Charts follow the dataviz rules:
 
 ### Superset dashboards
 
-The Dashboards page embeds the Superset dashboards whose title contains "Ferrero" (`Ferrero · D1 Legal Case Overview` … `Ferrero · DS-1 Case Detail`) with Superset's embedded SDK. The browser never signs in to Superset: for each dashboard it asks `POST /api/dashboards/guest-token`, and the backend (`ferrero.web.superset`) signs in with the account in `.env` and asks Superset for a guest token limited to that dashboard. The token carries row rules built from the persona's role, the same rules as everywhere else in Ferrero:
-- datasets with a `country` column: only the countries the persona may see (listed positively, so an unknown country stays hidden);
-- datasets with only a `case_id`: only the persona's cases;
+The Dashboards page embeds the Superset dashboards whose title contains "Ferrero" (`Ferrero · D1 Legal Case Overview` … `Ferrero · DS-1 Case Detail`) with Superset's embedded SDK. The browser never signs in to Superset: for each dashboard it asks `POST /api/dashboards/guest-token`, and the backend (`ferrero.web.superset`) signs in with the account in `.env` and asks Superset for a guest token limited to that dashboard. The token carries row rules built from the signed-in user's role, the same rules as everywhere else in Ferrero:
+- datasets with a `country` column: only the countries the user may see (listed positively, so an unknown country stays hidden);
+- datasets with only a `case_id`: only the user's cases;
 - document datasets: no rows for roles without documents (Procurement).
 
-Switching persona re-embeds the dashboard with a new token. "Case dashboard" on a case page opens DS-1 limited to that case (`/dashboards?d=DS-1&case=TM-2024-428`).
+Signing in as someone else re-embeds the dashboard with a new token. "Case dashboard" on a case page opens DS-1 limited to that case (`/dashboards?d=DS-1&case=TM-2024-428`).
 
 Set up:
 1. In `.env`: `FERRERO_SUPERSET_URL`, `FERRERO_SUPERSET_USERNAME`, `FERRERO_SUPERSET_PASSWORD`. The account needs "can grant guest token on SecurityRestApi" (Admin has it). Ferrero turns on "Embed dashboard" for any matching dashboard that lacks it (`FERRERO_SUPERSET_AUTO_EMBED=false` to stop that).
 2. Superset needs the `EMBEDDED_SUPERSET` feature flag (on at http://13.206.33.195:8088, version 6.1), and its `GUEST_ROLE_NAME` role needs read access to the Ferrero datasets, or the charts show a permission error.
-3. Check the connection: `.venv\Scripts\python -m ferrero.web.superset` signs in, lists the dashboards (turning embedding on where needed), checks framing for `http://localhost:<FERRERO_PORT>` and issues one guest token, printing OK or FAILED with the reason for each step. A restricted persona never gets a token for a dashboard whose datasets Superset won't list, because its row rules couldn't be built.
+3. Check the connection: `.venv\Scripts\python -m ferrero.web.superset` signs in, lists the dashboards (turning embedding on where needed), checks framing for `http://localhost:<FERRERO_PORT>` and issues one guest token, printing OK or FAILED with the reason for each step. A restricted user never gets a token for a dashboard whose datasets Superset won't list, because its row rules couldn't be built.
 4. Superset only lets the sites in its `frame-ancestors` list embed it. That server allows `http://localhost:8090`, so `.env` sets `FERRERO_PORT=8090` and `start.cmd` opens http://localhost:8090. To use another address, add it to `TALISMAN_CONFIG["content_security_policy"]["frame-ancestors"]` in `superset_config.py`. When the address isn't allowed, the page says which addresses are.
 
 **Note for this machine:** its Windows Application Control policy blocks the native Rolldown (Vite 8) and Rollup bundler binaries. The build therefore uses Vite 7 with Rollup's official WebAssembly build, set by the `overrides` entry in `package.json`. esbuild, Tailwind and LightningCSS run natively. On an unrestricted machine the override can be dropped.
+
+## Case records: updates, evidence, follow-ups and the audit trail
+
+The pack's CSVs stay the read-only baseline. What users change or add is stored in `data/records/` (`FERRERO_RECORDS_DIR`) and laid over the pack, so the case pages, the KPIs, the Follow-ups page and Ferrero's answers all show the current state at once.
+
+| Feature | What it does |
+|---|---|
+| **Registering a case** | "Register a case" on the Overview or the Cases page: the mark infringed, the infringer (on record, or new), the country, how it was reported, the owner and the first action; optionally the court, the amount claimed and the commercial sensitivity assessment. The case gets the next number for its year (TM-2026-435 after the pack's TM-2026-434), starts at Intake, and is stored in `registered_cases` (new infringers in `registered_infringers`); later changes go through the same rules as any case. Users can register only in the countries their role covers. |
+| **Workflow** | The Overview shows the four steps (register, assign, follow up, close) with what is waiting at each, then the user's deadlines. Each case has a workflow bar with Reassign, Add follow-up and Close case. A new owner, by registration or reassignment, gets a "Case assigned to you" notification. The Cases list has an Owner filter (My cases) and opens filtered from `?stage=Intake` or `?owner=me`. |
+| **Trademark comparison** | On the *Trademark comparison* tab: the registered mark's specimen (`src/ferrero/web/marks/MK-0n.png`, drawn by `scripts/make_mark_specimens.py`; replace them with the certificate images) beside a photo of the product from the case's evidence, indicative similarity of the sign on the product to the mark (`records/similarity.py`: letters different, sounds alike, contains the mark; Arabic signs against the Arabic name), and a recorded assessment: visual, phonetic and conceptual similarity, goods, likelihood of confusion, notes. A new assessment supersedes the last (kept as history, in `mark_comparisons`); each goes in the audit trail. |
+| **Photos and evidence** | On a case's *Evidence & documents* tab: drag and drop or choose files, or take a photo on a phone. Categories: product photo, screenshot, cease-and-desist letter, correspondence with authorities, invoice, external counsel document, other evidence. Each item has a title, the date it was taken or dated, where it was found, and notes. Photos show in a gallery and open in a viewer; PDFs preview in place. |
+| **Evidence integrity** | Accepted: photos (JPEG, PNG, WebP, GIF, HEIC), PDF, Word, Excel, PowerPoint, e-mails (.msg, .eml), text and CSV, up to 25 MB (`FERRERO_EVIDENCE_MAX_MB`). A file is accepted only if its content matches its extension, so a web page renamed `.jpg` is refused. Files are stored exactly as uploaded, named by their SHA-256, read-only and never deleted. The fingerprint goes into the audit trail, and "Check the file is unchanged" re-verifies it. Withdrawing an item (with a reason) takes it out of the case's evidence but keeps the file and its history. The same file can't be added to a case twice. |
+| **Follow-ups and reminders** | On the *Follow-ups* tab: a deadline, given as a start date plus the days allowed (for example a store given 30 days to remove infringing products) or as a date, with an owner (the case owner by default) and a reminder. The owner is reminded before it (7 days by default) and told when it is reached, to follow up and decide; if no decision is recorded 3 days later, Legal Operations is told as well (`FERRERO_REMINDER_LEAD_DAYS`, `FERRERO_ESCALATE_DAYS`). The decision is one of: complied, close the case (with its outcome); done, keep the case open; not complied, escalate (with the next step and, optionally, a new stage); no longer needed. A deadline can be moved, with a reason. The case tracker's next actions and hearings are reminded the same way, to the case's lead counsel. |
+| **Notifications** | Under the bell in the top bar: each user's reminders, checked when the app starts, every 15 minutes (`FERRERO_REMINDER_MINUTES`) and after every change. Each reminder is sent once, and only to people who can open the case; a decided follow-up or a closed case clears its reminders. E-mail copies are optional: set `FERRERO_SMTP_HOST` (see `.env.example`). |
+| **Commercial sensitivity** | On the case's Overview: business priority (High / Medium / Low), whether the business must be consulted before enforcement (Yes / No), the commercial relationship with the infringer (customer, distributor or reseller, commercial partner, supplier), the consultation's status (not started, in progress, cleared to proceed, hold enforcement), the business contact and notes. While consultation is required and not cleared, the case shows a banner, and moving it into an enforcement stage (notice sent, filed, hearing, judgment, appeal) is refused unless the user gives a reason to go ahead, which is recorded as *enforcement without business clearance*. The Cases list filters on these fields. |
+| **Audit trail** | On the *Audit trail* tab: every change to a case (its fields, evidence, follow-ups and decisions) with who made it, their role, when (UTC), each field before and after, and the reason. Entries can't be changed or deleted (SQLite triggers refuse it), and each entry's SHA-256 covers the one before it, so an edited, removed or reordered entry fails the tamper check shown on the tab. "Download CSV" exports one row per changed field. |
+
+**Who may do what:** Legal-UAE, Legal-KSA, Legal-MENA, Legal-Ops and Leadership may update the cases they can see. Evidence follows the document rules: Procurement sees neither the evidence nor the evidence entries in the audit trail, and can't change anything. The owner of a case or follow-up must be able to see that case.
+
+**Dates:** deadlines and "today" follow the reporting date (`FERRERO_DEMO_TODAY`, 5 November 2026), like the rest of the app; audit and upload times are the real time. To show a deadline being reached, give a follow-up a start date in the past (for example 6 October, with 30 days).
+
+**Ferrero (the assistant)** sees the same records: `get_case` returns the business assessment, the follow-ups and the evidence list, and `query_case_data` has the new columns on `fact_case` plus the tables `case_follow_up`, `case_evidence` (metadata only), `case_audit` and `case_mark_comparison`; registered cases are in `fact_case` like the pack's. When consultation is required and not cleared, Ferrero says so whenever it discusses enforcement steps on the case.
+
+```powershell
+.venv\Scripts\python -m ferrero.records status      # what the store holds
+.venv\Scripts\python -m ferrero.records verify      # audit chain, and every evidence file against its fingerprint
+.venv\Scripts\python -m ferrero.records reminders   # create the reminders due (--email also sends them, --date tests a day)
+```
+
+`data/records/` is users' data, not derived data: it is never rebuilt, it is left out of git (`.gitignore`) and of the Docker image (`.dockerignore`), and on a server it lives in a Docker volume. Deleting the folder resets every case to the pack's data.
+
+## Signing in
+
+Every page except the landing page and the sign-in page needs a signed-in user, and so does every API call.
+
+- **Accounts** are the people in the user directory (`dim_user`); the sign-in name is their e-mail address (the user id, such as `U-08`, also works). Their role, and so what they can see and change, comes from their Entra group as before.
+- **Passwords:** until someone sets their own (account menu, "Change password"), the starting password `FERRERO_DEMO_PASSWORD` applies to them. Without it, only people with their own password can sign in; there is no built-in password. Passwords are stored only as salted scrypt hashes in `data/records/auth.sqlite`. A new password needs at least 10 characters and can't contain the person's name or e-mail address; changing it signs the person out everywhere else.
+- **Sessions:** an HttpOnly cookie holding a random token (only its SHA-256 is stored). A session ends after 12 hours without activity (`FERRERO_SESSION_HOURS`), or 14 days with "keep me signed in" (`FERRERO_SESSION_REMEMBER_DAYS`), on sign-out, or when the password changes. When a session ends, the next click leads back to the sign-in page, and then to where the user was.
+- **Protection:** five wrong passwords for a name lock it for 15 minutes, and an unknown name gets the same answer as a wrong password. Every sign-in attempt is logged (`sign_ins` in `auth.sqlite`). Requests that change something must carry the `X-Ferrero` header, which other websites can't add, so a page elsewhere can't act with a signed-in user's cookie.
+- **Test accounts:** for a test environment, `FERRERO_LOGIN_SHOW_ACCOUNTS=true` lists the accounts on the sign-in page, which fills in the e-mail address when one is picked. Off by default.
+
+```powershell
+.venv\Scripts\python -m ferrero.auth accounts             # who can sign in, with which kind of password, last sign-in
+.venv\Scripts\python -m ferrero.auth set-password U-08    # set someone's password (asked for twice)
+.venv\Scripts\python -m ferrero.auth reset U-08           # back to the starting password
+.venv\Scripts\python -m ferrero.auth sign-out             # end every session (or: sign-out U-08)
+```
+
+For single sign-on later (Microsoft Entra ID), validate the identity provider's token in `current_principal` (`ferrero/web/app.py`) and map its group claims to `security.ROLES`; the rest of the app already takes the user from there.
 
 ## Evaluation
 
@@ -246,6 +302,15 @@ See `.env.example`. Real environment variables take precedence over `.env`.
 | `FERRERO_SUPERSET_TITLE`, `_AUTO_EMBED`, `_ALLOWED_DOMAINS`, `_AUTH_PROVIDER` | `Ferrero`, `true`, any, `db` | which dashboards, whether Ferrero turns embedding on, embed domains, login provider |
 | `FERRERO_SUPERSET_DASHBOARDS` | – | fallback without an account: `Title\|URL;Title\|URL` shown in plain frames |
 | `FERRERO_PORT` | `8000` | web app port (`start.cmd` opens http://localhost:&lt;port&gt;) |
+| `FERRERO_DEMO_PASSWORD` | – | starting password for every account without its own; without it, only people with their own password can sign in |
+| `FERRERO_SESSION_HOURS` / `FERRERO_SESSION_REMEMBER_DAYS` | `12` / `14` | a session ends after this long without activity (with "keep me signed in": days) |
+| `FERRERO_LOGIN_SHOW_ACCOUNTS` | `false` | list the accounts on the sign-in page (test environments) |
+| `FERRERO_COOKIE_SECURE` | `auto` | Secure flag on the session cookie: `auto` sets it when the page is served over HTTPS |
+| `FERRERO_RECORDS_DIR` | `data/records` | case records: changes, evidence files, follow-ups, notifications, audit trail |
+| `FERRERO_EVIDENCE_MAX_MB` | `25` | largest evidence file accepted |
+| `FERRERO_REMINDER_MINUTES` / `FERRERO_REMINDER_LEAD_DAYS` / `FERRERO_ESCALATE_DAYS` | `15` / `7` / `3` | how often deadlines are checked; how far ahead "due soon" is sent; days after a deadline before Legal Operations is told |
+| `FERRERO_SMTP_HOST`, `_PORT`, `_SECURITY`, `_USERNAME`, `_PASSWORD`, `_FROM` | – | e-mail copies of reminders (optional) |
+| `FERRERO_NOTIFY_EMAIL_TO`, `FERRERO_PUBLIC_URL` | – | send every reminder e-mail to one mailbox (demo, test); the address used in e-mail links |
 | `FERRERO_OCR_ENGINE` | `auto` | `auto` (the server if `FERRERO_OCR_URL` is set, else cached results only), `server`, `local`, `off` |
 | `FERRERO_OCR_URL` | – | OpenAI-compatible endpoint serving `baidu/Unlimited-OCR-2` |
 | `FERRERO_OCR_MODEL_DIR` / `FERRERO_OCR_MODE` | `models/Unlimited-OCR-2` / `gundam` | local model folder; `gundam` reads the page plus detail tiles (the model's default), `base` the page only (faster) |
@@ -255,6 +320,10 @@ See `.env.example`. Real environment variables take precedence over `.env`.
 ## Known limits and next steps
 
 - **Text recognition on a CPU is slow** (minutes per page; much slower when the machine is short of memory). For production, serve Unlimited-OCR-2 on a GPU (`FERRERO_OCR_URL`), where a page takes seconds. Confidence is the model's own token probability: calibrate the two thresholds on a sample of real scans.
+- **Case records:**
+  - The Superset dashboards read their own copy of the pack's data, so they don't show changes made in Ferrero (registered cases, closed cases, business priority, follow-ups). Ferrero's own pages and KPIs do; a registered case has no "Case dashboard" button.
+  - The text of uploaded evidence isn't indexed for Ferrero's document search yet: Ferrero sees the evidence list, not the files' contents.
+  - Photos are shown from the original files (no thumbnails), which is fine for tens of photos per case.
 - **Search** is SQLite full-text with a light Arabic stemmer. For production, use Azure AI Search with the same fields, an Arabic analyzer, vectors and a security filter on `access_group`.
 - Conversations are kept in memory: a restart forgets them, and the page starts a new one.
 - **Data-pack defects** stay as they are, and the assistant reports disagreements between sources:
@@ -271,6 +340,8 @@ src/ferrero/
   sync/      sources (folder, SharePoint), extract, chunker, index, runner, cli
   ocr/       text recognition for scans: Unlimited-OCR-2 in-process (local) or served (server), output parsing, cache, cli
   assistant/ tools, prompts, agent (Claude tool loop, conversations)
+  auth/      signing in: passwords (scrypt), sessions, lockout, cli
+  records/   case records: store and audit trail, evidence files, field rules, reminders, e-mail, service, cli
   web/       FastAPI app + static chat page
   eval/      golden-set runner, overrides, cli
 tests/       offline tests (fake Messages API, mocked Graph, fake OCR engine; test_ocr_local.py runs in .venv-ocr)

@@ -111,8 +111,10 @@ def case_list(model: CaseModel, principal: Principal) -> list[dict[str, Any]]:
         return _rows(conn, """
             SELECT case_id, title, mark_id, mark_name, infringer_name, infringer_type, case_type, country, court_name,
                    status, stage, outcome, priority, risk_rating, opened_date, closed_date, next_hearing_date, next_action,
-                   next_action_due, lead_counsel, currency, claim_amount_aed, awarded_amount_aed, settlement_amount_aed,
-                   recovered_amount_aed, days_open, (status = 'Open' AND next_action_due < reporting_date()) AS overdue
+                   next_action_due, lead_counsel_id, lead_counsel, currency, claim_amount_aed, awarded_amount_aed,
+                   settlement_amount_aed, recovered_amount_aed, days_open,
+                   (status = 'Open' AND next_action_due < reporting_date()) AS overdue,
+                   business_priority, consultation_required, consultation_status, commercial_relationship
             FROM fact_case ORDER BY opened_date DESC""")
     finally:
         conn.close()

@@ -27,3 +27,28 @@ export function friendlyReason(reason: string | null | undefined): string {
 export function pct(value: number | null | undefined): string {
   return value == null ? "–" : `${Math.round(value * 100)}%`;
 }
+
+/** Audit-trail actions in plain language. */
+export const AUDIT_ACTIONS: Record<string, string> = {
+  "case.registered": "Case registered",
+  "case.updated": "Case updated",
+  "case.closed": "Case closed",
+  "case.reopened": "Case reopened",
+  "business.updated": "Business assessment updated",
+  "business.override": "Enforcement without business clearance",
+  "evidence.added": "Evidence added",
+  "evidence.updated": "Evidence details changed",
+  "evidence.withdrawn": "Evidence withdrawn",
+  "follow_up.created": "Follow-up set",
+  "follow_up.updated": "Follow-up changed",
+  "follow_up.extended": "Deadline extended",
+  "follow_up.resolved": "Follow-up resolved",
+  "comparison.recorded": "Trademark comparison recorded",
+};
+
+/** Where a deadline stands, against the reporting date. */
+export function deadlineState(daysLeft: number, leadDays = 7): "overdue" | "today" | "soon" | "later" {
+  if (daysLeft < 0) return "overdue";
+  if (daysLeft === 0) return "today";
+  return daysLeft <= leadDays ? "soon" : "later";
+}

@@ -36,3 +36,38 @@ export function greeting(date = new Date()) {
   const h = date.getHours();
   return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
 }
+
+export function fmtBytes(n: number | null | undefined) {
+  if (n == null) return "–";
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${(n / 1024).toFixed(n < 10 * 1024 ? 1 : 0)} KB`;
+  return `${(n / 1024 / 1024).toFixed(1)} MB`;
+}
+
+/** A UTC timestamp in the reader's time zone: "17 Nov 2026, 10:32". */
+export function fmtDateTime(iso: string | null | undefined) {
+  if (!iso) return "–";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? iso
+    : d.toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+}
+
+/** "3 min ago", "2 h ago", "yesterday", or the date. */
+export function timeAgo(iso: string | null | undefined, now = Date.now()) {
+  if (!iso) return "";
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return "";
+  const min = Math.round((now - t) / 60_000);
+  if (min < 1) return "just now";
+  if (min < 60) return `${min} min ago`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `${h} h ago`;
+  return h < 48 ? "yesterday" : fmtDate(iso.slice(0, 10));
+}
+
+/** Add whole days to an ISO date. */
+export function addDays(iso: string, days: number) {
+  const d = new Date(`${iso.slice(0, 10)}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+}

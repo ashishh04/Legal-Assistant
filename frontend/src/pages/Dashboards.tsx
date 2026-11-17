@@ -45,7 +45,7 @@ function label(d: EmbeddedDashboardInfo) {
 export default function Dashboards() {
   const { user } = useSession();
   const userId = user?.user_id ?? "";
-  const { data, error, loading, reload } = useApi(() => api.dashboards(userId), [userId]);
+  const { data, error, loading, reload } = useApi(() => api.dashboards(), [userId]);
 
   if (!user) return null;
   if (loading && !data) return <><PageHeader eyebrow="Analytics" title="Dashboards" /><Card className="h-[420px] animate-pulse" /></>;

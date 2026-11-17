@@ -7,6 +7,45 @@ export interface User {
   entra_group: string;
   access: string;
   documents: boolean;
+  can_edit: boolean;
+  case_groups: string[];
+}
+
+/** The signed-in user: a directory entry plus the sign-in details. */
+export interface Me extends User {
+  email: string;
+  own_password: boolean; // false: still on the starting password
+}
+
+/** What the landing and sign-in pages get before anyone signs in. */
+export interface PublicInfo {
+  org_name: string;
+  sign_in_configured: boolean;
+  accounts: { user_id: string; full_name: string; job_title: string; entra_group: string; email: string }[] | null;
+}
+
+export type Decision = "close_case" | "keep_open" | "escalate" | "cancel";
+
+/** Choices for the case forms (case fields, evidence, follow-ups), from /api/meta. */
+export interface CaseOptions {
+  stages_open: string[];
+  stages_closed: string[];
+  outcomes: string[];
+  levels: string[];
+  relationships: string[];
+  consultation_statuses: string[];
+  enforcement_stages: string[];
+  labels: Record<string, string>;
+  evidence_categories: string[];
+  photo_categories: string[];
+  accept: string;
+  accepted_types: string;
+  evidence_max_mb: number;
+  follow_up_kinds: { kind: string; title: string; days: number }[];
+  decisions: { value: Decision; label: string }[];
+  reminder_lead_days: number;
+  escalate_days: number;
+  comparison: { similarity: string[]; goods: string[]; overall: string[]; labels: Record<string, string> };
 }
 
 export interface Meta {
@@ -19,6 +58,8 @@ export interface Meta {
   examples: string[];
   dashboards: { title: string; url: string }[];
   embedded_dashboards?: boolean;
+  case_options: CaseOptions;
+  email_notifications: boolean;
 }
 
 /** A dashboard Ferrero embeds through the dashboard server's SDK, with a guest token per persona. */
@@ -135,6 +176,11 @@ export interface CaseRow {
   recovered_amount_aed: number;
   days_open: number;
   overdue: number;
+  lead_counsel_id: string;
+  business_priority: string | null;
+  consultation_required: number | null;
+  consultation_status: string | null;
+  commercial_relationship: string | null;
 }
 
 export interface TimelineEvent {
@@ -161,9 +207,11 @@ export interface CaseDocument {
 export interface CaseDetail {
   case_id: string;
   title: string;
+  mark_id: string;
+  infringer_id: string;
   case_type: string;
   country: string;
-  court_name: string;
+  court_name: string | null;
   status: "Open" | "Closed";
   stage: string;
   outcome: string;
@@ -193,9 +241,287 @@ export interface CaseDetail {
   days_open: number;
   language: string;
   sensitivity: string;
+  access_group: string;
+  lead_counsel_id: string;
+  business_priority: string | null;
+  consultation_required: boolean | null;
+  commercial_relationship: string | null;
+  consultation_status: string | null;
+  consultation_contact: string | null;
+  consultation_notes: string | null;
   timeline: TimelineEvent[];
   invoices: { count: number; total_aed: number; by_category_aed: Record<string, number> };
   documents_on_file: CaseDocument[] | string;
+  follow_ups: { follow_up_id: string; kind: string; title: string; owner_name: string; due_date: string; status: string; decision: string | null }[];
+  mark_comparison: ComparisonEntry | null;
+  registered_in_app: boolean;
+  permissions: { edit: boolean; evidence: boolean; add_evidence: boolean };
+  counts: { evidence: number | null; follow_ups_open: number; audit: number };
+}
+
+/** Choices for registering a case (GET /api/register/options), limited to the countries the user covers. */
+export interface RegisterOptions {
+  marks: { mark_id: string; mark_name: string; mark_name_ar: string; product_category: string }[];
+  case_types: string[];
+  sources: string[];
+  countries: { country: string; currency: string; access_group: string }[];
+  courts: { court_id: string; country: string; court_name: string }[];
+  infringers: { infringer_id: string; name: string; name_ar: string | null; type: string; country: string }[];
+  infringer_types: string[];
+  levels: string[];
+  relationships: string[];
+  languages: string[];
+  sensitivities: string[];
+  default_next_action: string;
+  default_next_action_days: number;
+}
+
+/** A new case (POST /api/cases). */
+export interface NewCase {
+  mark_id: string;
+  infringer_id?: string | null;
+  infringer_name?: string | null;
+  infringer_type?: string | null;
+  infringer_city?: string | null;
+  case_type: string;
+  country: string;
+  court_id?: string | null;
+  source_channel: string;
+  opened_date?: string | null;
+  priority: string;
+  risk_rating?: string | null;
+  lead_counsel_id?: string | null;
+  external_firm?: string | null;
+  next_action?: string | null;
+  next_action_due?: string | null;
+  claim_amount_local?: number | null;
+  language?: string | null;
+  sensitivity?: string | null;
+  business_priority?: string | null;
+  consultation_required?: boolean | null;
+  commercial_relationship?: string | null;
+  details?: string | null;
+}
+
+/** A registered mark, as the comparison shows it. */
+export interface MarkInfo {
+  mark_id: string;
+  mark_name: string;
+  mark_name_ar: string;
+  product_category: string;
+  nice_classes: string;
+  registration_no: string;
+  registered_in: string[];
+  specimen: boolean;
+}
+
+/** Indicative similarity between a mark and a sign (an aid, not a finding). */
+export interface SimilarityResult {
+  compared_with: string;
+  word_similarity: number | null;
+  letters_different: number | null;
+  sounds_alike: boolean;
+  contains_mark: boolean;
+  identical?: boolean;
+  indication: "High" | "Medium" | "Low" | null;
+}
+
+export interface ComparisonEntry {
+  comparison_id: string;
+  evidence_id: string | null;
+  infringing_sign: string;
+  visual: string;
+  phonetic: string;
+  conceptual: string;
+  goods: string;
+  overall: string;
+  notes: string | null;
+  word_similarity: number | null;
+  sounds_alike?: boolean | null;
+  assessed_by: string;
+  assessed_by_id?: string;
+  assessed_at: string;
+  status?: "Current" | "Superseded";
+}
+
+export interface ComparisonData {
+  case_id: string;
+  mark: MarkInfo | null;
+  current: ComparisonEntry | null;
+  history: ComparisonEntry[];
+  indicators: SimilarityResult | null;
+  photos: EvidenceItem[] | null;
+  can_record: boolean;
+}
+
+export interface ComparisonInput {
+  infringing_sign: string;
+  evidence_id: string | null;
+  visual: string;
+  phonetic: string;
+  conceptual: string;
+  goods: string;
+  overall: string;
+  notes: string | null;
+}
+
+/** Editable case fields (PATCH /api/cases/:id). */
+export type CaseChanges = Partial<Record<
+  "status" | "stage" | "outcome" | "closed_date" | "priority" | "risk_rating" | "lead_counsel_id" | "external_firm" |
+  "next_action" | "next_action_due" | "next_hearing_date" | "business_priority" | "commercial_relationship" |
+  "consultation_status" | "consultation_contact" | "consultation_notes", string | null> & { consultation_required: boolean | null }>;
+
+export interface EvidenceItem {
+  evidence_id: string;
+  case_id: string;
+  category: string;
+  title: string;
+  notes: string | null;
+  captured_on: string | null;
+  location: string | null;
+  file_name: string;
+  content_type: string;
+  file_label: string;
+  image: boolean;
+  size_bytes: number;
+  sha256: string;
+  uploaded_by_id: string;
+  uploaded_by: string;
+  uploaded_at: string;
+  status: "Active" | "Withdrawn";
+  withdrawn_by: string | null;
+  withdrawn_at: string | null;
+  withdrawn_reason: string | null;
+}
+
+export interface EvidenceDetails {
+  category: string;
+  title?: string;
+  captured_on?: string;
+  location?: string;
+  notes?: string;
+}
+
+export interface FollowUp {
+  follow_up_id: string;
+  case_id: string;
+  case_title?: string;
+  kind: string;
+  title: string;
+  details: string | null;
+  owner_id: string;
+  owner_name: string;
+  start_date: string;
+  period_days: number | null;
+  due_date: string;
+  remind_days: number;
+  status: "Open" | "Done" | "Cancelled";
+  decision: string | null;
+  decision_label: string | null;
+  decision_note: string | null;
+  resolved_by: string | null;
+  resolved_at: string | null;
+  created_by_id: string;
+  created_by: string;
+  created_at: string;
+  days_left: number;
+}
+
+export interface NewFollowUp {
+  kind: string;
+  title: string;
+  details?: string;
+  owner_id?: string;
+  start_date?: string;
+  period_days?: number | null;
+  due_date?: string;
+  remind_days?: number;
+}
+
+export interface FollowUpDecision {
+  decision: Decision;
+  note?: string;
+  outcome?: string;
+  closed_date?: string;
+  case_changes?: { stage?: string; next_action?: string; next_action_due?: string };
+  override_reason?: string;
+}
+
+/** One open deadline on the worklist: a follow-up, a case's next action, or a hearing. */
+export interface WorkItem {
+  type: "follow_up" | "next_action" | "hearing";
+  id: string;
+  case_id: string;
+  case_title?: string;
+  kind: string;
+  title: string;
+  due_date: string;
+  days_left: number;
+  owner_id: string;
+  owner_name: string;
+  mine: boolean;
+  status: string;
+  link: string;
+  decision_label?: string | null;
+  decision_note?: string | null;
+  resolved_by?: string | null;
+  resolved_at?: string | null;
+}
+
+export interface Worklist {
+  as_of: string;
+  lead_days: number;
+  escalate_days: number;
+  items: WorkItem[];
+  resolved: WorkItem[];
+}
+
+export interface NotificationItem {
+  id: number;
+  case_id: string;
+  kind: "follow_up" | "next_action" | "hearing" | "assigned";
+  stage: "upcoming" | "due" | "overdue" | "today" | "assigned";
+  title: string;
+  body: string;
+  link: string;
+  ref_id: string | null;
+  due_date: string | null;
+  days_left: number | null;
+  created_at: string;
+  read: boolean;
+}
+
+export interface Notifications {
+  unread: number;
+  items: NotificationItem[];
+  email: boolean;
+}
+
+export interface AuditChange {
+  field: string;
+  label: string;
+  old: unknown;
+  new: unknown;
+}
+
+export interface AuditEntry {
+  entry_id: string;
+  at: string;
+  actor_id: string;
+  actor_name: string;
+  actor_role: string;
+  action: string;
+  summary: string;
+  changes: AuditChange[];
+  reason: string | null;
+  ref_type: string | null;
+  ref_id: string | null;
+  entry_hash: string;
+}
+
+export interface AuditTrail {
+  entries: AuditEntry[];
+  integrity: { ok: boolean; entries: number; head?: string; first_bad?: string; problem?: string };
 }
 
 export interface SyncDoc {

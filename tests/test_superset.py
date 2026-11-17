@@ -14,6 +14,8 @@ from ferrero.web.superset import (
     Dataset, SupersetClient, SupersetSettings, dashboard_code, frame_ancestors, row_rules, short_title,
 )
 
+from conftest import sign_in
+
 SETTINGS = SupersetSettings(url="http://superset.test:8088", username="ferrero-svc", password="pw")
 TITLES = {1: "Ferrero · D4 Infringer & Enforcement Outcomes", 2: "Ferrero · DS‑1 Case Detail",
           3: "Ferrero · D3 Infringement Intake & Triage", 4: "Ferrero · D2 Leadership Command View",
@@ -184,22 +186,23 @@ def test_settings_from_env():
 def test_web_endpoints(settings, model, index, fake_claude):
     fake = FakeSuperset()
     app = create_app(settings, Assistant(settings, model, index, client=fake_claude.client()), superset=client_with(fake))
-    c = TestClient(app)
+    c = sign_in(TestClient(app), "U-03")
     assert c.get("/api/meta").json()["embedded_dashboards"] is True
-    info = c.get("/api/dashboards", params={"user_id": "U-03"}).json()
+    info = c.get("/api/dashboards").json()
     assert info["mode"] == "embedded" and [d["code"] for d in info["dashboards"]] == ["D1", "D2", "D3", "D4", "DS-1"]
     assert info["frame_ancestors"] == ["'self'", "http://localhost:8090"]
     ds1 = info["dashboards"][-1]["uuid"]
-    ok = c.post("/api/dashboards/guest-token", json={"user_id": "U-03", "dashboard": ds1, "case_id": "TM-2024-428"})
+    ok = c.post("/api/dashboards/guest-token", json={"dashboard": ds1, "case_id": "TM-2024-428"})
     assert ok.status_code == 200 and ok.json() == {"token": "guest-token-1"}
     assert {"dataset": 11, "clause": "case_id = 'TM-2024-428'"} in fake.guest_requests[-1]["rls"]
     # a KSA user cannot scope a dashboard to a UAE case, and unknown dashboards are refused
-    assert c.post("/api/dashboards/guest-token", json={"user_id": "U-05", "dashboard": ds1, "case_id": "TM-2024-428"}).status_code == 404
-    assert c.post("/api/dashboards/guest-token", json={"user_id": "U-05", "dashboard": "12345678-0000-0000-0000-000000000000"}).status_code == 404
+    sign_in(c, "U-05")
+    assert c.post("/api/dashboards/guest-token", json={"dashboard": ds1, "case_id": "TM-2024-428"}).status_code == 404
+    assert c.post("/api/dashboards/guest-token", json={"dashboard": "12345678-0000-0000-0000-000000000000"}).status_code == 404
 
 
 def test_without_superset_the_page_falls_back(settings, model, index, fake_claude, monkeypatch):
     monkeypatch.delenv("FERRERO_SUPERSET_URL", raising=False)
-    c = TestClient(create_app(settings, Assistant(settings, model, index, client=fake_claude.client())))
-    assert c.get("/api/dashboards", params={"user_id": "U-08"}).json()["mode"] in ("none", "links")
-    assert c.post("/api/dashboards/guest-token", json={"user_id": "U-08", "dashboard": "0" * 32}).status_code == 404
+    c = sign_in(TestClient(create_app(settings, Assistant(settings, model, index, client=fake_claude.client()))), "U-08")
+    assert c.get("/api/dashboards").json()["mode"] in ("none", "links")
+    assert c.post("/api/dashboards/guest-token", json={"dashboard": "0" * 32}).status_code == 404

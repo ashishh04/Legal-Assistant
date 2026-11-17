@@ -24,11 +24,14 @@ COPY docs/Ferrero_Demo_Pack/csv ./docs/Ferrero_Demo_Pack/csv
 COPY docs/Ferrero_Demo_Pack/documents_full_meta ./docs/Ferrero_Demo_Pack/documents_full_meta
 COPY data ./data
 
-RUN useradd --create-home --uid 10001 ferrero && chown -R ferrero:ferrero /app/data
+# data/records holds what users add (case changes, evidence files, follow-ups, the audit trail): docker-compose.yml
+# mounts a named volume there, so it survives rebuilds. Created here so the volume starts owned by the app user.
+RUN useradd --create-home --uid 10001 ferrero && mkdir -p /app/data/records && chown -R ferrero:ferrero /app/data
 USER ferrero
 
 EXPOSE 8000
+# /api/public is the one endpoint that answers without signing in (everything else returns 401 to the health check).
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-  CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/meta', timeout=4)"]
+  CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/public', timeout=4)"]
 # One process: conversations live in memory, so several workers would lose track of them.
 CMD ["python", "-m", "ferrero.web", "--host", "0.0.0.0", "--port", "8000"]

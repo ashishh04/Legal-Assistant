@@ -5,9 +5,9 @@ that may grant guest tokens, such as an Admin). Ferrero then finds the dashboard
 FERRERO_SUPERSET_TITLE (default "Ferrero"), turns on embedding for any that lack it (unless
 FERRERO_SUPERSET_AUTO_EMBED=false), and gives the browser one guest token per dashboard.
 
-Each token carries row-level rules built from the persona's role, so a dashboard shows the same rows as
-every other page of Ferrero: datasets with a country column are limited to the countries the persona may
-see, datasets with only a case_id to the persona's cases, and document datasets are empty for roles without
+Each token carries row-level rules built from the signed-in user's role, so a dashboard shows the same rows
+as every other page of Ferrero: datasets with a country column are limited to the countries the user may
+see, datasets with only a case_id to the user's cases, and document datasets are empty for roles without
 documents. The browser never signs in to Superset and never sees the service account.
 """
 from __future__ import annotations
