@@ -27,7 +27,7 @@ def test_page_and_metadata(settings, model, index, fake_claude):
     meta = c.get("/api/meta").json()
     assert meta["index"]["indexed"] == 12 and meta["demo_today"] == "2026-11-05"
     users = c.get("/api/users").json()
-    assert len(users) == 10 and all("email" not in u for u in users)
+    assert len(users) == 11 and all("email" not in u for u in users)
 
 
 def test_conversation_streams_steps_then_answer(settings, model, index, fake_claude):

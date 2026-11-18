@@ -137,4 +137,4 @@ def test_without_any_password_nobody_can_sign_in(make_client, settings):
 def test_the_account_list_is_shown_only_when_switched_on(make_client, settings):
     assert make_client(settings).get("/api/public").json()["accounts"] is None
     accounts = make_client(replace(settings, login_show_accounts=True)).get("/api/public").json()["accounts"]
-    assert len(accounts) == 10 and all("password" not in str(a).lower() for a in accounts)
+    assert len(accounts) == 11 and all("password" not in str(a).lower() for a in accounts)

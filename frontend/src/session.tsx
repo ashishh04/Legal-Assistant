@@ -23,6 +23,11 @@ interface Session {
   signIn: (login: string, password: string, remember: boolean) => Promise<void>;
   signOut: () => Promise<void>;
   refreshUser: () => Promise<void>;
+  /** The administrator views the portal as another user (or returns to their own view). */
+  switchTo: (userId: string) => Promise<Me>;
+  switchBack: () => Promise<Me>;
+  /** Re-read the directory after the administrator changed it. */
+  reloadUsers: () => Promise<void>;
   theme: "light" | "dark";
   toggleTheme: () => void;
   assistant: AssistantState;
@@ -94,6 +99,22 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     try { await api.logout(); } finally { leave(false); }
   }, [leave]);
 
+  const switchTo = useCallback(async (userId: string) => {
+    const me = await api.switchUser(userId);
+    setAssistant((a) => ({ ...a, open: false }));
+    await enter(me);
+    return me;
+  }, [enter]);
+
+  const switchBack = useCallback(async () => {
+    const me = await api.switchBack();
+    setAssistant((a) => ({ ...a, open: false }));
+    await enter(me);
+    return me;
+  }, [enter]);
+
+  const reloadUsers = useCallback(async () => { setUsers(await api.users()); }, []);
+
   const refreshUser = useCallback(async () => {
     const me = await api.me();
     if (me) setUser(me);
@@ -106,10 +127,10 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const closeAssistant = useCallback(() => setAssistant((a) => ({ ...a, open: false })), []);
 
   const value = useMemo<Session>(() => ({
-    status, expired, publicInfo, meta, users, user, signIn, signOut, refreshUser,
+    status, expired, publicInfo, meta, users, user, signIn, signOut, refreshUser, switchTo, switchBack, reloadUsers,
     theme: theme === "dark" ? "dark" : "light", toggleTheme, assistant, openAssistant, closeAssistant, bootError,
-  }), [status, expired, publicInfo, meta, users, user, signIn, signOut, refreshUser, theme, toggleTheme, assistant,
-    openAssistant, closeAssistant, bootError]);
+  }), [status, expired, publicInfo, meta, users, user, signIn, signOut, refreshUser, switchTo, switchBack, reloadUsers,
+    theme, toggleTheme, assistant, openAssistant, closeAssistant, bootError]);
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 }

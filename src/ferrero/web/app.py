@@ -154,6 +154,27 @@ class Comparison(BaseModel):
     notes: str | None = Field(default=None, max_length=4000)
 
 
+class NewUser(BaseModel):
+    full_name: str | None = Field(default=None, max_length=240)
+    email: str | None = Field(default=None, max_length=240)
+    job_title: str | None = Field(default=None, max_length=240)
+    entra_group: str | None = Field(default=None, max_length=40)
+    country: str | None = Field(default=None, max_length=40)
+    password: str | None = Field(default=None, max_length=400)
+
+
+class UserChanges(BaseModel):
+    changes: dict[str, Any]
+
+
+class TemporaryPassword(BaseModel):
+    password: str = Field(default="", max_length=400)
+
+
+class SwitchTo(BaseModel):
+    user_id: str = Field(min_length=1, max_length=200)
+
+
 class ReadMark(BaseModel):
     ids: list[int] | None = None  # None: all
 
@@ -273,6 +294,32 @@ def create_app(settings: Settings | None = None, assistant: Assistant | None = N
     def change_password(body: PasswordChange, request: Request, p: Me) -> dict[str, bool]:
         auth.change_password(p, body.current_password, body.new_password, keep_token=request.cookies.get(COOKIE))
         return {"changed": True}
+
+    # ---------- the platform administrator: users, and switching into another user's view ----------
+    @app.get("/api/admin/users")
+    def admin_users(p: Me) -> dict[str, Any]:
+        return auth.list_users(p)
+
+    @app.post("/api/admin/users")
+    def admin_add_user(body: NewUser, p: Me) -> dict[str, Any]:
+        return auth.add_user(p, body.model_dump())
+
+    @app.patch("/api/admin/users/{user_id}")
+    def admin_update_user(user_id: str, body: UserChanges, p: Me) -> dict[str, Any]:
+        return auth.update_user(p, user_id, body.changes)
+
+    @app.post("/api/admin/users/{user_id}/password")
+    def admin_set_password(user_id: str, body: TemporaryPassword, p: Me) -> dict[str, Any]:
+        return auth.set_temporary_password(p, user_id, body.password)
+
+    @app.post("/api/admin/switch")
+    def admin_switch(body: SwitchTo, request: Request, _: Me) -> dict[str, Any]:
+        """The administrator's session acts as another user until switched back; their changes name both."""
+        return {"user": me_payload(auth.switch(request.cookies.get(COOKIE), body.user_id))}
+
+    @app.post("/api/admin/switch/back")
+    def admin_switch_back(request: Request, _: Me) -> dict[str, Any]:  # Me: a live session, whoever it acts as
+        return {"user": me_payload(auth.switch_back(request.cookies.get(COOKIE)))}
 
     # ---------- reference data ----------
     @app.get("/api/meta")

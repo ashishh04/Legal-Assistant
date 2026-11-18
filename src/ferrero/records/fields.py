@@ -23,7 +23,7 @@ CONSULTATION_STATUSES = ("Not started", "In progress", "Cleared to proceed", "Ho
 CLEARED = "Cleared to proceed"
 # Moving a case into one of these stages from an earlier one starts enforcement: a notice, a filing, a court step.
 ENFORCEMENT_STAGES = frozenset({"Notice sent", "Filed", "Hearing", "Judgment", "Appeal"})
-USER_ID = re.compile(r"U-\d{2}")
+USER_ID = re.compile(r"U-\d{2,3}")
 ISO_DAY = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 

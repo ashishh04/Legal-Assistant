@@ -79,6 +79,8 @@ class Settings:
     escalate_days: int = 3              # a deadline still open this many days after it passed is escalated
     # Sign-in (ferrero.auth)
     demo_password: str | None = None    # FERRERO_DEMO_PASSWORD: starting password for accounts without their own
+    admin_email: str = "admin@ferrero.com"   # FERRERO_ADMIN_EMAIL: the platform administrator's sign-in name
+    admin_password: str | None = None   # FERRERO_PASSWORD (or FERRERO_ADMIN_PASSWORD): the administrator's password
     session_hours: int = 12             # a session ends after this long without activity
     session_remember_days: int = 14     # ... or this long with "keep me signed in"
     login_show_accounts: bool = False   # list the accounts on the sign-in page (a convenience for test environments)
@@ -213,6 +215,8 @@ def get_settings() -> Settings:
         reminder_lead_days=int(env("FERRERO_REMINDER_LEAD_DAYS", "7")),
         escalate_days=int(env("FERRERO_ESCALATE_DAYS", "3")),
         demo_password=env("FERRERO_DEMO_PASSWORD") or None,
+        admin_email=(env("FERRERO_ADMIN_EMAIL") or "admin@ferrero.com").strip().lower(),
+        admin_password=env("FERRERO_ADMIN_PASSWORD") or env("FERRERO_PASSWORD") or None,
         session_hours=int(env("FERRERO_SESSION_HOURS", "12")),
         session_remember_days=int(env("FERRERO_SESSION_REMEMBER_DAYS", "14")),
         login_show_accounts=env("FERRERO_LOGIN_SHOW_ACCOUNTS", "false").lower() in ("true", "1", "yes"),

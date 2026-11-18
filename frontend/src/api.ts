@@ -1,7 +1,7 @@
 import type {
-  AuditChange, AuditTrail, CaseChanges, CaseDetail, CaseRow, ComparisonData, ComparisonInput, ConversationInfo,
+  AdminUser, AdminUsers, AuditChange, AuditTrail, CaseChanges, CaseDetail, CaseRow, ComparisonData, ComparisonInput, ConversationInfo,
   DashboardsInfo, DocumentView, EvidenceDetails, EvidenceItem, FollowUp, FollowUpDecision, MarkInfo, Me, Meta, NewCase,
-  NewFollowUp, Notifications, Overview, PublicInfo, RegisterOptions, SimilarityResult, StreamEvent, SyncStatus, User,
+  NewFollowUp, NewUser, Notifications, Overview, PublicInfo, RegisterOptions, SimilarityResult, StreamEvent, SyncStatus, User,
   Worklist,
 } from "./types";
 
@@ -51,6 +51,16 @@ export const api = {
   logout: () => send<{ signed_out: boolean }>("POST", "/api/auth/logout", {}),
   changePassword: (currentPassword: string, newPassword: string) =>
     send<{ changed: boolean }>("POST", "/api/auth/password", { current_password: currentPassword, new_password: newPassword }),
+
+  // ---------- the platform administrator ----------
+  adminUsers: () => request<AdminUsers>("/api/admin/users"),
+  addUser: (data: NewUser) => send<AdminUser>("POST", "/api/admin/users", data),
+  updateUser: (userId: string, changes: Partial<Pick<AdminUser, "full_name" | "job_title" | "entra_group" | "country" | "active">>) =>
+    send<AdminUser>("PATCH", `/api/admin/users/${enc(userId)}`, { changes }),
+  setUserPassword: (userId: string, password: string) =>
+    send<AdminUser>("POST", `/api/admin/users/${enc(userId)}/password`, { password }),
+  switchUser: async (userId: string) => (await send<{ user: Me }>("POST", "/api/admin/switch", { user_id: userId })).user,
+  switchBack: async () => (await send<{ user: Me }>("POST", "/api/admin/switch/back", {})).user,
 
   // ---------- the app ----------
   meta: () => request<Meta>("/api/meta"),

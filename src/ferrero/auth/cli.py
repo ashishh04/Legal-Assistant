@@ -1,6 +1,6 @@
 """``python -m ferrero.auth``: manage sign-in passwords and sessions.
 
-    python -m ferrero.auth accounts                 who can sign in, with which password, and their last sign-in
+    python -m ferrero.auth accounts                 everyone with an account: role, password state, access, last sign-in
     python -m ferrero.auth set-password U-08        set someone's own password (asked for twice, not echoed)
     python -m ferrero.auth reset U-08               back to the starting password (FERRERO_DEMO_PASSWORD)
     python -m ferrero.auth sign-out [U-08]          end the sessions of one user, or of everyone
@@ -32,15 +32,16 @@ def main(argv: list[str] | None = None) -> int:
     settings = get_settings()
     auth = Auth(settings, CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path))
     if args.command == "accounts":
-        with auth.store.connect() as conn:
-            last = {r["user_id"]: r["at"] for r in conn.execute(
-                "SELECT user_id, MAX(at) AS at FROM sign_ins WHERE ok = 1 GROUP BY user_id")}
-        for a in auth.accounts.values():
-            password = "own password" if auth.has_own_password(a.user_id) else (
-                "starting password" if settings.demo_password else "no password: can't sign in")
-            print(f"{a.user_id}  {a.email:<34} {a.entra_group:<12} {password:<28} last sign-in {last.get(a.user_id, 'never')}")
+        for u in auth.directory():
+            state = "active" if u["active"] else "DISABLED"
+            print(f"{u['user_id']:<6} {u['email']:<34} {u['entra_group']:<15} {u['password']:<11} {state:<9} "
+                  f"last sign-in {u['last_sign_in'] or 'never'}")
+        if not settings.admin_password:
+            print("
+FERRERO_PASSWORD is not set: the platform administrator can't sign in.")
         if not settings.demo_password:
-            print("\nFERRERO_DEMO_PASSWORD is not set: only accounts with their own password can sign in.")
+            print("FERRERO_DEMO_PASSWORD is not set: other accounts sign in with a password of their own "
+                  "(the administrator gives temporary ones on the Users page).")
         return 0
 
     account = auth.find(getattr(args, "user", "") or "") if getattr(args, "user", None) else None

@@ -156,16 +156,16 @@ class CaseRecords:
     def can_own(self, user_id: str, case: dict[str, Any]) -> bool:
         """Owners of a case or follow-up: users who can change cases and can see this one."""
         p = self.model.principal(user_id)
-        return bool(p and p.can_edit and p.sees_group(case["access_group"]))
+        return bool(p and p.can_edit and p.role.can_own and p.sees_group(case["access_group"]))
 
     def _escalate_to(self, case: dict[str, Any]) -> list[str]:
         return [u["user_id"] for u in self.model.users()
-                if u["entra_group"] in ESCALATION_GROUPS and case["access_group"] in u["case_groups"]]
+                if u["entra_group"] in ESCALATION_GROUPS and case["access_group"] in u["case_groups"] and u["active"]]
 
     def _audit(self, conn: sqlite3.Connection, principal: Principal, case_id: str, action: str, summary: str,
                changes: list[dict[str, Any]] | None = None, reason: str | None = None,
                ref_type: str | None = None, ref_id: str | None = None) -> None:
-        self.store.append_audit(conn, case_id=case_id, actor_id=principal.user_id, actor_name=principal.full_name,
+        self.store.append_audit(conn, case_id=case_id, actor_id=principal.user_id, actor_name=principal.actor_label,
                                 actor_role=principal.entra_group, action=action, summary=summary,
                                 changes=changes or [], reason=reason or None, ref_type=ref_type, ref_id=ref_id)
 
@@ -704,7 +704,7 @@ class CaseRecords:
         settings, sent = getattr(self.mailer, "settings", None), 0
         redirect = getattr(settings, "redirect_to", None)
         for uid, items in by_user.items():
-            to = redirect or self._emails.get(uid)
+            to = redirect or self._emails.get(uid) or self.model.email(uid)
             if not to:
                 continue
             subject, body = compose(self._name(uid), [dict(r) for r in items], getattr(settings, "public_url", None))

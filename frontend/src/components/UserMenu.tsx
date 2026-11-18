@@ -1,13 +1,14 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronsUpDown, KeyRound, LogOut, Repeat, ShieldAlert } from "lucide-react";
+import { ChevronsUpDown, Eye, KeyRound, LogOut, Repeat, ShieldAlert, Undo2, UsersRound } from "lucide-react";
 import { ApiError, api } from "../api";
 import { initials } from "../lib/format";
 import { useToast } from "../lib/toast";
 import { useSession } from "../session";
 import { Dialog } from "./Dialog";
 import { Field, FormError, TextInput } from "./forms";
+import { SwitchUserDialog } from "./SwitchUserDialog";
 import { Button } from "./ui";
 
 export function Avatar({ name, small }: { name: string; small?: boolean }) {
@@ -21,10 +22,12 @@ export function Avatar({ name, small }: { name: string; small?: boolean }) {
 
 /** The signed-in person at the bottom of the sidebar: their access, password, switching account and signing out. */
 export function UserMenu() {
-  const { user, signOut } = useSession();
+  const { user, signOut, switchBack } = useSession();
   const navigate = useNavigate();
+  const toast = useToast();
   const [open, setOpen] = useState(false);
   const [changing, setChanging] = useState(false);
+  const [switching, setSwitching] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!open) return;
@@ -37,6 +40,18 @@ export function UserMenu() {
   if (!user) return null;
 
   const item = "flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-start text-[13px] text-sidebar-ink transition hover:bg-white/5";
+  const acting = user.acting_by ?? null;
+  const administrator = Boolean(user.is_admin || acting);  // the real person is the administrator
+  const goBack = async () => {
+    setOpen(false);
+    try {
+      await switchBack();
+      navigate("/admin/users");
+      toast("info", "You are back in the administrator's view.");
+    } catch (e) {
+      toast("error", (e as Error).message);
+    }
+  };
   return (
     <div ref={ref} className="relative">
       {open && (
@@ -49,6 +64,13 @@ export function UserMenu() {
               Sees {user.access}{user.can_edit ? "" : " (read only)"}.
             </div>
           </div>
+          {acting && (
+            <button type="button" role="menuitem" onClick={goBack}
+              className="mb-1 flex w-full items-start gap-2.5 rounded-xl border border-accent/40 bg-accent/10 px-2.5 py-2 text-start text-[12px] leading-relaxed text-sidebar-ink">
+              <Undo2 size={15} className="mt-0.5 shrink-0 text-accent" />
+              <span>Viewing as {user.full_name}. <span className="font-medium text-white">Return to {acting.full_name}</span></span>
+            </button>
+          )}
           {!user.own_password && (
             <button type="button" role="menuitem" onClick={() => { setOpen(false); setChanging(true); }}
               className="mb-1 flex w-full items-start gap-2.5 rounded-xl border border-warning/30 bg-warning/10 px-2.5 py-2 text-start text-[12px] leading-relaxed text-sidebar-ink">
@@ -57,13 +79,25 @@ export function UserMenu() {
             </button>
           )}
           <div className="border-t border-white/10 pt-1">
-            <button type="button" role="menuitem" className={item} onClick={() => { setOpen(false); setChanging(true); }}>
-              <KeyRound size={15} className="text-sidebar-muted" /> Change password
-            </button>
-            <button type="button" role="menuitem" className={item}
-              onClick={async () => { setOpen(false); await signOut(); navigate("/login"); }}>
-              <Repeat size={15} className="text-sidebar-muted" /> Switch account
-            </button>
+            {administrator && (
+              <button type="button" role="menuitem" className={item} onClick={() => { setOpen(false); setSwitching(true); }}>
+                <Eye size={15} className="text-sidebar-muted" /> Switch user
+              </button>
+            )}
+            {user.is_admin && (
+              <button type="button" role="menuitem" className={item} onClick={() => { setOpen(false); navigate("/admin/users"); }}>
+                <UsersRound size={15} className="text-sidebar-muted" /> Users
+              </button>
+            )}
+            {!administrator && <>
+              <button type="button" role="menuitem" className={item} onClick={() => { setOpen(false); setChanging(true); }}>
+                <KeyRound size={15} className="text-sidebar-muted" /> Change password
+              </button>
+              <button type="button" role="menuitem" className={item}
+                onClick={async () => { setOpen(false); await signOut(); navigate("/login"); }}>
+                <Repeat size={15} className="text-sidebar-muted" /> Switch account
+              </button>
+            </>}
             <button type="button" role="menuitem" className={item} onClick={() => { setOpen(false); navigate("/logout"); }}>
               <LogOut size={15} className="text-sidebar-muted" /> Sign out
             </button>
@@ -78,11 +112,14 @@ export function UserMenu() {
         </span>
         <span className="min-w-0 flex-1">
           <span className="block truncate text-[13.5px] font-medium text-white">{user.full_name}</span>
-          <span className="block truncate text-[11.5px] text-sidebar-muted">{user.entra_group} · {user.job_title}</span>
+          <span className="block truncate text-[11.5px] text-sidebar-muted">
+            {acting ? `Viewing as · ${user.entra_group}` : user.is_admin ? "Platform administrator" : `${user.entra_group} · ${user.job_title}`}
+          </span>
         </span>
         <ChevronsUpDown size={15} className="text-sidebar-muted" />
       </button>
       <ChangePasswordDialog open={changing} onClose={() => setChanging(false)} />
+      <SwitchUserDialog open={switching} onClose={() => setSwitching(false)} />
     </div>
   );
 }

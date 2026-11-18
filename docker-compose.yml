@@ -6,7 +6,8 @@
 # Superset embeds its dashboards only in pages whose address is in its frame-ancestors list. http://3.75.206.231
 # (port 80) is on that list, so keep the published port at 80 there. FERRERO_HTTP_PORT (shell or .env) changes it.
 #
-# Everyone signs in: set FERRERO_DEMO_PASSWORD in .env (the starting password), or nobody can. On plain HTTP the
+# Everyone signs in: set FERRERO_PASSWORD in .env (the administrator, admin@ferrero.com, who then adds users and
+# gives them passwords), or nobody can. On plain HTTP the
 # passwords and the session cookie cross the network unencrypted: put HTTPS in front before real users sign in, and
 # keep the port limited to known addresses (EC2 security group) until then.
 services:

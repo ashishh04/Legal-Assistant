@@ -115,7 +115,10 @@ class CaseModel:
         self._records_by_case: dict[str, dict[str, list[dict]]] = {}
         self._marks = {r["mark_id"]: r for r in self.tables["dim_mark"].dicts()}
         self._infringers = {r["infringer_id"]: r for r in self.tables["dim_infringer"].dicts()}
-        self._users = {r["user_id"]: r for r in self.tables["dim_user"].dicts()}
+        self._base_user_table = self.tables["dim_user"]
+        self._users = {r["user_id"]: r for r in self._base_user_table.dicts()}
+        self._extra_emails: dict[str, str] = {}
+        self._disabled: frozenset[str] = frozenset()
         self._docs_by_file = {r["title"]: r for r in self.tables["fact_document"].dicts()}
         self._docs_by_id = {r["doc_id"]: r for r in self.tables["fact_document"].dicts()}
         self._by_case: dict[str, dict[str, list[dict]]] = defaultdict(lambda: defaultdict(list))
@@ -126,12 +129,34 @@ class CaseModel:
         self._lock = threading.Lock()
 
     # ---------- directory ----------
+    def set_directory(self, extra_users: list[dict[str, Any]], disabled: set[str] | frozenset[str]) -> None:
+        """People beyond the pack's dim_user (the administrator, users the administrator added) and disabled accounts.
+
+        A disabled person keeps their name on the record (audit trail, owners) but is no principal: they can't sign in,
+        own a case or receive reminders.
+        """
+        cols = self._base_user_table.columns
+        table = Table("dim_user", cols, self._base_user_table.types,
+                      self._base_user_table.rows + [tuple(u.get(c) for c in cols) for u in extra_users])
+        users = {r["user_id"]: r for r in table.dicts()}
+        with self._lock:
+            self.tables = {**self.tables, "dim_user": table}
+            self._users, self._disabled = users, frozenset(disabled)
+            self._extra_emails = {u["user_id"]: u["email"] for u in extra_users if u.get("email")}
+            self._snapshots.clear()
+
+    def email(self, user_id: str) -> str | None:
+        """The address of someone added beyond the pack (the pack's addresses stay out of the model)."""
+        return self._extra_emails.get(user_id)
+
     def users(self) -> list[dict[str, Any]]:
         out = []
         for u in self._users.values():
             role = role_for_group(u["entra_group"])
+            active = u["user_id"] not in self._disabled
             out.append({**u, "access": role.description, "documents": role.documents, "can_edit": role.can_edit,
-                        "case_groups": sorted(role.case_groups)})
+                        "case_groups": sorted(role.case_groups), "active": active, "can_own": role.can_own and active,
+                        "admin": role.admin})
         return out
 
     def user(self, user_id: str) -> dict[str, Any] | None:
@@ -176,6 +201,7 @@ class CaseModel:
                     by_case[r["case_id"]][name].append(r)
         cases = {r["case_id"]: r for r in cases_table.dicts()}
         with self._lock:
+            tables["dim_user"] = self.tables["dim_user"]  # the directory may have changed meanwhile (set_directory)
             self.tables, self._cases, self._records_by_case = tables, cases, by_case
             self._infringers = {r["infringer_id"]: r for r in infringers_table.dicts()}
             self._snapshots.clear()
@@ -206,7 +232,7 @@ class CaseModel:
 
     def principal(self, user_id: str) -> Principal | None:
         u = self._users.get(user_id)
-        if u is None:
+        if u is None or user_id in self._disabled:
             return None
         return Principal(u["user_id"], u["full_name"], u["job_title"], u["entra_group"], role_for_group(u["entra_group"]))
 

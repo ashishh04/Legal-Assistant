@@ -1,4 +1,5 @@
-"""SQLite store for sign-in (data/records/auth.sqlite): users' own passwords, live sessions and the sign-in log.
+"""SQLite store for sign-in (data/records/auth.sqlite): passwords, live sessions, the sign-in log, and the users the
+platform administrator manages (people added, accounts disabled, and a log of what the administrator did).
 
 Session tokens are never stored, only their SHA-256, so a copy of this file can't be used to take over a session.
 """
@@ -36,7 +37,41 @@ CREATE TABLE IF NOT EXISTS sign_ins (
     reason         TEXT
 );
 CREATE INDEX IF NOT EXISTS ix_sign_ins_user ON sign_ins(user_id, seq);
+
+-- People the administrator added (the pack's dim_user holds the rest).
+CREATE TABLE IF NOT EXISTS directory_users (
+    user_id        TEXT PRIMARY KEY,
+    full_name      TEXT NOT NULL,
+    job_title      TEXT NOT NULL,
+    team           TEXT NOT NULL,
+    country        TEXT NOT NULL,
+    entra_group    TEXT NOT NULL,
+    email          TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    created_by     TEXT NOT NULL,
+    created_at     TEXT NOT NULL,
+    updated_at     TEXT NOT NULL
+);
+-- Accounts the administrator disabled: they can't sign in, own cases or receive reminders.
+CREATE TABLE IF NOT EXISTS disabled_users (
+    user_id        TEXT PRIMARY KEY,
+    disabled_by    TEXT NOT NULL,
+    disabled_at    TEXT NOT NULL
+);
+-- What the administrator did: users added and changed, passwords set, switches into another user's view.
+CREATE TABLE IF NOT EXISTS admin_log (
+    seq            INTEGER PRIMARY KEY AUTOINCREMENT,
+    at             TEXT NOT NULL,
+    admin_id       TEXT NOT NULL,
+    action         TEXT NOT NULL,
+    user_id        TEXT,
+    detail         TEXT
+);
 """
+# Columns added after the first release, created on existing files.
+ADDED_COLUMNS = {
+    "credentials": [("temporary", "INTEGER NOT NULL DEFAULT 0")],  # 1: set by the administrator, to be changed
+    "sessions": [("acting_as", "TEXT")],                           # the user the administrator switched into
+}
 
 
 class AuthStore:
@@ -46,6 +81,11 @@ class AuthStore:
         with self.connect() as conn:
             conn.execute("PRAGMA journal_mode = WAL")
             conn.executescript(SCHEMA)
+            for table, columns in ADDED_COLUMNS.items():
+                have = {r["name"] for r in conn.execute(f"PRAGMA table_info({table})")}
+                for name, decl in columns:
+                    if name not in have:
+                        conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
 
     @contextmanager
     def connect(self) -> Iterator[sqlite3.Connection]:

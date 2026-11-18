@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-route
 import "./index.css";
 import { Monogram } from "./components/Brand";
 import { Shell } from "./components/Shell";
+import AdminUsers from "./pages/AdminUsers";
 import AssistantPage from "./pages/AssistantPage";
 import CaseDetail from "./pages/CaseDetail";
 import Cases from "./pages/Cases";
@@ -61,6 +62,7 @@ createRoot(document.getElementById("root")!).render(
               <Route path="documents" element={<Documents />} />
               <Route path="documents/:docId" element={<DocumentView />} />
               <Route path="dashboards" element={<Dashboards />} />
+              <Route path="admin/users" element={<AdminUsers />} />
               <Route path="home" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
             </Route>

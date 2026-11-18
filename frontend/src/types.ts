@@ -9,12 +9,50 @@ export interface User {
   documents: boolean;
   can_edit: boolean;
   case_groups: string[];
+  active?: boolean;   // false: disabled by the administrator
+  can_own?: boolean;  // may own cases and follow-ups
+  admin?: boolean;    // the platform administrator
 }
 
 /** The signed-in user: a directory entry plus the sign-in details. */
 export interface Me extends User {
   email: string;
-  own_password: boolean; // false: still on the starting password
+  own_password: boolean; // false: still on a starting or temporary password
+  is_admin?: boolean;
+  /** Set while the platform administrator views the portal as this user. */
+  acting_by?: { user_id: string; full_name: string } | null;
+}
+
+/** An account as the administrator's Users page shows it. */
+export interface AdminUser {
+  user_id: string;
+  full_name: string;
+  job_title: string;
+  team: string;
+  country: string;
+  entra_group: string;
+  email: string;
+  source: "directory" | "added" | "administrator";
+  active: boolean;
+  password: "configured" | "own" | "temporary" | "starting" | "not set";
+  access: string;
+  last_sign_in: string | null;
+}
+
+export interface AdminUsers {
+  users: AdminUser[];
+  roles: { group: string; description: string }[];
+  countries: string[];
+  starting_password: boolean;
+}
+
+export interface NewUser {
+  full_name: string;
+  email: string;
+  job_title: string;
+  entra_group: string;
+  country: string;
+  password: string;
 }
 
 /** What the landing and sign-in pages get before anyone signs in. */

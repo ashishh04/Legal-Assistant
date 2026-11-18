@@ -10,7 +10,8 @@ import { StatusPill } from "../ui";
 /** Who can own a case or a follow-up: people who can change cases and can see this case's country group. */
 export function useOwners(accessGroup: string): User[] {
   const { users } = useSession();
-  return useMemo(() => users.filter((u) => u.can_edit && u.case_groups.includes(accessGroup)), [users, accessGroup]);
+  return useMemo(() => users.filter((u) => u.can_edit && u.can_own !== false && u.active !== false
+    && u.case_groups.includes(accessGroup)), [users, accessGroup]);
 }
 
 /** High / Medium / Low as three bars plus the word (never colour alone). */
@@ -71,6 +72,6 @@ export function valueText(field: string, value: unknown, users: User[]): ReactNo
     return <span className="font-mono text-[11.5px]" title={value}>{value.slice(0, 12)}…{value.slice(-8)}</span>;
   const text = String(value);
   if (ISO_DAY.test(text)) return fmtDate(text);
-  if (/^U-\d{2}$/.test(text)) return users.find((u) => u.user_id === text)?.full_name ?? text;
+  if (/^U-\d{2,3}$/.test(text)) return users.find((u) => u.user_id === text)?.full_name ?? text;
   return text;
 }

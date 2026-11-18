@@ -23,7 +23,7 @@ python -m venv .venv
 copy .env.example .env                 # then put your ANTHROPIC_API_KEY in .env
 .venv\Scripts\python -m ferrero.sync   # index docs\Ferrero_Demo_Pack\documents
 .venv\Scripts\python -m ferrero.web    # open http://127.0.0.1:8000
-.venv\Scripts\python -m pytest         # 127 offline tests; no API key or network needed
+.venv\Scripts\python -m pytest         # 134 offline tests; no API key or network needed
 ```
 
 Scanned PDFs need text recognition first: double-click **`ocr.cmd`** (see "Text recognition").
@@ -257,14 +257,16 @@ The pack's CSVs stay the read-only baseline. What users change or add is stored 
 
 Every page except the landing page and the sign-in page needs a signed-in user, and so does every API call.
 
-- **Accounts** are the people in the user directory (`dim_user`); the sign-in name is their e-mail address (the user id, such as `U-08`, also works). Their role, and so what they can see and change, comes from their Entra group as before.
-- **Passwords:** until someone sets their own (account menu, "Change password"), the starting password `FERRERO_DEMO_PASSWORD` applies to them. Without it, only people with their own password can sign in; there is no built-in password. Passwords are stored only as salted scrypt hashes in `data/records/auth.sqlite`. A new password needs at least 10 characters and can't contain the person's name or e-mail address; changing it signs the person out everywhere else.
+- **Accounts** are the people in the user directory (`dim_user`), the platform administrator, and the people the administrator adds; the sign-in name is the e-mail address (the user id, such as `U-08`, also works). Their role, and so what they can see and change, comes from their Entra group as before.
+- **Platform administrator:** `admin@ferrero.com` (`FERRERO_ADMIN_EMAIL`), user `U-00`, signs in with `FERRERO_PASSWORD` (also read as `FERRERO_ADMIN_PASSWORD`), which lives only in the server's `.env` and can't be changed in the portal. The administrator sees every case and document and may change cases, but owns none. The **Users** page (`/admin/users`) adds people (name, work e-mail, job title, role, country, temporary password), changes added people's details and role, sets temporary passwords for anyone (they are asked to change them at the next sign-in), and turns access off and on (a disabled account is signed out at once and can't sign in, own cases or receive reminders; its history stays). Added people live in `directory_users`, disabled accounts in `disabled_users`, and every administrative action in `admin_log`, all in `auth.sqlite`.
+- **Switch user:** from the account menu or the Users page, the administrator views the portal exactly as another user does: same cases, documents, follow-ups and Overview. A banner shows whose view it is, with the way back. Changes made meanwhile are recorded in the audit trail as "Platform Administrator as Lina Mansour"; administration and password changes are unavailable until the administrator switches back.
+- **Passwords:** someone's own password, or a temporary one the administrator gave them, applies first; otherwise the optional starting password `FERRERO_DEMO_PASSWORD`. Without any of these the account can't sign in; there is no built-in password. Passwords are stored only as salted scrypt hashes in `data/records/auth.sqlite`. A new password needs at least 10 characters and can't contain the person's name or e-mail address; changing it signs the person out everywhere else.
 - **Sessions:** an HttpOnly cookie holding a random token (only its SHA-256 is stored). A session ends after 12 hours without activity (`FERRERO_SESSION_HOURS`), or 14 days with "keep me signed in" (`FERRERO_SESSION_REMEMBER_DAYS`), on sign-out, or when the password changes. When a session ends, the next click leads back to the sign-in page, and then to where the user was.
 - **Protection:** five wrong passwords for a name lock it for 15 minutes, and an unknown name gets the same answer as a wrong password. Every sign-in attempt is logged (`sign_ins` in `auth.sqlite`). Requests that change something must carry the `X-Ferrero` header, which other websites can't add, so a page elsewhere can't act with a signed-in user's cookie.
 - **Test accounts:** for a test environment, `FERRERO_LOGIN_SHOW_ACCOUNTS=true` lists the accounts on the sign-in page, which fills in the e-mail address when one is picked. Off by default.
 
 ```powershell
-.venv\Scripts\python -m ferrero.auth accounts             # who can sign in, with which kind of password, last sign-in
+.venv\Scripts\python -m ferrero.auth accounts             # everyone with an account: role, password state, access, last sign-in
 .venv\Scripts\python -m ferrero.auth set-password U-08    # set someone's password (asked for twice)
 .venv\Scripts\python -m ferrero.auth reset U-08           # back to the starting password
 .venv\Scripts\python -m ferrero.auth sign-out             # end every session (or: sign-out U-08)

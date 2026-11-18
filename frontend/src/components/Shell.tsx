@@ -2,9 +2,10 @@ import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
-  BriefcaseBusiness, CalendarClock, CalendarDays, ChartPie, ExternalLink, FileText, LayoutDashboard, Menu, Moon, Search,
-  Sparkles, Sun, X,
+  BriefcaseBusiness, CalendarClock, CalendarDays, ChartPie, ExternalLink, Eye, FileText, LayoutDashboard, Menu, Moon, Search,
+  Sparkles, Sun, Undo2, UsersRound, X,
 } from "lucide-react";
+import { useToast } from "../lib/toast";
 import { fmtDate } from "../lib/format";
 import { useSession } from "../session";
 import { Monogram } from "./Brand";
@@ -49,6 +50,7 @@ export function Shell() {
         <Sidebar />
       </aside>
       <div className="flex min-w-0 flex-1 flex-col">
+        <ActingBanner />
         <Topbar onMenu={() => setMenuOpen(true)} />
         <main className="min-h-0 flex-1 overflow-y-auto">
           {bootError ? (
@@ -68,8 +70,41 @@ export function Shell() {
   );
 }
 
+/** While the administrator views the portal as someone else: whose view it is, and the way back. */
+function ActingBanner() {
+  const { user, switchBack } = useSession();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const [busy, setBusy] = useState(false);
+  if (!user?.acting_by) return null;
+  const back = async () => {
+    setBusy(true);
+    try {
+      await switchBack();
+      navigate("/admin/users");
+    } catch (e) {
+      toast("error", (e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 bg-accent px-5 py-2 text-[13px] text-[#141519] sm:px-8" role="status">
+      <Eye size={15} className="shrink-0" />
+      <span className="min-w-0 flex-1">
+        Viewing Ferrero as <strong className="font-semibold">{user.full_name}</strong> ({user.job_title}).
+        <span className="hidden md:inline"> Changes are recorded as {user.acting_by.full_name} as {user.full_name}.</span>
+      </span>
+      <button type="button" onClick={back} disabled={busy}
+        className="inline-flex items-center gap-1.5 rounded-lg bg-[#141519] px-3 py-1 text-[12.5px] font-medium text-white hover:opacity-90 disabled:opacity-60">
+        <Undo2 size={14} /> {busy ? "Returning…" : `Return to ${user.acting_by.full_name}`}
+      </button>
+    </div>
+  );
+}
+
 function Sidebar() {
-  const { meta } = useSession();
+  const { meta, user } = useSession();
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-ink">
       <div className="flex items-center gap-3 px-5 pb-6 pt-6">
@@ -96,6 +131,22 @@ function Sidebar() {
             )}
           </NavLink>
         ))}
+        {user?.is_admin && <>
+          <div className="px-3 pb-2 pt-5 text-[10.5px] font-semibold uppercase tracking-[0.16em] text-sidebar-muted">Administration</div>
+          <NavLink to="/admin/users"
+            className={({ isActive }) => clsx(
+              "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[14px] transition",
+              isActive ? "bg-sidebar-2 font-medium text-white" : "text-sidebar-muted hover:bg-sidebar-2/60 hover:text-sidebar-ink",
+            )}>
+            {({ isActive }) => (
+              <>
+                <span className={clsx("absolute inset-y-2 start-0 w-[3px] rounded-full transition", isActive ? "bg-accent" : "bg-transparent")} />
+                <UsersRound size={18} strokeWidth={1.7} className={isActive ? "text-accent" : ""} />
+                Users
+              </>
+            )}
+          </NavLink>
+        </>}
       </nav>
       <div className="mt-auto flex flex-col gap-3 p-3">
         <UserMenu />
