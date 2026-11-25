@@ -90,7 +90,10 @@ export interface Meta {
   model: string;
   effort: string;
   provider: string;
+  /** The date the app works to ("today" for deadlines and forms): the real date, unless the server fixes one. */
   demo_today: string;
+  /** Whether the server works to a fixed date (a demonstration) rather than the calendar. */
+  today_fixed?: boolean;
   org_name: string;
   index: { documents: number; indexed: number; passages: number };
   examples: string[];

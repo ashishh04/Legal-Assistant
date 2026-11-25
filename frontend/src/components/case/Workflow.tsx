@@ -25,7 +25,7 @@ export function WorkflowBar({ c, onAssign, onFollowUp, onClose }:
   const nextDue = next ? next.due_date : c.next_action_due;
   const nextDays = daysFrom(today, nextDue);
   const action = (label: string, onClick: () => void) => canEdit && !closed && (
-    <button type="button" onClick={onClick} className="text-[12.5px] font-medium text-accent-ink hover:underline">{label}</button>
+    <button type="button" onClick={onClick} className="text-[13px] font-medium text-accent-ink underline-offset-2 hover:underline">{label}</button>
   );
 
   const steps: Step[] = [
@@ -43,24 +43,28 @@ export function WorkflowBar({ c, onAssign, onFollowUp, onClose }:
   ];
 
   return (
-    <Card className="mb-4 p-2 animate-fade-up">
-      <ol className="grid grid-cols-2 gap-1 lg:grid-cols-4" aria-label="Case workflow">
-        {steps.map((s, i) => (
-          <li key={s.key} aria-current={s.state === "current" ? "step" : undefined}
-            className={clsx("relative flex items-start gap-3 rounded-xl px-3 py-2.5", s.state === "current" && "bg-accent-soft/60")}>
-            <span className={clsx("mt-0.5 grid size-8 shrink-0 place-items-center rounded-full border",
-              s.state === "done" ? "border-transparent bg-primary text-primary-ink"
-                : s.state === "current" ? "border-accent bg-surface text-accent-ink" : "border-line-strong bg-surface text-muted")}>
-              {s.state === "done" ? <Check size={15} strokeWidth={2.4} /> : <s.icon size={15} strokeWidth={1.9} />}
-            </span>
-            <span className="min-w-0">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.1em] text-muted">Step {i + 1}</span>
-              <span className="block text-[13.5px] font-semibold text-ink">{s.label}</span>
-              <span className="block truncate text-[12.5px] text-ink-2">{s.detail}</span>
-              {s.action && <span className="mt-0.5 block">{s.action}</span>}
-            </span>
-          </li>
-        ))}
+    <Card className="mb-6 px-6 py-5 animate-fade-up">
+      <ol className="grid grid-cols-2 gap-x-4 gap-y-5 lg:grid-cols-4 lg:gap-x-0" aria-label="Case workflow">
+        {steps.map((s, i) => {
+          const after = steps[i + 1];
+          return (
+            <li key={s.key} aria-current={s.state === "current" ? "step" : undefined} className="min-w-0">
+              <div className="flex items-center">
+                <span className={clsx("grid size-8 shrink-0 place-items-center rounded-full",
+                  s.state === "done" ? "bg-primary text-primary-ink"
+                    : s.state === "current" ? "bg-accent-soft text-accent-ink ring-2 ring-accent" : "bg-surface text-muted ring-1 ring-line-strong")}>
+                  {s.state === "done" ? <Check size={15} strokeWidth={2.6} /> : <s.icon size={15} strokeWidth={1.9} />}
+                </span>
+                {after && <span aria-hidden className={clsx("mx-3 hidden h-px flex-1 lg:block", after.state === "todo" ? "bg-line-strong" : "bg-accent")} />}
+              </div>
+              <div className="mt-3 min-w-0 lg:pe-6">
+                <div className="text-[14px] font-semibold text-ink"><span className="sr-only">Step {i + 1}: </span>{s.label}</div>
+                <div className="mt-0.5 truncate text-[13px] text-ink-2">{s.detail}</div>
+                {s.action && <div className="mt-1.5">{s.action}</div>}
+              </div>
+            </li>
+          );
+        })}
       </ol>
     </Card>
   );

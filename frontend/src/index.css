@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/fraunces/opsz-italic.css";
 @import "@fontsource/ibm-plex-sans-arabic/400.css";
 @import "@fontsource/ibm-plex-sans-arabic/500.css";
 @import "@fontsource/ibm-plex-sans-arabic/600.css";
@@ -7,84 +9,166 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* ---------- tokens ----------
-   Chrome: warm ivory canvas, white cards, an ink sidebar and a champagne-gold accent.
-   Data: the dataviz reference palette (validated against these surfaces: light #ffffff, dark #1a1a19). */
-:root {
+   The whole palette is here; components use the names, never a colour of their own.
+   Brand: deep navy carries the navigation and the public pages' panels; blue is the one interactive colour
+   (the primary action, links, the active page, the current step, focus); surfaces are white on a cool grey page.
+   Text: three slate inks, each at least 4.5:1 on the page and on cards.
+   State: four tones (good, warning, critical, info), each with an ink for text, a soft fill and a line. State is
+   never colour alone: it always has an icon or a dot, and a label.
+   Data: the dataviz reference palette (validated against these surfaces).
+   A region can ask for the light theme inside a dark page (data-theme="light"): the product picture on the
+   public pages is always drawn light. */
+:root, [data-theme="light"] {
   color-scheme: light;
-  --page: #f4f3ef;
+
+  /* brand surfaces: the same in both themes (navigation and brand panels are always dark) */
+  --brand: #0b1f3a;
+  --brand-2: #12294a;
+  --brand-3: #1c3a63;
+  --brand-accent: #7fb2ff;       /* the highlight on a brand surface */
+  --on-brand: #f3f7fc;           /* text on a brand surface */
+  --on-brand-muted: #a3b3ca;
+  --on-brand-warning: #f2a541;   /* a warning on a brand surface */
+  --scrim: #0a1220;              /* behind dialogs and over photographs */
+
+  --page: #f4f6fa;
   --surface: #ffffff;
-  --surface-2: #f8f7f4;
-  --surface-3: #efeee9;
-  --ink: #0b0b0b;
-  --ink-2: #52514e;
-  --muted: #898781;
-  --line: rgba(11, 11, 11, 0.08);
-  --line-strong: rgba(11, 11, 11, 0.14);
-  --accent: #b08a4a;
-  --accent-ink: #7f5f2a;
-  --accent-soft: #f4ecdd;
-  --primary: #141519;
+  --surface-2: #f8fafc;
+  --surface-3: #edf1f6;
+  --ink: #0f1b2d;
+  --ink-2: #44546a;
+  --muted: #5d6b7e;
+  --line: #e2e7ee;
+  --line-strong: #cad3df;
+
+  --accent: #2563eb;
+  --accent-ink: #1d4ed8;
+  --accent-soft: #eff4ff;
+  --accent-line: #c9dafc;
+  --accent-contrast: #ffffff;    /* text on an accent fill */
+
+  --primary: #1d4ed8;
+  --primary-hover: #1a43bf;
   --primary-ink: #ffffff;
-  --sidebar: #121317;
-  --sidebar-2: #1b1c21;
-  --sidebar-ink: #e9e7e1;
-  --sidebar-muted: #8f8d87;
-  --shadow: 0 1px 2px rgba(17, 17, 17, 0.04), 0 10px 30px -18px rgba(17, 17, 17, 0.25);
+
+  --sidebar: var(--brand);
+  --sidebar-2: rgba(243, 247, 252, 0.08);
+  --sidebar-ink: var(--on-brand);
+  --sidebar-muted: var(--on-brand-muted);
+  --sidebar-line: rgba(243, 247, 252, 0.1);
+
+  --shadow-xs: 0 1px 2px rgba(15, 27, 45, 0.05);
+  --shadow-sm: 0 1px 2px rgba(15, 27, 45, 0.05), 0 3px 8px -2px rgba(15, 27, 45, 0.08);
+  --shadow-md: 0 6px 16px -4px rgba(15, 27, 45, 0.14), 0 2px 5px -2px rgba(15, 27, 45, 0.07);
+  --shadow-lg: 0 28px 64px -20px rgba(10, 18, 32, 0.36), 0 10px 20px -10px rgba(10, 18, 32, 0.16);
 
   /* chart roles */
   --viz-surface: #ffffff;
-  --viz-grid: #e1e0d9;
-  --viz-axis: #c3c2b7;
+  --viz-grid: #e7ebf1;
+  --viz-axis: #c5cedb;
   --series-1: #2a78d6;
   --series-2: #eb6834;
   --series-3: #1baf7a;
   --series-4: #eda100;
   --series-5: #e87ba4;
   --series-6: #008300;
-  /* status (reserved: always with an icon and a label) */
-  --good: #0ca30c;
-  --good-ink: #006300;
-  --warning: #fab219;
-  --serious: #ec835a;
-  --critical: #d03b3b;
+  --bar: #2563eb;
+
+  /* state */
+  --good: #15845a;
+  --good-ink: #0d6b47;
+  --good-soft: #e5f5ed;
+  --good-line: #b5e0c9;
+  --warning: #d97706;            /* the icon or dot */
+  --warning-ink: #1d2738;        /* text on the warning fill: slate, as dark amber text reads as brown */
+  --warning-soft: #fef3c7;
+  --warning-line: #f3d27a;
+  --serious: #c2570c;
+  --critical: #d6342a;
+  --critical-ink: #b3261e;
+  --critical-soft: #fdecea;
+  --critical-line: #f5c1bc;
+  --info: #0e7490;
+  --info-ink: #155e75;
+  --info-soft: #e5f5f9;
+  --info-line: #b3e0ec;
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --page: #0d0d0d;
-  --surface: #1a1a19;
-  --surface-2: #20201f;
-  --surface-3: #2a2a28;
-  --ink: #f0efec;
-  --ink-2: #c3c2b7;
-  --muted: #898781;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.14);
-  --accent: #c9a465;
-  --accent-ink: #d9b97f;
-  --accent-soft: #2c2519;
-  --primary: #f0efec;
-  --primary-ink: #141519;
-  --sidebar: #0a0a0b;
-  --sidebar-2: #151518;
-  --sidebar-ink: #e9e7e1;
-  --sidebar-muted: #8a8882;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -18px rgba(0, 0, 0, 0.7);
+  --page: #0a111f;
+  --surface: #111b2e;
+  --surface-2: #162238;
+  --surface-3: #1e2c46;
+  --ink: #e9eef6;
+  --ink-2: #b7c3d6;
+  --muted: #8796ad;
+  --line: #1f2c44;
+  --line-strong: #314261;
 
-  --viz-surface: #1a1a19;
-  --viz-grid: #2c2c2a;
-  --viz-axis: #383835;
+  --accent: #6ea8ff;
+  --accent-ink: #9cc3ff;
+  --accent-soft: #213352;
+  --accent-line: #34517d;
+  --accent-contrast: #0a111f;
+
+  --primary: #356ae6;
+  --primary-hover: #2b5fdb;
+  --primary-ink: #ffffff;
+
+  --sidebar: #070c17;
+  --sidebar-2: rgba(243, 247, 252, 0.07);
+  --sidebar-line: rgba(243, 247, 252, 0.08);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 3px 8px -2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.6), 0 2px 5px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 28px 64px -20px rgba(0, 0, 0, 0.85), 0 10px 20px -10px rgba(0, 0, 0, 0.6);
+
+  --viz-surface: #111b2e;
+  --viz-grid: #1f2c44;
+  --viz-axis: #314261;
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
   --series-4: #c98500;
   --series-5: #d55181;
   --series-6: #008300;
-  --good-ink: #0ca30c;
+  --bar: #6ea8ff;
+
+  /* soft fills and lines are the tone mixed into the card colour, so they stay neutral, never muddy */
+  --good: #3fbf8a;
+  --good-ink: #86dfb7;
+  --good-soft: #18343c;
+  --good-line: #21534d;
+  --warning: #f2a541;
+  --warning-ink: #f8c77b;
+  --warning-soft: #2e2d30;
+  --warning-line: #594734;
+  --serious: #f08a4b;
+  --critical: #f0665c;
+  --critical-ink: #f6a09a;
+  --critical-soft: #322635;
+  --critical-line: #61363f;
+  --info: #4fb3d1;
+  --info-ink: #8fd3e8;
+  --info-soft: #1a3246;
+  --info-line: #264f65;
 }
 
 @theme inline {
   --font-sans: "Inter Variable", "IBM Plex Sans Arabic", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Fraunces Variable", "IBM Plex Sans Arabic", "Iowan Old Style", Georgia, serif;
+
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+  --color-brand-3: var(--brand-3);
+  --color-brand-accent: var(--brand-accent);
+  --color-on-brand: var(--on-brand);
+  --color-on-brand-muted: var(--on-brand-muted);
+  --color-on-brand-warning: var(--on-brand-warning);
+  --color-scrim: var(--scrim);
+
   --color-page: var(--page);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
@@ -97,18 +181,38 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-line: var(--accent-line);
+  --color-accent-contrast: var(--accent-contrast);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-primary-ink: var(--primary-ink);
   --color-sidebar: var(--sidebar);
   --color-sidebar-2: var(--sidebar-2);
   --color-sidebar-ink: var(--sidebar-ink);
   --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-line: var(--sidebar-line);
   --color-good: var(--good);
   --color-good-ink: var(--good-ink);
+  --color-good-soft: var(--good-soft);
+  --color-good-line: var(--good-line);
   --color-warning: var(--warning);
+  --color-warning-ink: var(--warning-ink);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-line: var(--warning-line);
   --color-serious: var(--serious);
   --color-critical: var(--critical);
-  --shadow-card: var(--shadow);
+  --color-critical-ink: var(--critical-ink);
+  --color-critical-soft: var(--critical-soft);
+  --color-critical-line: var(--critical-line);
+  --color-info: var(--info);
+  --color-info-ink: var(--info-ink);
+  --color-info-soft: var(--info-soft);
+  --color-info-line: var(--info-line);
+
+  --shadow-card: var(--shadow-xs);
+  --shadow-raised: var(--shadow-sm);
+  --shadow-pop: var(--shadow-md);
+  --shadow-overlay: var(--shadow-lg);
 }
 
 /* ---------- base ---------- */
@@ -118,26 +222,76 @@ body {
   background: var(--page);
   color: var(--ink);
   font-family: var(--font-sans);
-  font-feature-settings: "cv11", "ss01";
+  font-feature-settings: "calt", "cv05", "cv08";
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
-::selection { background: var(--accent-soft); color: var(--ink); }
+::selection { background: var(--accent-line); color: var(--ink); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 .tabular { font-variant-numeric: tabular-nums; }
 
+/* The display face: page titles, case names, the public pages. Old-style proportions at text sizes, finer at large ones. */
+.font-display { font-optical-sizing: auto; font-feature-settings: "lnum", "kern"; letter-spacing: -0.012em; }
+
 /* thin, quiet scrollbars */
 * { scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 /* Arabic runs get the Arabic face's comfortable line height */
 [dir="rtl"], :lang(ar) { font-family: "IBM Plex Sans Arabic", var(--font-sans); line-height: 1.85; }
 
+/* ---------- controls ---------- */
+/* One caret for every select, in place of the browser's own. */
+.select-caret {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235d6b7e' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.625rem center;
+  background-size: 15px 15px;
+}
+[data-theme="dark"] .select-caret {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238796ad' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+.select-caret:disabled { opacity: 0.6; }
+select option { background: var(--surface); color: var(--ink); }
+
+/* ---------- brand surfaces (always dark: the navigation and the public pages' panels) ---------- */
+.brand-surface {
+  background-color: var(--brand);
+  background-image:
+    radial-gradient(62% 78% at 92% -6%, rgba(72, 135, 255, 0.36), transparent 62%),
+    radial-gradient(70% 60% at -8% 108%, rgba(22, 104, 196, 0.28), transparent 66%),
+    linear-gradient(180deg, #0e2545 0%, #071426 100%);
+}
+.sidebar-surface {
+  background-color: var(--sidebar);
+  background-image:
+    radial-gradient(130% 34% at 0% 0%, rgba(96, 150, 255, 0.17), transparent 72%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(0, 0, 0, 0.16));
+}
+/* A hairline that fades at both ends: under the brand in the sidebar. */
+.brand-rule { height: 1px; background: linear-gradient(90deg, transparent, rgba(127, 178, 255, 0.5) 18%, rgba(127, 178, 255, 0.5) 82%, transparent); }
+
+/* ---------- motion ---------- */
 @keyframes fade-up { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-.animate-fade-up { animation: fade-up 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.animate-fade-up { animation: fade-up 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.animate-fade-in { animation: fade-in 0.18s ease-out both; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(4px) scale(0.985); } to { opacity: 1; transform: none; } }
+.animate-pop-in { animation: pop-in 0.18s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 @keyframes slide-in { from { transform: translateX(24px); opacity: 0; } to { transform: none; opacity: 1; } }
-.animate-slide-in { animation: slide-in 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.animate-slide-in { animation: slide-in 0.26s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 @keyframes pulse-dot { 0%, 80%, 100% { opacity: 0.25; transform: scale(0.85); } 40% { opacity: 1; transform: none; } }
 .thinking-dot { animation: pulse-dot 1.2s infinite ease-in-out; }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+.skeleton {
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-2) 37%, var(--surface-3) 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up, .animate-slide-in, .thinking-dot { animation: none; }
+  .animate-fade-up, .animate-fade-in, .animate-pop-in, .animate-slide-in, .thinking-dot, .skeleton { animation: none; }
 }

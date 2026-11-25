@@ -36,10 +36,10 @@ function Gate() {
 
 function Splash({ text }: { text?: string }) {
   return (
-    <div className="grid h-full place-items-center bg-page">
-      <div className="flex flex-col items-center gap-4 text-center">
-        <Monogram size={44} />
-        <p className="max-w-xs text-[13.5px] text-muted" role="status">{text ?? "Loading…"}</p>
+    <div className="grid h-full place-items-center bg-page px-6">
+      <div className="flex flex-col items-center gap-5 text-center">
+        <Monogram size={52} />
+        <p className="max-w-xs text-[14px] leading-relaxed text-muted" role="status">{text ?? "Loading…"}</p>
       </div>
     </div>
   );

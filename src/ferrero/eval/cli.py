@@ -3,13 +3,22 @@ from __future__ import annotations
 
 import argparse
 import sys
+from datetime import date
 from pathlib import Path
 
 from ..assistant.agent import Assistant, make_client
 from ..casemodel import CaseModel
-from ..config import get_settings
+from ..config import Settings, get_settings
 from ..sync.index import DocumentIndex
 from .golden import PROBES, load_golden, run_one, write_report
+
+# The day the golden set's reference answers were written for (the data pack's DEMO_TODAY). The evaluation always
+# runs as of this day, whatever the calendar says, unless FERRERO_DEMO_TODAY names another.
+GOLDEN_TODAY = date(2026, 11, 5)
+
+
+def evaluation_day(settings: Settings) -> date:
+    return settings.demo_today or GOLDEN_TODAY
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -39,7 +48,8 @@ def main(argv: list[str] | None = None) -> int:
     if not args.yes and input("Continue? [y/N] ").strip().lower() not in ("y", "yes"):
         return 1
 
-    model = CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path)
+    # The reference answers count "open", "overdue" and "the next 30 days" as of the golden set's day.
+    model = CaseModel(settings.csv_dir, evaluation_day(settings), catalogue=settings.catalogue_path)
     index = DocumentIndex(settings.index_path, readonly=True)
     if not index.exists:
         print("The document index is missing: run `python -m ferrero.sync` first.")

@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, RotateCcw, ScanLine, Search } from "lucide-react";
+import { FileText, Lock, RotateCcw, ScanLine, Search } from "lucide-react";
 import { api } from "../api";
 import { Pagination, usePagination } from "../components/Pagination";
-import { Button, Card, EmptyState, PageHeader, Select, StatTile, StatusPill } from "../components/ui";
+import { Button, Card, Chip, EmptyState, PageHeader, SearchField, Select, StatStrip, StatTile, StatusPill } from "../components/ui";
 import { fmtInt } from "../lib/format";
 import { useApi } from "../lib/hooks";
 import { friendlyReason, pct } from "../lib/labels";
@@ -36,6 +36,12 @@ function KindPill({ kind }: { kind: Kind }) {
   return <StatusPill kind={map[kind]}>{KIND_LABEL[kind]}</StatusPill>;
 }
 
+/** The folder a file sits in: its library path without the file name (the name is the line above it). */
+function folderOf(d: SyncDoc): string {
+  const cut = d.library_path.lastIndexOf("/");
+  return cut > 0 ? d.library_path.slice(0, cut) : d.library_path;
+}
+
 export default function Documents() {
   const { user } = useSession();
   const [q, setQ] = useState("");
@@ -62,11 +68,11 @@ export default function Documents() {
   const pager = usePagination(shown, 15, [q, kind, user?.user_id].join("|"));
 
   if (!user) return null;
-  if (error) return <Card className="p-6 text-[14px] text-critical">The document library couldn't be loaded. Please try again.</Card>;
+  if (error) return <Card className="p-6 text-[14px] text-critical-ink">The document library couldn't be loaded. Please try again.</Card>;
   if (data && !data.visible) {
     return (
       <>
-        <PageHeader eyebrow="Document library" title="Documents" />
+        <PageHeader title="Documents" />
         <div className="mx-auto max-w-xl"><EmptyState icon={Lock} title="Case documents aren't available for your role">
           {user.full_name} ({user.entra_group}) can see case data but not the case documents themselves.
         </EmptyState></div>
@@ -77,24 +83,20 @@ export default function Documents() {
 
   return (
     <>
-      <PageHeader eyebrow="Document library" title="Documents"
+      <PageHeader title="Documents"
         subtitle="Files from the case libraries, each linked to its case and made searchable for Ferrero with that case's access rights. Scanned copies are read page by page with text recognition. Only files you may open are listed." />
 
-      <div className="mb-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <StatStrip className="mb-6 sm:grid-cols-2 xl:grid-cols-4">
         <StatTile label="Searchable by Ferrero" value={fmtInt(counts.searchable + counts.flagged)} sub={`${fmtInt(passages)} passages indexed`} />
-        <StatTile label="Read from scans" value={`${fmtInt(scans.read)} of ${fmtInt(scans.all)}`}
+        <StatTile label="Read from scans" value={<>{fmtInt(scans.read)}<span className="text-[17px] font-medium text-muted"> of {fmtInt(scans.all)}</span></>}
           sub={counts.scan ? `${fmtInt(counts.scan)} awaiting text recognition`
             : scans.mean != null ? `Average recognition confidence ${pct(scans.mean)}` : "No scanned copies"} />
         <StatTile label="Password-protected" value={fmtInt(counts.locked)} sub="Listed, but never opened" />
         <StatTile label="Not linked to a case" value={fmtInt(counts.unmatched + counts.other)} sub="Held back until their case is confirmed" />
-      </div>
+      </StatStrip>
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        <label className="flex min-w-[240px] flex-1 items-center gap-2 rounded-xl border border-line-strong bg-surface px-3 py-1.5 text-[13px] focus-within:border-accent sm:max-w-xs">
-          <Search size={15} className="text-muted" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="File, case number, type…"
-            className="min-w-0 flex-1 bg-transparent py-0.5 text-ink outline-none placeholder:text-muted" aria-label="Filter documents" />
-        </label>
+        <SearchField icon={Search} value={q} onChange={setQ} placeholder="File, case number, type…" label="Filter documents" className="flex-1 sm:max-w-[300px]" />
         <Select label="Status" value={kind} onChange={setKind}
           options={[{ value: "", label: "All" }, ...(Object.keys(KIND_LABEL) as Kind[]).filter((k) => counts[k]).map((k) => ({ value: k, label: `${KIND_LABEL[k]} (${counts[k]})` }))]} />
         {(q || kind) && <Button variant="ghost" icon={RotateCcw} onClick={() => { setQ(""); setKind(""); }}>Reset</Button>}
@@ -102,48 +104,64 @@ export default function Documents() {
 
       <Card className="overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[860px] text-[13.5px]">
-            <thead className="border-b border-line bg-surface-2 text-left text-[12px] text-muted">
+          <table className="w-full min-w-[900px] table-fixed text-[13.5px]">
+            <colgroup>
+              <col /><col className="w-[128px]" /><col className="w-[232px]" /><col className="w-[218px]" /><col className="w-[96px]" />
+            </colgroup>
+            <thead className="border-b border-line bg-surface-2 text-left text-[12.5px] text-muted">
               <tr>
-                <th className="px-4 py-3 font-medium">File</th>
-                <th className="px-4 py-3 font-medium">Case</th>
-                <th className="px-4 py-3 font-medium">Type</th>
-                <th className="px-4 py-3 font-medium">Status</th>
-                <th className="px-4 py-3 text-right font-medium">Passages</th>
+                <th className="py-3 pe-3 ps-5 font-medium">File</th>
+                <th className="px-3 py-3 font-medium">Case</th>
+                <th className="px-3 py-3 font-medium">Type</th>
+                <th className="px-3 py-3 font-medium">Status</th>
+                <th className="py-3 pe-5 ps-3 text-right font-medium">Passages</th>
               </tr>
             </thead>
             <tbody>
               {pager.slice.map((d) => {
                 const k = kindOf(d);
+                const scan = d.extraction === "ocr";
+                const Icon = scan ? ScanLine : FileText;
                 return (
-                  <tr key={d.doc_id} className="border-b border-line align-top last:border-0">
-                    <td className="max-w-[360px] px-4 py-3">
-                      {d.case_id
-                        ? <Link to={`/documents/${encodeURIComponent(d.doc_id)}`} dir="auto" className="block truncate font-medium text-ink hover:text-accent-ink hover:underline" title={d.file_name}>{d.file_name}</Link>
-                        : <span dir="auto" className="block truncate font-medium text-ink" title={d.file_name}>{d.file_name}</span>}
-                      <span className="flex min-w-0 items-center gap-1.5 text-[11.5px] text-muted">
-                        {d.extraction === "ocr" && (
-                          <span className="inline-flex shrink-0 items-center gap-1 rounded border border-line px-1 font-medium text-ink-2" title="Scanned copy: text recognised from the page images">
-                            <ScanLine size={11} aria-hidden />Scan{d.ocr_confidence != null && ` · ${pct(d.ocr_confidence)}`}
+                  <tr key={d.doc_id} className="border-b border-line align-top transition-colors last:border-0 hover:bg-surface-2">
+                    <td className="py-3 pe-3 ps-5">
+                      <span className="flex min-w-0 items-start gap-3">
+                        <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-surface-3 text-ink-2"><Icon size={15} strokeWidth={1.7} /></span>
+                        <span className="min-w-0 flex-1">
+                          {d.case_id
+                            ? <Link to={`/documents/${encodeURIComponent(d.doc_id)}`} dir="auto" className="block truncate text-left font-medium text-ink underline-offset-2 hover:text-accent-ink hover:underline" title={d.file_name}>{d.file_name}</Link>
+                            : <span dir="auto" className="block truncate text-left font-medium text-ink" title={d.file_name}>{d.file_name}</span>}
+                          <span className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[12px] text-muted">
+                            {scan && (
+                              <span className="shrink-0 font-medium text-ink-2" title="Scanned copy: text recognised from the page images">
+                                Scan{d.ocr_confidence != null && ` · ${pct(d.ocr_confidence)}`}
+                              </span>
+                            )}
+                            {scan && <span aria-hidden>·</span>}
+                            <span className="truncate text-left" dir="auto" title={d.library_path}>{folderOf(d)}</span>
                           </span>
-                        )}
-                        <span className="truncate" title={d.library_path}>{d.library_path}</span>
+                        </span>
                       </span>
                     </td>
-                    <td className="px-4 py-3">{d.case_id ? <Link to={`/cases/${d.case_id}`} className="font-medium text-accent-ink hover:underline">{d.case_id}</Link> : <span className="text-muted">–</span>}</td>
-                    <td className="px-4 py-3 text-ink-2">
-                      {d.doc_type ?? "–"}{d.language && <span className="ms-1.5 rounded border border-line px-1 text-[10.5px] font-semibold text-muted">{d.language}</span>}
+                    <td className="px-3 py-3">{d.case_id
+                      ? <Link to={`/cases/${d.case_id}`} className="whitespace-nowrap font-medium text-accent-ink underline-offset-2 hover:underline">{d.case_id}</Link>
+                      : <span className="text-muted">–</span>}</td>
+                    <td className="px-3 py-3 text-ink-2">
+                      <span className="flex items-center gap-2">
+                        <span className="truncate" title={d.doc_type ?? undefined}>{d.doc_type ?? "–"}</span>
+                        {d.language && <Chip tone="outline" className="shrink-0 px-1.5 py-0 text-[10.5px] font-semibold">{d.language}</Chip>}
+                      </span>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-3 py-3">
                       <KindPill kind={k} />
                       {k !== "searchable" && d.skip_reason && friendlyReason(d.skip_reason) !== KIND_LABEL[k] &&
-                        <span className="mt-1 block max-w-[300px] text-[11.5px] text-muted">{friendlyReason(d.skip_reason)}</span>}
+                        <span className="mt-1 block text-[12px] leading-snug text-muted">{friendlyReason(d.skip_reason)}</span>}
                     </td>
-                    <td className="tabular px-4 py-3 text-right text-ink-2">{d.passages || "–"}</td>
+                    <td className="tabular py-3 pe-5 ps-3 text-right text-ink-2">{d.passages || <span className="text-muted">–</span>}</td>
                   </tr>
                 );
               })}
-              {!shown.length && <tr><td colSpan={5} className="px-4 py-14 text-center text-[13.5px] text-muted">{data ? "No documents match." : "Loading…"}</td></tr>}
+              {!shown.length && <tr><td colSpan={5} className="px-4 py-16 text-center text-[13.5px] text-muted">{data ? "No documents match." : "Loading…"}</td></tr>}
             </tbody>
           </table>
         </div>

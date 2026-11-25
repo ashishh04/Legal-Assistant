@@ -30,15 +30,14 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     settings = get_settings()
-    auth = Auth(settings, CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path))
+    auth = Auth(settings, CaseModel(settings.csv_dir, settings.today, catalogue=settings.catalogue_path))
     if args.command == "accounts":
         for u in auth.directory():
             state = "active" if u["active"] else "DISABLED"
             print(f"{u['user_id']:<6} {u['email']:<34} {u['entra_group']:<15} {u['password']:<11} {state:<9} "
                   f"last sign-in {u['last_sign_in'] or 'never'}")
         if not settings.admin_password:
-            print("
-FERRERO_PASSWORD is not set: the platform administrator can't sign in.")
+            print("\nFERRERO_PASSWORD is not set: the platform administrator can't sign in.")
         if not settings.demo_password:
             print("FERRERO_DEMO_PASSWORD is not set: other accounts sign in with a password of their own "
                   "(the administrator gives temporary ones on the Users page).")

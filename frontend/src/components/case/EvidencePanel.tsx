@@ -12,7 +12,7 @@ import { useSession } from "../../session";
 import type { CaseDetail, EvidenceDetails, EvidenceItem } from "../../types";
 import { Dialog } from "../Dialog";
 import { Field, FormError, SelectInput, TextArea, TextInput } from "../forms";
-import { Button, Card, Chip, EmptyState, SectionTitle, StatusPill } from "../ui";
+import { Button, Card, Chip, EmptyState, SectionTitle, StatusPill, buttonCls } from "../ui";
 
 const IMAGE_EXT = /\.(jpe?g|png|webp|gif)$/i;
 
@@ -57,7 +57,7 @@ export function EvidencePanel({ c, onChanged }: { c: CaseDetail; onChanged: () =
   if (!c.permissions.evidence) {
     return (
       <Card className="p-6">
-        <p className="flex items-center gap-2 text-[13.5px] text-ink-2"><Lock size={15} /> Evidence and documents are not available for your role.</p>
+        <p className="flex items-center gap-2.5 text-[13.5px] text-ink-2"><Lock size={15} className="text-muted" /> Evidence and documents are not available for your role.</p>
       </Card>
     );
   }
@@ -65,47 +65,47 @@ export function EvidencePanel({ c, onChanged }: { c: CaseDetail; onChanged: () =
   const choose = (list: FileList | null) => { if (list?.length) setPending(Array.from(list)); };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-5">
       {c.permissions.add_evidence && (
         <div
           onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
           onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setDrag(false); }}
           onDrop={(e) => { e.preventDefault(); setDrag(false); choose(e.dataTransfer.files); }}
-          className={clsx("relative flex flex-col items-center gap-3 rounded-2xl border-2 border-dashed px-6 py-7 text-center transition",
-            drag ? "border-accent bg-accent-soft/60" : "border-line-strong bg-surface")}>
-          <span className="grid size-12 place-items-center rounded-2xl bg-accent-soft text-accent-ink"><CloudUpload size={22} strokeWidth={1.7} /></span>
-          <div>
+          className={clsx("relative flex flex-wrap items-center gap-x-5 gap-y-4 rounded-xl border border-dashed px-6 py-5 transition-colors",
+            drag ? "border-accent bg-accent-soft" : "border-line-strong bg-surface-2")}>
+          <span className="grid size-12 shrink-0 place-items-center rounded-full border border-accent-line bg-accent-soft text-accent-ink"><CloudUpload size={21} strokeWidth={1.7} /></span>
+          <div className="min-w-[260px] flex-1">
             <div className="text-[15px] font-semibold text-ink">Add evidence to {c.case_id}</div>
-            <p className="mx-auto mt-1 max-w-xl text-[13px] leading-relaxed text-ink-2">
+            <p className="mt-0.5 max-w-2xl text-[13px] leading-relaxed text-ink-2">
               Drop photos of infringing products, cease-and-desist letters, correspondence with authorities, invoices,
               screenshots or external counsel documents here.
             </p>
+            <p className="mt-1.5 text-[12px] leading-relaxed text-muted">
+              {o.accepted_types.charAt(0).toUpperCase() + o.accepted_types.slice(1)} · up to {o.evidence_max_mb} MB each ·
+              every file is kept exactly as uploaded, with a SHA-256 fingerprint
+            </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex shrink-0 flex-wrap gap-2">
             <Button variant="primary" icon={CloudUpload} onClick={() => browse.current?.click()}>Choose files</Button>
             <Button icon={Camera} onClick={() => camera.current?.click()}>Take a photo</Button>
           </div>
-          <p className="text-[11.5px] text-muted">
-            {o.accepted_types.charAt(0).toUpperCase() + o.accepted_types.slice(1)} · up to {o.evidence_max_mb} MB each ·
-            every file is kept exactly as uploaded, with a SHA-256 fingerprint
-          </p>
           <input ref={browse} type="file" multiple accept={o.accept} className="hidden" onChange={(e) => { choose(e.target.files); e.target.value = ""; }} />
           <input ref={camera} type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => { choose(e.target.files); e.target.value = ""; }} />
         </div>
       )}
 
-      <Card className="p-5">
-        <SectionTitle aside={<span className="text-[12px] text-muted">
+      <Card className="p-6">
+        <SectionTitle aside={<span className="tabular text-[12.5px] text-muted">
           {active.length} item{active.length === 1 ? "" : "s"}{withdrawn ? ` · ${withdrawn} withdrawn` : ""}</span>}>
           Evidence &amp; documents
         </SectionTitle>
-        {error && <p className="text-[13px] text-critical">The evidence list couldn't be loaded. Please try again.</p>}
+        {error && <p className="text-[13px] text-critical-ink">The evidence list couldn't be loaded. Please try again.</p>}
         {items.length > 0 && (
-          <div className="mb-4 flex flex-wrap items-center gap-1.5">
+          <div className="mb-5 flex flex-wrap items-center gap-1.5">
             {[["all", `All · ${active.length}`] as const, ...[...counts.entries()].map(([k, n]) => [k, `${k} · ${n}`] as const)].map(([k, label]) => (
               <button key={k} type="button" onClick={() => setFilter(k)} aria-pressed={filter === k}
-                className={clsx("rounded-full border px-3 py-1 text-[12.5px] font-medium transition",
-                  filter === k ? "border-primary bg-primary text-primary-ink" : "border-line bg-surface-2 text-ink-2 hover:text-ink")}>
+                className={clsx("rounded-md px-2.5 py-1 text-[12.5px] font-medium transition-colors",
+                  filter === k ? "bg-primary text-primary-ink" : "bg-surface-3 text-ink-2 hover:text-ink")}>
                 {label}
               </button>
             ))}
@@ -118,7 +118,7 @@ export function EvidencePanel({ c, onChanged }: { c: CaseDetail; onChanged: () =
           </div>
         )}
         {data && items.length === 0 && (
-          <EmptyState icon={FileImage} title="No evidence on file yet">
+          <EmptyState plain icon={FileImage} title="No evidence on file yet">
             Photos of the infringing products, letters, correspondence, invoices and screenshots added here stay with the case,
             each with who added it and when.
           </EmptyState>
@@ -129,17 +129,17 @@ export function EvidencePanel({ c, onChanged }: { c: CaseDetail; onChanged: () =
           <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
             {photos.map((e) => (
               <button key={e.evidence_id} type="button" onClick={() => setViewing(e.evidence_id)}
-                className={clsx("group relative aspect-[4/3] overflow-hidden rounded-xl border border-line bg-surface-2 text-start",
+                className={clsx("group relative aspect-[4/3] overflow-hidden rounded-lg border border-line bg-surface-2 text-start shadow-card transition-shadow hover:shadow-pop",
                   e.status === "Withdrawn" && "opacity-55 grayscale")}>
                 <img src={api.evidenceFileUrl(e.evidence_id)} alt={e.title} loading="lazy" decoding="async"
                   className="size-full object-cover transition duration-300 group-hover:scale-[1.03]" />
-                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent px-3 pb-2.5 pt-8">
-                  <span className="block truncate text-[12.5px] font-medium text-white">{e.title}</span>
-                  <span className="block truncate text-[11px] text-white/75">
+                <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-scrim/85 via-scrim/45 to-transparent px-3 pb-2.5 pt-10">
+                  <span className="block truncate text-[13px] font-medium text-white">{e.title}</span>
+                  <span className="block truncate text-[11.5px] text-white/80">
                     {[e.captured_on && fmtDate(e.captured_on), e.location].filter(Boolean).join(" · ") || e.category}
                   </span>
                 </span>
-                <span className="absolute start-2 top-2 rounded-md bg-black/55 px-1.5 py-0.5 text-[10.5px] font-medium text-white backdrop-blur">
+                <span className="tabular absolute start-2 top-2 rounded bg-scrim/65 px-1.5 py-0.5 text-[11px] font-medium text-white backdrop-blur">
                   {e.status === "Withdrawn" ? "Withdrawn" : e.evidence_id}
                 </span>
               </button>
@@ -154,19 +154,19 @@ export function EvidencePanel({ c, onChanged }: { c: CaseDetail; onChanged: () =
               return (
                 <li key={e.evidence_id}>
                   <button type="button" onClick={() => setViewing(e.evidence_id)}
-                    className={clsx("flex w-full items-center gap-3 py-2.5 text-start transition hover:bg-surface-2/60", e.status === "Withdrawn" && "opacity-60")}>
-                    <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-surface-2 text-ink-2"><Icon size={16} strokeWidth={1.7} /></span>
+                    className={clsx("-mx-2 flex w-[calc(100%+1rem)] items-center gap-3 rounded-lg px-2 py-3 text-start transition-colors hover:bg-surface-2", e.status === "Withdrawn" && "opacity-60")}>
+                    <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-surface-3 text-ink-2"><Icon size={16} strokeWidth={1.7} /></span>
                     <span className="min-w-0 flex-1">
                       <span className="flex flex-wrap items-center gap-x-2 text-[13.5px]">
                         <span className="font-medium text-ink" dir="auto">{e.title}</span>
-                        <span className="text-[12px] text-muted">{e.category}</span>
+                        <span className="text-[12.5px] text-muted">{e.category}</span>
                       </span>
-                      <span className="block truncate text-[12px] text-muted" dir="auto">
+                      <span className="mt-0.5 block truncate text-[12.5px] text-muted" dir="auto">
                         {e.file_name} · {e.file_label} · {fmtBytes(e.size_bytes)} · added by {e.uploaded_by}, {fmtDate(e.uploaded_at.slice(0, 10))}
                       </span>
                     </span>
                     {e.status === "Withdrawn" ? <StatusPill kind="neutral">Withdrawn</StatusPill>
-                      : e.captured_on && <span className="hidden text-[12px] text-muted sm:block">{fmtDate(e.captured_on)}</span>}
+                      : e.captured_on && <span className="tabular hidden whitespace-nowrap text-[12.5px] text-muted sm:block">{fmtDate(e.captured_on)}</span>}
                   </button>
                 </li>
               );
@@ -260,13 +260,13 @@ function UploadDialog({ c, files, onClose, onUploaded }: { c: CaseDetail; files:
             const bad = problem(f);
             const s = status[i];
             return (
-              <li key={`${f.name}-${i}`} className="flex items-center gap-3 rounded-xl border border-line bg-surface-2/60 p-2">
+              <li key={`${f.name}-${i}`} className="flex items-center gap-3 rounded-lg border border-line bg-surface-2 p-2">
                 {previews[i]
                   ? <img src={previews[i]!} alt="" className="size-12 shrink-0 rounded-lg object-cover" />
-                  : <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-surface text-ink-2"><FileText size={18} /></span>}
+                  : <span className="grid size-12 shrink-0 place-items-center rounded-lg bg-surface-3 text-ink-2"><FileText size={18} /></span>}
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[13px] font-medium text-ink" dir="auto" title={f.name}>{f.name}</span>
-                  <span className={clsx("block text-[12px]", bad || s?.state === "failed" ? "text-critical" : "text-muted")}>
+                  <span className={clsx("block text-[12.5px]", bad || s?.state === "failed" ? "text-critical-ink" : "text-muted")}>
                     {bad ?? (s?.state === "failed" ? s.message : s?.state === "done" ? "Added" : fmtBytes(f.size))}
                   </span>
                   {s?.state === "uploading" && (
@@ -278,7 +278,7 @@ function UploadDialog({ c, files, onClose, onUploaded }: { c: CaseDetail; files:
                 {s?.state === "done" ? <CircleCheck size={17} className="shrink-0 text-good" />
                   : !busy && !finished && (
                     <button type="button" aria-label={`Remove ${f.name}`} onClick={() => setList((l) => l.filter((_, j) => j !== i))}
-                      className="grid size-7 shrink-0 place-items-center rounded-lg text-muted hover:bg-surface hover:text-ink"><X size={14} /></button>
+                      className="grid size-7 shrink-0 place-items-center rounded-md text-muted transition-colors hover:bg-surface-3 hover:text-ink"><X size={14} /></button>
                   )}
               </li>
             );
@@ -388,8 +388,7 @@ function EvidenceViewer({ items, id, onNavigate, onClose, canEdit, onChanged }: 
         </>}
         {canEdit && active && <Button variant="ghost" icon={Undo2} onClick={() => { setReason(""); setError(null); setMode("withdraw"); }}>Withdraw</Button>}
         {canEdit && active && <Button icon={Pencil} onClick={startEdit}>Edit details</Button>}
-        <a href={api.evidenceFileUrl(item.evidence_id, true)}
-          className="inline-flex items-center gap-2 rounded-xl bg-primary px-3.5 py-2 text-[13.5px] font-medium text-primary-ink hover:opacity-90">
+        <a href={api.evidenceFileUrl(item.evidence_id, true)} className={buttonCls("primary")}>
           <Download size={16} /> Download original
         </a>
       </> : <>
@@ -401,14 +400,14 @@ function EvidenceViewer({ items, id, onNavigate, onClose, canEdit, onChanged }: 
       <div className="grid gap-6 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <div className="min-w-0">
           {item.image ? (
-            <a href={url} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-xl border border-line bg-[#0f0f10]">
+            <a href={url} target="_blank" rel="noreferrer" className="block overflow-hidden rounded-lg border border-line bg-scrim">
               <img src={url} alt={item.title} className="mx-auto max-h-[58vh] w-full object-contain" />
             </a>
           ) : item.content_type === "application/pdf" ? (
-            <iframe src={url} title={item.title} className="h-[58vh] w-full rounded-xl border border-line bg-surface-2" />
+            <iframe src={url} title={item.title} className="h-[58vh] w-full rounded-lg border border-line bg-surface-2" />
           ) : (
-            <div className="flex h-full min-h-[240px] flex-col items-center justify-center gap-3 rounded-xl border border-line bg-surface-2 p-8 text-center">
-              <span className="grid size-14 place-items-center rounded-2xl bg-surface text-ink-2"><Icon size={24} strokeWidth={1.6} /></span>
+            <div className="flex h-full min-h-[240px] flex-col items-center justify-center gap-3 rounded-lg border border-line bg-surface-2 p-8 text-center">
+              <span className="grid size-14 place-items-center rounded-full bg-surface-3 text-ink-2"><Icon size={24} strokeWidth={1.6} /></span>
               <div className="text-[13.5px] font-medium text-ink" dir="auto">{item.file_name}</div>
               <div className="text-[12.5px] text-muted">{item.file_label} · {fmtBytes(item.size_bytes)}</div>
               <a href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-[13px] font-medium text-accent-ink hover:underline">
@@ -417,7 +416,7 @@ function EvidenceViewer({ items, id, onNavigate, onClose, canEdit, onChanged }: 
             </div>
           )}
           {item.status === "Withdrawn" && (
-            <div className="mt-3 rounded-xl border border-line bg-surface-2 p-3 text-[12.5px] text-ink-2">
+            <div className="mt-3 rounded-lg border border-line bg-surface-2 p-3 text-[13px] leading-relaxed text-ink-2">
               <span className="font-medium text-ink">Withdrawn</span> by {item.withdrawn_by} on {fmtDateTime(item.withdrawn_at)}: “{item.withdrawn_reason}”
             </div>
           )}
@@ -461,7 +460,7 @@ function EvidenceViewer({ items, id, onNavigate, onClose, canEdit, onChanged }: 
                   <button type="button" onClick={copy} aria-label="Copy fingerprint" className="shrink-0 text-muted hover:text-ink"><Copy size={14} /></button>
                 </span>
               </Row>
-              <div className="rounded-xl border border-line bg-surface-2 p-3">
+              <div className="rounded-lg border border-line bg-surface-2 p-3">
                 {check == null ? (
                   <button type="button" onClick={verify} className="inline-flex items-center gap-2 text-[13px] font-medium text-accent-ink hover:underline">
                     <Fingerprint size={15} /> Check the file is unchanged since it was added
@@ -471,7 +470,7 @@ function EvidenceViewer({ items, id, onNavigate, onClose, canEdit, onChanged }: 
                     {check.ok ? <ShieldCheck size={17} className="mt-px shrink-0 text-good" /> : <ShieldAlert size={17} className="mt-px shrink-0 text-critical" />}
                     <div>
                       <div className="font-medium text-ink">{check.ok ? "Unchanged since it was added" : "The stored file no longer matches its fingerprint"}</div>
-                      <div className="text-[12px] text-muted">Checked {fmtDateTime(check.checked_at)} against the fingerprint recorded at upload</div>
+                      <div className="text-[12.5px] text-muted">Checked {fmtDateTime(check.checked_at)} against the fingerprint recorded at upload</div>
                     </div>
                   </div>
                 )}
@@ -486,8 +485,8 @@ function EvidenceViewer({ items, id, onNavigate, onClose, canEdit, onChanged }: 
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-[120px_minmax(0,1fr)] gap-3">
-      <dt className="text-[12px] text-muted">{label}</dt>
+    <div className="grid grid-cols-[124px_minmax(0,1fr)] gap-3">
+      <dt className="pt-px text-[12.5px] text-muted">{label}</dt>
       <dd className="min-w-0 text-ink">{children}</dd>
     </div>
   );

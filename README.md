@@ -59,7 +59,7 @@ To update, repeat these steps. If documents or the frontend changed, first run `
   - Superset embeds dashboards only in pages whose address is on its `frame-ancestors` list. That list includes http://3.75.206.231, but only on port 80.
   - Keep the app on plain HTTP while Superset is on HTTP, because an HTTPS page can't frame an HTTP one.
   - The server must be able to reach `FERRERO_SUPERSET_URL` to get guest tokens.
-- **Sign-in:** set `FERRERO_DEMO_PASSWORD` in the server's `.env` too, or nobody can sign in. The app runs on plain HTTP there, so the session cookie can't be marked Secure and passwords cross the network unencrypted: put HTTPS in front (a reverse proxy with a certificate) before real users sign in, and keep limiting the port to known addresses in the security group until then. With HTTPS, the cookie becomes Secure by itself (`FERRERO_COOKIE_SECURE=auto`).
+- **Sign-in:** set `FERRERO_PASSWORD` (the platform administrator, admin@ferrero.com, who then adds users and gives them passwords) in the server's `.env` too, or nobody can sign in. The app runs on plain HTTP there, so the session cookie can't be marked Secure and passwords cross the network unencrypted: put HTTPS in front (a reverse proxy with a certificate) before real users sign in, and keep limiting the port to known addresses in the security group until then. With HTTPS, the cookie becomes Secure by itself (`FERRERO_COOKIE_SECURE=auto`).
 - **Users' records** (case changes, evidence files, follow-ups, the audit trail) live in the `ferrero-records` Docker volume, mounted at `/app/data/records`, so rebuilding the image keeps them. Back the volume up, for example `sudo docker run --rm -v ferrero_ferrero-records:/r -v "$PWD":/b alpine tar czf /b/records-backup.tgz -C /r .` (the volume's full name starts with the compose project's name; `sudo docker volume ls` lists it).
 
 ## How it works
@@ -155,9 +155,14 @@ A run saves every page as it finishes, so it can be stopped (Ctrl+C, closing its
 ### Assistant
 
 - Model `claude-opus-5-5` at effort `medium` by default (`FERRERO_MODEL`, `FERRERO_EFFORT`). Server-side refusal fallback is enabled (`fallbacks: "default"`).
-- The system prompt and the tool list never change during a conversation. Per-user context (who is asking, and the case opened from Power BI) goes into one appended `system` message. Conversations live on the server and are only ever appended to, which keeps the prompt cache warm and Claude's thinking valid across turns. A failed turn is rolled back, so the user can simply resend.
+- The system prompt and the tool list never change during a conversation. Per-user context (today's date, who is asking, and the case opened from Power BI) goes into one appended `system` message. Conversations live on the server and are only ever appended to, which keeps the prompt cache warm and Claude's thinking valid across turns. A failed turn is rolled back, so the user can simply resend.
 - Document passages are returned as `search_result` blocks, so every claim from a document carries a citation to the exact paragraph. The UI lists each citation with the quoted text and its SharePoint path.
-- The demo date is fixed at 5 November 2026 (`FERRERO_DEMO_TODAY`), matching the notebook's `DEMO_TODAY`. SQL uses `demo_today()`, so "next 30 days" matches the golden set.
+- **The date.** The whole app works to one "today": the pages, the reminders, `reporting_date()` in the assistant's SQL, and the date the assistant is told at the start of each conversation.
+  - It is the real date, asked for each time it is needed, so a running app moves on at midnight. Open cases' `days_open`, "overdue" and "the next 30 days" are all counted from it.
+  - Midnight is the server's own unless `FERRERO_TIMEZONE` names a time zone (for example `Asia/Dubai`); a server in another region otherwise changes date at its own midnight.
+  - `FERRERO_DEMO_TODAY=2026-11-05` fixes the date instead, at the data pack's `DEMO_TODAY`. Use it for a demonstration against the sample data as delivered: without it, the sample deadlines keep ageing (15 next actions are overdue on 19 November 2026, against 4 on the 5th).
+  - The evaluation always runs as of 5 November 2026, the day its reference answers were written for, whatever the calendar says.
+  - The Superset dashboards are built as of 5 November 2026 in Superset itself, so their date-based tiles (open, overdue, next 30 days) differ from the app's once the date moves on.
 - **Amazon Bedrock:** install the extra with `pip install -e ".[bedrock]"`, then set `AWS_REGION`, AWS credentials (keys, `AWS_PROFILE` or `AWS_BEARER_TOKEN_BEDROCK`) and `BEDROCK_MODEL_ID` (e.g. `anthropic.claude-sonnet-5`). With no `ANTHROPIC_API_KEY` set, Bedrock is selected automatically. Requests go through the SDK's Bedrock Mantle client (the Messages API on Bedrock). Verified on 11 Nov 2026 with Claude Sonnet 5 in us-east-1.
 - **Microsoft Foundry:** set `FERRERO_LLM_PROVIDER=foundry` plus `ANTHROPIC_FOUNDRY_RESOURCE` and `ANTHROPIC_FOUNDRY_API_KEY` to run on Claude in Azure.
 - **Differences between providers:**
@@ -182,9 +187,9 @@ The page opens with that case in focus, so questions that name no case are about
 |---|---|
 | Landing page | What visitors see at `/` before signing in: what Ferrero does, how it protects the data, and the way in |
 | Sign in · Signed out | E-mail address and password, "keep me signed in", help for a forgotten password, and (test environments) a list of the accounts; the page after signing out |
-| Overview | Deliberately simple: four numbers (open cases, hearings in the next 30 days, overdue actions, cases closed this year), "Needs attention" (the user's deadlines that are overdue or due within 7 days, else everyone's they can see), and open cases by stage. The detailed figures are on the Dashboards page. |
+| Overview | Deliberately simple and workflow-first: the four stages (Register, Assign, Follow up, Close), each with what is waiting there and one click in, then "Needs attention" (the user's deadlines that are overdue or due within 7 days, else everyone's they can see). The detailed figures are on the Dashboards page. |
 | Cases | Searchable, sortable case tracker with stage, outcome, next step and overdue flags |
-| Case detail (DS-1) | Tabs: **Overview** (facts, amounts in local currency and AED, next step, timeline, documents with their sync status, counsel spend, commercial sensitivity, "Ask Ferrero about this case"), **Evidence & documents**, **Follow-ups** and **Audit trail**. "Update case" changes status, stage, next step and owner |
+| Case detail (DS-1) | Tabs: **Overview** (facts, amounts in local currency and AED, next step, timeline, documents with their sync status, counsel spend, commercial sensitivity, "Ask Ferrero about this case"), **Evidence & documents**, **Follow-ups**, **Trademark comparison** and **Audit trail**. "Update case" changes status, stage, next step and owner |
 | Follow-ups | Every open deadline the user can see, soonest first: follow-ups set on cases, next actions and hearings from the case tracker, grouped as overdue, due today, coming up and later, plus the recently resolved |
 | Assistant | Full-page chat in English or Arabic, with cited sources and the steps Ferrero took |
 | Documents | The document sync: searchable files, scans read by text recognition (with confidence) or waiting for it, password-protected files, with reasons |
@@ -199,6 +204,16 @@ npm install
 npm run build   # production build into src/ferrero/web/dist
 npm run dev     # http://localhost:5173 with hot reload; /api is proxied to python -m ferrero.web on :8000
 ```
+
+### Design
+
+The look is set in one place, `frontend/src/index.css`: deep navy for the navigation and the public pages' panels, one blue for everything interactive (the primary action, links, the active page, the current step, citations), and white cards on a cool grey page, each with a dark-theme counterpart. Titles use the Fraunces serif, everything else Inter (IBM Plex Sans Arabic for Arabic); all three are bundled, so nothing is fetched from a font service.
+
+- **Changing the palette** means changing the values in that file only. Components use the names (`brand`, `accent`, `primary`, `surface`, `ink`, the state tones), never a colour of their own; the two exceptions are the mark and the avatar tints.
+- **State** has four tones (good, warning, critical, info), each with an ink, a soft fill and a line, and is never colour alone: a state always carries an icon or a dot and a label. Text pairs meet WCAG AA (4.5:1) in both themes.
+- **Shared pieces** are in `frontend/src/components/ui.tsx` (cards, buttons, filters, tags, state pills, avatars, figure strips, tabs, notices) and `forms.tsx`; pages are built from these, so a change there carries everywhere.
+- **The mark** (`components/Brand.tsx`) is original artwork: a white serif "F" in a blue seal. To use the organisation's own logo, replace the `Monogram` there; the browser-tab icon is in `frontend/index.html`.
+- The page itself is served with `Cache-Control: no-cache`, so a new build shows on the next visit without a hard refresh.
 
 Charts follow the dataviz rules:
 - the palette is validated against the app's surfaces, in light and dark;
@@ -241,7 +256,7 @@ The pack's CSVs stay the read-only baseline. What users change or add is stored 
 
 **Who may do what:** Legal-UAE, Legal-KSA, Legal-MENA, Legal-Ops and Leadership may update the cases they can see. Evidence follows the document rules: Procurement sees neither the evidence nor the evidence entries in the audit trail, and can't change anything. The owner of a case or follow-up must be able to see that case.
 
-**Dates:** deadlines and "today" follow the reporting date (`FERRERO_DEMO_TODAY`, 5 November 2026), like the rest of the app; audit and upload times are the real time. To show a deadline being reached, give a follow-up a start date in the past (for example 6 October, with 30 days).
+**Dates:** deadlines and "today" follow the app's date, like everything else: the real date, or the fixed one when `FERRERO_DEMO_TODAY` is set (see "The date" under "Assistant"). Audit and upload times are always the real time. To show a deadline being reached, give a follow-up a start date 30 days in the past, with 30 days to act.
 
 **Ferrero (the assistant)** sees the same records: `get_case` returns the business assessment, the follow-ups and the evidence list, and `query_case_data` has the new columns on `fact_case` plus the tables `case_follow_up`, `case_evidence` (metadata only), `case_audit` and `case_mark_comparison`; registered cases are in `fact_case` like the pack's. When consultation is required and not cleared, Ferrero says so whenever it discusses enforcement steps on the case.
 
@@ -294,7 +309,8 @@ See `.env.example`. Real environment variables take precedence over `.env`.
 | `ANTHROPIC_API_KEY` | – | Claude API key (first-party) |
 | `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `BEDROCK_MODEL_ID` | – | Claude on Amazon Bedrock |
 | `FERRERO_MODEL` / `FERRERO_EFFORT` | `claude-opus-5-5` (or `BEDROCK_MODEL_ID`) / `medium` | model and effort (`low` … `max`) |
-| `FERRERO_DEMO_TODAY` | `2026-11-05` | frozen "today" |
+| `FERRERO_DEMO_TODAY` | unset: the real date | a fixed "today", e.g. `2026-11-05` for a demonstration on the sample data |
+| `FERRERO_TIMEZONE` | unset: the server's time zone | whose midnight starts a new day, e.g. `Asia/Dubai` |
 | `FERRERO_LLM_PROVIDER` | detected from the credentials present | `anthropic`, `bedrock` or `foundry` |
 | `FERRERO_FALLBACK_MODEL` | Foundry `claude-opus-4-8`, Bedrock none | client-side refusal fallback |
 | `FERRERO_PACK_DIR`, `FERRERO_DATA_DIR` | `docs/Ferrero_Demo_Pack`, `data` | input pack and generated data |

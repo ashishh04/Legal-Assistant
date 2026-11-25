@@ -18,10 +18,10 @@ export function useOwners(accessGroup: string): User[] {
 export function Level({ value, empty = "Not assessed" }: { value: string | null | undefined; empty?: string }) {
   const filled = value === "High" ? 3 : value === "Medium" ? 2 : value === "Low" ? 1 : 0;
   return (
-    <span className="inline-flex items-center gap-2 text-[13px] font-medium text-ink">
+    <span className="inline-flex items-center gap-2 whitespace-nowrap text-[13.5px] font-medium text-ink">
       <span className="flex items-end gap-[2px]" aria-hidden>
         {[1, 2, 3].map((i) => (
-          <span key={i} className={clsx("w-[4px] rounded-sm", i <= filled ? "bg-ink" : "bg-[var(--viz-axis)]")} style={{ height: 4 + i * 3 }} />
+          <span key={i} className={clsx("w-[4px] rounded-[1.5px]", i <= filled ? "bg-accent" : "bg-line-strong")} style={{ height: 4 + i * 3 }} />
         ))}
       </span>
       {value ?? <span className="font-normal text-muted">{empty}</span>}
@@ -44,11 +44,11 @@ export const awaitingBusiness = (c: { consultation_required: boolean | number | 
 /** Shown when a change would start enforcement before the business has cleared it. */
 export function GateNotice({ message, reason, setReason }: { message: string; reason: string; setReason: (v: string) => void }) {
   return (
-    <div className="mb-4 rounded-xl border border-warning/60 bg-warning/10 p-4" role="alert">
+    <div className="mb-4 rounded-xl border border-warning-line bg-warning-soft p-4" role="alert">
       <div className="flex gap-3">
-        <Handshake size={18} className="mt-0.5 shrink-0 text-[var(--warning)]" />
+        <Handshake size={18} className="mt-0.5 shrink-0 text-warning" />
         <div>
-          <div className="text-[13.5px] font-semibold text-ink">Business consultation comes first</div>
+          <div className="text-[14px] font-semibold text-ink">Business consultation comes first</div>
           <p className="mt-0.5 text-[13px] leading-relaxed text-ink-2">{message}</p>
         </div>
       </div>

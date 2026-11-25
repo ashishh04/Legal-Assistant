@@ -25,10 +25,10 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           const Icon = t.kind === "success" ? CircleCheck : t.kind === "error" ? TriangleAlert : Info;
           return (
             <div key={t.id} role={t.kind === "error" ? "alert" : "status"}
-              className="pointer-events-auto flex items-start gap-3 rounded-2xl border border-line bg-surface px-4 py-3 text-[13.5px] text-ink shadow-2xl animate-fade-up">
+              className="pointer-events-auto flex items-start gap-3 rounded-xl border border-line bg-surface px-4 py-3 text-[13.5px] text-ink shadow-overlay animate-fade-up">
               <Icon size={17} className={clsx("mt-0.5 shrink-0", t.kind === "success" && "text-good", t.kind === "error" && "text-critical", t.kind === "info" && "text-accent-ink")} />
               <span className="min-w-0 flex-1 leading-relaxed">{t.text}</span>
-              <button type="button" onClick={() => dismiss(t.id)} aria-label="Dismiss" className="text-muted hover:text-ink"><X size={15} /></button>
+              <button type="button" onClick={() => dismiss(t.id)} aria-label="Dismiss" className="-me-1 grid size-6 shrink-0 place-items-center rounded-md text-muted transition-colors hover:bg-surface-3 hover:text-ink"><X size={15} /></button>
             </div>
           );
         })}

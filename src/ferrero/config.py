@@ -4,9 +4,10 @@ from __future__ import annotations
 import os
 import re
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime
 from functools import lru_cache
 from pathlib import Path
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
@@ -53,7 +54,8 @@ def load_dotenv(path: Path) -> None:
 class Settings:
     pack_dir: Path
     data_dir: Path
-    demo_today: date
+    demo_today: date | None = None      # FERRERO_DEMO_TODAY: a fixed "today" (see today()); None: the real date
+    timezone: str | None = None         # FERRERO_TIMEZONE: whose midnight starts a new day; None: this machine's
     org_name: str = "Dolce Group International S.A."
     model: str = "claude-opus-5-5"
     effort: str = "medium"
@@ -110,6 +112,25 @@ class Settings:
         if self.reminder_minutes < 0 or not 0 <= self.reminder_lead_days <= 90 or not 1 <= self.escalate_days <= 90:
             raise ValueError("Reminder settings: FERRERO_REMINDER_MINUTES >= 0, FERRERO_REMINDER_LEAD_DAYS 0-90, "
                              "FERRERO_ESCALATE_DAYS 1-90")
+        if self.timezone:
+            try:
+                ZoneInfo(self.timezone)
+            except (ZoneInfoNotFoundError, ValueError, OSError):
+                raise ValueError(f"FERRERO_TIMEZONE must be a time zone name such as Asia/Dubai or Europe/Rome, not "
+                                 f"{self.timezone!r} (the names come from the tzdata package: pip install tzdata)") from None
+
+    def today(self) -> date:
+        """The date the app works to: what is due, overdue or "today", for the pages, the reminders and the assistant.
+
+        It is the real date, in FERRERO_TIMEZONE when one is set and otherwise in this machine's time zone, and is
+        asked for each time, so a running app moves on at midnight. FERRERO_DEMO_TODAY fixes it instead: for a
+        demonstration against the sample data, and for the evaluation's reference answers.
+        """
+        if self.demo_today is not None:
+            return self.demo_today
+        if self.timezone:
+            return datetime.now(ZoneInfo(self.timezone)).date()
+        return date.today()
 
     @property
     def mid_conversation_system(self) -> bool:
@@ -192,7 +213,8 @@ def get_settings() -> Settings:
     return Settings(
         pack_dir=_path(env("FERRERO_PACK_DIR"), PROJECT_ROOT / "docs" / "Ferrero_Demo_Pack"),
         data_dir=_path(env("FERRERO_DATA_DIR"), PROJECT_ROOT / "data"),
-        demo_today=date.fromisoformat(env("FERRERO_DEMO_TODAY", "2026-11-05")),
+        demo_today=date.fromisoformat(env("FERRERO_DEMO_TODAY")) if env("FERRERO_DEMO_TODAY") else None,
+        timezone=env("FERRERO_TIMEZONE") or None,
         org_name=env("FERRERO_ORG_NAME", "Dolce Group International S.A."),
         model=model,
         effort=env("FERRERO_EFFORT", "medium").lower(),

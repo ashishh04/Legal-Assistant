@@ -4,8 +4,7 @@ import { Copy, KeyRound, Lock, Pencil, Power, Repeat, Search, ShieldCheck, UserP
 import { api } from "../api";
 import { Dialog } from "../components/Dialog";
 import { Field, FormError, SelectInput, TextInput } from "../components/forms";
-import { Card, EmptyState, PageHeader, StatusPill, Button } from "../components/ui";
-import { Avatar } from "../components/UserMenu";
+import { Avatar, Button, Card, Chip, EmptyState, PageHeader, SearchField, StatusPill } from "../components/ui";
 import { fmtDateTime } from "../lib/format";
 import { useApi } from "../lib/hooks";
 import { useToast } from "../lib/toast";
@@ -72,30 +71,26 @@ export default function AdminUsers() {
         actions={<Button variant="primary" icon={UserPlus} onClick={() => setEditing("new")}>Add user</Button>} />
 
       <div className="mb-4 flex flex-wrap items-center gap-3 animate-fade-up">
-        <label className="flex min-w-[240px] flex-1 items-center gap-2 rounded-xl border border-line-strong bg-surface px-3 py-1.5 text-[13px] focus-within:border-accent sm:max-w-xs">
-          <Search size={15} className="text-muted" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Name, e-mail, role or country"
-            className="min-w-0 flex-1 bg-transparent py-0.5 text-ink outline-none placeholder:text-muted" aria-label="Find a user" />
-        </label>
-        {data && <span className="text-[12.5px] text-muted">{data.users.length} accounts · {data.users.filter((u) => !u.active).length} disabled</span>}
+        <SearchField icon={Search} value={q} onChange={setQ} placeholder="Name, e-mail, role or country" label="Find a user" className="flex-1 sm:max-w-[300px]" />
+        {data && <span className="tabular text-[13px] text-muted">{data.users.length} accounts · {data.users.filter((u) => !u.active).length} disabled</span>}
       </div>
 
-      {error && <Card className="p-6 text-[14px] text-critical">The users couldn't be loaded. Please try again.</Card>}
+      {error && <Card className="mb-4 p-6 text-[14px] text-critical-ink">The users couldn't be loaded. Please try again.</Card>}
       <Card className="overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1040px] table-fixed text-[13.5px]">
             <colgroup>
-              <col className="w-[27%]" /><col className="w-[20%]" /><col className="w-[15%]" />
-              <col className="w-[12%]" /><col className="w-[8%]" /><col className="w-[18%]" />
+              <col className="w-[25%]" /><col className="w-[20%]" /><col className="w-[15%]" />
+              <col className="w-[13%]" /><col className="w-[9%]" /><col className="w-[18%]" />
             </colgroup>
-            <thead className="border-b border-line bg-surface-2 text-left text-[12px] text-muted">
+            <thead className="border-b border-line bg-surface-2 text-left text-[12.5px] text-muted">
               <tr>
-                <th className="px-4 py-3 font-medium">Person</th>
-                <th className="px-4 py-3 font-medium">Role</th>
-                <th className="px-4 py-3 font-medium">Sign-in</th>
-                <th className="whitespace-nowrap px-4 py-3 font-medium">Last signed in</th>
-                <th className="px-4 py-3 font-medium">Access</th>
-                <th className="px-4 py-3 text-right font-medium">Actions</th>
+                <th className="py-3 pe-3 ps-5 font-medium">Person</th>
+                <th className="px-3 py-3 font-medium">Role</th>
+                <th className="px-3 py-3 font-medium">Sign-in</th>
+                <th className="whitespace-nowrap px-3 py-3 font-medium">Last signed in</th>
+                <th className="px-3 py-3 font-medium">Access</th>
+                <th className="py-3 pe-5 ps-3 text-right font-medium">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -104,25 +99,28 @@ export default function AdminUsers() {
                 const admin = u.source === "administrator";
                 const [label, kind] = PASSWORD_LABEL[u.password];
                 return (
-                  <tr key={u.user_id} className="border-b border-line align-middle last:border-0">
-                    <td className="px-4 py-3">
+                  <tr key={u.user_id} className={`border-b border-line align-middle transition-colors last:border-0 hover:bg-surface-2 ${u.active ? "" : "opacity-70"}`}>
+                    <td className="py-3 pe-3 ps-5">
                       <span className="flex items-center gap-3">
-                        <Avatar name={u.full_name} small />
+                        <Avatar name={u.full_name} size={34} />
                         <span className="min-w-0">
-                          <span className="block truncate font-medium text-ink">{u.full_name}{u.source === "added" && <span className="ms-2 rounded-md border border-line px-1.5 text-[10.5px] font-medium text-muted">Added</span>}</span>
-                          <span className="block truncate text-[12px] text-ink-2">{u.email}</span>
+                          <span className="flex items-center gap-2">
+                            <span className="truncate font-medium text-ink">{u.full_name}</span>
+                            {u.source === "added" && <Chip tone="outline" className="px-1.5 py-0 text-[10.5px]">Added</Chip>}
+                          </span>
+                          <span className="block truncate text-[12.5px] text-muted">{u.email}</span>
                         </span>
                       </span>
                     </td>
-                    <td className="px-4 py-3">
-                      <span className="block font-medium text-ink">{admin ? "Platform administrator" : u.entra_group}</span>
-                      <span className="block text-[12px] text-ink-2">{admin ? "All countries · user administration" : `${u.job_title}${u.country ? ` · ${u.country}` : ""}`}</span>
+                    <td className="px-3 py-3">
+                      <span className="block truncate font-medium text-ink">{admin ? "Platform administrator" : u.entra_group}</span>
+                      <span className="block truncate text-[12.5px] text-muted">{admin ? "All countries · user administration" : `${u.job_title}${u.country ? ` · ${u.country}` : ""}`}</span>
                     </td>
-                    <td className="px-4 py-3"><StatusPill kind={kind}>{label}</StatusPill></td>
-                    <td className="whitespace-nowrap px-4 py-3 text-[12.5px] text-ink-2">{u.last_sign_in ? fmtDateTime(u.last_sign_in) : <span className="text-muted">Never</span>}</td>
-                    <td className="px-4 py-3">{u.active ? <StatusPill kind="good">Active</StatusPill> : <StatusPill kind="critical">Disabled</StatusPill>}</td>
-                    <td className="px-4 py-3">
-                      {admin ? <span className="flex items-center justify-end gap-1.5 text-[12px] text-muted"><ShieldCheck size={14} /> You</span> : (
+                    <td className="px-3 py-3"><StatusPill kind={kind}>{label}</StatusPill></td>
+                    <td className="tabular whitespace-nowrap px-3 py-3 text-[13px] text-ink-2">{u.last_sign_in ? fmtDateTime(u.last_sign_in) : <span className="text-muted">Never</span>}</td>
+                    <td className="px-3 py-3">{u.active ? <StatusPill kind="good">Active</StatusPill> : <StatusPill kind="critical">Disabled</StatusPill>}</td>
+                    <td className="py-3 pe-4 ps-3">
+                      {admin ? <span className="flex items-center justify-end gap-1.5 pe-1 text-[12.5px] text-muted"><ShieldCheck size={14} /> You</span> : (
                         <span className="flex flex-nowrap items-center justify-end gap-0.5 whitespace-nowrap">
                           {u.active && <Action icon={Repeat} label="Switch to" onClick={() => switchInto(u)} />}
                           <Action icon={KeyRound} label={u.password === "not set" ? "Set a password" : "Reset the password"} iconOnly onClick={() => setPassword(u)} />
@@ -139,7 +137,7 @@ export default function AdminUsers() {
         </div>
       </Card>
       {data && !data.starting_password && (
-        <p className="mt-3 text-[12.5px] text-muted">People from the company directory sign in once you set them a temporary password; until then, you can view the portal as them with Switch to.</p>
+        <p className="mt-4 max-w-3xl text-[13px] leading-relaxed text-muted">People from the company directory sign in once you set them a temporary password; until then, you can view the portal as them with Switch to.</p>
       )}
 
       {data && editing && <UserDialog listing={data} user={editing === "new" ? null : editing} onClose={() => setEditing(null)} onSaved={changed} />}
@@ -152,8 +150,8 @@ export default function AdminUsers() {
 function Action({ icon: Icon, label, onClick, iconOnly = false }: { icon: typeof Repeat; label: string; onClick: () => void; iconOnly?: boolean }) {
   return (
     <button type="button" onClick={onClick} title={label} aria-label={label}
-      className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-[12.5px] font-medium text-ink-2 transition hover:bg-surface-2 hover:text-ink">
-      <Icon size={14} />{!iconOnly && label}
+      className="inline-flex h-8 items-center gap-1.5 rounded-md px-2 text-[13px] font-medium text-ink-2 transition-colors hover:bg-surface-3 hover:text-ink">
+      <Icon size={15} />{!iconOnly && label}
     </button>
   );
 }
@@ -163,10 +161,10 @@ function Credentials({ email, password }: { email: string; password: string }) {
   const toast = useToast();
   const text = `E-mail: ${email}\nTemporary password: ${password}`;
   return (
-    <div className="rounded-xl border border-good/40 bg-good/5 p-4">
-      <div className="text-[13.5px] font-semibold text-ink">Share these sign-in details</div>
-      <p className="mt-0.5 text-[12.5px] text-ink-2">They are shown only now. The user is asked to choose a personal password when they first sign in.</p>
-      <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-[13px]">
+    <div className="rounded-xl border border-good-line bg-good-soft p-4">
+      <div className="text-[14px] font-semibold text-ink">Share these sign-in details</div>
+      <p className="mt-0.5 text-[13px] leading-relaxed text-ink-2">They are shown only now. The user is asked to choose a personal password when they first sign in.</p>
+      <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-[13.5px]">
         <dt className="text-muted">E-mail</dt><dd className="font-medium text-ink">{email}</dd>
         <dt className="text-muted">Temporary password</dt><dd className="font-mono text-[13px] font-medium text-ink">{password}</dd>
       </dl>

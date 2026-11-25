@@ -46,18 +46,18 @@ export function Pagination<T>({ state, noun = "items", sizes, compact = false, c
   const { page, pages, total, from, to, size, setPage, setSize } = state;
   if (total === 0) return null;
   if (pages <= 1 && !sizes) return null;
-  const btn = "grid h-8 min-w-8 place-items-center rounded-lg px-2 text-[12.5px] transition disabled:cursor-not-allowed disabled:opacity-35";
+  const btn = "grid h-8 min-w-8 place-items-center rounded-md px-2 text-[12.5px] transition-colors disabled:cursor-not-allowed disabled:opacity-35";
 
   if (compact) {
     if (pages <= 1) return null;
     return (
-      <nav aria-label={`${noun} pages`} className={clsx("flex items-center justify-between gap-3 pt-3 text-[12px] text-muted", className)}>
+      <nav aria-label={`${noun} pages`} className={clsx("mt-3 flex items-center justify-between gap-3 border-t border-line pt-3 text-[12.5px] text-muted", className)}>
         <span className="tabular">{from}–{to} of {total}</span>
         <span className="flex items-center gap-1">
-          <button type="button" className={clsx(btn, "border border-line hover:bg-surface-2 hover:text-ink")} disabled={page === 1}
+          <button type="button" className={clsx(btn, "border border-line-strong bg-surface text-ink-2 hover:bg-surface-2 hover:text-ink")} disabled={page === 1}
             onClick={() => setPage(page - 1)} aria-label="Previous page"><ChevronLeft size={15} /></button>
-          <span className="tabular px-1.5 text-ink-2">{page} / {pages}</span>
-          <button type="button" className={clsx(btn, "border border-line hover:bg-surface-2 hover:text-ink")} disabled={page === pages}
+          <span className="tabular px-2 text-ink-2">{page} / {pages}</span>
+          <button type="button" className={clsx(btn, "border border-line-strong bg-surface text-ink-2 hover:bg-surface-2 hover:text-ink")} disabled={page === pages}
             onClick={() => setPage(page + 1)} aria-label="Next page"><ChevronRight size={15} /></button>
         </span>
       </nav>
@@ -66,31 +66,31 @@ export function Pagination<T>({ state, noun = "items", sizes, compact = false, c
 
   return (
     <nav aria-label={`${noun} pages`}
-      className={clsx("flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-3 text-[12.5px] text-muted", className)}>
+      className={clsx("flex flex-wrap items-center justify-between gap-3 border-t border-line bg-surface-2 px-5 py-3 text-[12.5px] text-muted", className)}>
       <span className="tabular">Showing <span className="font-medium text-ink">{from}–{to}</span> of <span className="font-medium text-ink">{total}</span> {noun}</span>
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="flex flex-wrap items-center gap-4">
         {sizes && (
           <label className="flex items-center gap-2">
             Rows per page
             <select value={size} onChange={(e) => setSize(Number(e.target.value))}
-              className="cursor-pointer rounded-lg border border-line-strong bg-surface px-2 py-1 font-medium text-ink outline-none">
+              className="select-caret h-8 cursor-pointer rounded-md border border-line-strong bg-surface ps-2.5 pe-7 font-medium text-ink outline-none focus:border-accent">
               {sizes.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
           </label>
         )}
         {pages > 1 && (
-          <span className="flex items-center gap-1">
-            <button type="button" className={clsx(btn, "text-ink-2 hover:bg-surface-2 hover:text-ink")} disabled={page === 1}
+          <span className="flex items-center gap-0.5">
+            <button type="button" className={clsx(btn, "text-ink-2 hover:bg-surface-3 hover:text-ink")} disabled={page === 1}
               onClick={() => setPage(page - 1)} aria-label="Previous page"><ChevronLeft size={16} /></button>
             {pageList(page, pages).map((p, i) => p === "…"
               ? <span key={`gap-${i}`} className="px-1 text-muted">…</span>
               : (
                 <button key={p} type="button" onClick={() => setPage(p)} aria-current={p === page ? "page" : undefined}
-                  className={clsx(btn, "tabular font-medium", p === page ? "bg-primary text-primary-ink" : "text-ink-2 hover:bg-surface-2 hover:text-ink")}>
+                  className={clsx(btn, "tabular font-medium", p === page ? "bg-primary text-primary-ink" : "text-ink-2 hover:bg-surface-3 hover:text-ink")}>
                   {p}
                 </button>
               ))}
-            <button type="button" className={clsx(btn, "text-ink-2 hover:bg-surface-2 hover:text-ink")} disabled={page === pages}
+            <button type="button" className={clsx(btn, "text-ink-2 hover:bg-surface-3 hover:text-ink")} disabled={page === pages}
               onClick={() => setPage(page + 1)} aria-label="Next page"><ChevronRight size={16} /></button>
           </span>
         )}

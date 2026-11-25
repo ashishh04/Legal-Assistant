@@ -1,9 +1,15 @@
 from dataclasses import replace
 
 from ferrero.assistant.agent import Assistant
-from ferrero.config import base_model_id, bedrock_model_id, detect_provider
+from ferrero.config import PROJECT_ROOT, base_model_id, bedrock_model_id, detect_provider
 
 from conftest import message, text, thinking
+
+
+def test_every_source_file_compiles():
+    """The command-line tools are not imported by the web app or the other tests, so a slip in one goes unseen."""
+    for path in sorted((PROJECT_ROOT / "src" / "ferrero").rglob("*.py")):
+        compile(path.read_text(encoding="utf-8"), str(path), "exec")
 
 
 def test_provider_detection():

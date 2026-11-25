@@ -12,42 +12,42 @@ import { ConsultationBadge, Level } from "./shared";
 export function CommercialCard({ c, onEdit }: { c: CaseDetail; onEdit?: () => void }) {
   const assessed = c.business_priority != null || c.consultation_required != null || c.commercial_relationship != null;
   return (
-    <Card className="p-5">
+    <Card className="p-6">
       <SectionTitle aside={onEdit && (
-        <Button variant="ghost" icon={Pencil} onClick={onEdit} className="-me-2 px-2.5 py-1.5 text-[12.5px]">{assessed ? "Edit" : "Assess"}</Button>
+        <Button variant="ghost" size="sm" icon={Pencil} onClick={onEdit} className="-me-2">{assessed ? "Edit" : "Assess"}</Button>
       )}>Commercial sensitivity</SectionTitle>
       {!assessed ? (
-        <p className="text-[13px] leading-relaxed text-ink-2">
+        <p className="text-[13.5px] leading-relaxed text-ink-2">
           Not assessed yet. Record the business priority, and whether the business must be consulted before enforcement,
           for example when the alleged infringer is also a customer or a commercial partner.
         </p>
       ) : (
-        <dl className="grid gap-x-6 gap-y-4 text-[13px] sm:grid-cols-2">
+        <dl className="grid gap-x-8 gap-y-5 text-[13.5px] sm:grid-cols-2">
           <div>
-            <dt className="text-[12px] text-muted">Business priority</dt>
+            <dt className="text-[12.5px] text-muted">Business priority</dt>
             <dd className="mt-1"><Level value={c.business_priority} /></dd>
           </div>
           <div>
-            <dt className="text-[12px] text-muted">Consult the business before enforcement</dt>
+            <dt className="text-[12.5px] text-muted">Consult the business before enforcement</dt>
             <dd className="mt-1 font-medium text-ink">
               {c.consultation_required == null ? <span className="font-normal text-muted">Not assessed</span> : c.consultation_required ? "Yes" : "No"}
             </dd>
           </div>
           <div>
-            <dt className="text-[12px] text-muted">Commercial relationship</dt>
+            <dt className="text-[12.5px] text-muted">Commercial relationship</dt>
             <dd className="mt-1 font-medium text-ink">{c.commercial_relationship ?? <span className="font-normal text-muted">Not recorded</span>}</dd>
           </div>
           {c.consultation_required && (
             <div>
-              <dt className="text-[12px] text-muted">Consultation</dt>
-              <dd className="mt-1"><ConsultationBadge required={c.consultation_required} status={c.consultation_status} /></dd>
-              {c.consultation_contact && <dd className="mt-1 text-[12px] text-ink-2">With {c.consultation_contact}</dd>}
+              <dt className="text-[12.5px] text-muted">Consultation</dt>
+              <dd className="mt-1.5"><ConsultationBadge required={c.consultation_required} status={c.consultation_status} /></dd>
+              {c.consultation_contact && <dd className="mt-1.5 text-[12.5px] text-muted">With {c.consultation_contact}</dd>}
             </div>
           )}
           {c.consultation_notes && (
-            <div className="sm:col-span-2">
-              <dt className="text-[12px] text-muted">Business considerations</dt>
-              <dd className="mt-1 whitespace-pre-line leading-relaxed text-ink-2">{c.consultation_notes}</dd>
+            <div className="border-t border-line pt-4 sm:col-span-2">
+              <dt className="text-[12.5px] text-muted">Business considerations</dt>
+              <dd className="mt-1.5 whitespace-pre-line leading-relaxed text-ink-2">{c.consultation_notes}</dd>
             </div>
           )}
         </dl>

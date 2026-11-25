@@ -12,6 +12,8 @@ interface AssistantState {
 
 export type AuthStatus = "loading" | "signed-out" | "signed-in";
 
+const DATE_CHECK_MS = 5 * 60_000;
+
 interface Session {
   status: AuthStatus;
   /** Set when the last session ended without signing out (expired, or signed out elsewhere). */
@@ -89,6 +91,28 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   }, [status, leave]);
 
   useEffect(() => { document.documentElement.setAttribute("data-theme", theme); }, [theme]);
+
+  // The server's date moves on at midnight. Ask again when the window is looked at, and every few minutes; pages
+  // that count days (deadlines, overdue) load again when it changes.
+  useEffect(() => {
+    if (status !== "signed-in") return;
+    let checked = Date.now();
+    const check = () => {
+      if (document.visibilityState === "hidden" || Date.now() - checked < 30_000) return;  // focus and visibility arrive together
+      checked = Date.now();
+      api.meta()
+        .then((m) => setMeta((old) => (old && old.demo_today === m.demo_today ? old : m)))
+        .catch(() => { /* the next check tries again; an ended session is handled by the request itself */ });
+    };
+    const timer = window.setInterval(check, DATE_CHECK_MS);
+    window.addEventListener("focus", check);
+    document.addEventListener("visibilitychange", check);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("focus", check);
+      document.removeEventListener("visibilitychange", check);
+    };
+  }, [status]);
 
   const signIn = useCallback(async (login: string, password: string, remember: boolean) => {
     const me = await api.login(login, password, remember);

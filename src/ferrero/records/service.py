@@ -6,8 +6,8 @@ documents), set follow-ups with deadlines, and record visual trademark compariso
 (who, when, what changed from what to what, and why) in one transaction. After each change the case model's overlay is
 refreshed, so the case pages, the KPIs and the assistant all see it at once.
 
-Business dates (deadlines, "today", closing dates) follow the reporting date (FERRERO_DEMO_TODAY), like the rest of
-the app. Audit and upload timestamps are the real time, in UTC.
+Business dates (deadlines, "today", closing dates) follow the case model's date, like the rest of the app: the real
+date, or the fixed one when FERRERO_DEMO_TODAY is set. Audit and upload timestamps are the real time, in UTC.
 """
 from __future__ import annotations
 
@@ -122,7 +122,7 @@ class CaseRecords:
     def __init__(self, settings: Settings, model: CaseModel, *, today: Callable[[], date] | None = None,
                  mailer: Mailer | Any | None = None):
         self.settings, self.model = settings, model
-        self.today = today or (lambda: settings.demo_today)
+        self.today = today or (lambda: model.today)  # the same clock as the pages and the assistant
         self.store = RecordStore(settings.records_dir / "records.sqlite")
         self.blobs = ev.BlobStore(settings.records_dir / "evidence")
         self.mailer = mailer

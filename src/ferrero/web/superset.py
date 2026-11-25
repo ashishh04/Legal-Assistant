@@ -373,7 +373,7 @@ def check(persona: str = "U-05") -> int:
     if not embeddable:
         print("FAILED          no dashboard can be embedded")
         return 1
-    model = CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path)
+    model = CaseModel(settings.csv_dir, settings.today, catalogue=settings.catalogue_path)
     p = model.principal(persona)
     if p is None:
         print(f"FAILED          unknown persona {persona}")

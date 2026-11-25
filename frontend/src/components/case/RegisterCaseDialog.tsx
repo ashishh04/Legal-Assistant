@@ -95,12 +95,12 @@ export function RegisterCaseDialog({ open, onClose }: { open: boolean; onClose: 
     <Dialog open={open} onClose={onClose} busy={busy} wide icon={<ClipboardPlus size={17} />} title="Register a case"
       subtitle="Record a new infringement. It starts at Intake with an owner, and every step after is in its audit trail."
       footer={<>
-        <span className="me-auto text-[12px] text-muted">The owner is notified and reminded of the first step.</span>
+        <span className="me-auto text-[12.5px] text-muted">The owner is notified and reminded of the first step.</span>
         <Button variant="ghost" onClick={onClose} disabled={busy}>Cancel</Button>
         <Button variant="primary" onClick={submit} disabled={busy || !o}>{busy ? "Registering…" : "Register case"}</Button>
       </>}>
       <FormError>{error}</FormError>
-      {!o && !error && <p className="py-10 text-center text-[13px] text-muted">Loading…</p>}
+      {!o && !error && <p className="py-12 text-center text-[13.5px] text-muted">Loading…</p>}
       {o && <>
         <FormSection title="The infringement">
           <div className="grid gap-4 sm:grid-cols-2">
@@ -167,8 +167,8 @@ export function RegisterCaseDialog({ open, onClose }: { open: boolean; onClose: 
         </FormSection>
 
         <button type="button" onClick={() => setMore((m) => !m)} aria-expanded={more}
-          className="mb-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-accent-ink hover:underline">
-          <ChevronDown size={15} className={more ? "rotate-180 transition" : "transition"} /> More details (optional)
+          className="mb-6 inline-flex h-8 items-center gap-1.5 rounded-lg bg-surface-3 px-2.5 text-[13px] font-medium text-ink-2 transition-colors hover:text-ink">
+          <ChevronDown size={15} className={more ? "rotate-180 transition-transform" : "transition-transform"} /> More details (optional)
         </button>
         {more && <>
           <FormSection title="Details">

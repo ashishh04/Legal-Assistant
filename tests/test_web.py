@@ -19,13 +19,15 @@ def events(response):
 def test_page_and_metadata(settings, model, index, fake_claude):
     c = client_for(settings, model, index, fake_claude)
     assert "Ferrero" in c.get("/").text and "Ferrero" in c.get("/login").text  # the app's own pages are public
+    # the page is checked on every visit, so an updated build shows at once instead of a cached one
+    assert all(c.get(path).headers.get("cache-control") == "no-cache" for path in ("/", "/login", "/cases/TM-2024-428"))
     assert c.get("/static/app.js").status_code == 200
     assert c.get("/api/meta").status_code == 401  # everything else needs a session
     public = c.get("/api/public").json()
     assert public["sign_in_configured"] and public["accounts"] is None  # no account list unless switched on
     sign_in(c, "U-08")
     meta = c.get("/api/meta").json()
-    assert meta["index"]["indexed"] == 12 and meta["demo_today"] == "2026-11-05"
+    assert meta["index"]["indexed"] == 12 and (meta["demo_today"], meta["today_fixed"]) == ("2026-11-05", True)
     users = c.get("/api/users").json()
     assert len(users) == 11 and all("email" not in u for u in users)
 

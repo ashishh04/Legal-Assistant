@@ -71,7 +71,7 @@ function inline(text: string, renderCite: (n: number) => ReactNode, keyBase: str
 export function Markdown({ text, renderCite }: { text: string; renderCite: (n: number) => ReactNode }) {
   const blocks = parseBlocks(text);
   return (
-    <div className="space-y-2.5 text-[15px] leading-relaxed">
+    <div className="space-y-3 text-[14.5px] leading-[1.65] text-ink">
       {blocks.map((b, i) => {
         const k = `b${i}`;
         switch (b.type) {
@@ -97,8 +97,8 @@ export function Markdown({ text, renderCite }: { text: string; renderCite: (n: n
           case "table":
             return (
               <div key={k} className="overflow-x-auto rounded-lg border border-line">
-                <table className="w-full text-sm" dir="auto">
-                  <thead className="bg-surface-2 text-left text-ink-2">
+                <table className="w-full text-[13.5px]" dir="auto">
+                  <thead className="bg-surface-2 text-left text-[12.5px] text-muted">
                     <tr>{b.head.map((h, j) => <th key={j} className="px-3 py-2 font-medium">{inline(h, renderCite, `${k}-h${j}`)}</th>)}</tr>
                   </thead>
                   <tbody>

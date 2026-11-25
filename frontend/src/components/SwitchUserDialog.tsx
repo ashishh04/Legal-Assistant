@@ -5,7 +5,7 @@ import { useToast } from "../lib/toast";
 import { useSession } from "../session";
 import { Dialog } from "./Dialog";
 import { FormError } from "./forms";
-import { Avatar } from "./UserMenu";
+import { Avatar } from "./ui";
 
 const GROUP_ORDER = ["Legal-Ops", "Leadership", "Legal-UAE", "Legal-KSA", "Legal-MENA", "Procurement"];
 
@@ -45,29 +45,29 @@ export function SwitchUserDialog({ open, onClose }: { open: boolean; onClose: ()
     <Dialog open={open} onClose={onClose} busy={busy !== null} icon={<Repeat size={17} />} title="Switch user"
       subtitle="See Ferrero exactly as another user does. Changes you make are recorded under your name and theirs.">
       <FormError>{error}</FormError>
-      <label className="mb-4 flex items-center gap-2 rounded-xl border border-line-strong bg-surface px-3 py-2 text-[13.5px] focus-within:border-accent">
-        <Search size={15} className="text-muted" />
+      <label className="mb-5 flex h-10 items-center gap-2.5 rounded-lg border border-line-strong bg-surface px-3 text-[13.5px] shadow-card transition-colors focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20">
+        <Search size={15} className="shrink-0 text-muted" />
         <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Name, role or country" data-autofocus
           className="min-w-0 flex-1 bg-transparent text-ink outline-none placeholder:text-muted" aria-label="Find a user" />
       </label>
       {!groups.length && <p className="py-6 text-center text-[13px] text-muted">No user matches.</p>}
-      <div className="grid gap-4">
+      <div className="grid grid-cols-1 gap-5">
         {groups.map(({ group, people }) => (
           <section key={group}>
-            <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">{group}</div>
-            <ul className="grid gap-1">
+            <div className="mb-1.5 px-2.5 text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">{group}</div>
+            <ul className="grid grid-cols-1 gap-0.5">
               {people.map((u) => {
                 const current = u.user_id === user?.user_id;
                 return (
                   <li key={u.user_id}>
                     <button type="button" disabled={current || busy !== null} onClick={() => pick(u.user_id, u.full_name)}
-                      className="flex w-full items-center gap-3 rounded-xl border border-transparent px-2.5 py-2 text-start transition hover:border-line hover:bg-surface-2 disabled:cursor-default disabled:opacity-60">
-                      <Avatar name={u.full_name} small />
+                      className="group flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-start transition-colors hover:bg-surface-3 disabled:cursor-default disabled:opacity-60 disabled:hover:bg-transparent">
+                      <Avatar name={u.full_name} size={32} />
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-[13.5px] font-medium text-ink">{u.full_name}</span>
-                        <span className="block truncate text-[12px] text-ink-2">{u.job_title} · sees {u.access}</span>
+                        <span className="block truncate text-[12.5px] text-muted">{u.job_title} · sees {u.access}</span>
                       </span>
-                      <span className="shrink-0 text-[12px] font-medium text-accent-ink">
+                      <span className="shrink-0 text-[12.5px] font-medium text-accent-ink">
                         {current ? "Viewing now" : busy === u.user_id ? "Switching…" : "Switch"}
                       </span>
                     </button>

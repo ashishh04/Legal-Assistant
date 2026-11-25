@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bell, BellRing, CalendarClock, CheckCheck, Gavel, TriangleAlert, UserPlus } from "lucide-react";
+import { ArrowRight, Bell, BellRing, CalendarClock, CheckCheck, Gavel, TriangleAlert, UserPlus } from "lucide-react";
 import { api } from "../api";
 import { relativeDays, timeAgo } from "../lib/format";
 import { useSession } from "../session";
@@ -81,24 +81,24 @@ export function NotificationBell() {
     <div ref={ref} className="relative">
       <button type="button" onClick={() => { setOpen((o) => !o); if (!open) load(); }} aria-expanded={open} aria-haspopup="dialog"
         aria-label={unread ? `Notifications: ${unread} unread` : "Notifications"}
-        className="relative grid size-9 place-items-center rounded-xl border border-line bg-surface text-ink-2 transition hover:text-ink">
-        {unread ? <BellRing size={16} /> : <Bell size={16} />}
+        className={clsx("relative grid size-9 place-items-center rounded-lg text-ink-2 transition-colors hover:bg-surface-3 hover:text-ink", open && "bg-surface-3 text-ink")}>
+        {unread ? <BellRing size={17} strokeWidth={1.9} /> : <Bell size={17} strokeWidth={1.9} />}
         {unread > 0 && (
-          <span className="tabular absolute -end-1.5 -top-1.5 grid h-[18px] min-w-[18px] place-items-center rounded-full bg-critical px-1 text-[10.5px] font-semibold text-white ring-2 ring-page">
+          <span className="tabular absolute end-0.5 top-0.5 grid h-[17px] min-w-[17px] place-items-center rounded-full bg-critical px-1 text-[10.5px] font-semibold leading-none text-white ring-2 ring-page">
             {unread > 99 ? "99+" : unread}
           </span>
         )}
       </button>
       {open && (
         <div role="dialog" aria-label="Notifications"
-          className="absolute end-0 top-full z-50 mt-2 w-[min(400px,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl animate-fade-up">
+          className="absolute end-0 top-full z-50 mt-2 w-[min(408px,calc(100vw-1.5rem))] overflow-hidden rounded-xl border border-line bg-surface shadow-overlay animate-pop-in">
           <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
             <div>
-              <div className="text-[14px] font-semibold text-ink">Notifications</div>
-              <div className="text-[12px] text-muted">{unread ? `${unread} unread` : "All caught up"} · deadlines on your cases</div>
+              <div className="text-[14.5px] font-semibold text-ink">Notifications</div>
+              <div className="text-[12.5px] text-muted">{unread ? `${unread} unread` : "All caught up"} · deadlines on your cases</div>
             </div>
             {unread > 0 && (
-              <button type="button" onClick={markAll} className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-[12.5px] font-medium text-ink-2 hover:bg-surface-2 hover:text-ink">
+              <button type="button" onClick={markAll} className="inline-flex h-8 items-center gap-1.5 rounded-lg px-2.5 text-[12.5px] font-medium text-ink-2 transition-colors hover:bg-surface-3 hover:text-ink">
                 <CheckCheck size={14} /> Mark all read
               </button>
             )}
@@ -106,9 +106,9 @@ export function NotificationBell() {
           <ul className="max-h-[60vh] divide-y divide-line overflow-y-auto">
             {data && data.items.length === 0 && (
               <li className="px-5 py-10 text-center">
-                <div className="mx-auto mb-3 grid size-10 place-items-center rounded-2xl bg-accent-soft text-accent-ink"><Bell size={18} /></div>
-                <div className="text-[13.5px] font-medium text-ink">No reminders yet</div>
-                <p className="mx-auto mt-1 max-w-[280px] text-[12.5px] leading-relaxed text-muted">
+                <div className="mx-auto mb-3 grid size-11 place-items-center rounded-full border border-accent-line bg-accent-soft text-accent-ink"><Bell size={18} /></div>
+                <div className="text-[14px] font-medium text-ink">No reminders yet</div>
+                <p className="mx-auto mt-1 max-w-[290px] text-[13px] leading-relaxed text-muted">
                   Reminders appear here when a deadline on one of your cases is approaching, due or overdue{data.email ? ", and are also sent by e-mail" : ""}.
                 </p>
               </li>
@@ -120,18 +120,18 @@ export function NotificationBell() {
               return (
                 <li key={n.id}>
                   <button type="button" onClick={() => openItem(n)}
-                    className={clsx("flex w-full gap-3 px-4 py-3 text-start transition hover:bg-surface-2", !n.read && "bg-accent-soft/40")}>
-                    <span className={clsx("mt-0.5 grid size-8 shrink-0 place-items-center rounded-xl",
-                      urgent ? "bg-critical/10 text-critical" : "bg-surface-2 text-ink-2")}>
+                    className={clsx("relative flex w-full gap-3 px-4 py-3 text-start transition-colors hover:bg-surface-2", !n.read && "bg-accent-soft/45")}>
+                    {!n.read && <span aria-hidden className="absolute inset-y-0 start-0 w-[3px] bg-accent" />}
+                    <span className={clsx("mt-0.5 grid size-8 shrink-0 place-items-center rounded-full",
+                      urgent ? "bg-critical-soft text-critical-ink" : "bg-surface-3 text-ink-2")}>
                       <Icon size={15} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="flex items-start gap-2">
-                        <span className={clsx("min-w-0 flex-1 text-[13px] leading-snug text-ink", !n.read && "font-semibold")}>{n.title}</span>
-                        {!n.read && <span className="mt-1.5 size-2 shrink-0 rounded-full bg-accent" aria-label="Unread" />}
+                      <span className={clsx("block text-[13.5px] leading-snug text-ink", !n.read && "font-semibold")}>
+                        {n.title}{!n.read && <span className="sr-only"> (unread)</span>}
                       </span>
                       <span className="mt-0.5 block text-[12.5px] leading-relaxed text-ink-2">{n.body}</span>
-                      <span className="mt-1 block text-[11.5px] text-muted">
+                      <span className="mt-1 block text-[12px] text-muted">
                         {n.case_id}{n.days_left != null ? ` · ${whenDue(n)}` : ""} · {timeAgo(n.created_at)}
                       </span>
                     </span>
@@ -142,7 +142,7 @@ export function NotificationBell() {
           </ul>
           <div className="border-t border-line bg-surface-2 px-4 py-2.5 text-end">
             <button type="button" onClick={() => { setOpen(false); navigate("/follow-ups"); }}
-              className="text-[12.5px] font-medium text-accent-ink hover:underline">Open all follow-ups</button>
+              className="inline-flex items-center gap-1 text-[13px] font-medium text-accent-ink hover:underline">Open all follow-ups <ArrowRight size={13} /></button>
           </div>
         </div>
       )}

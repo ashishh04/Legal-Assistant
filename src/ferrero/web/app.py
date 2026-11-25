@@ -200,7 +200,7 @@ def create_app(settings: Settings | None = None, assistant: Assistant | None = N
                auth: Auth | None = None) -> FastAPI:
     settings = settings or get_settings()
     if assistant is None:
-        model = CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path)
+        model = CaseModel(settings.csv_dir, settings.today, catalogue=settings.catalogue_path)  # the date as it moves on
         assistant = Assistant(settings, model, DocumentIndex(settings.index_path, readonly=True))
     if superset is None and (superset_settings := SupersetSettings.from_env()) is not None:
         superset = SupersetClient(superset_settings)
@@ -325,7 +325,9 @@ def create_app(settings: Settings | None = None, assistant: Assistant | None = N
     @app.get("/api/meta")
     def meta(_: Me) -> dict[str, Any]:
         return {"model": settings.model, "effort": settings.effort, "provider": settings.provider,
-                "demo_today": settings.demo_today.isoformat(), "org_name": settings.org_name,
+                # "demo_today": the date the app works to (the real date, unless FERRERO_DEMO_TODAY fixes one)
+                "demo_today": assistant.model.today.isoformat(), "today_fixed": settings.demo_today is not None,
+                "org_name": settings.org_name,
                 "index": assistant.index.stats(), "examples": EXAMPLES, "dashboards": views.superset_dashboards(),
                 "embedded_dashboards": superset is not None, "case_options": case_options(settings),
                 "email_notifications": records.mailer is not None}
@@ -613,7 +615,9 @@ def create_app(settings: Settings | None = None, assistant: Assistant | None = N
             candidate = (DIST / path).resolve()
             if path and candidate.is_file() and DIST.resolve() in candidate.parents:
                 return FileResponse(candidate)  # favicon and other root-level build files
-            return FileResponse(DIST / "index.html")  # client-side routes: /, /login, /cases/TM-2024-428, …
+            # Client-side routes: /, /login, /cases/TM-2024-428, … The page names the build's script and stylesheet, so
+            # browsers must check it on every visit, or they keep showing the previous build after an update.
+            return FileResponse(DIST / "index.html", headers={"Cache-Control": "no-cache"})
     else:
         @app.get("/", include_in_schema=False)
         def index() -> FileResponse:

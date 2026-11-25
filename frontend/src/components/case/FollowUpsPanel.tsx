@@ -18,17 +18,21 @@ export function DuePill({ days, lead = 7 }: { days: number; lead?: number }) {
   if (state === "overdue") return <StatusPill kind="critical">{relativeDays(days)}</StatusPill>;
   if (state === "today") return <StatusPill kind="warning">Due today</StatusPill>;
   if (state === "soon") return <StatusPill kind="pending">Due {relativeDays(days)}</StatusPill>;
-  return <span className="whitespace-nowrap text-[12px] text-muted">Due {relativeDays(days)}</span>;
+  return <span className="whitespace-nowrap text-[12.5px] text-muted">Due {relativeDays(days)}</span>;
 }
 
 export function DateBlock({ iso, state }: { iso: string; state: ReturnType<typeof deadlineState> | "done" }) {
   const d = new Date(`${iso}T00:00:00`);
+  // a calendar leaf: the month on a band in the deadline's tone, the day beneath
   return (
-    <span className={clsx("grid w-14 shrink-0 place-items-center self-start rounded-xl border py-1.5 text-center",
-      state === "overdue" ? "border-critical/40 bg-critical/5" : state === "today" ? "border-warning/60 bg-warning/10"
-        : state === "soon" ? "border-accent/50 bg-accent-soft/60" : "border-line bg-surface-2")}>
-      <span className="text-[18px] font-semibold leading-none tracking-[-0.02em] text-ink">{d.getDate()}</span>
-      <span className="mt-1 text-[10.5px] font-semibold uppercase tracking-[0.08em] text-muted">{d.toLocaleDateString("en-GB", { month: "short" })}</span>
+    <span className={clsx("w-12 shrink-0 self-start overflow-hidden rounded-lg border bg-surface text-center shadow-card",
+      state === "overdue" ? "border-critical-line" : state === "today" ? "border-warning-line" : state === "soon" ? "border-accent-line" : "border-line")}>
+      <span className={clsx("block py-[3px] text-[10px] font-semibold uppercase leading-4 tracking-[0.1em]",
+        state === "overdue" ? "bg-critical-soft text-critical-ink" : state === "today" ? "bg-warning-soft text-warning-ink"
+          : state === "soon" ? "bg-accent-soft text-accent-ink" : "bg-surface-3 text-muted")}>
+        {d.toLocaleDateString("en-GB", { month: "short" })}
+      </span>
+      <span className={clsx("tabular block py-1.5 text-[17px] font-semibold leading-none", state === "done" ? "text-muted" : "text-ink")}>{d.getDate()}</span>
     </span>
   );
 }
@@ -40,7 +44,7 @@ export function FollowUpsPanel({ c, onChanged, startNew = false, onStarted }:
   const o = meta!.case_options;
   const today = meta!.demo_today;
   const { data, error, reload } = useApi<FollowUp[] | null>(
-    () => (user ? api.followUps(c.case_id) : Promise.resolve(null)), [user?.user_id, c.case_id, c.counts.audit]);
+    () => (user ? api.followUps(c.case_id) : Promise.resolve(null)), [user?.user_id, c.case_id, c.counts.audit, today]);
   const [creating, setCreating] = useState(false);
   const [resolving, setResolving] = useState<FollowUp | null>(null);
   const [editing, setEditing] = useState<FollowUp | null>(null);
@@ -56,16 +60,16 @@ export function FollowUpsPanel({ c, onChanged, startNew = false, onStarted }:
   const hearing = daysFrom(today, c.next_hearing_date);
 
   return (
-    <div className="grid gap-4 lg:grid-cols-3">
-      <div className="flex min-w-0 flex-col gap-4 lg:col-span-2">
-        <Card className="p-5">
+    <div className="grid items-start gap-5 lg:grid-cols-3">
+      <div className="flex min-w-0 flex-col gap-5 lg:col-span-2">
+        <Card className="p-6">
           <SectionTitle aside={canEdit && <Button variant="primary" icon={Plus} onClick={() => setCreating(true)}>Add follow-up</Button>}>
             Follow-ups and deadlines
           </SectionTitle>
-          {error && <p className="text-[13px] text-critical">The follow-ups couldn't be loaded. Please try again.</p>}
+          {error && <p className="text-[13px] text-critical-ink">The follow-ups couldn't be loaded. Please try again.</p>}
           {!data && !error && <p className="py-8 text-center text-[13px] text-muted">Loading follow-ups…</p>}
           {data && !open.length && (
-            <EmptyState icon={CalendarClock} title="No open follow-ups"
+            <EmptyState plain icon={CalendarClock} title="No open follow-ups"
               action={canEdit ? <Button icon={Plus} onClick={() => setCreating(true)}>Add a follow-up</Button> : undefined}>
               Set a deadline when the other side is given time to act, for example a store given 30 days to remove the
               infringing products. The owner is told when it is reached, to follow up and decide.
@@ -76,27 +80,27 @@ export function FollowUpsPanel({ c, onChanged, startNew = false, onStarted }:
               const state = deadlineState(f.days_left, f.remind_days || o.reminder_lead_days);
               const decide = state === "overdue" || state === "today";
               return (
-                <li key={f.follow_up_id} className={clsx("flex gap-4 rounded-2xl border p-4",
-                  decide ? "border-warning/60 bg-warning/5" : "border-line bg-surface")}>
+                <li key={f.follow_up_id} className={clsx("flex gap-4 rounded-xl border p-4",
+                  decide ? "border-warning-line bg-warning-soft/60" : "border-line bg-surface")}>
                   <DateBlock iso={f.due_date} state={state} />
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[14px] font-semibold text-ink" dir="auto">{f.title}</span>
+                      <span className="text-[14.5px] font-semibold text-ink" dir="auto">{f.title}</span>
                       <DuePill days={f.days_left} lead={f.remind_days || o.reminder_lead_days} />
                     </div>
-                    <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-ink-2">
+                    <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-ink-2">
                       <Chip>{f.kind}</Chip>
                       <span>{f.period_days != null ? `${f.period_days} days from ${fmtDate(f.start_date)}` : `From ${fmtDate(f.start_date)}`}</span>
                       <span className="text-muted">·</span>
                       <span>Owner <span className="font-medium text-ink">{f.owner_name}</span></span>
                     </div>
-                    {f.details && <p className="mt-2 whitespace-pre-line text-[13px] leading-relaxed text-ink-2" dir="auto">{f.details}</p>}
-                    <div className="mt-1.5 text-[11.5px] text-muted">
+                    {f.details && <p className="mt-2.5 whitespace-pre-line text-[13.5px] leading-relaxed text-ink-2" dir="auto">{f.details}</p>}
+                    <div className="mt-2 text-[12px] text-muted">
                       {f.follow_up_id} · set by {f.created_by}, {fmtDateTime(f.created_at)}
                       {f.remind_days ? ` · reminder ${f.remind_days} day${f.remind_days === 1 ? "" : "s"} before` : " · reminder on the day"}
                     </div>
                     {canEdit && (
-                      <div className="mt-3 flex flex-wrap gap-2">
+                      <div className="mt-3.5 flex flex-wrap gap-2">
                         <Button variant={decide ? "primary" : "secondary"} icon={CircleCheck} onClick={() => setResolving(f)}>Record decision</Button>
                         <Button variant="ghost" icon={Pencil} onClick={() => setEditing(f)}>Change or extend</Button>
                       </div>
@@ -108,8 +112,8 @@ export function FollowUpsPanel({ c, onChanged, startNew = false, onStarted }:
           </ul>
         </Card>
         {done.length > 0 && (
-          <Card className="p-5">
-            <SectionTitle aside={<span className="text-[12px] text-muted">{done.length}</span>}>Resolved</SectionTitle>
+          <Card className="p-6">
+            <SectionTitle aside={<span className="tabular text-[12.5px] text-muted">{done.length}</span>}>Resolved</SectionTitle>
             <ul className="divide-y divide-line">
               {done.map((f) => (
                 <li key={f.follow_up_id} className="flex gap-4 py-3">
@@ -119,8 +123,8 @@ export function FollowUpsPanel({ c, onChanged, startNew = false, onStarted }:
                       <span className="text-[13.5px] font-medium text-ink" dir="auto">{f.title}</span>
                       <StatusPill kind={f.status === "Cancelled" ? "neutral" : f.decision === "escalate" ? "warning" : "good"}>{f.decision_label ?? f.status}</StatusPill>
                     </div>
-                    <div className="mt-0.5 text-[12.5px] text-ink-2">{f.resolved_by} · {fmtDateTime(f.resolved_at)} · owner {f.owner_name}</div>
-                    {f.decision_note && <p className="mt-1.5 border-s-2 border-line-strong ps-3 text-[13px] text-ink-2" dir="auto">{f.decision_note}</p>}
+                    <div className="mt-1 text-[12.5px] text-muted">{f.resolved_by} · {fmtDateTime(f.resolved_at)} · owner {f.owner_name}</div>
+                    {f.decision_note && <p className="mt-2 border-s-2 border-accent ps-3 text-[13px] leading-relaxed text-ink-2" dir="auto">{f.decision_note}</p>}
                   </div>
                 </li>
               ))}
@@ -129,37 +133,37 @@ export function FollowUpsPanel({ c, onChanged, startNew = false, onStarted }:
         )}
       </div>
 
-      <div className="flex flex-col gap-4">
-        <Card className="p-5">
+      <div className="flex flex-col gap-5">
+        <Card className="p-6">
           <SectionTitle>From the case tracker</SectionTitle>
           {c.status === "Open" && (c.next_action_due || c.next_hearing_date) ? (
-            <ul className="flex flex-col gap-3 text-[13px]">
+            <ul className="flex flex-col gap-4 text-[13.5px]">
               {c.next_action_due && (
                 <li className="flex items-start gap-3">
-                  <CalendarClock size={16} className="mt-0.5 shrink-0 text-ink-2" />
+                  <CalendarClock size={16} className="mt-0.5 shrink-0 text-muted" />
                   <span className="min-w-0 flex-1">
                     <span className="block font-medium text-ink">{c.next_action ?? "Next action"}</span>
-                    <span className="text-[12.5px] text-ink-2">Due {fmtDate(c.next_action_due)} · {c.lead_counsel}</span>
+                    <span className="text-[12.5px] text-muted">Due {fmtDate(c.next_action_due)} · {c.lead_counsel}</span>
                   </span>
                   {due != null && <DuePill days={due} lead={o.reminder_lead_days} />}
                 </li>
               )}
               {c.next_hearing_date && (
                 <li className="flex items-start gap-3">
-                  <Gavel size={16} className="mt-0.5 shrink-0 text-ink-2" />
+                  <Gavel size={16} className="mt-0.5 shrink-0 text-muted" />
                   <span className="min-w-0 flex-1">
                     <span className="block font-medium text-ink">Hearing</span>
-                    <span className="text-[12.5px] text-ink-2">{fmtDate(c.next_hearing_date)} · {c.court_name}</span>
+                    <span className="text-[12.5px] text-muted">{fmtDate(c.next_hearing_date)} · {c.court_name}</span>
                   </span>
-                  {hearing != null && hearing >= 0 && <span className="text-[12px] text-muted">{relativeDays(hearing)}</span>}
+                  {hearing != null && hearing >= 0 && <span className="whitespace-nowrap text-[12.5px] text-muted">{relativeDays(hearing)}</span>}
                 </li>
               )}
             </ul>
           ) : <p className="text-[13px] text-muted">No next action or hearing on the tracker.</p>}
         </Card>
-        <Card className="p-5">
+        <Card className="bg-surface-2 p-6">
           <SectionTitle>How reminders work</SectionTitle>
-          <ol className="flex flex-col gap-3 text-[13px] leading-relaxed text-ink-2">
+          <ol className="flex flex-col gap-3.5 text-[13px] leading-relaxed text-ink-2">
             <li className="flex gap-2.5"><BellRing size={15} className="mt-0.5 shrink-0 text-accent-ink" />
               <span>The owner is reminded before the deadline ({o.reminder_lead_days} days by default).</span></li>
             <li className="flex gap-2.5"><CalendarClock size={15} className="mt-0.5 shrink-0 text-accent-ink" />
@@ -167,7 +171,7 @@ export function FollowUpsPanel({ c, onChanged, startNew = false, onStarted }:
             <li className="flex gap-2.5"><TriangleAlert size={15} className="mt-0.5 shrink-0 text-accent-ink" />
               <span>{o.escalate_days} days later with no decision, Legal Operations is told as well.</span></li>
           </ol>
-          <p className="mt-3 text-[12px] text-muted">Reminders appear under the bell{meta?.email_notifications ? " and arrive by e-mail" : ""}. Each decision is recorded in the audit trail.</p>
+          <p className="mt-4 border-t border-line pt-3 text-[12.5px] leading-relaxed text-muted">Reminders appear under the bell{meta?.email_notifications ? " and arrive by e-mail" : ""}. Each decision is recorded in the audit trail.</p>
         </Card>
       </div>
 
@@ -254,8 +258,8 @@ function FollowUpDialog({ c, onClose, onSaved }: { c: CaseDetail; onClose: () =>
         <div className="-mt-1 flex flex-wrap gap-1.5">
           {[7, 14, 30, 60, 90].map((n) => (
             <button key={n} type="button" onClick={() => setPeriod(String(n))} aria-pressed={days === String(n)}
-              className={clsx("rounded-full border px-2.5 py-0.5 text-[12px] font-medium transition",
-                days === String(n) ? "border-primary bg-primary text-primary-ink" : "border-line bg-surface-2 text-ink-2 hover:text-ink")}>
+              className={clsx("rounded-md px-2.5 py-1 text-[12.5px] font-medium transition-colors",
+                days === String(n) ? "bg-primary text-primary-ink" : "bg-surface-3 text-ink-2 hover:text-ink")}>
               {n} days
             </button>
           ))}
@@ -266,7 +270,7 @@ function FollowUpDialog({ c, onClose, onSaved }: { c: CaseDetail; onClose: () =>
         </Field>
         <Field label="Details" optional><TextArea value={details} onChange={(e) => setDetails(e.target.value)} rows={2} maxLength={2000}
           placeholder="e.g. Notice served in person on the store manager; photos on file" /></Field>
-        <div className="flex gap-2.5 rounded-xl border border-line bg-surface-2 p-3 text-[12.5px] leading-relaxed text-ink-2">
+        <div className="flex gap-2.5 rounded-lg border border-accent-line bg-accent-soft p-3 text-[13px] leading-relaxed text-ink-2">
           <BellRing size={15} className="mt-0.5 shrink-0 text-accent-ink" /><span>{preview}</span>
         </div>
       </div>
@@ -336,12 +340,12 @@ function ResolveDialog({ c, f, onClose, onSaved }: { c: CaseDetail; f: FollowUp;
           const Icon = copy.icon;
           return (
             <button key={d.value} type="button" role="radio" aria-checked={decision === d.value} onClick={() => setDecision(d.value)}
-              className={clsx("flex gap-3 rounded-xl border p-3 text-start transition",
-                decision === d.value ? "border-accent bg-accent-soft/60 ring-1 ring-accent" : "border-line bg-surface hover:bg-surface-2")}>
+              className={clsx("flex gap-3 rounded-lg border p-3.5 text-start transition-colors",
+                decision === d.value ? "border-accent bg-accent-soft ring-1 ring-accent" : "border-line-strong bg-surface hover:bg-surface-2")}>
               <Icon size={17} className={clsx("mt-0.5 shrink-0", decision === d.value ? "text-accent-ink" : "text-ink-2")} />
               <span>
                 <span className="block text-[13.5px] font-medium text-ink">{copy.title}</span>
-                <span className="mt-0.5 block text-[12px] leading-relaxed text-ink-2">{copy.text}</span>
+                <span className="mt-0.5 block text-[12.5px] leading-relaxed text-ink-2">{copy.text}</span>
               </span>
             </button>
           );
@@ -430,7 +434,7 @@ function EditFollowUpDialog({ c, f, onClose, onSaved }: { c: CaseDetail; f: Foll
         <div className="-mt-1 flex flex-wrap gap-1.5">
           {[7, 14, 30].map((n) => (
             <button key={n} type="button" onClick={() => setDue(addDays(f.due_date, n))}
-              className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[12px] font-medium text-ink-2 hover:text-ink">+{n} days</button>
+              className="rounded-md bg-surface-3 px-2.5 py-1 text-[12.5px] font-medium text-ink-2 transition-colors hover:text-ink">+{n} days</button>
           ))}
         </div>
         <Field label="Details" optional><TextArea value={details} onChange={(e) => setDetails(e.target.value)} rows={2} maxLength={2000} /></Field>

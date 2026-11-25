@@ -88,7 +88,7 @@ export function CaseEditDialog({ c, open, onClose, onSaved }:
   return (
     <Dialog open={open} onClose={onClose} busy={busy} icon={<Pencil size={17} />} title={`Update ${c.case_id}`} subtitle={c.title}
       footer={<>
-        <span className="me-auto text-[12px] text-muted">{n ? `${n} change${n === 1 ? "" : "s"}` : "No changes yet"}</span>
+        <span className="tabular me-auto text-[12.5px] text-muted">{n ? `${n} change${n === 1 ? "" : "s"}` : "No changes yet"}</span>
         <Button variant="ghost" onClick={onClose} disabled={busy}>Cancel</Button>
         <Button variant="primary" onClick={save} disabled={busy || !n}>{busy ? "Saving…" : gate ? "Go ahead and save" : "Save changes"}</Button>
       </>}>
@@ -121,7 +121,7 @@ export function CaseEditDialog({ c, open, onClose, onSaved }:
           )}
         </div>
         {!closed && o.enforcement_stages.includes(form.stage) && !o.enforcement_stages.includes(c.stage) && (
-          <p className="mt-3 text-[12.5px] text-ink-2">Moving to <strong className="font-medium text-ink">{form.stage}</strong> starts enforcement.
+          <p className="mt-3 text-[13px] leading-relaxed text-ink-2">Moving to <strong className="font-semibold text-ink">{form.stage}</strong> starts enforcement.
             {c.consultation_required ? " This case needs business consultation first." : ""}</p>
         )}
       </FormSection>

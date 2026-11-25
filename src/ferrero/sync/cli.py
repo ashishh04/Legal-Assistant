@@ -62,7 +62,7 @@ def main(argv: list[str] | None = None) -> int:
         sys.stdout.reconfigure(encoding="utf-8")
 
     settings = get_settings()
-    model = CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path)
+    model = CaseModel(settings.csv_dir, settings.today, catalogue=settings.catalogue_path)
     index = DocumentIndex(settings.index_path)
     folder = args.path or settings.documents_dir
     manifest_path = args.manifest or (manifest_next_to(folder) if args.source == "local" else None)

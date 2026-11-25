@@ -2,8 +2,11 @@
 
 Each principal gets an in-memory SQLite database that contains only the rows their role may
 see, so any SQL the assistant writes is row-level secure by construction. The database is
-built once per access scope, cached as a serialised snapshot, and opened read-only per query
+built once per access scope and day, cached as a serialised snapshot, and opened read-only per query
 (an authorizer allows SELECT and reads only; one statement per call; time and row limits).
+
+The model works to one date, "today" (``CaseModel.today``, ``reporting_date()`` in queries): the real date as the
+app runs, or a fixed one. Open cases' ``days_open`` is counted up to it.
 
 The pack's CSVs are the baseline and are never written. What users change or add (case fields, cases
 registered in the app, follow-ups, evidence, trademark comparisons, the audit trail; see ``ferrero.records``) is
@@ -95,8 +98,10 @@ def _read_only_authorizer(action: int, *_: Any) -> int:
 
 
 class CaseModel:
-    def __init__(self, csv_dir: Path, demo_today: date, catalogue: Path | None = None):
-        self.demo_today = demo_today
+    def __init__(self, csv_dir: Path, today: date | Callable[[], date], catalogue: Path | None = None):
+        """``today``: the date the model works to (what is overdue, how long a case has been open, ``reporting_date()``
+        in queries). A function is asked each time, so a running app follows the calendar; a date stays fixed."""
+        self._today: Callable[[], date] = today if callable(today) else (lambda: today)
         self.tables: dict[str, Table] = {
             name: load_table(csv_dir / f"{name}.csv", HIDDEN_COLUMNS.get(name, frozenset())) for name in TABLES
         }
@@ -127,6 +132,10 @@ class CaseModel:
                 self._by_case[r["case_id"]][name].append(r)
         self._snapshots: dict[tuple, bytes] = {}
         self._lock = threading.Lock()
+
+    @property
+    def today(self) -> date:
+        return self._today()
 
     # ---------- directory ----------
     def set_directory(self, extra_users: list[dict[str, Any]], disabled: set[str] | frozenset[str]) -> None:
@@ -224,10 +233,10 @@ class CaseModel:
         """The pack's cases as delivered, before any overlay (the source of the form choices)."""
         return self._base_cases.dicts()
 
-    def _days_open(self, opened: str | None, closed: str | None, status: str | None) -> int | None:
+    def _days_open(self, opened: str | None, closed: str | None, status: str | None, today: date | None = None) -> int | None:
         if not opened:
             return None
-        end = date.fromisoformat(closed) if status == "Closed" and closed else self.demo_today
+        end = date.fromisoformat(closed) if status == "Closed" and closed else today or self.today
         return (end - date.fromisoformat(opened)).days
 
     def principal(self, user_id: str) -> Principal | None:
@@ -287,6 +296,8 @@ class CaseModel:
                 "next_action_due", "last_action_date", "days_open", "language", "sensitivity", "access_group",
                 *(c for c, _ in EXTRA_CASE_COLUMNS))
         summary: dict[str, Any] = {k: r.get(k) for k in keep}
+        if r.get("status") == "Open":  # an open case's stored figure is as of the day its row was written
+            summary["days_open"] = self._days_open(r.get("opened_date"), None, "Open")
         if summary["consultation_required"] is not None:
             summary["consultation_required"] = bool(summary["consultation_required"])
         summary["timeline"] = [
@@ -320,10 +331,11 @@ class CaseModel:
         return summary
 
     def connect(self, principal: Principal) -> sqlite3.Connection:
-        data = self._snapshot(principal)
+        day = self.today  # read once: the data and reporting_date() must agree, also across midnight
+        data = self._snapshot(principal, day)
         conn = sqlite3.connect(":memory:", check_same_thread=False)
         conn.deserialize(data)
-        today = self.demo_today.isoformat()
+        today = day.isoformat()
         for name in ("reporting_date", "demo_today"):  # demo_today kept as an alias for older queries
             conn.create_function(name, 0, lambda: today, deterministic=True)
         conn.set_authorizer(_read_only_authorizer)
@@ -359,15 +371,18 @@ class CaseModel:
         }
 
     # ---------- snapshots ----------
-    def _snapshot(self, principal: Principal) -> bytes:
-        key = principal.scope_key
+    def _snapshot(self, principal: Principal, today: date) -> bytes:
+        """The principal's database as of ``today``: kept per access scope and day, rebuilt when the day changes."""
+        key = (principal.scope_key, today)
         with self._lock:
             data = self._snapshots.get(key)
             if data is None:
-                data = self._snapshots[key] = self._build_snapshot(principal)
+                for other_day in [k for k in self._snapshots if k[1] != today]:
+                    del self._snapshots[other_day]
+                data = self._snapshots[key] = self._build_snapshot(principal, today)
             return data
 
-    def _build_snapshot(self, principal: Principal) -> bytes:
+    def _build_snapshot(self, principal: Principal, today: date) -> bytes:
         visible = {cid for cid, r in self._cases.items() if principal.sees_group(r["access_group"])}
         conn = sqlite3.connect(":memory:")
         try:
@@ -375,6 +390,8 @@ class CaseModel:
                 if name in DOCUMENT_TABLES and not principal.sees_documents:
                     continue  # object-level security: the table does not exist for this role
                 rows = self._visible_rows(name, table, principal, visible)
+                if name == "fact_case":
+                    rows = self._aged(table.columns, rows, today)
                 cols = ", ".join(f'"{c}" {t}' for c, t in zip(table.columns, table.types))
                 conn.execute(f'CREATE TABLE "{name}" ({cols})')
                 conn.executemany(f'INSERT INTO "{name}" VALUES ({", ".join("?" * len(table.columns))})', rows)
@@ -382,6 +399,12 @@ class CaseModel:
             return conn.serialize()
         finally:
             conn.close()
+
+    def _aged(self, cols: list[str], rows: list[tuple], today: date) -> list[tuple]:
+        """Open cases with days_open counted up to ``today`` (the stored figure is as of the day the row was written)."""
+        at, opened, status = cols.index("days_open"), cols.index("opened_date"), cols.index("status")
+        return [r[:at] + (self._days_open(r[opened], None, "Open", today),) + r[at + 1:] if r[status] == "Open" else r
+                for r in rows]
 
     def _visible_rows(self, name: str, table: Table, principal: Principal, visible: set[str]) -> list[tuple]:
         cols = table.columns

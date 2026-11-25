@@ -163,11 +163,12 @@ class Assistant:
                 conv.messages.append({"role": "user", "content": text})
             elif self.settings.mid_conversation_system:
                 conv.messages.append({"role": "user", "content": text})
-                conv.messages.append({"role": "system", "content": context_message(conv.principal, conv.case_focus)})
+                conv.messages.append({"role": "system",
+                                      "content": context_message(conv.principal, conv.case_focus, self.model.today)})
             else:  # models without mid-conversation system messages: the context leads the first user message
                 conv.messages.append({"role": "user", "content": [
                     {"type": "text", "text": "[Context from the Ferrero application, not written by the user] "
-                                             + context_message(conv.principal, conv.case_focus)},
+                                             + context_message(conv.principal, conv.case_focus, self.model.today)},
                     {"type": "text", "text": text},
                 ]})
             conv.context_sent = True

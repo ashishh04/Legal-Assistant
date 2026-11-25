@@ -80,7 +80,7 @@ export function SupersetFrame({ uuid, domain, userId, caseId, title, theme, bloc
   }, [theme]);
 
   return (
-    <div className="relative h-[calc(100dvh-15.5rem)] min-h-[560px] w-full bg-surface">
+    <div className="relative h-[calc(100dvh-19rem)] min-h-[560px] w-full bg-surface">
       <div ref={mount} className="h-full w-full [&>iframe]:h-full [&>iframe]:w-full [&>iframe]:border-0" />
       {state === "loading" && (
         <div className="absolute inset-0 grid place-items-center bg-surface">
@@ -92,9 +92,9 @@ export function SupersetFrame({ uuid, domain, userId, caseId, title, theme, bloc
       {state === "error" && (
         <div className="absolute inset-0 grid place-items-center bg-surface p-6">
           <div className="flex max-w-md flex-col items-center gap-3 text-center">
-            <span className="grid size-11 place-items-center rounded-2xl bg-accent-soft text-accent-ink"><AlertTriangle size={20} /></span>
-            <div className="text-[15px] font-semibold text-ink">This dashboard couldn't be shown</div>
-            <p className="text-[13px] leading-relaxed text-ink-2">{error}</p>
+            <span className="grid size-12 place-items-center rounded-full border border-accent-line bg-accent-soft text-accent-ink"><AlertTriangle size={20} /></span>
+            <div className="text-[16px] font-semibold text-ink">This dashboard couldn't be shown</div>
+            <p className="text-[13.5px] leading-relaxed text-ink-2">{error}</p>
           </div>
         </div>
       )}

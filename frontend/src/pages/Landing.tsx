@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
-import {
-  ArrowRight, BellRing, CalendarClock, CircleCheck, CircleCheckBig, ClipboardPlus, Gavel, Handshake, History, Languages,
-  Moon, Quote, ShieldCheck, Sun, UserRoundCheck,
-} from "lucide-react";
-import { Monogram } from "../components/Brand";
+import { ArrowRight, Check, History, Languages, Moon, Quote, ShieldCheck, Sun } from "lucide-react";
+import { Brand, Monogram } from "../components/Brand";
+import { buttonCls } from "../components/ui";
 import { useSession } from "../session";
 
 const STEPS = [
-  { icon: ClipboardPlus, title: "Register", text: "Record the infringement and its evidence." },
-  { icon: UserRoundCheck, title: "Assign", text: "Give every case an owner." },
-  { icon: CalendarClock, title: "Follow up", text: "Deadlines with automatic alerts." },
-  { icon: CircleCheckBig, title: "Close", text: "Record the outcome and close." },
+  { title: "Register", text: "Record the infringement and its evidence." },
+  { title: "Assign", text: "Give every case an owner." },
+  { title: "Follow up", text: "Deadlines with automatic alerts." },
+  { title: "Close", text: "Record the outcome and close." },
+];
+
+const ASSURANCES = [
+  { icon: ShieldCheck, text: "Access by role" },
+  { icon: Languages, text: "English and Arabic" },
+  { icon: History, text: "Every change on record" },
 ];
 
 export default function Landing() {
@@ -18,71 +22,67 @@ export default function Landing() {
   const org = publicInfo?.org_name;
   return (
     <div className="flex h-full flex-col overflow-y-auto bg-page">
-      <header className="border-b border-line">
-        <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center gap-3 px-5 sm:px-8">
-          <Monogram size={34} />
-          <div className="leading-tight">
-            <div className="text-[15px] font-semibold tracking-[-0.01em] text-ink">Ferrero</div>
-            <div className="text-[11.5px] text-muted">Case intelligence</div>
-          </div>
-          <nav className="ms-auto flex items-center gap-1 sm:gap-2" aria-label="Page">
+      <section className="brand-surface relative flex flex-[1_0_auto] flex-col overflow-hidden text-on-brand">
+        {/* the seal's rings, large and faint, behind the product */}
+        <div aria-hidden className="pointer-events-none absolute -end-[220px] top-1/2 hidden size-[900px] -translate-y-1/2 rounded-full border border-brand-accent/[0.13] lg:block" />
+        <div aria-hidden className="pointer-events-none absolute -end-[120px] top-1/2 hidden size-[700px] -translate-y-1/2 rounded-full border border-brand-accent/[0.09] lg:block" />
+
+        <header className="relative mx-auto flex h-[76px] w-full max-w-[1240px] shrink-0 items-center px-6 sm:px-10">
+          <Link to="/" aria-label="Ferrero Case Intelligence"><Brand onDark /></Link>
+          <nav className="ms-auto flex items-center gap-2" aria-label="Page">
             <button type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
-              className="grid size-9 place-items-center rounded-xl text-ink-2 hover:bg-surface-2 hover:text-ink">
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              className="grid size-9 place-items-center rounded-lg text-on-brand/70 transition-colors hover:bg-white/10 hover:text-on-brand">
+              {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
             </button>
-            <Link to="/login" className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-[13.5px] font-medium text-primary-ink hover:opacity-90">
-              Sign in
-            </Link>
+            <Link to="/login" className={buttonCls("inverse", "md", "px-4")}>Sign in</Link>
           </nav>
-        </div>
-      </header>
+        </header>
 
-      <main className="flex-1">
-        <section className="relative overflow-hidden">
-          <div aria-hidden className="pointer-events-none absolute -end-40 -top-40 size-[640px] rounded-full bg-[radial-gradient(circle,var(--accent-soft),transparent_65%)]" />
-          <div className="relative mx-auto grid max-w-[1200px] items-center gap-12 px-5 pb-14 pt-14 sm:px-8 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
-            <div className="animate-fade-up">
-              <div className="mb-4 text-[11.5px] font-semibold uppercase tracking-[0.16em] text-accent-ink">
-                Legal &amp; Brand Protection{org ? ` · ${org}` : ""}
-              </div>
-              <h1 className="text-balance text-[40px] font-semibold leading-[1.08] tracking-[-0.035em] text-ink sm:text-[52px]">
-                Every case, from report to closure.
-              </h1>
-              <p className="mt-5 max-w-lg text-[16px] leading-relaxed text-ink-2">
-                Register, assign, follow up and close infringement cases, with every step on record.
-              </p>
-              <Link to="/login" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-[14.5px] font-medium text-primary-ink shadow-card hover:opacity-90">
-                Sign in <ArrowRight size={16} />
-              </Link>
-              <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-ink-2">
-                {[[ShieldCheck, "Access by role"], [Languages, "English and Arabic"], [History, "Every change on record"]].map(([Icon, text]) => {
-                  const I = Icon as typeof ShieldCheck;
-                  return <li key={text as string} className="flex items-center gap-2"><I size={15} className="text-accent-ink" />{text as string}</li>;
-                })}
-              </ul>
+        <div className="relative mx-auto grid w-full max-w-[1240px] flex-1 grid-cols-1 items-center gap-x-16 gap-y-14 px-6 pb-20 pt-10 sm:px-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,1fr)] lg:pb-24 lg:pt-12">
+          <div className="min-w-0 animate-fade-up">
+            <div className="mb-6 flex items-center gap-3 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-brand-accent">
+              <span aria-hidden className="h-px w-8 bg-brand-accent/60" />
+              Legal &amp; Brand Protection
             </div>
-            <ProductSketch />
+            <h1 className="font-display text-balance text-[44px] font-[460] leading-[1.04] text-on-brand sm:text-[60px]">
+              Every case, from report to <em className="font-[440] italic text-brand-accent">closure</em>.
+            </h1>
+            <p className="mt-6 max-w-[30rem] text-[17px] leading-relaxed text-on-brand/75">
+              Register, assign, follow up and close infringement cases, with every step on record.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <Link to="/login" className={buttonCls("inverse", "lg", "px-6")}>
+                Sign in <ArrowRight size={17} />
+              </Link>
+              {org && <span className="text-[13px] text-on-brand/55">For the legal team of {org}</span>}
+            </div>
+            <ul className="mt-12 flex flex-wrap gap-x-7 gap-y-3 border-t border-white/10 pt-6 text-[13.5px] text-on-brand/80">
+              {ASSURANCES.map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-center gap-2"><Icon size={16} className="text-brand-accent" strokeWidth={1.7} />{text}</li>
+              ))}
+            </ul>
           </div>
-        </section>
+          <ProductSketch />
+        </div>
+      </section>
 
-        <section className="mx-auto max-w-[1200px] px-5 pb-16 sm:px-8" aria-label="How it works">
-          <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS.map(({ icon: Icon, title, text }, i) => (
-              <li key={title} className="flex items-center gap-4 rounded-2xl border border-line bg-surface p-5">
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent-ink"><Icon size={20} strokeWidth={1.7} /></span>
-                <span>
-                  <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Step {i + 1}</span>
-                  <span className="block text-[15px] font-semibold text-ink">{title}</span>
-                  <span className="block text-[13px] text-ink-2">{text}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      </main>
+      <section className="mx-auto w-full max-w-[1240px] shrink-0 px-6 py-12 sm:px-10" aria-label="How it works">
+        <ol className="grid gap-x-0 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map(({ title, text }, i) => (
+            <li key={title} className="min-w-0">
+              <div className="flex items-center">
+                <span className="grid size-9 shrink-0 place-items-center rounded-full border border-accent-line bg-accent-soft text-[14px] font-semibold text-accent-ink">{i + 1}</span>
+                {i < STEPS.length - 1 && <span aria-hidden className="mx-4 hidden h-px flex-1 bg-line-strong lg:block" />}
+              </div>
+              <h2 className="mt-4 text-[16px] font-semibold text-ink"><span className="sr-only">Step {i + 1}: </span>{title}</h2>
+              <p className="mt-1 max-w-[15rem] text-[14px] leading-relaxed text-ink-2">{text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-      <footer className="border-t border-line">
-        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-3 px-5 py-6 text-[12.5px] text-muted sm:px-8">
+      <footer className="shrink-0 border-t border-line">
+        <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-3 px-6 py-5 text-[12.5px] text-muted sm:px-10">
           <span>{org ? `${org} · ` : ""}Legal &amp; Brand Protection</span>
           <span>Ferrero Case Intelligence</span>
         </div>
@@ -91,56 +91,57 @@ export default function Landing() {
   );
 }
 
-/** An illustration of the product, made from the app's own pieces (no real case data: this page is public). */
+/** An illustration of the product, made from the app's own pieces (no real case data: this page is public). It is
+ *  always drawn in the light theme, as a picture on the dark panel. */
 function ProductSketch() {
+  const rows = [
+    { day: "5", title: "Store to remove infringing products", meta: "Compliance deadline · decision due", due: "Due today", leaf: "border-warning-line", band: "bg-warning-soft text-warning-ink", pill: "bg-warning-soft text-warning-ink" },
+    { day: "11", title: "Hearing, Commercial Court", meta: "Hearing bundle prepared", due: "In 6 days", leaf: "border-accent-line", band: "bg-accent-soft text-accent-ink", pill: "bg-accent-soft text-accent-ink" },
+    { day: "19", title: "Follow-up test purchase", meta: "Next action · assigned to counsel", due: "In 14 days", leaf: "border-line", band: "bg-surface-3 text-muted", pill: "bg-surface-3 text-ink-2" },
+  ];
   return (
-    <div className="relative mx-auto w-full max-w-[520px] animate-fade-up lg:mx-0" aria-hidden>
-      <div className="rounded-3xl border border-line bg-surface p-5 shadow-card">
+    <div data-theme="light" className="relative mx-auto w-full min-w-0 max-w-[540px] animate-fade-up lg:mx-0 lg:ms-auto" aria-hidden>
+      <div className="rounded-2xl border border-white/10 bg-surface p-5 shadow-overlay">
         <div className="mb-4 flex items-center justify-between">
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">Today</div>
-            <div className="text-[16px] font-semibold text-ink">Needs attention</div>
-          </div>
-          <span className="rounded-full border border-line bg-surface-2 px-2.5 py-1 text-[11.5px] font-medium text-ink-2">3 items</span>
+          <div className="text-[15px] font-semibold text-ink">Needs attention</div>
+          <span className="text-[12.5px] text-muted">This week</span>
         </div>
-        <ul className="flex flex-col gap-2.5">
-          {[
-            { icon: BellRing, title: "Store to remove infringing products", meta: "Deadline reached · decision due today", tone: "warn" },
-            { icon: Gavel, title: "Hearing, Commercial Court", meta: "In 6 days · hearing bundle prepared", tone: "calm" },
-            { icon: Handshake, title: "Business consultation", meta: "Customer · cleared to proceed", tone: "good" },
-          ].map(({ icon: Icon, title, meta, tone }) => (
-            <li key={title} className="flex items-center gap-3 rounded-2xl border border-line bg-page p-3">
-              <span className={`grid size-9 shrink-0 place-items-center rounded-xl ${tone === "warn" ? "bg-critical/10 text-critical" : tone === "good" ? "bg-good/10 text-good-ink" : "bg-accent-soft text-accent-ink"}`}>
-                <Icon size={16} />
+        <ul className="divide-y divide-line">
+          {rows.map((r) => (
+            <li key={r.title} className="flex items-center gap-3.5 py-3 first:pt-1 last:pb-1">
+              <span className={`w-11 shrink-0 overflow-hidden rounded-lg border bg-surface text-center ${r.leaf}`}>
+                <span className={`block py-[2px] text-[9.5px] font-semibold uppercase tracking-[0.1em] ${r.band}`}>Nov</span>
+                <span className="block py-1 text-[15px] font-semibold leading-none text-ink">{r.day}</span>
               </span>
-              <span className="min-w-0">
-                <span className="block truncate text-[13.5px] font-medium text-ink">{title}</span>
-                <span className="block truncate text-[12px] text-muted">{meta}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-[13.5px] font-medium text-ink">{r.title}</span>
+                <span className="block truncate text-[12.5px] text-muted">{r.meta}</span>
               </span>
+              <span className={`shrink-0 rounded-full px-2.5 py-[3px] text-[11.5px] font-medium ${r.pill}`}>{r.due}</span>
             </li>
           ))}
         </ul>
       </div>
 
-      <div className="relative -mt-6 ms-auto w-[88%] rounded-3xl border border-line bg-surface p-4 shadow-card sm:-mt-8">
+      <div className="relative -mt-5 ms-auto w-[90%] rounded-2xl border border-line bg-surface p-4 shadow-overlay sm:-mt-6 sm:w-[86%] lg:-me-6">
         <div className="flex items-center gap-2.5">
           <Monogram size={28} />
-          <span className="text-[13px] font-semibold text-ink">Ferrero</span>
-          <span className="ms-auto rounded-full bg-surface-2 px-2 py-0.5 text-[11px] text-muted">EN · AR</span>
+          <span className="text-[13.5px] font-semibold text-ink">Ferrero Assistant</span>
+          <span className="ms-auto rounded-md bg-surface-3 px-2 py-0.5 text-[11.5px] font-medium text-ink-2">EN · AR</span>
         </div>
-        <p className="mt-3 rounded-2xl rounded-tl-md bg-surface-2 px-3.5 py-2.5 text-[13px] text-ink-2">What did the court award?</p>
-        <p className="mt-2 text-[13px] leading-relaxed text-ink">
+        <p className="ms-auto mt-3.5 w-fit rounded-2xl rounded-ee-md bg-brand-2 px-3.5 py-2 text-[13px] text-on-brand">What did the court award?</p>
+        <p className="mt-3 text-[13.5px] leading-relaxed text-ink">
           The court awarded compensation and ordered the infringing goods destroyed
-          <span className="ms-1 inline-grid size-[18px] place-items-center rounded-md bg-accent-soft align-[1px] text-[10.5px] font-semibold text-accent-ink">1</span>
+          <span className="ms-1 inline-grid size-[18px] place-items-center rounded bg-accent-soft align-[1px] text-[10.5px] font-semibold text-accent-ink ring-1 ring-accent-line">1</span>
         </p>
-        <span className="mt-2.5 inline-flex items-center gap-1.5 rounded-lg border border-line px-2 py-1 text-[11.5px] text-muted">
-          <Quote size={12} /> Judgment · Operative part
+        <span className="mt-3 inline-flex items-center gap-1.5 rounded-md border border-line bg-surface-2 px-2 py-1 text-[12px] text-ink-2">
+          <Quote size={12} className="text-accent-ink" /> Judgment · Operative part
         </span>
       </div>
 
-      <div className="absolute -end-3 -top-5 hidden items-center gap-2 rounded-2xl border border-line bg-surface px-3.5 py-2.5 shadow-card sm:flex">
-        <CircleCheck size={16} className="text-good" />
-        <span className="text-[12.5px] font-medium text-ink">Tamper check passed</span>
+      <div className="absolute -top-5 end-6 hidden items-center gap-2 rounded-full border border-good-line bg-good-soft py-1.5 pe-3.5 ps-2.5 shadow-pop sm:flex lg:-end-5">
+        <span className="grid size-5 place-items-center rounded-full bg-good text-white"><Check size={12} strokeWidth={3} /></span>
+        <span className="text-[12.5px] font-medium text-good-ink">Tamper check passed</span>
       </div>
     </div>
   );

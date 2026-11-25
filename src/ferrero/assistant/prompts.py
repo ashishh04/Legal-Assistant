@@ -1,11 +1,13 @@
 """The assistant's system prompt (fixed per deployment) and the per-conversation context message.
 
 The system prompt must stay byte-identical for the life of a conversation: Claude's thinking blocks are
-bound to the exact conversation prefix, and so is the prompt cache. Anything that varies per user or per
-conversation goes into an appended ``role: "system"`` message instead (see ``context_message``).
+bound to the exact conversation prefix, and so is the prompt cache. Anything that varies per user, per
+conversation or per day (today's date) goes into an appended ``role: "system"`` message instead (see
+``context_message``).
 """
 from __future__ import annotations
 
+from datetime import date
 from typing import Any
 
 from ..casemodel import CaseModel
@@ -20,7 +22,6 @@ def _join(items: list[str]) -> str:
 def system_prompt(settings: Settings, model: CaseModel) -> str:
     marks = _join([r["mark_name"] for r in model.tables["dim_mark"].dicts()])
     countries = _join(list(dict.fromkeys(r["country"] for r in model.tables["dim_court"].dicts())))
-    today = f"{settings.demo_today.day} {settings.demo_today:%B %Y}"
     return f"""\
 You are Ferrero, the case-intelligence assistant for the legal and brand-protection team of {settings.org_name}. The team \
 enforces the group's trademarks ({marks}) in {countries}: counterfeit and lookalike goods, customs seizures, marketplace, \
@@ -48,12 +49,14 @@ file names and registration numbers as written. Lead with the answer, then the e
 list; use a table only to compare cases. Passages you use from search results are cited automatically, so do not add your own \
 reference list; for figures from the case tracker, say they come from the case tracker.
 
-Today's date is {today}; interpret "today", "this week", "next 30 days" and similar against it."""
+Each conversation opens with a note from the Ferrero application that gives today's date. Interpret "today", "this week", \
+"next 30 days", "overdue" and similar against that date; in queries it is reporting_date()."""
 
 
-def context_message(principal: Principal, case: dict[str, Any] | None = None) -> str:
-    text = (f"Signed-in user: {principal.full_name}, {principal.job_title} (Entra ID group {principal.entra_group}). "
-            f"Access: {principal.role.description}.")
+def context_message(principal: Principal, case: dict[str, Any] | None = None, today: date | None = None) -> str:
+    text = f"Today's date is {today:%A} {today.day} {today:%B %Y}. " if today else ""
+    text += (f"Signed-in user: {principal.full_name}, {principal.job_title} (Entra ID group {principal.entra_group}). "
+             f"Access: {principal.role.description}.")
     if case:
         text += (f" The user opened Ferrero from Power BI on case {case['case_id']} ({case['title']}); questions that name no "
                  "case are about this case.")

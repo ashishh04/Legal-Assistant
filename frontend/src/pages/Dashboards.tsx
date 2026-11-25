@@ -1,10 +1,9 @@
-import clsx from "clsx";
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ChartPie, ExternalLink, RotateCcw, X } from "lucide-react";
+import { ArrowLeft, ChartPie, ExternalLink, LoaderCircle, RotateCcw, X } from "lucide-react";
 import { api } from "../api";
 import { SupersetFrame } from "../components/SupersetFrame";
-import { Button, Card, EmptyState, PageHeader } from "../components/ui";
+import { Button, Card, Chip, EmptyState, PageHeader, Tabs, buttonCls } from "../components/ui";
 import { useApi } from "../lib/hooks";
 import { useSession } from "../session";
 import type { DashboardsInfo, EmbeddedDashboardInfo } from "../types";
@@ -48,11 +47,22 @@ export default function Dashboards() {
   const { data, error, loading, reload } = useApi(() => api.dashboards(), [userId]);
 
   if (!user) return null;
-  if (loading && !data) return <><PageHeader eyebrow="Analytics" title="Dashboards" /><Card className="h-[420px] animate-pulse" /></>;
+  if (loading && !data) {
+    return (
+      <>
+        <PageHeader title="Dashboards" />
+        <Card className="grid h-[420px] place-items-center">
+          <div className="flex items-center gap-2.5 text-[13.5px] text-ink-2" role="status">
+            <LoaderCircle size={16} className="animate-spin text-accent" /> Loading the dashboards…
+          </div>
+        </Card>
+      </>
+    );
+  }
   if (error || !data) {
     return (
       <>
-        <PageHeader eyebrow="Analytics" title="Dashboards" />
+        <PageHeader title="Dashboards" />
         <EmptyState icon={ChartPie} title="Dashboards are unavailable" action={<Button icon={RotateCcw} onClick={reload}>Try again</Button>}>
           The dashboard list couldn't be loaded. Please try again in a moment.
         </EmptyState>
@@ -72,7 +82,7 @@ function EmbeddedDashboards({ info, userId, reload }: { info: DashboardsInfo; us
   if (info.error || !dashboards.length) {
     return (
       <>
-        <PageHeader eyebrow="Analytics" title="Dashboards" />
+        <PageHeader title="Dashboards" />
         <EmptyState icon={ChartPie} title={info.error ? "Dashboards are unavailable" : "No dashboards yet"}
           action={<Button icon={RotateCcw} onClick={reload}>Try again</Button>}>
           {info.error ?? "No dashboards are published for Ferrero yet."}
@@ -82,7 +92,7 @@ function EmbeddedDashboards({ info, userId, reload }: { info: DashboardsInfo; us
   }
 
   const wanted = params.get("d");
-  const current = dashboards.find((d) => d.code === wanted || d.uuid === wanted) ?? dashboards[0];
+  const current = (wanted ? dashboards.find((d) => d.code === wanted || d.uuid === wanted) : undefined) ?? dashboards[0];
   const caseId = current.code === "DS-1" ? params.get("case")?.toUpperCase() ?? null : null;
   const blocked = blockedByServer(info);
   const problem = domainProblem(current);
@@ -101,37 +111,29 @@ function EmbeddedDashboards({ info, userId, reload }: { info: DashboardsInfo; us
 
   return (
     <>
-      <PageHeader eyebrow="Analytics" title="Dashboards"
+      <PageHeader title="Dashboards"
         subtitle="Portfolio dashboards for each audience, on the same case data and access rights as the rest of Ferrero."
-        actions={<a href={current.url} target="_blank" rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-line-strong bg-surface px-3.5 py-2 text-[13.5px] font-medium text-ink hover:bg-surface-2">
+        actions={<a href={current.url} target="_blank" rel="noreferrer" className={buttonCls("secondary")}>
           <ExternalLink size={15} /> Open in a new tab</a>} />
-      <div className="mb-4 flex flex-wrap items-center gap-3">
-        <div className="flex flex-wrap gap-1 rounded-xl border border-line bg-surface p-1" role="tablist" aria-label="Dashboards">
-          {dashboards.map((d) => (
-            <button key={d.uuid} type="button" role="tab" aria-selected={d.uuid === current.uuid} onClick={() => select(d)}
-              className={clsx("rounded-lg px-3 py-1.5 text-[13px] transition",
-                d.uuid === current.uuid ? "bg-primary text-primary-ink" : "text-ink-2 hover:bg-surface-2")}>
-              {label(d)}
-            </button>
-          ))}
-        </div>
-        {caseId && (
-          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-2 py-1 pe-1.5 ps-3 text-[12.5px] text-ink-2">
-            <Link to={`/cases/${caseId}`} className="inline-flex items-center gap-1 font-medium text-ink hover:underline">
-              <ArrowLeft size={13} /> {caseId}
+      <Tabs label="Dashboards" value={current.uuid} onChange={(uuid) => select(dashboards.find((d) => d.uuid === uuid)!)} className="mb-5"
+        tabs={dashboards.map((d) => ({ value: d.uuid, label: d.code ? <><span className="text-muted">{d.code}</span> {d.title}</> : d.title }))} />
+      {caseId && (
+        <div className="mb-4 flex items-center gap-2 text-[13px] text-ink-2">
+          Showing
+          <Chip tone="accent" className="pe-1">
+            <Link to={`/cases/${caseId}`} className="inline-flex items-center gap-1 font-semibold hover:underline">
+              <ArrowLeft size={12} /> {caseId}
             </Link>
-            <span>only</span>
             <button type="button" onClick={clearCase} aria-label="Show all cases"
-              className="grid size-5 place-items-center rounded-full hover:bg-surface"><X size={12} /></button>
-          </span>
-        )}
-      </div>
+              className="grid size-4 place-items-center rounded hover:bg-accent-line"><X size={11} /></button>
+          </Chip>
+          only
+        </div>
+      )}
       {blocked ? (
         <EmptyState icon={ChartPie} title="Open Ferrero from an address that can show the dashboards"
           action={blocked.alternatives[0] && (
-            <a href={`${blocked.alternatives[0]}${window.location.pathname}${window.location.search}`}
-              className="inline-flex items-center gap-2 rounded-xl bg-primary px-3.5 py-2 text-[13.5px] font-medium text-primary-ink hover:opacity-90">
+            <a href={`${blocked.alternatives[0]}${window.location.pathname}${window.location.search}`} className={buttonCls("primary")}>
               <ExternalLink size={15} /> Open at {blocked.alternatives[0]}
             </a>
           )}>
@@ -140,7 +142,7 @@ function EmbeddedDashboards({ info, userId, reload }: { info: DashboardsInfo; us
       ) : (
         <>
           {problem && (
-            <div role="status" className="mb-3 rounded-xl border border-line bg-surface-2 px-4 py-2.5 text-[13px] text-ink-2">{problem}</div>
+            <div role="status" className="mb-4 rounded-lg border border-line bg-surface-2 px-4 py-2.5 text-[13px] text-ink-2">{problem}</div>
           )}
           <Card className="overflow-hidden">
             <SupersetFrame uuid={current.uuid} domain={info.superset_url ?? ""} userId={userId} caseId={caseId}
@@ -157,20 +159,13 @@ function LinkedDashboards({ dashboards }: { dashboards: { title: string; url: st
   const current = dashboards[Math.min(active, dashboards.length - 1)];
   return (
     <>
-      <PageHeader eyebrow="Analytics" title="Dashboards"
-        actions={<a href={current.url} target="_blank" rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-line-strong bg-surface px-3.5 py-2 text-[13.5px] font-medium text-ink hover:bg-surface-2">
+      <PageHeader title="Dashboards"
+        actions={<a href={current.url} target="_blank" rel="noreferrer" className={buttonCls("secondary")}>
           <ExternalLink size={15} /> Open in a new tab</a>} />
-      <div className="mb-4 flex flex-wrap gap-1 rounded-xl border border-line bg-surface p-1">
-        {dashboards.map((d, i) => (
-          <button key={d.url} type="button" onClick={() => setActive(i)} aria-pressed={i === active}
-            className={clsx("rounded-lg px-3 py-1.5 text-[13px] transition", i === active ? "bg-primary text-primary-ink" : "text-ink-2 hover:bg-surface-2")}>
-            {d.title}
-          </button>
-        ))}
-      </div>
+      <Tabs label="Dashboards" value={String(Math.min(active, dashboards.length - 1))} onChange={(i) => setActive(Number(i))} className="mb-5"
+        tabs={dashboards.map((d, i) => ({ value: String(i), label: d.title }))} />
       <Card className="overflow-hidden">
-        <iframe key={current.url} title={current.title} src={current.url} className="h-[calc(100dvh-15rem)] min-h-[560px] w-full border-0 bg-surface" />
+        <iframe key={current.url} title={current.title} src={current.url} className="h-[calc(100dvh-17rem)] min-h-[560px] w-full border-0 bg-surface" />
       </Card>
     </>
   );
@@ -179,23 +174,20 @@ function LinkedDashboards({ dashboards }: { dashboards: { title: string; url: st
 function PlannedDashboards() {
   return (
     <>
-      <PageHeader eyebrow="Analytics" title="Dashboards"
+      <PageHeader title="Dashboards"
         subtitle="Portfolio dashboards for each audience, built on the same case data and access rights as the rest of Ferrero." />
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-5 md:grid-cols-2">
         {PLANNED.map((d) => (
-          <Card key={d.id} className="flex flex-col p-5">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2.5">
-                <span className="grid size-9 place-items-center rounded-xl bg-accent-soft text-accent-ink"><ChartPie size={17} /></span>
-                <div>
-                  <div className="text-[11px] font-semibold tracking-[0.08em] text-accent-ink">{d.id}</div>
-                  <h3 className="text-[15px] font-semibold text-ink">{d.name}</h3>
-                </div>
+          <Card key={d.id} className="flex flex-col p-6">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="text-[12.5px] font-semibold text-accent-ink">{d.id}</div>
+                <h3 className="mt-0.5 text-[16px] font-semibold text-ink">{d.name}</h3>
               </div>
-              <span className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 text-[11.5px] font-medium text-ink-2">Coming soon</span>
+              <Chip>Coming soon</Chip>
             </div>
-            <p className="mt-4 text-[13.5px] italic leading-relaxed text-ink-2">“{d.question}”</p>
-            <p className="mt-auto pt-3 text-[12px] text-muted">For {d.audience}</p>
+            <p className="font-display mt-4 text-[17px] leading-snug text-ink-2">“{d.question}”</p>
+            <p className="mt-auto border-t border-line pt-3.5 text-[12.5px] text-muted">For {d.audience}</p>
           </Card>
         ))}
       </div>

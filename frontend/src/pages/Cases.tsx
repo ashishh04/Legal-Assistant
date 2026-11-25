@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowDown, ArrowUp, ClipboardPlus, Handshake, RotateCcw, Search } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronsUpDown, ClipboardPlus, Handshake, RotateCcw, Search } from "lucide-react";
 import { api } from "../api";
 import { RegisterCaseDialog } from "../components/case/RegisterCaseDialog";
 import { Pagination, usePagination } from "../components/Pagination";
-import { Button, Card, Outcome, PageHeader, Select, StatusPill } from "../components/ui";
+import { Avatar, Button, Card, Chip, Outcome, PageHeader, SearchField, Select, StatusPill } from "../components/ui";
 import { daysFrom, fmtAED, fmtDate, relativeDays } from "../lib/format";
 import { useApi } from "../lib/hooks";
 import { useSession } from "../session";
@@ -14,6 +14,7 @@ import type { CaseRow } from "../types";
 type SortKey = "opened_date" | "next" | "claim_amount_aed" | "case_id";
 
 const nextDate = (r: CaseRow) => (r.status === "Open" ? (r.next_hearing_date ?? r.next_action_due ?? "") : "");
+const dayMonth = { day: "numeric", month: "short" } as const;
 
 export default function Cases() {
   const { user, meta } = useSession();
@@ -29,7 +30,7 @@ export default function Cases() {
   const [business, setBusiness] = useState("");
   const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({ key: "opened_date", dir: -1 });
   useEffect(() => { setQ(params.get("q") ?? ""); }, [params]);
-  const { data, error, loading } = useApi<CaseRow[]>(() => (user ? api.cases() : Promise.resolve([])), [user?.user_id]);
+  const { data, error, loading } = useApi<CaseRow[]>(() => (user ? api.cases() : Promise.resolve([])), [user?.user_id, meta?.demo_today]);
 
   const rows = data ?? [];
   const options = useMemo(() => ({
@@ -59,16 +60,12 @@ export default function Cases() {
 
   return (
     <>
-      <PageHeader eyebrow="Case tracker" title="Cases"
+      <PageHeader title="Cases"
         subtitle={user ? <>{rows.length} cases visible to {user.full_name} · {open} open. Select a case to work on it.</> : null}
         actions={user?.can_edit && <Button variant="primary" icon={ClipboardPlus} onClick={() => setRegistering(true)}>Register a case</Button>} />
 
       <div className="mb-4 flex flex-wrap items-center gap-2 animate-fade-up">
-        <label className="flex min-w-[240px] flex-1 items-center gap-2 rounded-xl border border-line-strong bg-surface px-3 py-1.5 text-[13px] focus-within:border-accent sm:max-w-xs">
-          <Search size={15} className="text-muted" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Case number, party, mark, court…"
-            className="min-w-0 flex-1 bg-transparent py-0.5 text-ink outline-none placeholder:text-muted" aria-label="Filter cases" />
-        </label>
+        <SearchField icon={Search} value={q} onChange={setQ} placeholder="Case number, party, mark, court…" label="Filter cases" className="flex-1 sm:max-w-[290px]" />
         <Select label="Status" value={status} onChange={setStatus} options={[{ value: "", label: "All" }, { value: "Open", label: "Open" }, { value: "Closed", label: "Closed" }]} />
         <Select label="Owner" value={owner} onChange={setOwner} options={[{ value: "", label: "Everyone" }, { value: "me", label: "My cases" }]} />
         <Select label="Stage" value={stage} onChange={setStage} options={[{ value: "", label: "All" }, ...options.stages.map((s) => ({ value: s, label: s }))]} />
@@ -81,69 +78,78 @@ export default function Cases() {
         {filtered && <Button variant="ghost" icon={RotateCcw} onClick={reset}>Reset</Button>}
       </div>
 
-      {error && <Card className="p-6 text-[14px] text-critical">The case list couldn't be loaded. Please try again in a moment.</Card>}
+      {error && <Card className="mb-4 p-6 text-[14px] text-critical-ink">The case list couldn't be loaded. Please try again in a moment.</Card>}
       <Card className={clsx("overflow-hidden transition-opacity", loading && data && "opacity-60")}>
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[920px] text-[13.5px]">
-            <thead className="border-b border-line bg-surface-2 text-left text-[12px] text-muted">
+          <table className="w-full min-w-[1000px] table-fixed text-[13.5px]">
+            <colgroup>
+              <col /><col className="w-[86px]" /><col className="w-[152px]" /><col className="w-[188px]" />
+              <col className="w-[162px]" /><col className="w-[104px]" /><col className="w-[118px]" />
+            </colgroup>
+            <thead className="border-b border-line bg-surface-2 text-left text-[12.5px] text-muted">
               <tr>
-                <Th label="Case" onClick={() => toggleSort("case_id")} sort={sort.key === "case_id" ? sort.dir : 0} />
-                <th className="px-4 py-3 font-medium">Country</th>
-                <th className="px-4 py-3 font-medium">Stage · outcome</th>
+                <Th label="Case" first onClick={() => toggleSort("case_id")} sort={sort.key === "case_id" ? sort.dir : 0} />
+                <th className="px-3 py-3 font-medium">Country</th>
+                <th className="px-3 py-3 font-medium">Stage · outcome</th>
                 <Th label="Next" onClick={() => toggleSort("next")} sort={sort.key === "next" ? sort.dir : 0} />
-                <th className="px-4 py-3 font-medium">Counsel</th>
+                <th className="px-3 py-3 font-medium">Counsel</th>
                 <Th label="Opened" onClick={() => toggleSort("opened_date")} sort={sort.key === "opened_date" ? sort.dir : 0} />
-                <Th label="Claimed" align="right" onClick={() => toggleSort("claim_amount_aed")} sort={sort.key === "claim_amount_aed" ? sort.dir : 0} />
+                <Th label="Claimed" align="right" last onClick={() => toggleSort("claim_amount_aed")} sort={sort.key === "claim_amount_aed" ? sort.dir : 0} />
               </tr>
             </thead>
             <tbody>
               {pager.slice.map((r) => {
                 const due = daysFrom(today, r.next_action_due);
+                const consult = Boolean(r.consultation_required) && r.consultation_status !== "Cleared to proceed" && r.status === "Open";
                 return (
                   <tr key={r.case_id} onClick={() => navigate(`/cases/${r.case_id}`)}
                     onKeyDown={(e) => { if (e.key === "Enter") navigate(`/cases/${r.case_id}`); }} tabIndex={0}
-                    className="cursor-pointer border-b border-line align-top transition last:border-0 hover:bg-surface-2 focus-visible:bg-surface-2">
-                    <td className="px-4 py-3">
-                      <span className="block text-[11.5px] font-medium text-muted">{r.case_id} · {r.case_type}</span>
-                      <span className="block max-w-[340px] truncate font-medium text-ink">{r.title}</span>
-                      {(r.business_priority || r.consultation_required) && (
-                        <span className="mt-1 flex flex-wrap gap-1.5">
-                          {r.business_priority && <span className="rounded-md border border-line px-1.5 text-[11px] font-medium text-ink-2">Business {r.business_priority}</span>}
-                          {Boolean(r.consultation_required) && r.consultation_status !== "Cleared to proceed" && r.status === "Open" && (
-                            <span className="inline-flex items-center gap-1 rounded-md border border-warning/60 bg-warning/10 px-1.5 text-[11px] font-medium text-ink">
-                              <Handshake size={11} /> Consult business first
-                            </span>
-                          )}
+                    className="cursor-pointer border-b border-line align-top transition-colors last:border-0 hover:bg-surface-2 focus-visible:bg-surface-2">
+                    <td className="py-3.5 pe-3 ps-5">
+                      <span className="flex min-w-0 items-baseline gap-1.5 text-[12px] text-muted">
+                        <span className="shrink-0 font-medium text-ink-2">{r.case_id}</span>
+                        <span className="truncate" title={r.case_type}>· {r.case_type}</span>
+                      </span>
+                      <span className="mt-0.5 line-clamp-2 text-[14px] font-medium leading-snug text-ink">{r.title}</span>
+                      {(r.business_priority || consult) && (
+                        <span className="mt-1.5 flex flex-wrap gap-1.5">
+                          {r.business_priority && <Chip tone="outline" className="py-px text-[11.5px]">Business {r.business_priority}</Chip>}
+                          {consult && <Chip tone="warning" className="py-px text-[11.5px]"><Handshake size={11} /> Consult business first</Chip>}
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-ink-2">{r.country}</td>
-                    <td className="px-4 py-3">
+                    <td className="px-3 py-3.5 text-ink-2">{r.country}</td>
+                    <td className="px-3 py-3.5">
                       {r.status === "Open"
-                        ? <span className="text-ink">{r.stage}</span>
+                        ? <span className="font-medium text-ink">{r.stage}</span>
                         : <Outcome outcome={r.outcome} />}
-                      <span className="block text-[11.5px] text-muted">{r.status}{r.priority ? ` · ${r.priority} priority` : ""}</span>
+                      <span className="mt-0.5 block truncate text-[12px] text-muted">{r.priority ? `${r.priority} priority` : r.status}</span>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-3 py-3.5">
                       {r.status === "Open" ? (
                         <>
-                          <span className="block text-ink">{r.next_action ?? "–"}</span>
+                          <span className="line-clamp-2 leading-snug text-ink" title={r.next_action ?? undefined}>{r.next_action ?? "–"}</span>
                           {r.overdue
-                            ? <span className="mt-1 inline-block"><StatusPill kind="warning">{relativeDays(due)}</StatusPill></span>
-                            : <span className="block text-[11.5px] text-muted">
-                                {r.next_hearing_date ? `Hearing ${fmtDate(r.next_hearing_date, { day: "numeric", month: "short" })}` : r.next_action_due ? `Due ${fmtDate(r.next_action_due, { day: "numeric", month: "short" })}` : ""}
+                            ? <span className="mt-1.5 inline-block"><StatusPill kind="critical">{relativeDays(due)}</StatusPill></span>
+                            : <span className="mt-0.5 block text-[12px] text-muted">
+                                {r.next_hearing_date ? `Hearing ${fmtDate(r.next_hearing_date, dayMonth)}` : r.next_action_due ? `Due ${fmtDate(r.next_action_due, dayMonth)}` : ""}
                               </span>}
                         </>
-                      ) : <span className="text-[12.5px] text-muted">Closed {fmtDate(r.closed_date)}</span>}
+                      ) : <span className="text-[13px] text-muted">Closed {fmtDate(r.closed_date)}</span>}
                     </td>
-                    <td className="px-4 py-3 text-ink-2">{r.lead_counsel}</td>
-                    <td className="tabular whitespace-nowrap px-4 py-3 text-ink-2">{fmtDate(r.opened_date)}</td>
-                    <td className="tabular whitespace-nowrap px-4 py-3 text-right text-ink">{r.claim_amount_aed ? fmtAED(r.claim_amount_aed) : "–"}</td>
+                    <td className="px-3 py-3.5">
+                      <span className="flex min-w-0 items-center gap-2">
+                        <Avatar name={r.lead_counsel} size={24} />
+                        <span className="truncate text-ink-2" title={r.lead_counsel}>{r.lead_counsel}</span>
+                      </span>
+                    </td>
+                    <td className="tabular whitespace-nowrap px-3 py-3.5 text-ink-2">{fmtDate(r.opened_date)}</td>
+                    <td className="tabular whitespace-nowrap py-3.5 pe-5 ps-3 text-right font-medium text-ink">{r.claim_amount_aed ? fmtAED(r.claim_amount_aed) : <span className="font-normal text-muted">–</span>}</td>
                   </tr>
                 );
               })}
               {!shown.length && (
-                <tr><td colSpan={7} className="px-4 py-14 text-center text-[13.5px] text-muted">{data ? "No cases match these filters." : "Loading cases…"}</td></tr>
+                <tr><td colSpan={7} className="px-4 py-16 text-center text-[13.5px] text-muted">{data ? "No cases match these filters." : "Loading cases…"}</td></tr>
               )}
             </tbody>
           </table>
@@ -155,12 +161,13 @@ export default function Cases() {
   );
 }
 
-function Th({ label, onClick, sort, align }: { label: string; onClick: () => void; sort: 0 | 1 | -1; align?: "right" }) {
-  const Icon = sort === 1 ? ArrowUp : ArrowDown;
+function Th({ label, onClick, sort, align, first, last }: { label: string; onClick: () => void; sort: 0 | 1 | -1; align?: "right"; first?: boolean; last?: boolean }) {
+  const Icon = sort === 1 ? ArrowUp : sort === -1 ? ArrowDown : ChevronsUpDown;
   return (
-    <th className={clsx("px-4 py-3 font-medium", align === "right" && "text-right")} aria-sort={sort === 0 ? "none" : sort === 1 ? "ascending" : "descending"}>
-      <button type="button" onClick={onClick} className={clsx("inline-flex items-center gap-1 hover:text-ink", sort !== 0 && "text-ink")}>
-        {label}{sort !== 0 && <Icon size={12} />}
+    <th className={clsx("py-3 font-medium", first ? "pe-3 ps-5" : last ? "pe-5 ps-3" : "px-3", align === "right" && "text-right")}
+      aria-sort={sort === 0 ? "none" : sort === 1 ? "ascending" : "descending"}>
+      <button type="button" onClick={onClick} className={clsx("inline-flex items-center gap-1 transition-colors hover:text-ink", sort !== 0 && "font-semibold text-ink")}>
+        {label}<Icon size={12} className={sort === 0 ? "opacity-50" : undefined} />
       </button>
     </th>
   );

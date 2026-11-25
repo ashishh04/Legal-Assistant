@@ -23,8 +23,8 @@ from .service import CaseRecords
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ferrero-records", description=__doc__.split("\n\n")[0])
     sub = parser.add_subparsers(dest="command", required=True)
-    rem = sub.add_parser("reminders", help="create the reminders due today (the reporting date)")
-    rem.add_argument("--date", type=date.fromisoformat, help="check as of this date instead of the reporting date")
+    rem = sub.add_parser("reminders", help="create the reminders due today")
+    rem.add_argument("--date", type=date.fromisoformat, help="check as of this date instead of today")
     rem.add_argument("--email", action="store_true", help="also e-mail them (needs FERRERO_SMTP_HOST)")
     sub.add_parser("verify", help="check the audit chain and every evidence file")
     sub.add_parser("status", help="counts of what the store holds")
@@ -32,11 +32,11 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
     settings = get_settings()
-    model = CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path)
+    model = CaseModel(settings.csv_dir, settings.today, catalogue=settings.catalogue_path)
     records = CaseRecords(settings, model, mailer=Mailer.from_env())
     if args.command == "reminders":
         created = records.run_reminders(args.date)
-        print(f"{created} new notifications as of {(args.date or settings.demo_today).isoformat()}")
+        print(f"{created} new notifications as of {(args.date or model.today).isoformat()}")
         if args.email:
             if records.mailer is None:
                 print("E-mail is off: set FERRERO_SMTP_HOST (see .env.example).")

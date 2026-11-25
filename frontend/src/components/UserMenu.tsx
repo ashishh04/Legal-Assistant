@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronsUpDown, Eye, KeyRound, LogOut, Repeat, ShieldAlert, Undo2, UsersRound } from "lucide-react";
@@ -10,15 +9,6 @@ import { Dialog } from "./Dialog";
 import { Field, FormError, TextInput } from "./forms";
 import { SwitchUserDialog } from "./SwitchUserDialog";
 import { Button } from "./ui";
-
-export function Avatar({ name, small }: { name: string; small?: boolean }) {
-  return (
-    <span className={clsx("grid shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#e8cf9a] to-[#9c7a3f] font-semibold text-[#141519]",
-      small ? "size-7 text-[11px]" : "size-9 text-[12.5px]")}>
-      {initials(name)}
-    </span>
-  );
-}
 
 /** The signed-in person at the bottom of the sidebar: their access, password, switching account and signing out. */
 export function UserMenu() {
@@ -39,7 +29,7 @@ export function UserMenu() {
   }, [open]);
   if (!user) return null;
 
-  const item = "flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-start text-[13px] text-sidebar-ink transition hover:bg-white/5";
+  const item = "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-start text-[13px] text-on-brand/90 transition-colors hover:bg-white/[0.07] hover:text-on-brand";
   const acting = user.acting_by ?? null;
   const administrator = Boolean(user.is_admin || acting);  // the real person is the administrator
   const goBack = async () => {
@@ -55,26 +45,26 @@ export function UserMenu() {
   return (
     <div ref={ref} className="relative">
       {open && (
-        <div className="absolute bottom-full start-0 mb-2 w-full rounded-2xl border border-white/10 bg-sidebar-2 p-1.5 shadow-2xl animate-fade-up" role="menu" aria-label="Account">
-          <div className="px-2.5 pb-2.5 pt-2">
-            <div className="truncate text-[13.5px] font-medium text-white">{user.full_name}</div>
-            <div className="truncate text-[11.5px] text-sidebar-muted">{user.email}</div>
-            <div className="mt-2 text-[11.5px] leading-relaxed text-sidebar-muted">
-              <span className="me-1.5 rounded-full border border-white/10 px-1.5 py-px text-[10px] text-sidebar-ink">{user.entra_group}</span>
+        <div className="absolute bottom-full start-0 mb-2 w-full rounded-xl border border-white/10 bg-brand-2 p-1.5 shadow-overlay animate-pop-in" role="menu" aria-label="Account">
+          <div className="px-2.5 pb-3 pt-2">
+            <div className="truncate text-[13.5px] font-medium text-on-brand">{user.full_name}</div>
+            <div className="truncate text-[12px] text-sidebar-muted">{user.email}</div>
+            <div className="mt-2.5 text-[12px] leading-relaxed text-sidebar-muted">
+              <span className="me-1.5 rounded bg-white/10 px-1.5 py-0.5 text-[11px] font-medium text-on-brand">{user.entra_group}</span>
               Sees {user.access}{user.can_edit ? "" : " (read only)"}.
             </div>
           </div>
           {acting && (
             <button type="button" role="menuitem" onClick={goBack}
-              className="mb-1 flex w-full items-start gap-2.5 rounded-xl border border-accent/40 bg-accent/10 px-2.5 py-2 text-start text-[12px] leading-relaxed text-sidebar-ink">
-              <Undo2 size={15} className="mt-0.5 shrink-0 text-accent" />
-              <span>Viewing as {user.full_name}. <span className="font-medium text-white">Return to {acting.full_name}</span></span>
+              className="mb-1 flex w-full items-start gap-2.5 rounded-lg border border-brand-accent/35 bg-brand-accent/10 px-2.5 py-2 text-start text-[12.5px] leading-relaxed text-on-brand/90">
+              <Undo2 size={15} className="mt-0.5 shrink-0 text-brand-accent" />
+              <span>Viewing as {user.full_name}. <span className="font-medium text-on-brand">Return to {acting.full_name}</span></span>
             </button>
           )}
           {!user.own_password && (
             <button type="button" role="menuitem" onClick={() => { setOpen(false); setChanging(true); }}
-              className="mb-1 flex w-full items-start gap-2.5 rounded-xl border border-warning/30 bg-warning/10 px-2.5 py-2 text-start text-[12px] leading-relaxed text-sidebar-ink">
-              <ShieldAlert size={15} className="mt-0.5 shrink-0 text-[var(--warning)]" />
+              className="mb-1 flex w-full items-start gap-2.5 rounded-lg border border-on-brand-warning/35 bg-on-brand-warning/10 px-2.5 py-2 text-start text-[12.5px] leading-relaxed text-on-brand/90">
+              <ShieldAlert size={15} className="mt-0.5 shrink-0 text-on-brand-warning" />
               You are signed in with a temporary password. Please set a personal one.
             </button>
           )}
@@ -105,18 +95,20 @@ export function UserMenu() {
         </div>
       )}
       <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-haspopup="menu"
-        className="flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-sidebar-2 p-2.5 text-start transition hover:border-white/20">
+        className="flex w-full items-center gap-3 rounded-xl border border-sidebar-line bg-white/[0.04] p-2.5 text-start transition-colors hover:border-white/20 hover:bg-white/[0.07]">
         <span className="relative">
-          <Avatar name={user.full_name} />
-          {!user.own_password && <span className="absolute -end-0.5 -top-0.5 size-2.5 rounded-full bg-warning ring-2 ring-sidebar-2" aria-label="Set a personal password" />}
+          <span className="grid size-9 place-items-center rounded-full bg-brand-accent/15 text-[12.5px] font-semibold text-brand-accent ring-1 ring-brand-accent/40" aria-hidden>
+            {initials(user.full_name)}
+          </span>
+          {!user.own_password && <span className="absolute -end-0.5 -top-0.5 size-2.5 rounded-full bg-on-brand-warning ring-2 ring-brand" aria-label="Set a personal password" />}
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block truncate text-[13.5px] font-medium text-white">{user.full_name}</span>
-          <span className="block truncate text-[11.5px] text-sidebar-muted">
+          <span className="block truncate text-[13.5px] font-medium text-on-brand">{user.full_name}</span>
+          <span className="block truncate text-[12px] text-sidebar-muted">
             {acting ? `Viewing as · ${user.entra_group}` : user.is_admin ? "Platform administrator" : `${user.entra_group} · ${user.job_title}`}
           </span>
         </span>
-        <ChevronsUpDown size={15} className="text-sidebar-muted" />
+        <ChevronsUpDown size={15} className="shrink-0 text-sidebar-muted" />
       </button>
       <ChangePasswordDialog open={changing} onClose={() => setChanging(false)} />
       <SwitchUserDialog open={switching} onClose={() => setSwitching(false)} />
@@ -161,7 +153,7 @@ export function ChangePasswordDialog({ open, onClose }: { open: boolean; onClose
       <form onSubmit={(e) => { e.preventDefault(); save(); }} className="grid gap-4">
         <FormError>{error}</FormError>
         {user && !user.own_password && (
-          <p className="-mt-1 text-[12.5px] leading-relaxed text-ink-2">
+          <p className="-mt-1 text-[13px] leading-relaxed text-ink-2">
             You are signed in with a temporary password. Please choose a personal password known only to you.
           </p>
         )}
@@ -179,3 +171,4 @@ export function ChangePasswordDialog({ open, onClose }: { open: boolean; onClose
     </Dialog>
   );
 }
+

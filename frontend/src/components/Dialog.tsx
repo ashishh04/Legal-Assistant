@@ -30,23 +30,23 @@ export function Dialog({ open, onClose, title, subtitle, icon, children, footer,
   if (!open) return null;
   return createPortal(
     <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6">
-      <div className="fixed inset-0 bg-black/45 backdrop-blur-[2px]" onClick={() => { if (!busy) onClose(); }} />
+      <div className="fixed inset-0 bg-scrim/55 backdrop-blur-[3px] animate-fade-in" onClick={() => { if (!busy) onClose(); }} />
       <section ref={panel} role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}
-        className={clsx("relative my-auto flex max-h-[calc(100vh-2rem)] w-full flex-col rounded-2xl border border-line bg-surface shadow-2xl outline-none animate-fade-up",
-          wide ? "max-w-[880px]" : "max-w-[580px]")}>
-        <header className="flex items-start gap-3 border-b border-line px-6 py-4">
-          {icon && <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent-ink">{icon}</span>}
+        className={clsx("relative my-auto flex max-h-[calc(100vh-2rem)] w-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-overlay outline-none animate-pop-in",
+          wide ? "max-w-[900px]" : "max-w-[580px]")}>
+        <header className="flex items-start gap-3.5 border-b border-line px-6 py-4">
+          {icon && <span className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-full border border-accent-line bg-accent-soft text-accent-ink">{icon}</span>}
           <div className="min-w-0 flex-1">
-            <h2 id={titleId} className="text-[16px] font-semibold tracking-[-0.01em] text-ink">{title}</h2>
-            {subtitle && <p className="mt-0.5 text-[12.5px] text-ink-2">{subtitle}</p>}
+            <h2 id={titleId} className="text-[17px] font-semibold leading-snug text-ink">{title}</h2>
+            {subtitle && <p className="mt-0.5 text-[13px] leading-relaxed text-ink-2">{subtitle}</p>}
           </div>
           <button type="button" data-close onClick={onClose} disabled={busy} aria-label="Close"
-            className="grid size-8 shrink-0 place-items-center rounded-lg text-ink-2 hover:bg-surface-2 hover:text-ink disabled:opacity-40">
+            className="-me-2 grid size-8 shrink-0 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-3 hover:text-ink disabled:opacity-40">
             <X size={17} />
           </button>
         </header>
         <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5">{children}</div>
-        {footer && <footer className="flex flex-wrap items-center justify-end gap-2 rounded-b-2xl border-t border-line bg-surface-2 px-6 py-3.5">{footer}</footer>}
+        {footer && <footer className="flex flex-wrap items-center justify-end gap-2 border-t border-line bg-surface-2 px-6 py-3.5">{footer}</footer>}
       </section>
     </div>,
     document.body,

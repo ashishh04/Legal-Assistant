@@ -74,7 +74,7 @@ interface Tip { x: number; y: number; title?: string; rows: TipRow[] }
 function Tooltip({ tip }: { tip: Tip | null }) {
   if (!tip) return null;
   return (
-    <div role="tooltip" className="pointer-events-none absolute z-20 min-w-36 -translate-x-1/2 -translate-y-full rounded-xl border border-line bg-surface px-3 py-2 text-[12.5px] shadow-card"
+    <div role="tooltip" className="pointer-events-none absolute z-20 min-w-36 -translate-x-1/2 -translate-y-full rounded-lg border border-line bg-surface px-3 py-2 text-[12.5px] shadow-pop"
       style={{ left: tip.x, top: tip.y - 10 }}>
       {tip.title && <div className="mb-1 text-muted">{tip.title}</div>}
       {tip.rows.map((r) => (
@@ -103,7 +103,7 @@ export function Legend({ items }: { items: { label: string; color: string }[] })
 }
 
 // ---------- ranked horizontal bars (one series, one hue, values at the tips) ----------
-export function BarList({ data, format = (v) => String(v), color = "var(--series-1)", max, total, onSelect, unit, stacked }:
+export function BarList({ data, format = (v) => String(v), color = "var(--bar)", max, total, onSelect, unit, stacked }:
   { data: { label: string; value: number; hint?: string }[]; format?: (v: number) => string; color?: string; max?: number;
     total?: number; onSelect?: (label: string) => void; unit?: string; stacked?: boolean }) {
   const top = max ?? Math.max(1, ...data.map((d) => d.value));
@@ -142,7 +142,7 @@ export function BarList({ data, format = (v) => String(v), color = "var(--series
               className="group grid w-full grid-cols-[minmax(84px,34%)_1fr] items-center gap-3 rounded-md text-left outline-offset-4">
               <span className="truncate text-[13px] text-ink-2 group-hover:text-ink">{d.label}</span>
               <span className="flex min-w-0 items-center gap-2 border-s border-[var(--viz-axis)]">
-                <span className="h-2.5 rounded-e-[4px] transition-[filter] group-hover:brightness-110"
+                <span className="h-2 rounded-e-[3px] transition-[filter] group-hover:brightness-110"
                   style={{ width: `${Math.max(d.value > 0 ? 0.8 : 0, (d.value / top) * 82)}%`, background: color }} />
                 <span className="tabular shrink-0 text-[12.5px] font-medium text-ink">{format(d.value)}</span>
               </span>

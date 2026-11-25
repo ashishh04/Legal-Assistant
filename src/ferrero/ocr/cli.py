@@ -260,7 +260,7 @@ class _Syncer:
         from .reader import OcrReader
 
         self.settings = settings
-        self.model = CaseModel(settings.csv_dir, settings.demo_today, catalogue=settings.catalogue_path)
+        self.model = CaseModel(settings.csv_dir, settings.today, catalogue=settings.catalogue_path)
         self.index = DocumentIndex(settings.index_path)
         manifest_path = manifest_next_to(folder)
         manifest = load_manifest(manifest_path) if manifest_path else None

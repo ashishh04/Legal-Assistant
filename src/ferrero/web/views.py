@@ -67,7 +67,7 @@ def overview(model: CaseModel, principal: Principal, country: str | None = None,
         outcome_counts = {r["outcome"]: r["n"] for r in _rows(
             conn, f"SELECT outcome, COUNT(*) AS n FROM fact_case WHERE status = 'Closed' AND {w} GROUP BY outcome", params)}
         return {
-            "as_of": model.demo_today.isoformat(),
+            "as_of": model.today.isoformat(),
             "kpis": k,
             "open_by_stage": [{"label": s, "value": stage_counts.get(s, 0)} for s in STAGES],
             "open_by_country": [{"label": r["country"], "value": r["n"]} for r in _rows(
